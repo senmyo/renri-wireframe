@@ -213,6 +213,53 @@
       .step-num span:first-child { display: none; }
       .step-num span:last-child { font-size: 16px; margin-top: 0; }
     }
+
+    /* ============================================
+       FEEDBACK BUTTON
+       ============================================ */
+    .feedback-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 50;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      font-size: 12px;
+      color: #fff;
+      background: rgba(0,0,0,0.5);
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease;
+      letter-spacing: 0.5px;
+    }
+    .feedback-btn:hover {
+      background: rgba(0,0,0,0.75);
+    }
+    .feedback-btn::before {
+      content: "\270E";
+      font-size: 14px;
+    }
+
+    /* ============================================
+       ANIMATIONS
+       ============================================ */
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-copy { animation: heroFadeIn 1s ease-out 0.4s both; }
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+    .fade-in.is-visible { opacity: 1; transform: translateY(0); }
+    .fade-in-d1 { transition-delay: 0.25s; }
+    .fade-in-d2 { transition-delay: 0.5s; }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-copy { animation: none; }
+      .fade-in { opacity: 1; transform: none; transition: none; }
+    }
   </style>
 </head>
 <body>
@@ -236,8 +283,9 @@
   </header>
 
   <!-- 1. メイン画像・キャッチコピー -->
-  <section class="hero" id="hero">
+  <section class="hero" id="hero" style="position:relative;">
     <span class="section-label">① メイン画像・キャッチコピー</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド結婚指輪&entry.1525828345=①メイン画像・キャッチコピー" target="_blank">コメント</a>
     <div class="img-placeholder" style="background: linear-gradient(135deg, #a0a0a0, #777777); color: #fff;">
     </div>
     <div class="hero-copy">
@@ -247,30 +295,31 @@
   </section>
 
   <!-- 2. 選ばれる理由（特徴x3） -->
-  <section class="features">
+  <section class="features" style="position:relative;">
     <span class="section-label">② 特徴×3（オーダーメイドならではの魅力）</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド結婚指輪&entry.1525828345=②特徴×3" target="_blank">コメント</a>
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <div class="en">REASONS</div>
         <h2>renriのオーダーメイド結婚指輪が選ばれる理由</h2>
         <div class="line"></div>
       </div>
       <div class="features-grid">
-        <div class="feature-card">
+        <div class="feature-card fade-in">
           <div class="img-placeholder">📷 デザイナーがデザイン画を描いている写真</div>
           <div class="feature-body">
             <h3>専属デザイナーによる<br>おふたりだけのデザイン提案</h3>
             <p>具体的なイメージがなくても大丈夫です。おふたりの好みやライフスタイル、エピソードなどからデザイナーがご提案。目の前で何枚でもデザイン画をお描きし、理想の形を引き出します。打ち合わせは何度でも無料です。</p>
           </div>
         </div>
-        <div class="feature-card">
+        <div class="feature-card fade-in fade-in-d1">
           <div class="img-placeholder">📷 専門的な工具を使った職人の彫金作業写真</div>
           <div class="feature-body">
             <h3>熟練の職人が叶える<br>高度な技術と美しい仕上がり</h3>
             <p>和彫りや複雑なコンビカラー、アンティーク調のミル打ちなど、既製品では実現できないようなオリジナリティ溢れるデザインも、renriのオーダーメイドなら叶えます。熟練の職人が美しく繊細な品質で形にいたします。</p>
           </div>
         </div>
-        <div class="feature-card">
+        <div class="feature-card fade-in fade-in-d2">
           <div class="img-placeholder">📷 試作リングのフィッティング写真</div>
           <div class="feature-body">
             <h3>試作リングの作成で<br>完成前の不安を解消</h3>
@@ -282,17 +331,18 @@
   </section>
 
   <!-- 3. 実績（高品質感・低中高価格） -->
-  <section class="portfolio">
+  <section class="portfolio" style="position:relative;">
     <span class="section-label">③ 実績（オーダーメイドならではのデザイン・価格別）</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド結婚指輪&entry.1525828345=③実績" target="_blank">コメント</a>
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <div class="en">PORTFOLIO</div>
         <h2>オーダーメイド結婚指輪の制作事例</h2>
         <div class="line"></div>
       </div>
       <div class="portfolio-grid">
         
-        <div class="portfolio-card">
+        <div class="portfolio-card fade-in">
           <div class="img-placeholder">📷 プラチナベースの洗練されたデザイン写真</div>
           <div class="portfolio-info">
             <span class="portfolio-price-tag">シンプル・上品</span>
@@ -301,7 +351,7 @@
           </div>
         </div>
 
-        <div class="portfolio-card">
+        <div class="portfolio-card fade-in fade-in-d1">
           <div class="img-placeholder">📷 アンティーク調のゴールドリング写真</div>
           <div class="portfolio-info">
             <span class="portfolio-price-tag">アンティーク・人気</span>
@@ -310,7 +360,7 @@
           </div>
         </div>
 
-        <div class="portfolio-card">
+        <div class="portfolio-card fade-in fade-in-d2">
           <div class="img-placeholder">📷 和彫りやコンビカラーの複雑な装飾写真</div>
           <div class="portfolio-info">
             <span class="portfolio-price-tag">こだわり・複雑</span>
@@ -320,21 +370,22 @@
         </div>
 
       </div>
-      <div style="text-align: center; margin-top: 40px;">
+      <div class="fade-in fade-in-d1" style="text-align: center; margin-top: 40px;">
         <a href="https://renri.jp/case" class="btn-reserve" style="background: var(--bg-white); color: var(--text-primary); border: 1px solid var(--border-light); padding: 12px 40px; font-size: 14px; letter-spacing: 2px;">すべてのオーダーメイド結婚指輪の制作事例を見る</a>
       </div>
     </div>
   </section>
 
   <!-- 4. 価格 -->
-  <section class="pricing">
+  <section class="pricing" style="position:relative;">
     <span class="section-label">④ 価格</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド結婚指輪&entry.1525828345=④価格" target="_blank">コメント</a>
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <div class="en">PRICE</div>
         <h2>オーダーメイド結婚指輪の制作料金</h2>
       </div>
-      <div class="price-formula">
+      <div class="price-formula fade-in fade-in-d1">
         <div class="price-part">制作料金 <span class="val">22,000</span> 円〜</div>
         <div class="price-plus">+</div>
         <div class="price-part">材料費</div>
@@ -346,16 +397,17 @@
   </section>
 
   <!-- 5. 素材・オプション加工 -->
-  <section class="options">
+  <section class="options" style="position:relative;">
     <span class="section-label">⑤ 素材・オプション加工</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド結婚指輪&entry.1525828345=⑤素材・オプション" target="_blank">コメント</a>
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <div class="en">MATERIALS & OPTION</div>
         <h2>素材とオプション加工</h2>
         <div class="line"></div>
       </div>
 
-      <div class="materials-section">
+      <div class="materials-section fade-in">
         <h3 class="subsection-title">材料費（貴金属地金代）</h3>
         <div class="materials-grid" style="grid-template-columns: repeat(3, 1fr);">
           <div class="material-card">
@@ -393,7 +445,7 @@
       </div>
 
       <h3 class="subsection-title">豊富なオプション加工</h3>
-      <div class="options-grid">
+      <div class="options-grid fade-in">
 
         <div class="option-item">
           <div class="img-placeholder">📷 ミル打ち</div>
@@ -456,17 +508,18 @@
   </section>
 
   <!-- 6. 制作の流れ -->
-  <section class="flow">
+  <section class="flow" style="position:relative;">
     <span class="section-label">⑥ 制作の流れ（試作リングを含むオーダーメイドの流れ）</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド結婚指輪&entry.1525828345=⑥制作の流れ" target="_blank">コメント</a>
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <div class="en">WORK FLOW</div>
         <h2>オーダーメイド結婚指輪 完成までの流れ</h2>
         <div class="line"></div>
       </div>
       <div class="flow-steps">
 
-        <div class="flow-step">
+        <div class="flow-step fade-in">
           <div class="step-num"><span>STEP</span><span>01</span></div>
           <div class="step-content">
             <h3>ご予約・ご来店</h3>
@@ -475,7 +528,7 @@
           </div>
         </div>
 
-        <div class="flow-step">
+        <div class="flow-step fade-in">
           <div class="step-num"><span>STEP</span><span>02</span></div>
           <div class="step-content">
             <h3>お打合せ</h3>
@@ -484,7 +537,7 @@
           </div>
         </div>
 
-        <div class="flow-step">
+        <div class="flow-step fade-in">
           <div class="step-num"><span>STEP</span><span>03</span></div>
           <div class="step-content">
             <h3>試作リングの制作</h3>
@@ -493,7 +546,7 @@
           </div>
         </div>
 
-        <div class="flow-step">
+        <div class="flow-step fade-in">
           <div class="step-num"><span>STEP</span><span>04</span></div>
           <div class="step-content">
             <h3>フィッティング・微調整</h3>
@@ -502,7 +555,7 @@
           </div>
         </div>
 
-        <div class="flow-step">
+        <div class="flow-step fade-in">
           <div class="step-num"><span>STEP</span><span>05</span></div>
           <div class="step-content">
             <h3>職人による本制作</h3>
@@ -511,7 +564,7 @@
           </div>
         </div>
 
-        <div class="flow-step">
+        <div class="flow-step fade-in">
           <div class="step-num"><span>STEP</span><span>06</span></div>
           <div class="step-content">
             <h3>完成・お渡し</h3>
@@ -525,31 +578,32 @@
   </section>
 
   <!-- 7. アフターサービス -->
-  <section class="aftercare">
+  <section class="aftercare" style="position:relative;">
     <span class="section-label">⑦ アフターケア</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド結婚指輪&entry.1525828345=⑦アフターサービス" target="_blank">コメント</a>
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <div class="en">AFTERCARE</div>
         <h2>世界にひとつの大切な指輪だから<br>安心のアフターサポート</h2>
         <div class="line"></div>
       </div>
       <div class="aftercare-grid">
-        <div class="aftercare-item">
+        <div class="aftercare-item fade-in">
           <div class="img-placeholder">🛠</div>
           <h4>サイズ直し<br>（基本無料）</h4>
           <p>前後1号のサイズ直しは基本無料です。複雑なデザインの場合も職人が丁寧に対応いたします。</p>
         </div>
-        <div class="aftercare-item">
+        <div class="aftercare-item fade-in fade-in-d1">
           <div class="img-placeholder">✨</div>
           <h4>クリーニング<br>（基本永久無償）</h4>
           <p>大切な指輪の輝きを永く保つため、クリーニングは基本的に永久無償で承っております。</p>
         </div>
-        <div class="aftercare-item">
+        <div class="aftercare-item fade-in fade-in-d2">
           <div class="img-placeholder">🔍</div>
           <h4>歪み直し・磨き直し</h4>
           <p>永くお使いいただく中で生じた歪みや小傷も、元の美しい状態にお直しいたします。</p>
         </div>
-        <div class="aftercare-item">
+        <div class="aftercare-item fade-in fade-in-d1">
           <div class="img-placeholder">💎</div>
           <h4>追加加工対応</h4>
           <p>記念日ごとにダイヤモンドを追加するなど、後からの加工も承っております。</p>
@@ -559,42 +613,44 @@
   </section>
 
   <!-- 8. お客様の声 -->
-  <section class="voices">
+  <section class="voices" style="position:relative;">
     <span class="section-label">⑧ お客様の声</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド結婚指輪&entry.1525828345=⑧お客様の声" target="_blank">コメント</a>
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <div class="en">VOICES</div>
         <h2>お客様の声</h2>
         <div class="line"></div>
       </div>
       <div class="voice-grid">
-        <div class="voice-card">
+        <div class="voice-card fade-in">
           <div class="img-placeholder">📷 笑顔のカップル写真</div>
           <h4>ここには貴社指定のお客様の声が固定ではいります。</h4>
           <p>理想の結婚指輪のデザインがありましたが、既製品では見つからずオーダーメイドを選びました。デザイナーさんが私たちの曖昧な希望を見事に汲み取ってくださり、職人さんの技術で想像以上の仕上がりになりました。（東京都・30代ご夫婦）</p>
         </div>
-        <div class="voice-card">
+        <div class="voice-card fade-in fade-in-d2">
           <div class="img-placeholder">📷 デザイン画と完成品の比較写真</div>
           <h4>ここには貴社指定のお客様の声が固定ではいります。</h4>
           <p>初めてのフルオーダーメイドで不安でしたが、途中の試作リングで実際のボリューム感を確認できたのがとても良かったです。気になった部分も微調整していただき、理想通りの結婚指輪が完成しました。（横浜市・20代ご夫婦）</p>
         </div>
       </div>
-      <div style="text-align: center; margin-top: 40px;">
+      <div class="fade-in fade-in-d1" style="text-align: center; margin-top: 40px;">
         <a href="https://renri.jp/voice" class="btn-reserve" style="background: var(--bg-white); color: var(--text-primary); border: 1px solid var(--border-light); padding: 12px 40px; font-size: 14px; letter-spacing: 2px; border-radius: 2px;">すべてのオーダーメイド結婚指輪のお客様の声を見る</a>
       </div>
     </div>
   </section>
 
   <!-- 9. よくある質問 -->
-  <section class="faq">
+  <section class="faq" style="position:relative;">
     <span class="section-label">⑨ よくある質問</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド結婚指輪&entry.1525828345=⑨よくある質問" target="_blank">コメント</a>
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <div class="en">Q & A</div>
         <h2>よくある質問</h2>
         <div class="line"></div>
       </div>
-      <div class="faq-list">
+      <div class="faq-list fade-in">
         <div class="faq-item">
           <div class="faq-q">結婚指輪のオーダーメイドは、具体的なデザインが決まっていなくても大丈夫ですか？</div>
           <div class="faq-a">はい、全く問題ございません。デザイナーは、様々なご提案をできるようサンプルや資料を準備しております。おふたりの漠然としたイメージやお好みをお伺いしながら、具体的なデザイン画にしてご提案いたします。</div>
@@ -646,6 +702,18 @@
   <footer class="footer" style="padding: 60px 40px; text-align: center; background: #f5f5f5; border-top: 1px solid #cccccc; color: #999;">
     <p style="font-size: 14px; letter-spacing: 2px;">※ フッターに変更なし（現状のまま）</p>
   </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
