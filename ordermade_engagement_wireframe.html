@@ -91,6 +91,96 @@
     }
 
     /* ============================================
+       SERIES & SERVICE LINKS
+       ============================================ */
+    .series-links {
+      background: var(--bg-cream);
+    }
+
+    .series-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .series-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      background: var(--bg-white);
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border-light);
+    }
+
+    .series-card:hover {
+      box-shadow: var(--shadow-card);
+      transform: translateY(-4px);
+    }
+
+    .series-card-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #cccccc, #aaaaaa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(0, 0, 0, 0.2);
+      font-family: sans-serif;
+      font-size: 13px;
+    }
+
+    .series-card-body {
+      padding: 24px 20px 28px;
+      text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .series-card-body .en-label {
+      font-family: var(--serif-en);
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .series-card-body h3 {
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+
+    .series-card-body .series-tag {
+      font-size: 12px;
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-light);
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .series-card-body p:last-child {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ============================================
        HEADER
        ============================================ */
     .header {
@@ -132,11 +222,11 @@
        ============================================ */
     .features { background: var(--bg-cream); }
     .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-    .feature-card { background: var(--bg-white); border-radius: 4px; overflow: hidden; box-shadow: var(--shadow-soft); text-align: center; }
+    .feature-card { background: var(--bg-white); border-radius: 4px; overflow: hidden; box-shadow: var(--shadow-soft); text-align: center; display: flex; flex-direction: column; }
     .feature-card .img-placeholder { height: 200px; }
-    .feature-body { padding: 30px 20px; }
-    .feature-body h3 { font-size: 17px; margin-bottom: 16px; font-weight: 500; }
-    .feature-body p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.8; text-align: left; }
+    .feature-body { padding: 30px 20px; flex: 1; display: flex; flex-direction: column; }
+    .feature-body h3 { font-size: 17px; margin-bottom: 16px; font-weight: 500; min-height: 80px; display: flex; align-items: center; justify-content: center; }
+    .feature-body p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.8; text-align: left; min-height: 130px; }
 
     /* ============================================
        3. PORTFOLIO (実績)
@@ -235,7 +325,7 @@
     .btn-reserve:hover { background: #111; }
 
     @media (max-width: 768px) {
-      .features-grid, .portfolio-grid, .options-grid, .voice-grid { grid-template-columns: 1fr; }
+      .features-grid, .portfolio-grid, .options-grid, .voice-grid, .series-cards { grid-template-columns: 1fr; }
       .materials-grid, .aftercare-grid { grid-template-columns: 1fr 1fr; }
       .hero-copy h1 { font-size: 24px; }
       .flow-step { gap: 20px; }
@@ -273,8 +363,8 @@
     <div class="img-placeholder" style="background: linear-gradient(135deg, #a0a0a0, #777777); color: #fff;">
     </div>
     <div class="hero-copy">
-      <h1>大切な人へ、とっておきの輝きを。<br>オーダーメイドの婚約指輪。</h1>
-      <p>デザイナーと職人が力を合わせ、<br>おふたりのためだけにあつらえる、世界にひとつの婚約指輪を。</p>
+      <h1>大切な人へ、世界にひとつの輝きを。<br>オーダーメイドの婚約指輪。</h1>
+      <p>想いをかたちにする特別な一本を、<br>デザイナーと職人がおふたりのためにお仕立ていたします。</p>
     </div>
   </section>
 
@@ -292,22 +382,22 @@
         <div class="feature-card">
           <div class="img-placeholder">📷 デザイナーがデザイン提案をしている写真</div>
           <div class="feature-body">
-            <h3>専属デザイナーによる<br>理想のデザイン提案</h3>
-            <p>具体的なイメージがなくても大丈夫です。お相手の雰囲気や好みに合わせて、デザイナーが目の前で何枚でもデザイン画をお描きし、世界にひとつの婚約指輪をご提案いたします。打ち合わせは何度でも無料です。</p>
+            <h3>「イメージがない」でも大丈夫。<br>専属デザイナーがゼロからご提案</h3>
+            <p>具体的なイメージがなくても大丈夫。お相手の雰囲気やお好みをもとに、デザイナーが目の前でデザイン画をお描きします。おひとりでも、おふたりでも大歓迎。打ち合わせは何度でも無料です。</p>
           </div>
         </div>
         <div class="feature-card">
           <div class="img-placeholder">📷 高品質なダイヤモンドの写真</div>
           <div class="feature-body">
             <h3>確かな目で選ばれる<br>高品質なダイヤモンド</h3>
-            <p>ハイジュエリーも手がけてきたデザイナーがえりすぐった、高品質なダイヤモンドをご用意しております。ご予算に応じたダイヤモンドの仕入れも可能ですので、ご希望にあった一粒の輝きをきっと見つけていただけます。</p>
+            <p>ハイジュエリーも手がけてきたデザイナーが、品質の違いをわかりやすくご説明いたします。初めてのダイヤモンド選びでも安心。ご予算に合わせて、最高の一粒の輝きを一緒にお選びいただけます。</p>
           </div>
         </div>
         <div class="feature-card">
           <div class="img-placeholder">📷 職人が繊細な加工をしている写真</div>
           <div class="feature-body">
-            <h3>熟練の職人による<br>高度な技術と試作リングの安心感</h3>
-            <p>和彫りやアンティーク調のミル打ちなど、複雑なデザインも熟練の職人が形にいたします。本制作前にフィッティング用の試作リングをお作りすることもでき、デザインやサイズ、つけ心地を確認できるので安心です。</p>
+            <h3>熟練の職人による高度な技術と<br>試作リングの安心感</h3>
+            <p>和彫りやアンティーク調のミル打ちなど、複雑なデザインも熟練の職人が形にいたします。本制作前に試作リングでデザインやサイズを実物で確認でき、「完成品が違ったら…」という不安を解消していただけます。</p>
           </div>
         </div>
       </div>
@@ -355,7 +445,7 @@
 
       </div>
       <div style="text-align: center; margin-top: 40px;">
-        <a href="https://renri.jp/case" class="btn-reserve" style="background: var(--bg-white); color: var(--text-primary); border: 1px solid var(--border-light); padding: 12px 40px; font-size: 14px; letter-spacing: 2px;">すべての制作事例を見る</a>
+        <a href="https://renri.jp/case" class="btn-reserve" style="background: var(--bg-white); color: var(--text-primary); border: 1px solid var(--border-light); padding: 12px 40px; font-size: 14px; letter-spacing: 2px;">すべてのオーダーメイド婚約指輪の制作事例を見る</a>
       </div>
     </div>
   </section>
@@ -530,10 +620,77 @@
     </div>
   </section>
 
-  <!-- 6. 制作の流れ -->
+  <!-- 6. シリーズ & サービス -->
+  <section class="series-links" style="position:relative;">
+    <span class="section-label">⑥ シリーズ & サービス</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=⑥シリーズ&サービス" target="_blank">修正コメント</a>
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="en">SERIES &amp; SERVICE</div>
+        <h2>特別なシリーズ・サービス</h2>
+        <div class="line"></div>
+        <p style="font-size: 14px; color: var(--text-secondary); margin-top: 20px; line-height: 2;">
+          おふたりのシーンに合わせた、オーダーメイドならではの特別なご提案。
+        </p>
+      </div>
+      <div class="series-cards">
+
+        <!-- 花こよみ -->
+        <a href="https://renri.jp/blog/%E4%BA%8C%E4%BA%BA%E3%81%AE%E6%83%B3%E3%81%84%E5%87%BA%E3%82%92%E4%B8%80%E8%BC%AA%E3%81%AE%E8%8A%B1%E3%81%AB%E3%81%9F%E3%81%A8%E3%81%88%E3%81%A6%E3%80%82%E6%96%B0%E4%BD%9C%E3%81%AE%E3%82%A8%E3%83%B3/" target="_blank" class="series-card fade-in">
+          <div class="series-card-image">
+            📷 花こよみシリーズのイメージ写真
+          </div>
+          <div class="series-card-body">
+            <div class="en-label">HANAKOYOMI SERIES</div>
+            <h3>花こよみ</h3>
+            <p class="series-tag">婚約指輪シリーズ｜全6型</p>
+            <p>
+              季節の花をモチーフにしたオリジナル婚約指輪。<br>
+              おふたりの想い出の季節を、一輪の花にたとえて。
+            </p>
+          </div>
+        </a>
+
+        <!-- リトルブーケ -->
+        <a href="https://renri.jp/blog/%E3%82%B5%E3%83%97%E3%83%A9%E3%82%A4%E3%82%BA%E3%83%97%E3%83%AD%E3%83%9D%E3%83%BC%E3%82%BA%E3%82%92%E5%BF%9C%E6%8F%B4%E3%81%97%E3%81%BE%E3%81%99%EF%BC%81%EF%BC%81%E6%96%B0%E3%81%9F%E3%81%AA%E5%A9%9A/" target="_blank" class="series-card fade-in fade-in-d1">
+          <div class="series-card-image">
+            📷 リトルブーケシリーズのイメージ写真
+          </div>
+          <div class="series-card-body">
+            <div class="en-label">LITTLE BOUQUET SERIES</div>
+            <h3>リトルブーケ</h3>
+            <p class="series-tag">定額制｜最短2週間｜143,000円〜</p>
+            <p>
+              小さな花束を贈るように、日常に寄り添う婚約指輪。<br>
+              定額制で安心、短納期でお届けします。
+            </p>
+          </div>
+        </a>
+
+        <!-- サプライズプロポーズ -->
+        <a href="https://renri.jp/blog/%e3%83%80%e3%82%a4%e3%83%a4%e3%83%a2%e3%83%b3%e3%83%89%e3%81%a7%e3%82%b5%e3%83%97%e3%83%a9%e3%82%a4%e3%82%ba%e3%83%97%e3%83%ad%e3%83%9d%e3%83%bc%e3%82%ba%e3%82%92%ef%bc%81%ef%bc%81%e3%80%80%e6%96%b0/" target="_blank" class="series-card fade-in fade-in-d2">
+          <div class="series-card-image">
+            📷 サプライズプロポーズのイメージ写真
+          </div>
+          <div class="series-card-body">
+            <div class="en-label">SURPRISE PROPOSAL</div>
+            <h3>サプライズプロポーズ</h3>
+            <p class="series-tag">ダイヤ先渡し｜最短当日｜48,000円〜</p>
+            <p>
+              まずダイヤモンドだけを贈り、デザインは後からふたりで。<br>
+              サプライズを叶える新しいプロポーズの形。
+            </p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. 制作の流れ -->
   <section class="flow" style="position:relative;">
-    <span class="section-label">⑥ 制作の流れ</span>
-    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=⑥制作の流れ" target="_blank">修正コメント</a>
+    <span class="section-label">⑦ 制作の流れ</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=⑦制作の流れ" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header">
         <div class="en">WORK FLOW</div>
@@ -545,45 +702,54 @@
         <div class="flow-step">
           <div class="step-num"><span>STEP</span><span>01</span></div>
           <div class="step-content">
-            <h3>お打合せ</h3>
-            <p>横浜のアトリエにご来店いただき、ご希望のデザインや納期、ご予算をお打合せさせていただきます。サプライズプロポーズで男性おひとりでのご来店も大歓迎です。お相手の好みやお写真を拝見しながら、デザイナーが理想の婚約指輪をご提案いたします。</p>
-            <div class="img-placeholder">📷 デザイナーが相談に乗りながらダイヤを見せている写真</div>
+            <h3>ご予約・ご来店</h3>
+            <p>WEBまたはお電話でご予約のうえ、横浜のアトリエへお越しください。おひとりでも、おふたりでもお気軽にどうぞ。（当日予約も空きがあれば可能です）</p>
+            <div class="img-placeholder">📷 アトリエ外観やスタッフがお出迎えする安心感のある写真</div>
           </div>
         </div>
 
         <div class="flow-step">
           <div class="step-num"><span>STEP</span><span>02</span></div>
           <div class="step-content">
-            <h3>ダイヤモンド選び・デザイン決定</h3>
-            <p>初めてのダイヤモンド選びはわからないことばかり。でも永くジュエリー業界に携わってきたデザイナーが親切にご説明させていただきますのでご安心ください。ご予算やご希望に合わせて、最適な一粒の輝きをお選びいただけます。</p>
-            <div class="img-placeholder">📷 ダイヤモンドを確認している写真</div>
+            <h3>お打合せ・デザインご提案</h3>
+            <p>お相手の普段の雰囲気やお好みをお伺いしながら、デザイナーが目の前でデザイン画をお描きします。「こんな感じがいい」という漠然としたイメージで大丈夫。ご予算やご希望の納期に合わせてご提案いたします。</p>
+            <div class="img-placeholder">📷 デザイナーが相談に乗りながらデザイン画を描いている写真</div>
           </div>
         </div>
 
         <div class="flow-step">
           <div class="step-num"><span>STEP</span><span>03</span></div>
           <div class="step-content">
-            <h3>試作リングのご確認</h3>
-            <p>ご希望に応じてフィッティング用の試作リングをお作りいたします。デザインやサイズ、つけ心地をご確認いただき、気になる点がございましたら微調整を行います。</p>
-            <div class="img-placeholder">📷 シルバーの試作リングのディテールを確認している写真</div>
+            <h3>ダイヤモンド選び</h3>
+            <p>初めてのダイヤモンド選びでも安心です。品質の違いをわかりやすくご説明し、ご予算に合った最高の一粒を一緒にお選びいただけます。実際に輝きを見比べながら、お決めいただけます。</p>
+            <div class="img-placeholder">📷 ダイヤモンドを確認している写真</div>
           </div>
         </div>
 
         <div class="flow-step">
           <div class="step-num"><span>STEP</span><span>04</span></div>
           <div class="step-content">
-            <h3>職人による本制作・石留め</h3>
-            <p>試作での調整内容をもとに、熟練の職人がプラチナやゴールドなどの本番素材を用いて丁寧に仕上げ、美しくダイヤモンドをセッティングいたします。少しづつ丁寧に、想いを指輪に込めていきます。</p>
-            <div class="img-placeholder">📷 職人が顕微鏡などを使いながら繊細な石留めをしている様子</div>
+            <h3>試作リングのご確認</h3>
+            <p>ご希望に応じてフィッティング用の試作リングをお作りいたします。実物でデザインやボリューム感を確認できるので、「完成品が思っていたのと違う」という心配がありません。</p>
+            <div class="img-placeholder">📷 シルバーの試作リングのディテールを確認している写真</div>
           </div>
         </div>
 
         <div class="flow-step">
           <div class="step-num"><span>STEP</span><span>05</span></div>
           <div class="step-content">
+            <h3>職人による本制作・石留め</h3>
+            <p>試作での調整内容をもとに、熟練の職人がプラチナやゴールドなどの本番素材で丁寧に仕上げ、選び抜いたダイヤモンドを美しくセッティングいたします。少しづつ丁寧に、想いを指輪に込めていきます。</p>
+            <div class="img-placeholder">📷 職人が顕微鏡などを使いながら繊細な石留めをしている様子</div>
+          </div>
+        </div>
+
+        <div class="flow-step">
+          <div class="step-num"><span>STEP</span><span>06</span></div>
+          <div class="step-content">
             <h3>完成・お渡し</h3>
             <p>世界にひとつのオーダーメイド婚約指輪の完成です。renriオリジナルケースに入れてお渡しいたします。ダイヤモンドの鑑定書や筆による着彩デザイン画もプレゼントいたしますので、ぜひ記念の品としてお手元に。</p>
-            <div class="img-placeholder">📷 完成した美しい指輪を開けた瞬間の喜ぶ写真</div>
+            <div class="img-placeholder">📷 完成した美しい指輪をケースから見せている写真</div>
           </div>
         </div>
 
@@ -593,8 +759,8 @@
 
   <!-- 7. アフターサービス -->
   <section class="aftercare" style="position:relative;">
-    <span class="section-label">⑦ アフターケア</span>
-    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=⑦アフターケア" target="_blank">修正コメント</a>
+    <span class="section-label">⑧ アフターケア</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=⑧アフターケア" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header">
         <div class="en">AFTERCARE</div>
@@ -605,7 +771,7 @@
         <div class="aftercare-item">
           <div class="img-placeholder">🛠</div>
           <h4>サイズ直し<br>（基本無料）</h4>
-          <p>前後1号のサイズ直しは基本無料です。サプライズでお渡しした後にサイズが合わなかった場合でも、調整が可能ですのでご安心ください。</p>
+          <p>前後1号のサイズ直しは基本無料です。サプライズでお贈りされた後にサイズが合わなかった場合でも、調整が可能ですのでご安心ください。</p>
         </div>
         <div class="aftercare-item">
           <div class="img-placeholder">✨</div>
@@ -628,8 +794,8 @@
 
   <!-- 8. お客様の声 -->
   <section class="voices" style="position:relative;">
-    <span class="section-label">⑧ お客様の声</span>
-    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=⑧お客様の声" target="_blank">修正コメント</a>
+    <span class="section-label">⑨ お客様の声</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=⑨お客様の声" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header">
         <div class="en">VOICES</div>
@@ -656,8 +822,8 @@
 
   <!-- 9. よくある質問 -->
   <section class="faq" style="position:relative;">
-    <span class="section-label">⑨ よくある質問（オーダーメイド＆プロポーズの疑問）</span>
-    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=⑨よくある質問" target="_blank">修正コメント</a>
+    <span class="section-label">⑩ よくある質問（オーダーメイド＆プロポーズの疑問）</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=⑩よくある質問" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header">
         <div class="en">Q & A</div>
