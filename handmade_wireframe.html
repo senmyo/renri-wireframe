@@ -104,6 +104,36 @@
     }
 
     /* ============================================
+       FEEDBACK BUTTON
+       ============================================ */
+    .feedback-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 50;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      font-size: 12px;
+      color: #fff;
+      background: rgba(0,0,0,0.5);
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease;
+      letter-spacing: 0.5px;
+    }
+    .feedback-btn:hover {
+      background: rgba(0,0,0,0.75);
+    }
+    .feedback-btn::before {
+      content: "\270E";
+      font-size: 14px;
+    }
+
+    /* ============================================
        HEADER
        ============================================ */
     .header {
@@ -491,8 +521,7 @@
     }
 
     .course-card:hover {
-      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
-      transform: translateY(-8px) scale(1.02);
+      box-shadow: var(--shadow-card);
     }
 
     .course-card-image {
@@ -782,8 +811,9 @@
   <!-- ============================================
        SECTION 1: HERO / メイン画像
        ============================================ -->
-  <section class="hero" id="hero">
+  <section class="hero" id="hero" style="position:relative;">
     <span class="section-label">① メイン画像 + キャッチコピー</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=手作りコースTOP&entry.1525828345=①メイン画像+キャッチコピー" target="_blank">修正コメント</a>
     <div class="hero-image-placeholder">
     </div>
     <div class="hero-copy">
@@ -796,8 +826,9 @@
   <!-- ============================================
        SECTION 2: INTRODUCTION / 紹介文
        ============================================ -->
-  <section class="intro" id="intro">
+  <section class="intro" id="intro" style="position:relative;">
     <span class="section-label">② キャッチコピー + 紹介文</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=手作りコースTOP&entry.1525828345=②キャッチコピー+紹介文" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
         <div class="en">ABOUT HANDMADE</div>
@@ -823,8 +854,9 @@
   <!-- ============================================
        SECTION 3: FEATURES / 特徴3つ
        ============================================ -->
-  <section class="features" id="features">
+  <section class="features" id="features" style="position:relative;">
     <span class="section-label">③ 特徴3つ（競合と比べた強み）</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=手作りコースTOP&entry.1525828345=③特徴3つ" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
         <div class="en">FEATURES</div>
@@ -882,8 +914,9 @@
   <!-- ============================================
        SECTION 4: COMPARISON TABLE / 手作りとオーダーの比較表
        ============================================ -->
-  <section class="comparison" id="comparison">
+  <section class="comparison" id="comparison" style="position:relative;">
     <span class="section-label">④ 手作りとオーダーの比較表（オーダーへのリンク）</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=手作りコースTOP&entry.1525828345=④比較表" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
         <div class="en">COMPARISON</div>
@@ -940,8 +973,9 @@
   <!-- ============================================
        SECTION 5: COURSE LINKS / 結婚・婚約指輪ページへのリンク
        ============================================ -->
-  <section class="course-links" id="course-links">
+  <section class="course-links" id="course-links" style="position:relative;">
     <span class="section-label">⑤ 結婚指輪・婚約指輪ページへのリンク</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=手作りコースTOP&entry.1525828345=⑤結婚指輪・婚約指輪リンク" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
         <div class="en">SELECT COURSE</div>

@@ -61,6 +61,36 @@
     }
 
     /* ============================================
+       FEEDBACK BUTTON
+       ============================================ */
+    .feedback-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 50;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      font-size: 12px;
+      color: #fff;
+      background: rgba(0,0,0,0.5);
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease;
+      letter-spacing: 0.5px;
+    }
+    .feedback-btn:hover {
+      background: rgba(0,0,0,0.75);
+    }
+    .feedback-btn::before {
+      content: "\270E";
+      font-size: 14px;
+    }
+
+    /* ============================================
        HEADER
        ============================================ */
     .header {
@@ -237,8 +267,9 @@
   </header>
 
   <!-- 1. メイン画像・キャッチコピー -->
-  <section class="hero" id="hero">
+  <section class="hero" id="hero" style="position:relative;">
     <span class="section-label">① メイン画像・キャッチコピー</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=①メイン画像・キャッチコピー" target="_blank">修正コメント</a>
     <div class="img-placeholder" style="background: linear-gradient(135deg, #a0a0a0, #777777); color: #fff;">
     </div>
     <div class="hero-copy">
@@ -248,8 +279,9 @@
   </section>
 
   <!-- 2. 選ばれる理由（特徴x3） -->
-  <section class="features">
+  <section class="features" style="position:relative;">
     <span class="section-label">② 特徴×3（オーダーメイド婚約指輪ならではの魅力）</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=②特徴×3" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header">
         <div class="en">REASONS</div>
@@ -283,8 +315,9 @@
   </section>
 
   <!-- 3. 実績（高品質感・低中高価格） -->
-  <section class="portfolio">
+  <section class="portfolio" style="position:relative;">
     <span class="section-label">③ 実績（オーダーメイドで叶える多様なデザインと価格）</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=③実績" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header">
         <div class="en">PORTFOLIO</div>
@@ -328,8 +361,9 @@
   </section>
 
   <!-- 4. 価格 -->
-  <section class="pricing">
+  <section class="pricing" style="position:relative;">
     <span class="section-label">④ 価格</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=④価格" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header">
         <div class="en">PRICE</div>
@@ -349,8 +383,9 @@
   </section>
 
   <!-- 5. 素材・オプション加工 -->
-  <section class="options">
+  <section class="options" style="position:relative;">
     <span class="section-label">⑤ 素材・オプション加工</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=⑤素材・オプション" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header">
         <div class="en">MATERIALS & OPTION</div>
@@ -496,8 +531,9 @@
   </section>
 
   <!-- 6. 制作の流れ -->
-  <section class="flow">
+  <section class="flow" style="position:relative;">
     <span class="section-label">⑥ 制作の流れ</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=⑥制作の流れ" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header">
         <div class="en">WORK FLOW</div>
@@ -556,8 +592,9 @@
   </section>
 
   <!-- 7. アフターサービス -->
-  <section class="aftercare">
+  <section class="aftercare" style="position:relative;">
     <span class="section-label">⑦ アフターケア</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=⑦アフターケア" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header">
         <div class="en">AFTERCARE</div>
@@ -590,8 +627,9 @@
   </section>
 
   <!-- 8. お客様の声 -->
-  <section class="voices">
+  <section class="voices" style="position:relative;">
     <span class="section-label">⑧ お客様の声</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=⑧お客様の声" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header">
         <div class="en">VOICES</div>
@@ -617,8 +655,9 @@
   </section>
 
   <!-- 9. よくある質問 -->
-  <section class="faq">
+  <section class="faq" style="position:relative;">
     <span class="section-label">⑨ よくある質問（オーダーメイド＆プロポーズの疑問）</span>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=オーダーメイド婚約指輪&entry.1525828345=⑨よくある質問" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header">
         <div class="en">Q & A</div>
