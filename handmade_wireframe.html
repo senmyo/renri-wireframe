@@ -484,15 +484,15 @@
       border-radius: 4px;
       background: var(--bg-white);
       box-shadow: var(--shadow-soft);
-      transition: var(--transition);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
       text-decoration: none;
       color: inherit;
       display: block;
     }
 
     .course-card:hover {
-      box-shadow: var(--shadow-card);
-      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+      transform: translateY(-8px) scale(1.02);
     }
 
     .course-card-image {
