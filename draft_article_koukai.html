@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>【DRAFT】手作り婚約指輪で後悔しないために｜SEO記事改善案</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================
+       ROOT VARIABLES
+       ============================================ */
+    :root {
+      --text-primary: #222222;
+      --text-secondary: #555555;
+      --bg-white: #ffffff;
+      --bg-cream: #f5f5f5;
+      --border-light: #cccccc;
+      --serif-jp: 'Noto Serif JP', 'Yu Mincho', serif;
+      --serif-en: 'Cormorant Garamond', serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--serif-jp);
+      color: var(--text-primary);
+      background: var(--bg-cream);
+      line-height: 1.9;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+      padding-top: 36px;
+    }
+
+    /* ============================================
+       WIREFRAME BAR
+       ============================================ */
+    .wireframe-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+      background: #1a1a2e; color: #fff; padding: 8px 20px;
+      font-family: sans-serif; font-size: 12px; display: flex; align-items: center; gap: 16px;
+    }
+    .wireframe-bar .badge {
+      background: #e94560; color: #fff; padding: 2px 10px; border-radius: 3px; font-weight: 700; font-size: 11px;
+    }
+    .wireframe-bar .page-path { color: #a2d2ff; font-weight: 500; }
+
+    /* ============================================
+       FEEDBACK BUTTON
+       ============================================ */
+    .feedback-btn {
+      position: absolute; top: 12px; right: 12px; z-index: 50;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; font-size: 12px; color: #fff;
+      background: rgba(0,0,0,0.5); border: none; border-radius: 20px;
+      cursor: pointer; text-decoration: none; transition: background 0.3s ease;
+    }
+    .feedback-btn:hover { background: rgba(0,0,0,0.75); }
+    .feedback-btn::before { content: "\270E"; font-size: 14px; }
+
+    /* ============================================
+       ARTICLE CONTAINER
+       ============================================ */
+    .article-container {
+      max-width: 960px;
+      margin: 40px auto;
+      background: var(--bg-white);
+      border-radius: 8px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      padding: 48px 56px 64px;
+    }
+    @media (max-width: 768px) {
+      .article-container { padding: 24px 20px 40px; margin: 20px 12px; }
+    }
+
+    /* ============================================
+       TYPOGRAPHY
+       ============================================ */
+    .article-title {
+      font-family: var(--serif-jp);
+      font-size: 26px;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+    .article-meta {
+      font-family: sans-serif;
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #eee;
+    }
+    h2 {
+      font-family: var(--serif-jp);
+      font-size: 22px;
+      font-weight: 600;
+      margin: 48px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #ddd;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    h3 {
+      font-family: var(--serif-jp);
+      font-size: 18px;
+      font-weight: 600;
+      margin: 32px 0 12px;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    p {
+      margin-bottom: 18px;
+      color: var(--text-secondary);
+      line-height: 2;
+    }
+
+    /* ============================================
+       SECTION WRAPPER (for feedback btn positioning)
+       ============================================ */
+    .section-wrapper {
+      position: relative;
+      margin: 32px 0;
+    }
+
+    /* ============================================
+       CHANGE PROPOSAL BOX
+       ============================================ */
+    .change-proposal {
+      background: #fffde7;
+      border-left: 4px solid #ffc107;
+      padding: 20px 24px;
+      margin: 20px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .change-proposal .label {
+      font-family: sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #e65100;
+      margin-bottom: 8px;
+    }
+    .change-proposal .before,
+    .change-proposal .after {
+      font-family: sans-serif;
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .change-proposal .before { color: #999; }
+    .change-proposal .before s { text-decoration: line-through; }
+    .change-proposal .after { color: #333; font-weight: 500; }
+
+    /* ============================================
+       NEW SECTION BOX
+       ============================================ */
+    .new-section {
+      background: #e8f5e9;
+      border-left: 4px solid #4caf50;
+      padding: 20px 24px;
+      margin: 20px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .new-section .label {
+      font-family: sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #2e7d32;
+      margin-bottom: 8px;
+    }
+
+    /* ============================================
+       EXISTING CONTENT BOX
+       ============================================ */
+    .existing-content {
+      background: #f5f5f5;
+      border: 1px dashed #ccc;
+      padding: 20px 24px;
+      margin: 20px 0;
+      border-radius: 8px;
+      color: #999;
+      font-family: sans-serif;
+      font-size: 13px;
+    }
+    .existing-content .label {
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: #888;
+    }
+
+    /* ============================================
+       VOICE / TESTIMONIAL
+       ============================================ */
+    .voice-card {
+      background: #fafafa;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin: 16px 0;
+      position: relative;
+    }
+    .voice-card::before {
+      content: "\201C";
+      font-family: var(--serif-en);
+      font-size: 48px;
+      color: #ddd;
+      position: absolute;
+      top: 8px;
+      left: 16px;
+      line-height: 1;
+    }
+    .voice-card p {
+      padding-left: 24px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      margin-bottom: 8px;
+    }
+    .voice-card .attribution {
+      padding-left: 24px;
+      font-family: sans-serif;
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    /* ============================================
+       FAQ
+       ============================================ */
+    .faq-item {
+      margin: 20px 0;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .faq-q {
+      background: #fafafa;
+      padding: 16px 20px;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .faq-q .q-mark {
+      font-family: var(--serif-en);
+      font-size: 20px;
+      font-weight: 700;
+      color: #999;
+      flex-shrink: 0;
+    }
+    .faq-a {
+      padding: 16px 20px 16px 50px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+    }
+
+    /* ============================================
+       REGRET PATTERN CARD
+       ============================================ */
+    .regret-card {
+      margin: 28px 0;
+      padding: 0 0 0 20px;
+      border-left: 3px solid #4caf50;
+    }
+    .regret-card h3 {
+      font-size: 17px;
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+    .regret-card p {
+      font-size: 14px;
+    }
+
+    /* ============================================
+       TOC
+       ============================================ */
+    .toc {
+      background: #fafafa;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin: 32px 0;
+    }
+    .toc-title {
+      font-family: sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #888;
+      margin-bottom: 12px;
+    }
+    .toc ol {
+      padding-left: 20px;
+    }
+    .toc li {
+      font-size: 14px;
+      line-height: 2;
+      color: var(--text-secondary);
+    }
+    .toc li.new-marker { color: #2e7d32; font-weight: 500; }
+    .toc li.change-marker { color: #e65100; font-weight: 500; }
+  </style>
+</head>
+<body>
+
+<!-- ============================================
+     WIREFRAME BAR
+     ============================================ -->
+<div class="wireframe-bar">
+  <span class="badge">DRAFT</span>
+  <span>SEO記事改善案</span>
+  <span class="page-path">記事2: 婚約指輪 手作り 後悔</span>
+</div>
+
+<div class="article-container">
+
+  <!-- ============================================
+       TITLE & META DESCRIPTION 改善案
+       ============================================ -->
+  <div class="section-wrapper">
+    <a class="feedback-btn"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=SEO記事_後悔&entry.1525828345=title・meta_description"
+       target="_blank" rel="noopener">修正コメント</a>
+
+    <div class="change-proposal">
+      <div class="label">&#9999;&#65039; 変更提案 ― title タグ</div>
+      <div class="before"><s>手作り婚約指輪ってどうなの？後悔する前に気になるアレコレを一気に解消！</s></div>
+      <div class="after">&#10140; 手作り婚約指輪で後悔しないために｜よくある失敗例と対策をプロが解説</div>
+    </div>
+
+    <div class="change-proposal">
+      <div class="label">&#9999;&#65039; 変更提案 ― meta description</div>
+      <div class="before"><s>横浜・日本大通りにある手作り・オーダーメイドの結婚指輪renri（レンリ）。手作りの婚約指輪の魅力や後悔する前に知っておきたいことを解説しています。</s></div>
+      <div class="after">&#10140; 婚約指輪を手作りして後悔しないために知っておくべきこと。よくある失敗例・価値観の確認方法・デザインのチェックポイントをrenriのデザイナーが解説します。</div>
+    </div>
+  </div>
+
+  <!-- ARTICLE TITLE (改善後) -->
+  <h1 class="article-title">手作り婚約指輪で後悔しないために｜よくある失敗例と対策をプロが解説</h1>
+  <div class="article-meta">対策キーワード: 婚約指輪 手作り 後悔 ／ 改善下書き ／ renri</div>
+
+  <!-- ============================================
+       目次（改善後の構成）
+       ============================================ -->
+  <div class="toc">
+    <div class="toc-title">目次（改善後の構成）</div>
+    <ol>
+      <li>手作りの婚約指輪って実際どうなの？</li>
+      <li>手作り婚約指輪ならではの魅力</li>
+      <li class="new-marker">&#10133; 手作り婚約指輪でよくある後悔パターン5選【新規追加】</li>
+      <li>婚約指輪を手作りして後悔しないために知っておくべきこと</li>
+      <li>手作り婚約指輪がおすすめな人とは</li>
+      <li>最高の手作り婚約指輪に仕上げるためのチェックポイント</li>
+      <li>renriならデザインにもダイヤモンドにもこだわれる</li>
+      <li class="new-marker">&#10133; お客様の声 ― 手作り婚約指輪を選んだ理由【新規追加】</li>
+      <li class="change-marker">&#9999;&#65039; 手作り婚約指輪ってどうなの？気になるアレコレ【FAQ拡充】</li>
+      <li>まとめ</li>
+    </ol>
+  </div>
+
+  <!-- ============================================
+       H2-1: 手作りの婚約指輪って実際どうなの？
+       ============================================ -->
+  <div class="section-wrapper">
+    <a class="feedback-btn"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=SEO記事_後悔&entry.1525828345=手作りの婚約指輪って実際どうなの"
+       target="_blank" rel="noopener">修正コメント</a>
+    <h2>1. 手作りの婚約指輪って実際どうなの？</h2>
+    <div class="existing-content">
+      <div class="label">既存コンテンツ維持</div>
+      <p>このセクションは現行の内容をそのまま維持します。手作り婚約指輪への一般的な疑問と、その需要が高まっている背景を紹介する導入パートです。</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       H2-2: 手作り婚約指輪ならではの魅力
+       ============================================ -->
+  <div class="section-wrapper">
+    <a class="feedback-btn"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=SEO記事_後悔&entry.1525828345=手作り婚約指輪ならではの魅力"
+       target="_blank" rel="noopener">修正コメント</a>
+    <h2>2. 手作り婚約指輪ならではの魅力</h2>
+    <div class="existing-content">
+      <div class="label">既存コンテンツ維持</div>
+      <p>このセクションは現行の内容をそのまま維持します。手作りならではの唯一無二感、制作体験の思い出、コストパフォーマンスなどの魅力を伝えるパートです。</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       H2-3: 【新規】手作り婚約指輪でよくある後悔パターン5選
+       ============================================ -->
+  <div class="section-wrapper">
+    <a class="feedback-btn"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=SEO記事_後悔&entry.1525828345=よくある後悔パターン5選"
+       target="_blank" rel="noopener">修正コメント</a>
+
+    <div class="new-section">
+      <div class="label">&#10133; 新規追加 ― 既存セクション2と3の間に挿入</div>
+    </div>
+
+    <h2>3. 手作り婚約指輪でよくある後悔パターン5選</h2>
+
+    <p>婚約指輪を手作りすること自体はとても素敵な選択です。しかし、事前の準備や情報収集が不十分なまま進めてしまうと、思わぬ後悔につながることがあります。ここでは、実際に聞かれることの多い後悔パターンと、その対策をご紹介します。</p>
+
+    <!-- 後悔① -->
+    <div class="regret-card">
+      <h3>後悔①: デザインが思い通りにならなかった</h3>
+      <p>「手作りなら好きなデザインを自由に作れるはず」と期待して工房を訪れたものの、技術的な制約や素材の特性から、思い描いていたデザインを完全には再現できなかった――これは手作り婚約指輪で最も多く聞かれる後悔のひとつです。</p>
+      <p>たとえば、繊細な透かし模様や複雑な曲線など、高度な技術を要するデザインは、一日の手作り体験では難しい場合があります。また、金属の種類や太さによっても表現できるデザインの幅は変わってきます。</p>
+      <p>renriでは、制作前にデザイナーがお客様のイメージを丁寧にヒアリングし、ご希望を踏まえたうえで実現可能な形に落とし込んだデッサンをお描きします。完成形を事前にしっかりと共有できるため、「想像と違った」というギャップが生まれにくいのが特長です。手作りでは表現が難しい部分は、職人が仕上げで補うことも可能ですので、デザインの自由度を保ちながら理想の一本をお作りいただけます。</p>
+    </div>
+
+    <!-- 後悔② -->
+    <div class="regret-card">
+      <h3>後悔②: 相手がブランド志向だった</h3>
+      <p>心を込めて手作りした婚約指輪。しかし、お相手が実はハイブランドの婚約指輪を期待していた――サプライズで贈ったからこそ、お渡しした後にそのことがわかり、お互いに気まずい思いをしてしまったというケースがあります。</p>
+      <p>婚約指輪に対する価値観は人それぞれです。手作りの温かみや世界にひとつだけの特別感を大切にする方もいれば、ブランドのネームバリューやステータスを重視する方もいらっしゃいます。どちらが正しいということではなく、大切なのはお相手の価値観を事前に理解しておくことです。</p>
+      <p>対策としては、普段の会話の中で、さりげなくジュエリーの好みやブランドへの関心についてリサーチしておくことが大切です。たとえば、雑誌やSNSで目にしたジュエリーへの反応を観察したり、お友達やご家族に協力をお願いしたりするのもひとつの方法です。お相手が「ふたりの手で作るもの」に価値を感じてくれるタイプなら、手作りの婚約指輪はきっと最高のプレゼントになるでしょう。</p>
+    </div>
+
+    <!-- 後悔③ -->
+    <div class="regret-card">
+      <h3>後悔③: 納期に間に合わなかった</h3>
+      <p>プロポーズの日は決まっているのに、婚約指輪の制作が間に合わなかった。この後悔は、手作り婚約指輪ならではのトラブルと言えるかもしれません。</p>
+      <p>手作りの婚約指輪は、既製品のように店頭ですぐに持ち帰れるわけではありません。制作体験の後に職人による仕上げ工程が入り、石留めや刻印などの特殊な加工が必要な場合は1ヶ月ほどお時間をいただくこともあります。</p>
+      <p>renriでは、最初のご相談の段階でプロポーズの予定日をお伺いし、それに合わせた制作スケジュールをご提案しています。納期のご相談にも柔軟に対応しておりますので、「この日までに間に合いますか？」というご不安があれば、まずはお気軽にお問い合わせください。余裕を持ったスケジュールで、焦ることなく一生の宝物をお作りいただけます。</p>
+    </div>
+
+    <!-- 後悔④ -->
+    <div class="regret-card">
+      <h3>後悔④: 品質に不安が残った</h3>
+      <p>「手作り＝素人が作ったもの」というイメージから、品質面での不安を感じる方は少なくありません。せっかく婚約指輪を手作りしたのに、仕上がりを見て「やっぱり既製品の方がきれいだったかも」と後悔してしまうのは、とても残念なことです。</p>
+      <p>しかし、工房選びさえ間違えなければ、この心配は不要です。renriでは、お客様が手作りされた指輪に対して、一級技能士の資格を持つ専属の職人が最終仕上げを行います。石留め、磨き、表面処理など、プロフェッショナルの手によって一つひとつ丁寧に仕上げるため、ハイジュエリーブランドの製品と遜色のないクオリティをお約束できます。</p>
+      <p>「自分の手で作る温かみ」と「職人の技術が保証する品質」。その両方を兼ね備えているのが、renriの手作り婚約指輪です。</p>
+    </div>
+
+    <!-- 後悔⑤ -->
+    <div class="regret-card">
+      <h3>後悔⑤: サイズが合わなかった</h3>
+      <p>サプライズで婚約指輪を贈る場合に起こりがちなのが、サイズの問題です。お相手に気づかれないよう指輪のサイズを調べるのは意外と難しく、せっかく心を込めて作った指輪がはめられなかった――というのは、贈る側にとっても受け取る側にとっても、少し切ない経験です。</p>
+      <p>サイズを事前に正確に把握するのが難しい場合でも、おおよそのサイズで制作し、プロポーズ後にお相手と一緒にサイズ調整を行うという方法があります。renriでは、完成後のサイズ直しを永久無償で対応しております。何年経っても、指のサイズが変わっても、いつでもぴったりのサイズに調整いたしますので、安心してサプライズに臨んでいただけます。</p>
+      <p>また、サプライズではなくお相手と一緒に制作される場合は、当日に正確なサイズを測定したうえでお作りしますので、サイズの心配は一切ありません。</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       H2-4: 婚約指輪を手作りして後悔しないために知っておくべきこと（旧3）
+       ============================================ -->
+  <div class="section-wrapper">
+    <a class="feedback-btn"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=SEO記事_後悔&entry.1525828345=後悔しないために知っておくべきこと"
+       target="_blank" rel="noopener">修正コメント</a>
+    <h2>4. 婚約指輪を手作りして後悔しないために知っておくべきこと</h2>
+    <div class="existing-content">
+      <div class="label">既存コンテンツ維持</div>
+      <p>このセクションは現行の内容をそのまま維持します。工房選びのポイント、アフターサービスの確認、パートナーとの事前相談の重要性などを解説するパートです。</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       H2-5: 手作り婚約指輪がおすすめな人とは（旧4）
+       ============================================ -->
+  <div class="section-wrapper">
+    <a class="feedback-btn"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=SEO記事_後悔&entry.1525828345=手作り婚約指輪がおすすめな人とは"
+       target="_blank" rel="noopener">修正コメント</a>
+    <h2>5. 手作り婚約指輪がおすすめな人とは</h2>
+    <div class="existing-content">
+      <div class="label">既存コンテンツ維持</div>
+      <p>このセクションは現行の内容をそのまま維持します。手作り婚約指輪が向いている人の特徴やシチュエーションを紹介するパートです。</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       H2-6: 最高の手作り婚約指輪に仕上げるためのチェックポイント（旧5）
+       ============================================ -->
+  <div class="section-wrapper">
+    <a class="feedback-btn"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=SEO記事_後悔&entry.1525828345=チェックポイント"
+       target="_blank" rel="noopener">修正コメント</a>
+    <h2>6. 最高の手作り婚約指輪に仕上げるためのチェックポイント</h2>
+    <div class="existing-content">
+      <div class="label">既存コンテンツ維持</div>
+      <p>このセクションは現行の内容をそのまま維持します。素材選び、ダイヤモンドの4C、デザインの確認事項など、完成度を高めるためのチェックリストです。</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       H2-7: renriならデザインにもダイヤモンドにもこだわれる（旧6）
+       ============================================ -->
+  <div class="section-wrapper">
+    <a class="feedback-btn"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=SEO記事_後悔&entry.1525828345=renriならデザインにもダイヤモンドにもこだわれる"
+       target="_blank" rel="noopener">修正コメント</a>
+    <h2>7. renriならデザインにもダイヤモンドにもこだわれる</h2>
+    <div class="existing-content">
+      <div class="label">既存コンテンツ維持</div>
+      <p>このセクションは現行の内容をそのまま維持します。renriのデザイン力とダイヤモンドの品質へのこだわりを訴求するパートです。</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       H2-8: 【新規】お客様の声 ― 手作り婚約指輪を選んだ理由
+       ============================================ -->
+  <div class="section-wrapper">
+    <a class="feedback-btn"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=SEO記事_後悔&entry.1525828345=お客様の声"
+       target="_blank" rel="noopener">修正コメント</a>
+
+    <div class="new-section">
+      <div class="label">&#10133; 新規追加 ― 既存セクション「renriなら〜」の後、まとめの前に挿入</div>
+    </div>
+
+    <h2>8. お客様の声 ― 手作り婚約指輪を選んだ理由</h2>
+
+    <p>実際にrenriで手作り・オーダーメイドの婚約指輪をお作りになったお客様から、嬉しいお声をいただいています。</p>
+
+    <div class="voice-card">
+      <p>正直、手作りで品質は大丈夫かなと不安がありました。でも、仕上げは熟練の職人さんが行ってくれるので、既製品と遜色ない美しさに仕上がりました。不安は完全に杞憂でした。</p>
+      <div class="attribution">&#8212; 婚約指輪を手作りされたお客様</div>
+    </div>
+
+    <div class="voice-card">
+      <p>サプライズで婚約指輪を作りたかったのですが、彼女の好みやサイズがわからず不安でした。デザイナーさんが普段のファッションや雰囲気からアドバイスしてくれて、渡したときの彼女の笑顔が忘れられません。</p>
+      <div class="attribution">&#8212; 婚約指輪を手作りされたお客様</div>
+    </div>
+
+    <div class="voice-card">
+      <p>サンプルリングで実際の着け心地やサイズ感を事前に確認できたので、"思っていたのと違った"という後悔がありませんでした。完成品を受け取ったとき、想像以上の仕上がりで感動しました。</p>
+      <div class="attribution">&#8212; 婚約指輪をオーダーメイドされたお客様</div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       H2-9: FAQ拡充 ― 手作り婚約指輪ってどうなの？気になるアレコレ（旧7）
+       ============================================ -->
+  <div class="section-wrapper">
+    <a class="feedback-btn"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=SEO記事_後悔&entry.1525828345=FAQ"
+       target="_blank" rel="noopener">修正コメント</a>
+
+    <h2>9. 手作り婚約指輪ってどうなの？気になるアレコレ</h2>
+
+    <div class="existing-content">
+      <div class="label">既存コンテンツ維持</div>
+      <p>既存のQ&Aはそのまま維持します。以下に新規Q&Aの追加を提案します。</p>
+    </div>
+
+    <div class="change-proposal">
+      <div class="label">&#9999;&#65039; 変更提案 ― FAQ拡充（以下3つを追加）</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        <span class="q-mark">Q.</span>
+        手作りの婚約指輪は既製品と比べて品質が劣りますか？
+      </div>
+      <div class="faq-a">
+        いいえ、品質は既製品と遜色ありません。renriでは、お客様が手作りした指輪を熟練の職人が最終仕上げします。石留めは一級技能士の専属職人が担当するため、ハイジュエリーブランドと同等の品質に仕上がります。
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        <span class="q-mark">Q.</span>
+        サプライズで手作りする場合、相手の指のサイズがわからなくても大丈夫ですか？
+      </div>
+      <div class="faq-a">
+        ご安心ください。おおよそのサイズで制作し、完成後にサイズ直しをすることが可能です。renriではサイズ直しは永久無償で対応しております。
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">
+        <span class="q-mark">Q.</span>
+        デザインの知識がなくても理想の婚約指輪は作れますか？
+      </div>
+      <div class="faq-a">
+        はい、ご安心ください。renriではハイジュエリーブランドで約10年のキャリアを持つデザイナーが、お好みやライフスタイルを丁寧にヒアリングしながら一緒にデザインを考えます。
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       H2-10: まとめ（旧8）
+       ============================================ -->
+  <div class="section-wrapper">
+    <a class="feedback-btn"
+       href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=SEO記事_後悔&entry.1525828345=まとめ"
+       target="_blank" rel="noopener">修正コメント</a>
+    <h2>10. まとめ</h2>
+    <div class="existing-content">
+      <div class="label">既存コンテンツ維持</div>
+      <p>このセクションは現行の内容をそのまま維持します。記事全体の要点を振り返り、CTAへ誘導するまとめパートです。</p>
+    </div>
+  </div>
+
+  <!-- ============================================
+       FOOTER NOTE
+       ============================================ -->
+  <div style="margin-top: 60px; padding-top: 24px; border-top: 1px solid #eee; font-family: sans-serif; font-size: 12px; color: #aaa; text-align: center; line-height: 1.8;">
+    <p>この下書きはクライアント確認用です。実際の公開記事とはレイアウト・デザインが異なります。</p>
+    <p>各セクションの「修正コメント」ボタンからフィードバックをお送りください。</p>
+  </div>
+
+</div>
+
+</body>
+</html>
