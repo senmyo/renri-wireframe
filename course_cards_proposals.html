@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>コース選択カード改案 | renri ワイヤーフレーム</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #555555;
+      --gold-light: #777777;
+      --text-primary: #222222;
+      --text-secondary: #555555;
+      --text-light: #999999;
+      --bg-white: #ffffff;
+      --bg-cream: #f5f5f5;
+      --border-light: #cccccc;
+      --serif-jp: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+      --serif-en: 'Cormorant Garamond', serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--serif-jp);
+      color: var(--text-primary);
+      background: var(--bg-white);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    /* Wireframe bar */
+    .wireframe-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+      background: #1a1a2e; color: #fff; padding: 8px 20px;
+      font-family: sans-serif; font-size: 12px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .wireframe-bar .badge {
+      background: #e94560; color: #fff; padding: 2px 10px;
+      border-radius: 3px; font-weight: 700; font-size: 11px;
+    }
+
+    /* Intro */
+    .intro {
+      max-width: 1000px; margin: 80px auto 20px; padding: 0 20px;
+    }
+    .intro h1 {
+      font-size: 22px; font-weight: 500; letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+    .intro p {
+      font-size: 14px; color: var(--text-secondary); line-height: 2;
+    }
+
+    /* Pattern section */
+    .pattern {
+      max-width: 1000px; margin: 60px auto; padding: 0 20px;
+    }
+    .pattern-header {
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 16px; margin-bottom: 32px;
+    }
+    .pattern-badge {
+      display: inline-block; background: var(--text-primary); color: #fff;
+      font-family: sans-serif; font-size: 11px; font-weight: 700;
+      padding: 4px 12px; border-radius: 3px; letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .pattern h2 {
+      font-size: 20px; font-weight: 500; letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    .pattern-desc {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.8;
+    }
+
+    /* Situation cards (matching v2 style) */
+    .situation-cards {
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .situation-card {
+      display: flex; align-items: center; gap: 20px;
+      padding: 24px 28px; background: var(--bg-cream);
+      border: 1px solid transparent; border-radius: 4px;
+      text-decoration: none; color: inherit;
+      transition: all 0.3s ease; position: relative;
+    }
+    .situation-card:hover {
+      background: #fff; border-color: var(--border-light);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .situation-icon {
+      font-size: 28px; flex-shrink: 0; width: 56px;
+      text-align: center;
+    }
+    .situation-body { flex: 1; }
+    .situation-label {
+      font-family: var(--serif-en); font-size: 11px;
+      letter-spacing: 3px; color: var(--text-light);
+      margin-bottom: 4px; text-transform: uppercase;
+    }
+    .situation-title {
+      font-size: 17px; font-weight: 500;
+      color: var(--text-primary); margin-bottom: 6px;
+    }
+    .situation-desc {
+      font-size: 13px; color: var(--text-secondary);
+      line-height: 1.8;
+    }
+    .situation-arrow {
+      font-family: var(--serif-en); font-size: 20px;
+      color: var(--text-light); flex-shrink: 0;
+    }
+
+    /* Persona tags under card */
+    .persona-tags {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-top: 8px;
+    }
+    .persona-tag {
+      font-size: 11px; background: #fff;
+      padding: 2px 8px; border-radius: 10px;
+      color: var(--text-secondary); border: 1px solid var(--border-light);
+    }
+
+    /* Analysis box */
+    .analysis {
+      background: #fffbe6; border-left: 3px solid #d4a300;
+      padding: 16px 20px; margin-top: 24px; font-size: 13px;
+      line-height: 2; color: var(--text-secondary);
+    }
+    .analysis strong { color: var(--text-primary); }
+
+    /* Footer note */
+    .footer-note {
+      max-width: 1000px; margin: 80px auto; padding: 40px 20px;
+      border-top: 1px solid var(--border-light);
+      font-size: 13px; color: var(--text-secondary);
+      line-height: 2;
+    }
+
+    @media (max-width: 640px) {
+      .situation-card { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wireframe-bar">
+    <span class="badge">PROPOSALS</span>
+    <span>コース選択カード — 3パターン改案</span>
+  </div>
+
+  <div class="intro" style="margin-top: 80px;">
+    <h1>コース選択カード — ブラッシュアップ案</h1>
+    <p>
+      クライアントから提示された「ユーザー視点」のリストを元に、<br>
+      スペック比較ではなく「自分ごと化」を促す3パターンを提案します。
+    </p>
+  </div>
+
+  <!-- ============================================
+       現状 (Reference)
+       ============================================ -->
+  <div class="pattern">
+    <div class="pattern-header">
+      <span class="pattern-badge" style="background: #999;">現状</span>
+      <h2>今のカード内容</h2>
+      <p class="pattern-desc">比較のためのリファレンス。機能説明寄り。</p>
+    </div>
+
+    <div class="situation-cards">
+      <div class="situation-card">
+        <div class="situation-icon">&#9997;</div>
+        <div class="situation-body">
+          <div class="situation-label">HANDMADE COURSE</div>
+          <div class="situation-title">ふたりで思い出を作りたい</div>
+          <div class="situation-desc">制作体験そのものが一生の宝物に。鍛造製法で、おふたりの手で仕上げます。</div>
+        </div>
+        <div class="situation-arrow">&rsaquo;</div>
+      </div>
+      <div class="situation-card">
+        <div class="situation-icon">&#128142;</div>
+        <div class="situation-body">
+          <div class="situation-label">ORDER MADE COURSE</div>
+          <div class="situation-title">デザインにとことんこだわりたい</div>
+          <div class="situation-desc">デザイナーがゼロからご提案。職人の技術で繊細なデザインも実現します。</div>
+        </div>
+        <div class="situation-arrow">&rsaquo;</div>
+      </div>
+      <div class="situation-card">
+        <div class="situation-icon">&#127873;</div>
+        <div class="situation-body">
+          <div class="situation-label">SURPRISE PROPOSAL</div>
+          <div class="situation-title">サプライズで贈りたい</div>
+          <div class="situation-desc">おひとりでのご来店も歓迎。ダイヤモンド先渡しプランなど、プロポーズを全力でサポートします。</div>
+        </div>
+        <div class="situation-arrow">&rsaquo;</div>
+      </div>
+      <div class="situation-card">
+        <div class="situation-icon">&#128172;</div>
+        <div class="situation-body">
+          <div class="situation-label">CONSULTATION</div>
+          <div class="situation-title">まだ決められない・相談したい</div>
+          <div class="situation-desc">手作りとオーダーメイド、どちらも詳しくご説明いたします。おふたりに合うコースを一緒に見つけましょう。</div>
+        </div>
+        <div class="situation-arrow">&rsaquo;</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       Pattern A: 共感フック型
+       ============================================ -->
+  <div class="pattern">
+    <div class="pattern-header">
+      <span class="pattern-badge" style="background: #c9a961;">PATTERN A</span>
+      <h2>共感フック型 — クライアント提示ワードを活用</h2>
+      <p class="pattern-desc">クライアントが挙げたキーワードを素直に反映。「自分のことだ」と思ってもらいやすい具体的な動機を提示。</p>
+    </div>
+
+    <div class="situation-cards">
+      <div class="situation-card">
+        <div class="situation-icon">&#9997;</div>
+        <div class="situation-body">
+          <div class="situation-label">HANDMADE COURSE</div>
+          <div class="situation-title">ふたりの想い出として残したい</div>
+          <div class="situation-desc">指輪を作る時間そのものを、一生の記念に。制作中の写真や動画もお持ち帰りいただけます。</div>
+          <div class="persona-tags">
+            <span class="persona-tag">ものづくりが好き</span>
+            <span class="persona-tag">シンプルなデザイン</span>
+            <span class="persona-tag">写真・動画に残したい</span>
+          </div>
+        </div>
+        <div class="situation-arrow">&rsaquo;</div>
+      </div>
+      <div class="situation-card">
+        <div class="situation-icon">&#128142;</div>
+        <div class="situation-body">
+          <div class="situation-label">ORDER MADE COURSE</div>
+          <div class="situation-title">既製品では物足りない</div>
+          <div class="situation-desc">他とはかぶらない、自分たちだけの一本を。デザイナーがゼロから描き起こし、熟練の職人が形にします。</div>
+          <div class="persona-tags">
+            <span class="persona-tag">デザインにこだわりたい</span>
+            <span class="persona-tag">他とかぶりたくない</span>
+            <span class="persona-tag">想いを形にしたい</span>
+          </div>
+        </div>
+        <div class="situation-arrow">&rsaquo;</div>
+      </div>
+      <div class="situation-card">
+        <div class="situation-icon">&#127873;</div>
+        <div class="situation-body">
+          <div class="situation-label">SURPRISE PROPOSAL</div>
+          <div class="situation-title">サプライズで贈りたい</div>
+          <div class="situation-desc">おひとりでのご来店も歓迎。ダイヤモンド先渡しプランなど、プロポーズを全力でサポートします。</div>
+        </div>
+        <div class="situation-arrow">&rsaquo;</div>
+      </div>
+      <div class="situation-card">
+        <div class="situation-icon">&#128172;</div>
+        <div class="situation-body">
+          <div class="situation-label">CONSULTATION</div>
+          <div class="situation-title">まだ決められない・相談したい</div>
+          <div class="situation-desc">手作りとオーダーメイド、どちらも詳しくご説明いたします。おふたりに合うコースを一緒に見つけましょう。</div>
+        </div>
+        <div class="situation-arrow">&rsaquo;</div>
+      </div>
+    </div>
+
+    <div class="analysis">
+      <strong>特徴:</strong> クライアント提示キーワードをタグ化してカード下に配置。「自分はこれに当てはまる」と瞬時に判断できる。<br>
+      <strong>メリット:</strong> 情報量を増やさずとも、複数の動機を訴求できる。<br>
+      <strong>懸念:</strong> タグが増えると賑やかになりすぎる可能性。数は3つ程度に絞る必要あり。
+    </div>
+  </div>
+
+  <!-- ============================================
+       Pattern B: ストーリー型
+       ============================================ -->
+  <div class="pattern">
+    <div class="pattern-header">
+      <span class="pattern-badge" style="background: #7a9ca0;">PATTERN B</span>
+      <h2>ストーリー型 — 情景描写で感情に訴える</h2>
+      <p class="pattern-desc">ゼクシィ風の詩的トーンを一部取り入れ、カードを読むだけで情景が浮かぶように。</p>
+    </div>
+
+    <div class="situation-cards">
+      <div class="situation-card">
+        <div class="situation-icon">&#9997;</div>
+        <div class="situation-body">
+          <div class="situation-label">HANDMADE COURSE</div>
+          <div class="situation-title">一緒に過ごした時間を、指輪に込めたい</div>
+          <div class="situation-desc">一本の金属をふたりで分け合い、ハンマーで模様を刻む。その時間そのものが、特別な想い出になります。</div>
+        </div>
+        <div class="situation-arrow">&rsaquo;</div>
+      </div>
+      <div class="situation-card">
+        <div class="situation-icon">&#128142;</div>
+        <div class="situation-body">
+          <div class="situation-label">ORDER MADE COURSE</div>
+          <div class="situation-title">まだ世界のどこにもない、一本を</div>
+          <div class="situation-desc">ふたりの価値観や想いに耳を傾けることから、デザインは始まります。流行に左右されない、おふたりだけの物語を指輪に。</div>
+        </div>
+        <div class="situation-arrow">&rsaquo;</div>
+      </div>
+      <div class="situation-card">
+        <div class="situation-icon">&#127873;</div>
+        <div class="situation-body">
+          <div class="situation-label">SURPRISE PROPOSAL</div>
+          <div class="situation-title">大切な人に、特別な一日を</div>
+          <div class="situation-desc">おひとりでのご来店も歓迎。ダイヤ先渡しプランなど、プロポーズを叶えるためのご提案をいたします。</div>
+        </div>
+        <div class="situation-arrow">&rsaquo;</div>
+      </div>
+      <div class="situation-card">
+        <div class="situation-icon">&#128172;</div>
+        <div class="situation-body">
+          <div class="situation-label">CONSULTATION</div>
+          <div class="situation-title">おふたりに合う方を、一緒に探す</div>
+          <div class="situation-desc">どちらが正解、ということはありません。おふたりの想いを伺いながら、ぴったりのコースを一緒に見つけます。</div>
+        </div>
+        <div class="situation-arrow">&rsaquo;</div>
+      </div>
+    </div>
+
+    <div class="analysis">
+      <strong>特徴:</strong> ゼクシィ掲載文の詩的トーンをカード全体に反映。ブランドの世界観を強く打ち出せる。<br>
+      <strong>メリット:</strong> ブランドイメージの統一感が出る。情緒的な訴求力が高い。<br>
+      <strong>懸念:</strong> 「どんなコースか」が一瞬でわかりにくい。読み手の想像力に依存する。
+    </div>
+  </div>
+
+  <!-- ============================================
+       Pattern C: 問いかけ型
+       ============================================ -->
+  <div class="pattern">
+    <div class="pattern-header">
+      <span class="pattern-badge" style="background: #8a5a44;">PATTERN C</span>
+      <h2>問いかけ型 — 自問自答で自分ごと化</h2>
+      <p class="pattern-desc">タイトルを「〜？」の形にして、ユーザーに判断させる。能動的な選択を促す設計。</p>
+    </div>
+
+    <div class="situation-cards">
+      <div class="situation-card">
+        <div class="situation-icon">&#9997;</div>
+        <div class="situation-body">
+          <div class="situation-label">HANDMADE COURSE</div>
+          <div class="situation-title">作る時間も大切にしたい？</div>
+          <div class="situation-desc">完成した指輪だけでなく、ふたりで手を動かす時間そのものを楽しみたい方へ。職人がしっかりサポートします。</div>
+        </div>
+        <div class="situation-arrow">&rsaquo;</div>
+      </div>
+      <div class="situation-card">
+        <div class="situation-icon">&#128142;</div>
+        <div class="situation-body">
+          <div class="situation-label">ORDER MADE COURSE</div>
+          <div class="situation-title">デザインに妥協したくない？</div>
+          <div class="situation-desc">既製品や定型デザインでは物足りない方へ。デザイナーと1から描き起こし、世界にひとつの一本を仕立てます。</div>
+        </div>
+        <div class="situation-arrow">&rsaquo;</div>
+      </div>
+      <div class="situation-card">
+        <div class="situation-icon">&#127873;</div>
+        <div class="situation-body">
+          <div class="situation-label">SURPRISE PROPOSAL</div>
+          <div class="situation-title">サプライズで贈りたい？</div>
+          <div class="situation-desc">おひとりでのご来店も歓迎。ダイヤモンド先渡しプランなど、プロポーズを全力でサポートします。</div>
+        </div>
+        <div class="situation-arrow">&rsaquo;</div>
+      </div>
+      <div class="situation-card">
+        <div class="situation-icon">&#128172;</div>
+        <div class="situation-body">
+          <div class="situation-label">CONSULTATION</div>
+          <div class="situation-title">どちらが合うか、まだわからない？</div>
+          <div class="situation-desc">両コースの違いを詳しくご説明します。おふたりのご希望を伺いながら、最適な方をご提案いたします。</div>
+        </div>
+        <div class="situation-arrow">&rsaquo;</div>
+      </div>
+    </div>
+
+    <div class="analysis">
+      <strong>特徴:</strong> 問いかけ形式で「Yes/No」を意識させ、自分ごと化を促す。<br>
+      <strong>メリット:</strong> 能動的な判断を促すため、クリック率が上がりやすい。選択理由が明確になる。<br>
+      <strong>懸念:</strong> 「？」が4枚並ぶと少しカジュアルな印象に。ブランドトーンとの相性確認が必要。
+    </div>
+  </div>
+
+  <!-- ============================================
+       まとめ
+       ============================================ -->
+  <div class="footer-note">
+    <h3 style="font-size: 16px; margin-bottom: 16px;">どのパターンを推すか</h3>
+    <p>
+      <strong>個人的な推奨は Pattern A（共感フック型）</strong>です。理由：<br>
+      ・クライアントが挙げたキーワードを直接活用できるため、提案の根拠が明確<br>
+      ・タグで複数の動機を可視化でき、ユーザーが「これ自分のことだ」と瞬時に認識できる<br>
+      ・現状のカード構造を大きく崩さず、追加だけで実装可能<br><br>
+      Pattern B（ストーリー型）はブランディング重視のクライアント確認次第、<br>
+      Pattern C（問いかけ型）はCVR改善を優先する場合に有効です。<br><br>
+      クライアントと方向性を合わせた上で、採用パターンを本実装に反映します。
+    </p>
+  </div>
+
+</body>
+</html>
