@@ -293,6 +293,8 @@
     .aftercare-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
     .aftercare-item { border: 1px solid var(--border-light); padding: 30px 20px; text-align: center; border-radius: 4px; background: var(--bg-white); }
     .aftercare-item .img-placeholder { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 16px; }
+    .aftercare-item .aftercare-icon { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 16px; background: var(--bg-cream); display: flex; align-items: center; justify-content: center; }
+    .aftercare-item .aftercare-icon svg { width: 28px; height: 28px; stroke: var(--text-secondary); stroke-width: 1.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
     .aftercare-item h4 { font-size: 14px; margin-bottom: 10px; }
     .aftercare-item p { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
 
@@ -788,22 +790,22 @@
       </div>
       <div class="aftercare-grid">
         <div class="aftercare-item fade-in">
-          <div class="img-placeholder">🛠</div>
+          <div class="aftercare-icon"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="10"/><path d="M13 16 L15.5 18.5 L20 13"/></svg></div>
           <h4>サイズ直し<br>（基本無料）</h4>
           <p>前後1号のサイズ直しは基本無料です。サプライズでお贈りされた後にサイズが合わなかった場合でも、調整が可能ですのでご安心ください。</p>
         </div>
         <div class="aftercare-item fade-in fade-in-d1">
-          <div class="img-placeholder">✨</div>
+          <div class="aftercare-icon"><svg viewBox="0 0 32 32"><path d="M16 6 L16 10 M16 22 L16 26 M6 16 L10 16 M22 16 L26 16"/><circle cx="16" cy="16" r="6"/></svg></div>
           <h4>クリーニング<br>（基本永久無償）</h4>
           <p>大切なダイヤモンドの輝きを永く保つため、クリーニングは基本的に永久無償で承っております。</p>
         </div>
         <div class="aftercare-item fade-in fade-in-d2">
-          <div class="img-placeholder">🔍</div>
+          <div class="aftercare-icon"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="10"/><path d="M12 16 C12 16 14 12 16 12 C18 12 20 16 20 16 C20 16 18 20 16 20 C14 20 12 16 12 16 Z"/></svg></div>
           <h4>歪み直し・磨き直し</h4>
           <p>永くお使いいただく中で生じた歪みや小傷も、元の美しい状態にお直しいたします。</p>
         </div>
         <div class="aftercare-item fade-in fade-in-d1">
-          <div class="img-placeholder">💍</div>
+          <div class="aftercare-icon"><svg viewBox="0 0 32 32"><circle cx="12" cy="18" r="7"/><circle cx="20" cy="18" r="7"/><path d="M16 11 L16 7 M14 8 L16 6 L18 8"/></svg></div>
           <h4>結婚指輪との<br>重ね付けのご相談</h4>
           <p>将来、renriで結婚指輪をお作りになる際に、婚約指輪とぴったり重ね付けできるデザインのご提案も可能です。</p>
         </div>
