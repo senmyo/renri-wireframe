@@ -859,6 +859,15 @@
   }
   .situation-card:hover .situation-arrow { color: var(--text-primary); }
 
+  .persona-tags {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;
+  }
+  .persona-tag {
+    font-size: 11px; background: rgba(0,0,0,0.03);
+    padding: 2px 8px; border-radius: 10px;
+    color: var(--text-secondary); border: 1px solid var(--border-light);
+  }
+
   .situation-current-badge {
     position: absolute;
     top: -1px;
@@ -1110,8 +1119,13 @@
             <div class="situation-icon">&#9997;</div>
             <div class="situation-body">
               <div class="situation-label">HANDMADE COURSE</div>
-              <div class="situation-title">ふたりで思い出を作りたい</div>
-              <div class="situation-desc">制作体験そのものが一生の宝物に。鍛造製法で、おふたりの手で仕上げます。</div>
+              <div class="situation-title">ふたりで手を動かして作りたい</div>
+              <div class="situation-desc">自分たちの手で指輪を作る体験そのものが、かけがえのない想い出に。制作中の写真や動画もお持ち帰りいただけます。</div>
+              <div class="persona-tags">
+                <span class="persona-tag">体験を大切にしたい</span>
+                <span class="persona-tag">ものづくりが好き</span>
+                <span class="persona-tag">写真・動画に残したい</span>
+              </div>
             </div>
             <div class="situation-arrow">&rsaquo;</div>
           </a>
@@ -1121,8 +1135,13 @@
             <div class="situation-icon">&#128142;</div>
             <div class="situation-body">
               <div class="situation-label">ORDER MADE COURSE</div>
-              <div class="situation-title">デザインにとことんこだわりたい</div>
-              <div class="situation-desc">デザイナーがゼロからご提案。職人の技術で繊細なデザインも実現します。</div>
+              <div class="situation-title">おふたりの想いを、ゼロから形に</div>
+              <div class="situation-desc">デザイナーとの対話から始まるオーダーメイド。100種類以上のサンプルに触れながら、理想の一本を見つけていきます。</div>
+              <div class="persona-tags">
+                <span class="persona-tag">対話から生まれるデザイン</span>
+                <span class="persona-tag">100種以上のサンプル</span>
+                <span class="persona-tag">打合せ何度でも無料</span>
+              </div>
             </div>
             <div class="situation-arrow"></div>
           </div>
