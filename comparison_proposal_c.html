@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>比較セクション C案 | renri 提案</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #555555;
+      --gold-light: #777777;
+      --gold-dark: #333333;
+      --text-primary: #222222;
+      --text-secondary: #555555;
+      --text-light: #999999;
+      --bg-white: #ffffff;
+      --bg-cream: #f5f5f5;
+      --bg-warm: #e8e8e8;
+      --border-light: #cccccc;
+      --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.08);
+      --serif-jp: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+      --serif-en: 'Cormorant Garamond', serif;
+      --transition: all 0.3s ease;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--serif-jp);
+      color: var(--text-primary);
+      background: var(--bg-white);
+      line-height: 1.8;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wireframe-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0; z-index: 9999;
+      background: #1a1a2e;
+      color: #fff;
+      padding: 10px 20px;
+      font-family: sans-serif;
+      font-size: 12px;
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+    .wireframe-bar .badge {
+      background: #d49b3c;
+      color: #fff;
+      padding: 3px 10px;
+      border-radius: 3px;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+    .wireframe-bar .note { opacity: 0.85; }
+
+    .proposal-intro {
+      max-width: 750px;
+      margin: 80px auto 30px;
+      padding: 24px 30px;
+      background: #fdf8eb;
+      border-left: 3px solid #d49b3c;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+    }
+    .proposal-intro h2 {
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .proposal-intro ul { padding-left: 18px; margin-top: 6px; }
+    .proposal-intro li { margin: 2px 0; }
+
+    .comparison {
+      background: var(--bg-white);
+      padding: 60px 20px 100px;
+    }
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .section-header .en {
+      font-family: var(--serif-en);
+      font-size: 14px;
+      letter-spacing: 5px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+    .section-header h2 {
+      font-size: 26px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      color: var(--text-primary);
+    }
+    .section-header .line {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 16px auto 0;
+    }
+
+    .new-comparison { max-width: 750px; margin: 0 auto; }
+    .situation-intro {
+      text-align: center;
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 36px;
+      line-height: 2;
+    }
+    .situation-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .situation-card {
+      display: flex;
+      align-items: stretch;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 3px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+      background: var(--bg-white);
+    }
+    .situation-card:hover {
+      box-shadow: var(--shadow-card);
+      border-color: rgba(0,0,0,0.15);
+    }
+    .situation-card.is-current {
+      border: 2px solid var(--gold);
+      pointer-events: none;
+      position: relative;
+    }
+    .situation-icon {
+      width: 90px;
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: var(--bg-cream);
+    }
+    .situation-icon svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--text-secondary);
+      stroke-width: 1.2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .situation-card.consult .situation-icon { background: rgba(0,0,0,0.04); }
+
+    .situation-body {
+      flex: 1;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .situation-label {
+      font-family: var(--serif-en);
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+    .situation-title {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    /* === NEW: bullets replace desc + persona-tags === */
+    .situation-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.85;
+      color: var(--text-secondary);
+    }
+    .situation-bullets li {
+      padding-left: 16px;
+      position: relative;
+    }
+    .situation-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 12px;
+      width: 4px;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+    .bullet-key {
+      color: var(--text-primary);
+      font-weight: 500;
+      margin-right: 4px;
+    }
+    .bullet-key::after {
+      content: ' — ';
+      color: var(--text-light);
+      font-weight: 400;
+    }
+
+    .situation-arrow {
+      width: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 20px;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+    .situation-card:hover .situation-arrow { color: var(--text-primary); }
+
+    .situation-current-badge {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      background: var(--gold);
+      color: #fff;
+      font-size: 10px;
+      letter-spacing: 2px;
+      padding: 4px 12px;
+      border-radius: 0 3px 0 3px;
+      font-family: sans-serif;
+    }
+
+    @media (max-width: 600px) {
+      .situation-card { flex-direction: column; }
+      .situation-icon {
+        width: 100%;
+        min-height: 70px;
+        padding: 16px 0;
+      }
+      .situation-body { padding: 18px 18px 20px; }
+      .situation-title { font-size: 15px; }
+      .situation-bullets { font-size: 12.5px; }
+      .situation-arrow {
+        width: 100%;
+        height: 36px;
+        border-top: 1px solid rgba(0,0,0,0.04);
+      }
+      .section-header h2 { font-size: 22px; letter-spacing: 2px; }
+      .situation-current-badge { font-size: 9px; padding: 3px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wireframe-bar">
+    <span class="badge">PROPOSAL · C</span>
+    <span>比較セクション 改訂案 — 既存4カード維持・3行ビュレット化</span>
+    <span class="note">※ 最小変更でクライアントコピー反映</span>
+  </div>
+
+  <div class="proposal-intro">
+    <h2>提案C：既存4カードをそのまま、チップ（タグ）を3行ビュレットに置き換え</h2>
+    A案・B案で生じた「カード増量」「階層」「グループ見出し」を全て撤回。最も最小限の変更案です。
+    <ul>
+      <li>カード数は <strong>4枚のまま</strong>（増やさない）</li>
+      <li>新セクションやグループ見出しの追加は <strong>なし</strong></li>
+      <li>各カードのペルソナチップ（タグ）と説明文を、<strong>「キーワード — 1行要約」の3行ビュレット</strong>に統一</li>
+      <li>クライアントのペルソナ3点を圧縮反映（本文の詳細はLP本編へ移譲）</li>
+      <li>SP表示でも4カードのみで完結、縦に伸びすぎない</li>
+    </ul>
+  </div>
+
+  <section class="comparison">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="en">FIND YOUR STYLE</div>
+        <h2>あなたに合う指輪づくりは？</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="new-comparison">
+
+        <p class="situation-intro">
+          renriでは、手作りとオーダーメイドの2つのコースをご用意。<br>
+          おふたりの想いやライフスタイルに合わせて、最適な方法をお選びいただけます。
+        </p>
+
+        <div class="situation-cards">
+
+          <!-- HANDMADE COURSE (current) -->
+          <div class="situation-card handmade is-current">
+            <div class="situation-current-badge">NOW</div>
+            <div class="situation-icon">
+              <svg viewBox="0 0 32 32"><circle cx="12" cy="18" r="7"/><circle cx="20" cy="18" r="7"/></svg>
+            </div>
+            <div class="situation-body">
+              <div class="situation-label">HANDMADE COURSE</div>
+              <div class="situation-title">ふたりの想い出として残したい</div>
+              <ul class="situation-bullets">
+                <li><span class="bullet-key">映像記録</span>制作工程は写真や動画に自由に残せます</li>
+                <li><span class="bullet-key">ものづくり体験</span>初めての方も職人が丁寧にサポート</li>
+                <li><span class="bullet-key">シンプル志向</span>手仕事ならではのあたたかい表情が映えます</li>
+              </ul>
+            </div>
+            <div class="situation-arrow"></div>
+          </div>
+
+          <!-- ORDER MADE COURSE -->
+          <a href="/ordermade/" class="situation-card ordermade">
+            <div class="situation-icon">
+              <svg viewBox="0 0 32 32"><path d="M16 28 L4 12 L9 4 L23 4 L28 12 Z"/><polyline points="4,12 16,12 28,12"/><line x1="9" y1="4" x2="16" y2="12"/><line x1="23" y1="4" x2="16" y2="12"/></svg>
+            </div>
+            <div class="situation-body">
+              <div class="situation-label">ORDER MADE COURSE</div>
+              <div class="situation-title">既製品では物足りない</div>
+              <ul class="situation-bullets">
+                <li><span class="bullet-key">唯一性</span>デザイナーがゼロから世界にひとつの一本を</li>
+                <li><span class="bullet-key">幅広い選択肢</span>素材・デザイン・仕上げの組み合わせ自在</li>
+                <li><span class="bullet-key">ストーリー重視</span>花言葉や記念日を繊細に込めて</li>
+              </ul>
+            </div>
+            <div class="situation-arrow">&rsaquo;</div>
+          </a>
+
+          <!-- SURPRISE PROPOSAL -->
+          <a href="/ordermade/#surprise" class="situation-card ordermade">
+            <div class="situation-icon">
+              <svg viewBox="0 0 32 32"><rect x="6" y="14" width="20" height="14" rx="2"/><line x1="16" y1="14" x2="16" y2="28"/><path d="M16 14 C16 14 12 6 8 10 C4 14 16 14 16 14"/><path d="M16 14 C16 14 20 6 24 10 C28 14 16 14 16 14"/></svg>
+            </div>
+            <div class="situation-body">
+              <div class="situation-label">SURPRISE PROPOSAL</div>
+              <div class="situation-title">サプライズで贈りたい</div>
+              <ul class="situation-bullets">
+                <li>おひとりでのご来店もOK</li>
+                <li>ダイヤモンド先渡しプランあり</li>
+                <li>プロポーズを全力でサポート</li>
+              </ul>
+            </div>
+            <div class="situation-arrow">&rsaquo;</div>
+          </a>
+
+          <!-- CONSULTATION -->
+          <a href="/reservation/" class="situation-card consult">
+            <div class="situation-icon">
+              <svg viewBox="0 0 32 32"><path d="M6 22 L6 8 C6 6.9 6.9 6 8 6 L24 6 C25.1 6 26 6.9 26 8 L26 18 C26 19.1 25.1 20 24 20 L12 20 L6 26 Z"/></svg>
+            </div>
+            <div class="situation-body">
+              <div class="situation-label">CONSULTATION</div>
+              <div class="situation-title">まだ決められない・相談したい</div>
+              <ul class="situation-bullets">
+                <li>各コースの詳しいご説明</li>
+                <li>おふたりに合うコース選びを一緒に</li>
+                <li>何でもお気軽にご相談ください</li>
+              </ul>
+            </div>
+            <div class="situation-arrow">&rsaquo;</div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
