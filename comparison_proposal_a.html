@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>比較セクション A案 | renri 提案</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #555555;
+      --gold-light: #777777;
+      --gold-dark: #333333;
+      --text-primary: #222222;
+      --text-secondary: #555555;
+      --text-light: #999999;
+      --bg-white: #ffffff;
+      --bg-cream: #f5f5f5;
+      --bg-warm: #e8e8e8;
+      --border-light: #cccccc;
+      --shadow-soft: 0 2px 20px rgba(0, 0, 0, 0.06);
+      --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.08);
+      --serif-jp: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+      --serif-en: 'Cormorant Garamond', serif;
+      --transition: all 0.3s ease;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--serif-jp);
+      color: var(--text-primary);
+      background: var(--bg-white);
+      line-height: 1.8;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Proposal annotation bar */
+    .wireframe-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0; z-index: 9999;
+      background: #1a1a2e;
+      color: #fff;
+      padding: 10px 20px;
+      font-family: sans-serif;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .wireframe-bar .badge {
+      background: #e94560;
+      color: #fff;
+      padding: 3px 10px;
+      border-radius: 3px;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+    .wireframe-bar .note {
+      opacity: 0.85;
+    }
+
+    /* Intro block */
+    .proposal-intro {
+      max-width: 750px;
+      margin: 80px auto 30px;
+      padding: 24px 30px;
+      background: #fffbe9;
+      border-left: 3px solid #e94560;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+    }
+    .proposal-intro h2 {
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .proposal-intro ul { padding-left: 18px; margin-top: 6px; }
+    .proposal-intro li { margin: 2px 0; }
+
+    /* Section frame */
+    .comparison {
+      background: var(--bg-white);
+      padding: 60px 20px 100px;
+    }
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .section-header .en {
+      font-family: var(--serif-en);
+      font-size: 14px;
+      letter-spacing: 5px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+    .section-header h2 {
+      font-size: 26px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      color: var(--text-primary);
+    }
+    .section-header .line {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 16px auto 0;
+    }
+
+    /* === existing comparison styles === */
+    .new-comparison { max-width: 750px; margin: 0 auto; }
+    .situation-intro {
+      text-align: center;
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      line-height: 2;
+    }
+    .situation-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      margin-bottom: 50px;
+    }
+    .situation-card {
+      display: flex;
+      align-items: stretch;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 3px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+      background: var(--bg-white);
+    }
+    .situation-card.is-current {
+      border: 2px solid var(--gold);
+      pointer-events: none;
+      position: relative;
+    }
+    .situation-icon {
+      width: 80px;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: var(--bg-cream);
+    }
+    .situation-icon svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--text-secondary);
+      stroke-width: 1.2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .situation-card.consult .situation-icon { background: rgba(0,0,0,0.04); }
+    .situation-body {
+      flex: 1;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .situation-label {
+      font-family: var(--serif-en);
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+    .situation-title {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+    .situation-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .situation-arrow {
+      width: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .situation-current-badge {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      background: var(--gold);
+      color: #fff;
+      font-size: 10px;
+      letter-spacing: 2px;
+      padding: 4px 12px;
+      border-radius: 0 3px 0 3px;
+    }
+
+    /* === NEW: persona detail sub-cards === */
+    .situation-card-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .persona-section {
+      margin: 16px 8px 0;
+    }
+    .persona-section-label {
+      text-align: center;
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: var(--text-light);
+      margin-bottom: 14px;
+      font-weight: 400;
+    }
+    .persona-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .persona-detail-card {
+      background: var(--bg-cream);
+      border-radius: 3px;
+      padding: 22px 20px;
+      border-top: 2px solid var(--gold);
+      display: flex;
+      flex-direction: column;
+    }
+    .persona-detail-label {
+      font-family: var(--serif-en);
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      color: var(--gold);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .persona-detail-title {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.7;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+    .persona-detail-body {
+      font-size: 12.5px;
+      line-height: 1.9;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .persona-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .persona-section { margin: 14px 0 0; }
+    }
+    @media (max-width: 600px) {
+      .situation-icon { width: 60px; }
+      .situation-body { padding: 16px; }
+      .situation-title { font-size: 14px; }
+      .situation-arrow { width: 36px; }
+      .section-header h2 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wireframe-bar">
+    <span class="badge">PROPOSAL · A</span>
+    <span>比較セクション 改訂案 — クライアント追加コピー反映</span>
+    <span class="note">※ メインカード直下に「3詳細ペルソナ」サブカードを追加</span>
+  </div>
+
+  <div class="proposal-intro">
+    <h2>提案A：詳細ペルソナをサブカードで展開</h2>
+    クライアントから提供された3パターンの詳細ペルソナ（手作り×3、オーダー×3）を、各メインカードの直下にサブカード形式で展開する案です。
+    <ul>
+      <li>既存の「ペルソナタグ（チップ）」は撤去（サブカードに役割を吸収）</li>
+      <li>初心者でも自分ごと化しやすい具体性を担保</li>
+      <li>SP表示では1カラムに自動で縦積み</li>
+    </ul>
+  </div>
+
+  <section class="comparison">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="en">FIND YOUR STYLE</div>
+        <h2>あなたに合う指輪づくりは？</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="new-comparison">
+
+        <p class="situation-intro">
+          renriでは、手作りとオーダーメイドの2つのコースをご用意。<br>
+          おふたりの想いやライフスタイルに合わせて、最適な方法をお選びいただけます。
+        </p>
+
+        <div class="situation-cards">
+
+          <!-- =========================================
+               HANDMADE COURSE (current page)
+               ========================================= -->
+          <div class="situation-card-group">
+            <div class="situation-card handmade is-current">
+              <div class="situation-current-badge">NOW</div>
+              <div class="situation-icon"><svg viewBox="0 0 32 32"><circle cx="12" cy="18" r="7"/><circle cx="20" cy="18" r="7"/></svg></div>
+              <div class="situation-body">
+                <div class="situation-label">HANDMADE COURSE</div>
+                <div class="situation-title">ふたりの想い出として残したい</div>
+                <div class="situation-desc">指輪を作る時間そのものを、一生の記念に。制作中の写真や動画もお持ち帰りいただけます。</div>
+              </div>
+              <div class="situation-arrow"></div>
+            </div>
+
+            <div class="persona-section">
+              <div class="persona-section-label">— こんなおふたりにおすすめ —</div>
+              <div class="persona-cards-grid">
+                <div class="persona-detail-card">
+                  <div class="persona-detail-label">Memory</div>
+                  <div class="persona-detail-title">制作の時間も、思い出として残したい</div>
+                  <p class="persona-detail-body">指輪が出来上がっていく工程そのものが、おふたりだけの大切なひととき。スタッフによる撮影に加え、ご自身のカメラやスマホでも自由に残していただけます。</p>
+                </div>
+                <div class="persona-detail-card">
+                  <div class="persona-detail-label">Crafting</div>
+                  <div class="persona-detail-title">ふたりで手を動かす時間を楽しみたい</div>
+                  <p class="persona-detail-body">工程ごとに職人が丁寧にサポートいたしますので、初めての方もご安心ください。ものづくりが好きなおふたりに、ゆったりと過ごしていただける制作時間です。</p>
+                </div>
+                <div class="persona-detail-card">
+                  <div class="persona-detail-label">Simple</div>
+                  <div class="persona-detail-title">ふたりらしい、やさしい雰囲気の指輪にしたい</div>
+                  <p class="persona-detail-body">シンプルなデザインほど、手仕事ならではの表情があたたかく映ります。毎日身に着けたくなる、おふたりに馴染む一本に仕上がります。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- =========================================
+               ORDER MADE COURSE
+               ========================================= -->
+          <div class="situation-card-group">
+            <a href="/ordermade/" class="situation-card ordermade">
+              <div class="situation-icon"><svg viewBox="0 0 32 32"><path d="M16 28 L4 12 L9 4 L23 4 L28 12 Z"/><polyline points="4,12 16,12 28,12"/><line x1="9" y1="4" x2="16" y2="12"/><line x1="23" y1="4" x2="16" y2="12"/></svg></div>
+              <div class="situation-body">
+                <div class="situation-label">ORDER MADE COURSE</div>
+                <div class="situation-title">既製品では物足りない</div>
+                <div class="situation-desc">他とはかぶらない、自分たちだけの一本を。デザイナーがゼロから描き起こし、熟練の職人が形にします。</div>
+              </div>
+              <div class="situation-arrow">&rsaquo;</div>
+            </a>
+
+            <div class="persona-section">
+              <div class="persona-section-label">— こんなおふたりにおすすめ —</div>
+              <div class="persona-cards-grid">
+                <div class="persona-detail-card">
+                  <div class="persona-detail-label">Unique</div>
+                  <div class="persona-detail-title">ふたりだけのための指輪をかたちにしたい</div>
+                  <p class="persona-detail-body">デザイナーがゼロからご提案し、おふたりのご希望をじっくりとかたちにしていきます。世界にひとつだけの指輪を、一緒に作り上げていきましょう。</p>
+                </div>
+                <div class="persona-detail-card">
+                  <div class="persona-detail-label">Variety</div>
+                  <div class="persona-detail-title">たくさんの選択肢から、ぴったりの一本を見つけたい</div>
+                  <p class="persona-detail-body">素材・デザイン・仕上げまで、幅広い組み合わせの中からお選びいただけます。おふたりの理想のイメージを丁寧にうかがいながら、少しずつかたちにしていきます。</p>
+                </div>
+                <div class="persona-detail-card">
+                  <div class="persona-detail-label">Story</div>
+                  <div class="persona-detail-title">おふたりの想いや物語を、デザインに込めたい</div>
+                  <p class="persona-detail-body">花言葉や記念日、おふたりだけの物語を、そっと指輪に忍ばせてみませんか。職人の技術で、繊細なモチーフや表現もていねいに仕立てます。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- =========================================
+               SURPRISE PROPOSAL (no sub-cards)
+               ========================================= -->
+          <a href="/ordermade/#surprise" class="situation-card ordermade">
+            <div class="situation-icon"><svg viewBox="0 0 32 32"><rect x="6" y="14" width="20" height="14" rx="2"/><line x1="16" y1="14" x2="16" y2="28"/><path d="M16 14 C16 14 12 6 8 10 C4 14 16 14 16 14"/><path d="M16 14 C16 14 20 6 24 10 C28 14 16 14 16 14"/></svg></div>
+            <div class="situation-body">
+              <div class="situation-label">SURPRISE PROPOSAL</div>
+              <div class="situation-title">サプライズで贈りたい</div>
+              <div class="situation-desc">おひとりでのご来店も歓迎。ダイヤモンド先渡しプランなど、プロポーズを全力でサポートします。</div>
+            </div>
+            <div class="situation-arrow">&rsaquo;</div>
+          </a>
+
+          <!-- =========================================
+               CONSULTATION (no sub-cards)
+               ========================================= -->
+          <a href="/reservation/" class="situation-card consult">
+            <div class="situation-icon"><svg viewBox="0 0 32 32"><path d="M6 22 L6 8 C6 6.9 6.9 6 8 6 L24 6 C25.1 6 26 6.9 26 8 L26 18 C26 19.1 25.1 20 24 20 L12 20 L6 26 Z"/></svg></div>
+            <div class="situation-body">
+              <div class="situation-label">CONSULTATION</div>
+              <div class="situation-title">まだ決められない・相談したい</div>
+              <div class="situation-desc">手作りとオーダーメイド、どちらも詳しくご説明いたします。おふたりに合うコースを一緒に見つけましょう。</div>
+            </div>
+            <div class="situation-arrow">&rsaquo;</div>
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
