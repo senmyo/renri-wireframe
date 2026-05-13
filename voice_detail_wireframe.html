@@ -86,24 +86,43 @@
     }
 
     /* ============================================
-       HERO (お客様メイン写真)
+       PAGE HERO (共通)
        ============================================ */
-    .article-hero {
+    .page-hero {
       position: relative;
-      width: 100%;
-      max-height: 560px;
-      overflow: hidden;
-    }
-    .article-hero-image {
-      width: 100%;
-      height: 560px;
+      height: 340px;
       background: linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 40%, #888888 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.18);
+    }
+    .page-hero-copy {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+      animation: heroFadeIn 1s ease-out 0.4s both;
+    }
+    .page-hero-copy .en-title {
+      font-family: var(--serif-en);
       font-size: 16px;
-      font-family: sans-serif;
+      letter-spacing: 6px;
+      font-weight: 300;
+      margin-bottom: 14px;
+      opacity: 0.9;
+    }
+    .page-hero-copy h2 {
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 6px;
+      line-height: 1.6;
     }
 
     /* ============================================
@@ -595,7 +614,8 @@
         cursor: pointer;
       }
 
-      .article-hero-image { height: 320px; }
+      .page-hero { height: 240px; }
+      .page-hero-copy h2 { font-size: 22px; letter-spacing: 4px; }
 
       .breadcrumb { padding: 10px 20px; font-size: 11px; }
 
@@ -696,10 +716,13 @@
     </div>
   </header>
 
-  <!-- HERO IMAGE (ACF: お客様メイン写真) -->
-  <div class="article-hero">
-    <div class="article-hero-image">📷 お客様の正面写真（メイン画像）</div>
-  </div>
+  <!-- PAGE HERO (共通) -->
+  <section class="page-hero">
+    <div class="page-hero-copy">
+      <div class="en-title">CUSTOMER'S VOICE</div>
+      <h2>お客様の声</h2>
+    </div>
+  </section>
 
   <!-- パンくず -->
   <div class="breadcrumb">
