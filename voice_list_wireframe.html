@@ -37,83 +37,16 @@
       line-height: 1.8;
       font-size: 15px;
       -webkit-font-smoothing: antialiased;
-      padding-top: 36px;
+      padding-top: 0;
     }
 
-    /* ============================================
-       WIREFRAME BAR
-       ============================================ */
-    .wireframe-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 9999;
-      background: #1a1a2e;
-      color: #fff;
-      padding: 8px 20px;
-      font-family: sans-serif;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .wireframe-bar .badge {
-      background: #e94560;
-      color: #fff;
-      padding: 2px 10px;
-      border-radius: 3px;
-      font-weight: 700;
-      font-size: 11px;
-      letter-spacing: 0.5px;
-    }
-    .wireframe-bar .page-path {
-      color: #a2d2ff;
-      font-weight: 500;
-    }
-
-    .section-label {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: rgba(26, 26, 46, 0.85);
-      color: #a2d2ff;
-      font-family: sans-serif;
-      font-size: 11px;
-      padding: 3px 10px;
-      border-radius: 3px;
-      z-index: 10;
-      letter-spacing: 0.3px;
-    }
-
-    .feedback-btn {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      z-index: 50;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      font-size: 12px;
-      color: #fff;
-      background: rgba(0,0,0,0.5);
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.3s ease;
-      letter-spacing: 0.5px;
-    }
-    .feedback-btn:hover { background: rgba(0,0,0,0.75); }
-    .feedback-btn::before { content: "\270E"; font-size: 14px; }
 
     /* ============================================
        HEADER
        ============================================ */
     .header {
       position: sticky;
-      top: 36px;
+      top: 0;
       z-index: 100;
       background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(10px);
@@ -757,13 +690,6 @@
   </style>
 </head>
 <body>
-
-  <!-- ワイヤーフレームバー -->
-  <div class="wireframe-bar">
-    <span class="badge">WIREFRAME</span>
-    <span>renri — お客様の声（一覧ページ）</span>
-    <span class="page-path">/voice/</span>
-  </div>
 
   <!-- ============================================
        HEADER
