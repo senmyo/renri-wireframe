@@ -754,24 +754,6 @@
       body { padding-bottom: 60px; }
     }
 
-    /* ============================================
-       NOTE ANNOTATION (デザイナーへの注釈)
-       ============================================ */
-    .design-note {
-      background: #fffbeb;
-      border: 1px dashed #e6c84c;
-      border-radius: 4px;
-      padding: 16px 20px;
-      margin: 20px 40px;
-      font-family: sans-serif;
-      font-size: 12px;
-      color: #7a6b1f;
-      line-height: 1.8;
-    }
-    .design-note strong { color: #5a4e0e; }
-    @media (max-width: 768px) {
-      .design-note { margin: 16px 20px; padding: 12px 16px; font-size: 11px; }
-    }
   </style>
 </head>
 <body>
@@ -858,11 +840,6 @@
     <div class="filter-result-count">
       <strong>216</strong> 件の声が見つかりました
     </div>
-  </div>
-
-  <!-- デザイナー注釈 -->
-  <div class="design-note">
-    <strong>📝 実装メモ:</strong> フィルターはWordPressカスタムタクソノミーベースで動作。「作り方」（手作り/オーダー）はカテゴリ、「種類」（結婚指輪/婚約指輪）はタグで管理。既存200件超の記事は一括でカテゴリ付与（手作り）＋タイトルから種類を自動判定。フィルター操作時はAjaxでカード部分のみ差し替え（ページ遷移なし）。
   </div>
 
   <!-- ============================================
