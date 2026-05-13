@@ -40,7 +40,6 @@
       padding-top: 0;
     }
 
-
     /* ============================================
        HEADER
        ============================================ */
@@ -93,7 +92,7 @@
     }
 
     /* ============================================
-       PAGE HERO (shorter than LP hero)
+       PAGE HERO
        ============================================ */
     .page-hero {
       position: relative;
@@ -115,6 +114,7 @@
       z-index: 2;
       text-align: center;
       color: #fff;
+      animation: heroFadeIn 1s ease-out 0.4s both;
     }
     .page-hero-copy .en-title {
       font-family: var(--serif-en);
@@ -156,33 +156,28 @@
     .voice-intro {
       position: relative;
       text-align: center;
-      max-width: 700px;
+      max-width: 760px;
       margin: 0 auto;
       padding: 60px 40px 0;
     }
-    .voice-intro p {
-      font-size: 15px;
+    .voice-intro .intro-heading {
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+    .voice-intro .intro-body {
+      font-size: 14px;
       line-height: 2.2;
       color: var(--text-secondary);
       letter-spacing: 0.5px;
-    }
-    .voice-intro .count {
-      display: inline-block;
-      margin-top: 16px;
-      font-size: 13px;
-      color: var(--text-light);
-      letter-spacing: 1px;
-    }
-    .voice-intro .count strong {
-      font-size: 20px;
-      font-weight: 500;
-      color: var(--text-primary);
-      font-family: var(--serif-en);
-      margin: 0 2px;
+      text-align: left;
     }
 
     /* ============================================
-       FILTER CHIPS
+       FILTER
        ============================================ */
     .filter-section {
       position: relative;
@@ -190,17 +185,43 @@
       margin: 0 auto;
       padding: 40px 40px 0;
     }
-    .filter-row {
+    .filter-box {
+      background: var(--bg-cream);
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      padding: 24px 28px;
+    }
+    .filter-box-title {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: var(--text-primary);
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .filter-box-title::before {
+      content: '';
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' stroke='%23555' stroke-width='1.5' stroke-linecap='round'%3E%3Cline x1='3' y1='5' x2='15' y2='5'/%3E%3Cline x1='5' y1='9' x2='13' y2='9'/%3E%3Cline x1='7' y1='13' x2='11' y2='13'/%3E%3C/svg%3E") no-repeat center;
+    }
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .filter-group:last-of-type {
+      margin-bottom: 0;
     }
     .filter-group-label {
       font-size: 12px;
       color: var(--text-light);
       letter-spacing: 1px;
-      margin-right: 4px;
+      min-width: 48px;
       flex-shrink: 0;
     }
     .filter-chips {
@@ -230,11 +251,23 @@
       color: #fff;
       border-color: var(--text-primary);
     }
-    .filter-divider {
-      width: 1px;
-      height: 20px;
-      background: var(--border-light);
-      flex-shrink: 0;
+    .filter-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-light);
+    }
+    .filter-result-count {
+      font-size: 14px;
+      color: var(--text-primary);
+      letter-spacing: 0.5px;
+    }
+    .filter-result-count strong {
+      font-size: 18px;
+      font-weight: 500;
+      font-family: var(--serif-en);
     }
     .filter-reset {
       font-size: 12px;
@@ -243,20 +276,8 @@
       cursor: pointer;
       transition: var(--transition);
       letter-spacing: 0.5px;
-      flex-shrink: 0;
     }
     .filter-reset:hover { color: var(--text-primary); }
-
-    .filter-result-count {
-      margin-top: 16px;
-      font-size: 13px;
-      color: var(--text-light);
-      letter-spacing: 0.5px;
-    }
-    .filter-result-count strong {
-      color: var(--text-primary);
-      font-weight: 500;
-    }
 
     /* ============================================
        VOICE CARD GRID
@@ -527,7 +548,6 @@
       from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .page-hero-copy { animation: heroFadeIn 1s ease-out 0.4s both; }
 
     .fade-in {
       opacity: 0;
@@ -563,7 +583,7 @@
       .header-inner { padding: 12px 20px; }
       .nav { display: none; }
       .sp-menu-btn {
-        display: flex;
+        display: flex !important;
         width: 32px;
         height: 32px;
         align-items: center;
@@ -580,60 +600,40 @@
       }
 
       .breadcrumb { padding: 10px 20px; font-size: 11px; }
-      .voice-intro { padding: 40px 20px 0; }
-      .voice-intro p { font-size: 14px; }
 
-      .filter-section { padding: 28px 20px 0; }
-      .filter-row {
-        gap: 8px;
-        overflow-x: auto;
-        flex-wrap: nowrap;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        padding-bottom: 4px;
-      }
-      .filter-row::-webkit-scrollbar { display: none; }
-      .filter-group-label { display: none; }
-      .filter-chips {
-        flex-wrap: nowrap;
-        flex-shrink: 0;
-      }
-      .filter-chip { padding: 7px 16px; font-size: 12px; flex-shrink: 0; }
-      .filter-divider { width: 1px; height: 16px; flex-shrink: 0; }
+      .voice-intro { padding: 32px 20px 0; }
+      .voice-intro .intro-heading { font-size: 17px; margin-bottom: 14px; }
+      .voice-intro .intro-body { font-size: 13px; }
 
-      .voice-grid-section { padding: 28px 20px 40px; }
+      .filter-section { padding: 24px 20px 0; }
+      .filter-box { padding: 18px 16px; }
+      .filter-box-title { font-size: 12px; margin-bottom: 12px; }
+      .filter-group { flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+      .filter-group-label {
+        width: 100%;
+        min-width: auto;
+        font-size: 11px;
+        margin-bottom: -4px;
+      }
+      .filter-chips { flex-wrap: wrap; gap: 6px; }
+      .filter-chip { padding: 7px 14px; font-size: 12px; }
+      .filter-bottom { margin-top: 12px; padding-top: 12px; }
+
+      .voice-grid-section { padding: 24px 20px 40px; }
       .voice-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
       }
-      .voice-card-sp-row {
-        display: flex;
-        flex-direction: row;
+      .voice-card-image {
+        aspect-ratio: 4 / 3;
       }
-      .voice-card-sp-row .voice-card-image {
-        width: 120px;
-        min-width: 120px;
-        aspect-ratio: 1 / 1;
-        border-radius: 4px 0 0 4px;
-      }
-      .voice-card-sp-row .voice-card-body {
-        padding: 14px 16px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-      .voice-card-sp-row .voice-card-title { font-size: 14px; margin-bottom: 4px; }
-      .voice-card-sp-row .voice-card-excerpt {
-        font-size: 12px;
-        -webkit-line-clamp: 2;
-      }
-      .voice-card-sp-row .voice-card-badges {
-        top: 8px;
-        left: 8px;
-      }
-      .voice-card-sp-row .badge-course { font-size: 10px; padding: 3px 8px; }
-      .voice-card-sp-row .badge-type { font-size: 9px; padding: 3px 6px; }
-      .voice-card-sp-row .voice-card-meta { margin-top: 8px; }
+      .voice-card-body { padding: 12px 12px 16px; }
+      .voice-card-title { font-size: 13px; margin-bottom: 4px; }
+      .voice-card-excerpt { font-size: 11px; -webkit-line-clamp: 2; }
+      .voice-card-badges { top: 8px; left: 8px; gap: 4px; }
+      .badge-course { font-size: 10px; padding: 3px 8px; }
+      .badge-type { font-size: 9px; padding: 2px 6px; }
+      .voice-card-meta { margin-top: 6px; font-size: 10px; }
 
       .load-more-wrap { padding: 10px 20px 60px; }
       .btn-load-more { padding: 14px 36px; font-size: 13px; }
@@ -691,9 +691,7 @@
 </head>
 <body>
 
-  <!-- ============================================
-       HEADER
-       ============================================ -->
+  <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
       <a href="/" class="logo">renri</a>
@@ -709,10 +707,8 @@
     </div>
   </header>
 
-  <!-- ============================================
-       SECTION 1: PAGE HERO
-       ============================================ -->
-  <section class="page-hero" style="position:relative;">
+  <!-- PAGE HERO -->
+  <section class="page-hero">
     <div class="page-hero-copy">
       <div class="en-title">CUSTOMER'S VOICE</div>
       <h1>お客様の声</h1>
@@ -726,53 +722,54 @@
     <span>お客様の声</span>
   </div>
 
-  <!-- ============================================
-       SECTION 2: INTRO
-       ============================================ -->
-  <div class="voice-intro fade-in" style="position:relative;">
-    <p>
-      renriで結婚指輪・婚約指輪をお作りいただいた<br>
-      おふたりの声をご紹介します。
+  <!-- INTRO -->
+  <div class="voice-intro fade-in">
+    <p class="intro-heading">
+      renriでお作りいただいた<br>
+      おふたりの声をご紹介します
     </p>
-    <div class="count">全 <strong>216</strong> 件</div>
+    <p class="intro-body">
+      横浜元町のアトリエrenriでは、手作りコースとオーダーメイドコースの2つの方法で結婚指輪・婚約指輪をお作りいただけます。「ふたりで手を動かす時間が宝物になった」「世界にひとつだけのデザインに出会えた」——ここでは、実際にrenriで指輪をお作りいただいたお客様の制作エピソードと感想をご紹介しています。素材やデザインの選び方、当日の雰囲気など、指輪づくりを検討されている方の参考になれば幸いです。
+    </p>
   </div>
 
-  <!-- ============================================
-       SECTION 3: FILTER
-       ============================================ -->
-  <div class="filter-section fade-in" style="position:relative;">
+  <!-- FILTER -->
+  <div class="filter-section fade-in">
+    <div class="filter-box">
+      <div class="filter-box-title">絞り込み検索</div>
 
-    <div class="filter-row">
-      <span class="filter-group-label">作り方</span>
-      <div class="filter-chips">
-        <button class="filter-chip active">すべて</button>
-        <button class="filter-chip">手作り</button>
-        <button class="filter-chip">オーダーメイド</button>
+      <div class="filter-group">
+        <span class="filter-group-label">作り方</span>
+        <div class="filter-chips">
+          <button class="filter-chip active" data-group="method" data-value="all">すべて</button>
+          <button class="filter-chip" data-group="method" data-value="handmade">手作り</button>
+          <button class="filter-chip" data-group="method" data-value="ordermade">オーダーメイド</button>
+        </div>
       </div>
-      <div class="filter-divider"></div>
-      <span class="filter-group-label">種類</span>
-      <div class="filter-chips">
-        <button class="filter-chip">結婚指輪</button>
-        <button class="filter-chip">婚約指輪</button>
+
+      <div class="filter-group">
+        <span class="filter-group-label">種類</span>
+        <div class="filter-chips">
+          <button class="filter-chip active" data-group="type" data-value="all">すべて</button>
+          <button class="filter-chip" data-group="type" data-value="marriage">結婚指輪</button>
+          <button class="filter-chip" data-group="type" data-value="engagement">婚約指輪</button>
+        </div>
       </div>
-      <div class="filter-divider"></div>
-      <a class="filter-reset">× リセット</a>
-    </div>
-    <div class="filter-result-count">
-      <strong>216</strong> 件の声が見つかりました
+
+      <div class="filter-bottom">
+        <div class="filter-result-count">
+          <strong id="filteredCount">216</strong> 件の声が見つかりました
+        </div>
+        <a class="filter-reset" id="filterReset">× リセット</a>
+      </div>
     </div>
   </div>
 
-  <!-- ============================================
-       SECTION 4: VOICE CARDS — PC（3列グリッド）
-       ============================================ -->
-  <div class="voice-grid-section" style="position:relative;">
-
-    <!-- PC: 3列グリッド / Tablet: 2列 / SP: 横並びリスト -->
+  <!-- VOICE CARDS -->
+  <div class="voice-grid-section">
     <div class="voice-grid" id="voiceGrid">
 
-      <!-- Card 1: 手作り × 結婚指輪 -->
-      <a href="#" class="voice-card fade-in">
+      <a href="#" class="voice-card fade-in" data-method="handmade" data-type="marriage">
         <div class="voice-card-image">
           <div class="voice-card-badges">
             <span class="badge-course badge-handmade">手作り</span>
@@ -783,14 +780,11 @@
         <div class="voice-card-body">
           <div class="voice-card-title">異なる表情が寄り添う結婚指輪</div>
           <div class="voice-card-excerpt">おふたりの手で一本ずつ丁寧に仕上げた結婚指輪。異なるテクスチャが並ぶと、ひとつの物語のように...</div>
-          <div class="voice-card-meta">
-            <span>おふたりで来店</span>
-          </div>
+          <div class="voice-card-meta"><span>おふたりで来店</span></div>
         </div>
       </a>
 
-      <!-- Card 2: 手作り × 結婚指輪 -->
-      <a href="#" class="voice-card fade-in fade-in-d1">
+      <a href="#" class="voice-card fade-in fade-in-d1" data-method="handmade" data-type="marriage">
         <div class="voice-card-image">
           <div class="voice-card-badges">
             <span class="badge-course badge-handmade">手作り</span>
@@ -801,14 +795,11 @@
         <div class="voice-card-body">
           <div class="voice-card-title">水色の輝きが映えるご結婚指輪</div>
           <div class="voice-card-excerpt">アイスブルーのダイヤモンドを内側にあしらった、さりげないこだわりが光る一組...</div>
-          <div class="voice-card-meta">
-            <span>おふたりで来店</span>
-          </div>
+          <div class="voice-card-meta"><span>おふたりで来店</span></div>
         </div>
       </a>
 
-      <!-- Card 3: オーダー × 結婚指輪 -->
-      <a href="#" class="voice-card fade-in fade-in-d2">
+      <a href="#" class="voice-card fade-in fade-in-d2" data-method="ordermade" data-type="marriage">
         <div class="voice-card-image">
           <div class="voice-card-badges">
             <span class="badge-course badge-ordermade">オーダーメイド</span>
@@ -819,14 +810,11 @@
         <div class="voice-card-body">
           <div class="voice-card-title">波の記憶を刻むご結婚指輪</div>
           <div class="voice-card-excerpt">おふたりの思い出の海をモチーフに、デザイナーが波のテクスチャを一から設計した特別な一組...</div>
-          <div class="voice-card-meta">
-            <span>おふたりで来店</span>
-          </div>
+          <div class="voice-card-meta"><span>おふたりで来店</span></div>
         </div>
       </a>
 
-      <!-- Card 4: 手作り × 婚約指輪 -->
-      <a href="#" class="voice-card fade-in">
+      <a href="#" class="voice-card fade-in" data-method="handmade" data-type="engagement">
         <div class="voice-card-image">
           <div class="voice-card-badges">
             <span class="badge-course badge-handmade">手作り</span>
@@ -837,14 +825,11 @@
         <div class="voice-card-body">
           <div class="voice-card-title">繊細な輝きが宿るご婚約指輪</div>
           <div class="voice-card-excerpt">サプライズで制作された婚約指輪。お相手の好みを丁寧にヒアリングしながら...</div>
-          <div class="voice-card-meta">
-            <span>おひとりで来店（サプライズ）</span>
-          </div>
+          <div class="voice-card-meta"><span>おひとりで来店（サプライズ）</span></div>
         </div>
       </a>
 
-      <!-- Card 5: オーダー × 婚約指輪 -->
-      <a href="#" class="voice-card fade-in fade-in-d1">
+      <a href="#" class="voice-card fade-in fade-in-d1" data-method="ordermade" data-type="engagement">
         <div class="voice-card-image">
           <div class="voice-card-badges">
             <span class="badge-course badge-ordermade">オーダーメイド</span>
@@ -855,14 +840,11 @@
         <div class="voice-card-body">
           <div class="voice-card-title">桜の花びらが舞うご婚約指輪</div>
           <div class="voice-card-excerpt">春に出会ったおふたりのエピソードから着想し、側面に桜の彫刻を施した世界にひとつの...</div>
-          <div class="voice-card-meta">
-            <span>おふたりで来店</span>
-          </div>
+          <div class="voice-card-meta"><span>おふたりで来店</span></div>
         </div>
       </a>
 
-      <!-- Card 6: 手作り × 結婚指輪 -->
-      <a href="#" class="voice-card fade-in fade-in-d2">
+      <a href="#" class="voice-card fade-in fade-in-d2" data-method="handmade" data-type="marriage">
         <div class="voice-card-image">
           <div class="voice-card-badges">
             <span class="badge-course badge-handmade">手作り</span>
@@ -873,14 +855,11 @@
         <div class="voice-card-body">
           <div class="voice-card-title">艷やかに美しいご結婚指輪</div>
           <div class="voice-card-excerpt">鏡面仕上げの美しさにこだわったプラチナの結婚指輪。途切れることのない円に永遠の意味を...</div>
-          <div class="voice-card-meta">
-            <span>おふたりで来店</span>
-          </div>
+          <div class="voice-card-meta"><span>おふたりで来店</span></div>
         </div>
       </a>
 
-      <!-- Card 7 -->
-      <a href="#" class="voice-card fade-in">
+      <a href="#" class="voice-card fade-in" data-method="handmade" data-type="marriage">
         <div class="voice-card-image">
           <div class="voice-card-badges">
             <span class="badge-course badge-handmade">手作り</span>
@@ -891,14 +870,11 @@
         <div class="voice-card-body">
           <div class="voice-card-title">やわらかな曲線が重なるご結婚指輪</div>
           <div class="voice-card-excerpt">ゆるやかなウェーブが特徴のペアリング。重ね着けしたときの調和まで考えられた...</div>
-          <div class="voice-card-meta">
-            <span>おふたりで来店</span>
-          </div>
+          <div class="voice-card-meta"><span>おふたりで来店</span></div>
         </div>
       </a>
 
-      <!-- Card 8 -->
-      <a href="#" class="voice-card fade-in fade-in-d1">
+      <a href="#" class="voice-card fade-in fade-in-d1" data-method="handmade" data-type="marriage">
         <div class="voice-card-image">
           <div class="voice-card-badges">
             <span class="badge-course badge-handmade">手作り</span>
@@ -909,14 +885,11 @@
         <div class="voice-card-body">
           <div class="voice-card-title">温もり溢れるご結婚指輪</div>
           <div class="voice-card-excerpt">K18イエローゴールドのあたたかみある色合いに、マット仕上げのやさしい質感を合わせて...</div>
-          <div class="voice-card-meta">
-            <span>おふたりで来店</span>
-          </div>
+          <div class="voice-card-meta"><span>おふたりで来店</span></div>
         </div>
       </a>
 
-      <!-- Card 9 -->
-      <a href="#" class="voice-card fade-in fade-in-d2">
+      <a href="#" class="voice-card fade-in fade-in-d2" data-method="ordermade" data-type="marriage">
         <div class="voice-card-image">
           <div class="voice-card-badges">
             <span class="badge-course badge-ordermade">オーダーメイド</span>
@@ -927,30 +900,24 @@
         <div class="voice-card-body">
           <div class="voice-card-title">想いを形づけるご結婚指輪</div>
           <div class="voice-card-excerpt">おふたりの出会いのエピソードから着想したデザインを、職人が丁寧に形にした特別な...</div>
-          <div class="voice-card-meta">
-            <span>おふたりで来店</span>
-          </div>
+          <div class="voice-card-meta"><span>おふたりで来店</span></div>
         </div>
       </a>
 
     </div>
   </div>
 
-  <!-- ============================================
-       SECTION 5: LOAD MORE
-       ============================================ -->
-  <div class="load-more-wrap fade-in" style="position:relative;">
+  <!-- LOAD MORE -->
+  <div class="load-more-wrap fade-in">
     <button class="btn-load-more">
       もっと見る
       <span style="font-size:12px;">↓</span>
     </button>
-    <div class="load-more-count">9 / 216 件を表示中</div>
+    <div class="load-more-count"><span id="shownCount">9</span> / <span id="totalCount">216</span> 件を表示中</div>
   </div>
 
-  <!-- ============================================
-       SECTION 6: CTA
-       ============================================ -->
-  <section class="cta" style="position:relative;">
+  <!-- CTA -->
+  <section class="cta">
     <div class="section-inner">
       <h2>おふたりだけの指輪づくり、<br>はじめてみませんか？</h2>
       <p>来店予約は電話・WEBにて受付中です。お気軽にご相談ください。</p>
@@ -961,9 +928,7 @@
     </div>
   </section>
 
-  <!-- ============================================
-       FOOTER
-       ============================================ -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-sns">
       <a href="#">f</a>
@@ -992,7 +957,7 @@
     <p class="footer-copy">&copy; 2026 renri.</p>
   </footer>
 
-  <!-- SP: フローティングCTA（既設の再現） -->
+  <!-- SP: フローティングCTA -->
   <div class="sp-floating-cta">
     <a href="#">手作り結婚指輪</a>
     <a href="#">オーダーメイド</a>
@@ -1000,9 +965,6 @@
     <a href="#" class="highlight">来店予約</a>
   </div>
 
-  <!-- ============================================
-       SCRIPTS
-       ============================================ -->
   <script>
     // Fade-in observer
     const observer = new IntersectionObserver((entries) => {
@@ -1015,47 +977,73 @@
     }, { threshold: 0.12 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // Filter chip toggle (demo)
+    // Filter logic
+    const TOTAL_COUNTS = {
+      'all-all': 216,
+      'handmade-all': 185,
+      'ordermade-all': 31,
+      'all-marriage': 180,
+      'all-engagement': 36,
+      'handmade-marriage': 158,
+      'handmade-engagement': 27,
+      'ordermade-marriage': 22,
+      'ordermade-engagement': 9
+    };
+
+    let activeMethod = 'all';
+    let activeType = 'all';
+
+    function updateFilter() {
+      const key = activeMethod + '-' + activeType;
+      const count = TOTAL_COUNTS[key] || 0;
+
+      document.getElementById('filteredCount').textContent = count;
+      document.getElementById('totalCount').textContent = count;
+
+      const cards = document.querySelectorAll('.voice-card');
+      let shown = 0;
+      cards.forEach(card => {
+        const m = card.dataset.method;
+        const t = card.dataset.type;
+        const matchMethod = (activeMethod === 'all' || m === activeMethod);
+        const matchType = (activeType === 'all' || t === activeType);
+        if (matchMethod && matchType) {
+          card.style.display = '';
+          shown++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      document.getElementById('shownCount').textContent = shown;
+    }
+
     document.querySelectorAll('.filter-chip').forEach(chip => {
       chip.addEventListener('click', () => {
-        const isAll = chip.textContent === 'すべて';
-        const parent = chip.closest('.filter-chips');
+        const group = chip.dataset.group;
+        const value = chip.dataset.value;
 
-        if (isAll) {
-          document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-          chip.classList.add('active');
-        } else {
-          parent.querySelector('.filter-chip:first-child')?.classList.remove('active');
-          if (chip.textContent === 'すべて') return;
-          chip.classList.toggle('active');
-          const anyActive = document.querySelectorAll('.filter-chip.active').length;
-          if (!anyActive) {
-            document.querySelector('.filter-chip').classList.add('active');
-          }
-        }
+        chip.closest('.filter-chips').querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+
+        if (group === 'method') activeMethod = value;
+        if (group === 'type') activeType = value;
+
+        updateFilter();
       });
     });
 
-    // SP: Convert grid cards to row layout
-    function applySpLayout() {
-      const cards = document.querySelectorAll('.voice-card');
-      if (window.innerWidth <= 768) {
-        cards.forEach(c => c.classList.add('voice-card-sp-row'));
-      } else {
-        cards.forEach(c => c.classList.remove('voice-card-sp-row'));
-      }
-    }
-    applySpLayout();
-    window.addEventListener('resize', applySpLayout);
+    document.getElementById('filterReset').addEventListener('click', () => {
+      activeMethod = 'all';
+      activeType = 'all';
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('[data-value="all"]').forEach(c => c.classList.add('active'));
+      updateFilter();
+    });
 
     // SP menu button visibility
     function toggleSpMenu() {
       const btn = document.querySelector('.sp-menu-btn');
-      if (window.innerWidth <= 768) {
-        btn.style.display = 'flex';
-      } else {
-        btn.style.display = 'none';
-      }
+      btn.style.display = window.innerWidth <= 768 ? 'flex' : 'none';
     }
     toggleSpMenu();
     window.addEventListener('resize', toggleSpMenu);
