@@ -442,6 +442,88 @@
       text-align: left;
       border: 1px solid rgba(0,0,0,0.06);
     }
+
+    /* WORKS section in result */
+    .result-works {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+    .result-works-header {
+      margin-bottom: 20px;
+    }
+    .result-works-label {
+      font-family: var(--serif-en);
+      font-size: 12px;
+      letter-spacing: 5px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+    .result-works-title {
+      font-size: 15px;
+      letter-spacing: 2px;
+      color: var(--text-primary);
+    }
+    .result-works-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .work-card {
+      background: var(--bg-white);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 3px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+      text-align: left;
+    }
+    .work-card:hover {
+      box-shadow: var(--shadow-card);
+      transform: translateY(-2px);
+    }
+    .work-image {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #cccccc, #a8a8a8);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(0,0,0,0.25); font-size: 11px; font-family: sans-serif;
+    }
+    .work-body {
+      padding: 12px 14px 14px;
+    }
+    .work-title {
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      line-height: 1.5;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    .work-meta {
+      font-family: var(--serif-en);
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      letter-spacing: 0.5px;
+    }
+    .work-meta strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    .result-works-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: var(--text-primary);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-bottom: 1px solid var(--text-primary);
+      transition: var(--transition);
+    }
+    .result-works-more:hover { color: var(--gold); border-color: var(--gold); }
     .result-benefits-label {
       font-family: var(--serif-en);
       font-size: 11px;
@@ -592,6 +674,16 @@
       .result-benefits { padding: 20px 18px; margin-bottom: 28px; }
       .result-benefits-title { font-size: 14px; letter-spacing: 1.5px; }
       .result-benefits p { font-size: 12px; line-height: 1.9; }
+
+      /* WORKS section SP */
+      .result-works { margin-bottom: 32px; }
+      .result-works-label { font-size: 10px; letter-spacing: 4px; }
+      .result-works-title { font-size: 13px; letter-spacing: 1.5px; }
+      .result-works-grid { gap: 10px; margin-bottom: 16px; }
+      .work-body { padding: 10px 12px 12px; }
+      .work-title { font-size: 11.5px; line-height: 1.5; margin-bottom: 6px; }
+      .work-meta { font-size: 10px; line-height: 1.6; }
+      .result-works-more { font-size: 11px; padding: 7px 14px; }
       .result-cta { padding: 14px 18px; font-size: 13px; gap: 12px; min-height: 52px; }
       .result-cta-icon { width: 32px; height: 32px; font-size: 14px; }
       .result-footer p { font-size: 12px; }
@@ -796,25 +888,32 @@
           <p id="resultBenefitText">— — —</p>
         </div>
 
+        <!-- WORKS section: このコースで実際に作られた指輪を2件 -->
+        <div class="result-works">
+          <div class="result-works-header">
+            <div class="result-works-label">WORKS</div>
+            <h3 class="result-works-title" id="resultWorksTitle">このコースで作られた指輪</h3>
+          </div>
+          <div class="result-works-grid" id="resultWorks">
+            <!-- JS で動的に挿入 -->
+          </div>
+          <a href="#" class="result-works-more" id="resultWorksMore">もっと事例を見る <span>→</span></a>
+        </div>
+
         <div class="result-ctas">
-          <a href="#" class="result-cta primary" id="ctaCourse">
+          <a href="#" class="result-cta primary">
+            <span class="result-cta-icon">✉</span>
+            <span class="result-cta-label">ご来店予約・相談する</span>
+            <span class="result-cta-arrow">→</span>
+          </a>
+          <a href="#" class="result-cta" id="ctaCourse">
             <span class="result-cta-icon">→</span>
             <span class="result-cta-label" id="ctaCourseLabel">コースの詳細を見る</span>
             <span class="result-cta-arrow">→</span>
           </a>
           <a href="#" class="result-cta">
-            <span class="result-cta-icon">¥</span>
-            <span class="result-cta-label">WEB見積もりで価格を確認する</span>
-            <span class="result-cta-arrow">→</span>
-          </a>
-          <a href="#" class="result-cta">
             <span class="result-cta-icon">♡</span>
             <span class="result-cta-label">お客様の声を見る</span>
-            <span class="result-cta-arrow">→</span>
-          </a>
-          <a href="#" class="result-cta">
-            <span class="result-cta-icon">✉</span>
-            <span class="result-cta-label">まずは来店予約・相談する</span>
             <span class="result-cta-arrow">→</span>
           </a>
         </div>
@@ -839,7 +938,12 @@
         description: 'おふたりの手で金属を叩き、形にしていく手作りコース。ジュエリー職人がそばで丁寧にサポートしますので、はじめての方もご安心ください。鍛造製法で永く愛用できる、思い出の詰まった一本に仕上がります。',
         benefitTitle: '制作の時間そのものが、宝物になります',
         benefitText: '工程ごとに職人が丁寧にサポートいたします。撮影もご自由に。ふたりらしさが、やさしく刻まれる一本に。',
-        courseLabel: '手作り結婚指輪を詳しく見る'
+        courseLabel: '手作り結婚指輪を詳しく見る',
+        worksMoreUrl: '/gallery/?course=handmade',
+        works: [
+          { title: '異なる表情が寄り添う結婚指輪', material: 'Pt900 ／ K18YG', price: '¥298,000', delivery: '当日' },
+          { title: '温もり溢れるご結婚指輪', material: 'K18YG', price: '¥218,000', delivery: '当日' }
+        ]
       },
       ordermade: {
         name: 'オーダーメイドコース',
@@ -847,7 +951,12 @@
         description: 'デザイナーがゼロからご提案する、世界にひとつのオーダーメイドコース。素材・デザイン・仕上げまで幅広い組み合わせの中から、おふたりの理想を丁寧にうかがいながら少しずつかたちにします。',
         benefitTitle: 'ふたりだけのための一本を、ともに作り上げる',
         benefitText: 'モチーフや物語、おふたりの想いを職人の技術で繊細に表現。世界にひとつの指輪を、ご一緒に。',
-        courseLabel: 'オーダーメイド結婚指輪を詳しく見る'
+        courseLabel: 'オーダーメイド結婚指輪を詳しく見る',
+        worksMoreUrl: '/gallery/?course=ordermade',
+        works: [
+          { title: '波の記憶を刻むご結婚指輪', material: 'Pt900', price: '¥386,000', delivery: '約2ヶ月' },
+          { title: '想いを形づけるご結婚指輪', material: 'Pt900 ／ K18WG', price: '¥412,000', delivery: '約2ヶ月' }
+        ]
       },
       hanakoyomi: {
         name: '花こよみ',
@@ -855,7 +964,12 @@
         description: '季節の花をモチーフにしたrenriオリジナルの婚約指輪シリーズ「花こよみ」。全6型のデザインから、おふたりの想い出の季節を、一輪の花にたとえて。',
         benefitTitle: 'おふたりの季節を、一輪の花に',
         benefitText: 'デザイナーが想いを込めて描いた花のモチーフ。おふたりの「はじまりの季節」を、指輪に。',
-        courseLabel: '花こよみシリーズを詳しく見る'
+        courseLabel: '花こよみシリーズを詳しく見る',
+        worksMoreUrl: '/gallery/?series=hanakoyomi',
+        works: [
+          { title: '桜こよみ', material: 'K18PG ／ ダイヤ約3.5mm', price: '¥246,000', delivery: '約1.5ヶ月' },
+          { title: '椿こよみ', material: 'Pt900 ／ ダイヤ約4mm', price: '¥298,000', delivery: '約1.5ヶ月' }
+        ]
       },
       littlebouquet: {
         name: 'リトルブーケ',
@@ -863,7 +977,12 @@
         description: '小さな花束を贈るように、日常に寄り添う婚約指輪「リトルブーケ」。定額制で安心、最短2週間でお届けします。¥143,000〜のお手頃価格も魅力。',
         benefitTitle: '日常になじむ、やさしい婚約指輪',
         benefitText: '定額制・短納期のシリーズだから、お忙しいおふたりにも安心。日々の中で気軽に身につけられます。',
-        courseLabel: 'リトルブーケシリーズを詳しく見る'
+        courseLabel: 'リトルブーケシリーズを詳しく見る',
+        worksMoreUrl: '/gallery/?series=littlebouquet',
+        works: [
+          { title: 'リトルブーケ クラシック', material: 'K18WG ／ ダイヤ約3mm', price: '¥143,000', delivery: '約2週間' },
+          { title: 'リトルブーケ ピンク', material: 'K18PG ／ ダイヤ約3mm', price: '¥158,000', delivery: '約2週間' }
+        ]
       },
       surprise: {
         name: 'サプライズプロポーズ',
@@ -871,7 +990,12 @@
         description: 'まずダイヤモンドだけを贈り、デザインは後からふたりで選ぶ新しいプロポーズの形。最短当日からご利用可能、¥48,000〜と手の届きやすい価格で、サプライズを叶えます。',
         benefitTitle: 'プロポーズの瞬間を、最高の形に',
         benefitText: 'ダイヤモンド先渡しプランで、サプライズを全力サポート。デザインは、おふたりでゆっくりお決めいただけます。',
-        courseLabel: 'サプライズプロポーズを詳しく見る'
+        courseLabel: 'サプライズプロポーズを詳しく見る',
+        worksMoreUrl: '/gallery/?service=surprise',
+        works: [
+          { title: 'ダイヤ先渡し プラン', material: 'ダイヤ約3.5mm（ケース付）', price: '¥48,000〜', delivery: '最短当日' },
+          { title: 'プロポーズ後オーダー仕立て', material: 'お選び素材＋ダイヤ', price: '¥220,000〜', delivery: '約1ヶ月' }
+        ]
       },
       uchideno: {
         name: 'うちでのリング',
@@ -879,7 +1003,12 @@
         description: 'ご自宅で手作り体験をお楽しみいただける「うちでのリング」。かわいいトランクに入れた手作りキットをお届け。おふたりのペースでじっくり、ゆっくり制作をお楽しみください。',
         benefitTitle: 'おうちで、ふたりだけのアトリエ時間',
         benefitText: '遠方の方やご来店が難しいおふたりにも、手作り体験をお届け。リラックスした時間で、心ゆくまで指輪づくりを。',
-        courseLabel: 'うちでのリングを詳しく見る'
+        courseLabel: 'うちでのリングを詳しく見る',
+        worksMoreUrl: '/gallery/?service=uchideno',
+        works: [
+          { title: 'おうち制作 シルバーリング', material: 'シルバー925', price: '¥38,000', delivery: 'キット即発送' },
+          { title: 'おうち制作 K10ペアリング', material: 'K10', price: '¥88,000', delivery: 'キット即発送' }
+        ]
       }
     };
 
@@ -1002,6 +1131,29 @@
       document.getElementById('resultBenefitTitle').textContent = r.benefitTitle;
       document.getElementById('resultBenefitText').textContent = r.benefitText;
       document.getElementById('ctaCourseLabel').textContent = r.courseLabel;
+
+      // WORKS section: 2件の制作事例を動的レンダリング
+      document.getElementById('resultWorksTitle').textContent = r.name + 'で作られた指輪';
+      const worksGrid = document.getElementById('resultWorks');
+      worksGrid.innerHTML = '';
+      r.works.forEach(work => {
+        const card = document.createElement('a');
+        card.href = '#';
+        card.className = 'work-card';
+        card.innerHTML = `
+          <div class="work-image">📷 ${work.title}</div>
+          <div class="work-body">
+            <div class="work-title">${work.title}</div>
+            <div class="work-meta">
+              <strong>${work.material}</strong><br>
+              ${work.price}｜${work.delivery}
+            </div>
+          </div>
+        `;
+        worksGrid.appendChild(card);
+      });
+      document.getElementById('resultWorksMore').href = r.worksMoreUrl;
+
       goToScreen('result');
     }
 
