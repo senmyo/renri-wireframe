@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>30秒診断 | renri ワイヤーフレーム</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #555555;
+      --gold-light: #777777;
+      --text-primary: #222222;
+      --text-secondary: #555555;
+      --text-light: #999999;
+      --bg-white: #ffffff;
+      --bg-cream: #f5f5f5;
+      --bg-warm: #ede9e3;
+      --bg-dark: #222222;
+      --border-light: #cccccc;
+      --shadow-soft: 0 2px 20px rgba(0,0,0,0.06);
+      --shadow-card: 0 4px 30px rgba(0,0,0,0.08);
+      --serif-jp: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+      --serif-en: 'Cormorant Garamond', serif;
+      --transition: all 0.3s ease;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--serif-jp);
+      color: var(--text-primary);
+      background: var(--bg-cream);
+      line-height: 1.8;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+      padding-top: 36px;
+      min-height: 100vh;
+    }
+
+    /* WIREFRAME UI */
+    .wireframe-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+      background: #1a1a2e; color: #fff; padding: 8px 20px;
+      font-family: sans-serif; font-size: 12px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .wireframe-bar .badge {
+      background: #e94560; color: #fff; padding: 2px 10px;
+      border-radius: 3px; font-weight: 700; font-size: 11px;
+    }
+    .wireframe-bar .page-path { color: #a2d2ff; font-weight: 500; }
+
+    /* HEADER */
+    .header {
+      position: sticky; top: 36px; z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .header-inner {
+      max-width: 1200px; margin: 0 auto; padding: 14px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-family: var(--serif-en); font-size: 26px; font-weight: 300;
+      letter-spacing: 4px; color: var(--text-primary); text-decoration: none;
+    }
+    .back-to-top {
+      font-size: 12px; letter-spacing: 1px;
+      color: var(--text-secondary); text-decoration: none;
+      padding: 8px 14px; border: 1px solid var(--border-light);
+      border-radius: 2px; transition: var(--transition);
+    }
+    .back-to-top:hover { background: var(--bg-cream); }
+
+    /* APP CONTAINER */
+    .diagnosis-app {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+      min-height: calc(100vh - 36px - 60px);
+      position: relative;
+    }
+
+    /* SCREENS (共通) */
+    .screen { display: none; animation: fadeIn 0.5s ease-out; }
+    .screen.active { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================
+       INTRO SCREEN
+       ============================================ */
+    .intro {
+      text-align: center;
+      padding: 40px 0;
+    }
+    .intro-en {
+      font-family: var(--serif-en);
+      font-size: 13px;
+      letter-spacing: 6px;
+      color: var(--text-light);
+      margin-bottom: 24px;
+    }
+    .intro h1 {
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 4px;
+      line-height: 1.9;
+      margin-bottom: 28px;
+      color: var(--text-primary);
+    }
+    .intro-tag {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 3px;
+      padding: 5px 16px;
+      background: var(--text-primary);
+      color: #fff;
+      border-radius: 20px;
+      margin-bottom: 36px;
+    }
+    .intro-visual {
+      width: 100%;
+      max-width: 380px;
+      aspect-ratio: 1/1;
+      background: linear-gradient(135deg, #d8d4cf, #b8b4af);
+      border-radius: 50%;
+      margin: 0 auto 36px;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(0,0,0,0.3); font-size: 13px; font-family: sans-serif;
+    }
+    .intro-lead {
+      font-size: 15px;
+      line-height: 2.3;
+      color: var(--text-secondary);
+      letter-spacing: 1px;
+      margin-bottom: 36px;
+    }
+    .intro-meta {
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: var(--text-light);
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .intro-meta span::before {
+      content: '●';
+      color: var(--gold);
+      font-size: 8px;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+    .btn-start {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 56px;
+      background: var(--text-primary);
+      color: #fff;
+      font-family: var(--serif-jp);
+      font-size: 15px;
+      letter-spacing: 5px;
+      cursor: pointer;
+      border: none;
+      border-radius: 2px;
+      transition: var(--transition);
+      min-height: 56px;
+    }
+    .btn-start:hover { background: var(--gold); transform: translateY(-2px); }
+    .btn-start::after {
+      content: '→';
+      font-family: var(--serif-en);
+      font-size: 18px;
+    }
+
+    /* ============================================
+       QUESTION SCREEN
+       ============================================ */
+    .question-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .progress-bar {
+      width: 100%;
+      max-width: 320px;
+      height: 2px;
+      background: rgba(0,0,0,0.08);
+      margin: 0 auto 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--gold);
+      transition: width 0.5s ease;
+      width: 0%;
+    }
+    .progress-text {
+      font-family: var(--serif-en);
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: var(--text-light);
+    }
+    .staff-bubble {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 28px;
+      padding: 0 8px;
+    }
+    .staff-avatar {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #d0ccc6, #aaa6a0);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(0,0,0,0.4); font-size: 11px; font-family: sans-serif;
+    }
+    .staff-message {
+      flex: 1;
+      background: var(--bg-white);
+      padding: 14px 18px;
+      border-radius: 4px 14px 14px 14px;
+      font-size: 13.5px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      letter-spacing: 0.5px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+    }
+    .staff-message::before {
+      content: '';
+      position: absolute;
+      left: -6px; top: 14px;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 6px 7px 6px 0;
+      border-color: transparent var(--bg-white) transparent transparent;
+    }
+    .question-title {
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      line-height: 1.8;
+      text-align: center;
+      margin-bottom: 32px;
+      padding: 0 8px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: 4px;
+      font-family: var(--serif-jp);
+      font-size: 14.5px;
+      letter-spacing: 1px;
+      line-height: 1.7;
+      color: var(--text-primary);
+      text-align: left;
+      cursor: pointer;
+      transition: var(--transition);
+      min-height: 64px;
+      box-shadow: var(--shadow-soft);
+    }
+    .option:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+    }
+    .option.selected {
+      border-color: var(--text-primary);
+      background: var(--text-primary);
+      color: #fff;
+    }
+    .option-letter {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--border-light);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif-en);
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: var(--transition);
+    }
+    .option:hover .option-letter {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .option.selected .option-letter {
+      background: #fff;
+      border-color: #fff;
+      color: var(--text-primary);
+    }
+    .option-text {
+      flex: 1;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+    }
+    .btn-back {
+      padding: 10px 18px;
+      background: none;
+      border: 1px solid var(--border-light);
+      border-radius: 2px;
+      font-family: var(--serif-jp);
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      min-height: 44px;
+      transition: var(--transition);
+    }
+    .btn-back:hover { border-color: var(--text-primary); color: var(--text-primary); }
+    .btn-back::before { content: '← '; }
+
+    /* ============================================
+       JUDGING SCREEN
+       ============================================ */
+    .judging {
+      text-align: center;
+      padding: 80px 0;
+    }
+    .judging-en {
+      font-family: var(--serif-en);
+      font-size: 14px;
+      letter-spacing: 5px;
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+    .judging h2 {
+      font-size: 22px;
+      font-weight: 300;
+      letter-spacing: 4px;
+      line-height: 1.9;
+      margin-bottom: 48px;
+    }
+    .spinner {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto;
+      border: 2px solid rgba(0,0,0,0.1);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 1.2s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .judging-hint {
+      margin-top: 32px;
+      font-size: 13px;
+      letter-spacing: 1px;
+      color: var(--text-light);
+    }
+
+    /* ============================================
+       RESULT SCREEN
+       ============================================ */
+    .result {
+      text-align: center;
+    }
+    .result-label {
+      font-family: var(--serif-en);
+      font-size: 12px;
+      letter-spacing: 6px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+    }
+    .result-intro {
+      font-size: 15px;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+    .result-name {
+      font-size: 28px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+    .result-visual {
+      width: 100%;
+      max-width: 460px;
+      aspect-ratio: 4/3;
+      margin: 0 auto 32px;
+      background: linear-gradient(135deg, #cccccc, #a0a0a0);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(0,0,0,0.3); font-size: 13px; font-family: sans-serif;
+    }
+    .result-tag {
+      display: inline-block;
+      font-family: var(--serif-en);
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--gold);
+      padding: 4px 14px;
+      border: 1px solid var(--gold);
+      border-radius: 20px;
+      margin-bottom: 18px;
+    }
+    .result-description {
+      font-size: 14px;
+      line-height: 2.3;
+      color: var(--text-secondary);
+      letter-spacing: 0.5px;
+      max-width: 560px;
+      margin: 0 auto 36px;
+      text-align: left;
+    }
+    .result-benefits {
+      background: var(--bg-white);
+      padding: 24px 28px;
+      border-radius: 3px;
+      max-width: 560px;
+      margin: 0 auto 40px;
+      text-align: left;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .result-benefits-label {
+      font-family: var(--serif-en);
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--text-light);
+      margin-bottom: 14px;
+    }
+    .result-benefits-title {
+      font-size: 15px;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+    .result-benefits p {
+      font-size: 13px;
+      line-height: 2;
+      color: var(--text-secondary);
+    }
+    .result-ctas {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      max-width: 480px;
+      margin: 0 auto 40px;
+    }
+    .result-cta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 24px;
+      background: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: 3px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: var(--transition);
+      min-height: 56px;
+    }
+    .result-cta:hover {
+      background: var(--text-primary);
+      color: #fff;
+      border-color: var(--text-primary);
+    }
+    .result-cta.primary {
+      background: var(--text-primary);
+      color: #fff;
+      border-color: var(--text-primary);
+    }
+    .result-cta.primary:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+    .result-cta-icon {
+      flex-shrink: 0;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--bg-cream);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      color: var(--text-primary);
+    }
+    .result-cta.primary .result-cta-icon {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+    .result-cta-label { flex: 1; text-align: left; }
+    .result-cta-arrow {
+      flex-shrink: 0;
+      font-family: var(--serif-en);
+      font-size: 16px;
+      opacity: 0.6;
+    }
+
+    .result-footer {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-light);
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .result-footer p {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 14px;
+    }
+    .btn-retake {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 24px;
+      background: none;
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      font-family: var(--serif-jp);
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--transition);
+      min-height: 44px;
+    }
+    .btn-retake:hover { border-color: var(--text-primary); color: var(--text-primary); }
+    .btn-retake::before { content: '↻'; font-family: sans-serif; }
+
+    /* RESPONSIVE — SP (90%ユーザー優先) */
+    @media (max-width: 768px) {
+      .header-inner { padding: 10px 16px; }
+      .logo { font-size: 22px; letter-spacing: 3px; }
+      .back-to-top { padding: 7px 12px; font-size: 11px; }
+      .diagnosis-app { padding: 36px 16px 80px; }
+
+      /* INTRO */
+      .intro { padding: 20px 0; }
+      .intro-en { font-size: 11px; letter-spacing: 4px; margin-bottom: 18px; }
+      .intro h1 { font-size: 21px; letter-spacing: 3px; line-height: 1.9; margin-bottom: 20px; }
+      .intro-tag { font-size: 10px; padding: 4px 12px; margin-bottom: 28px; }
+      .intro-visual { max-width: 240px; margin-bottom: 28px; }
+      .intro-lead { font-size: 13px; line-height: 2; }
+      .intro-meta { font-size: 11px; gap: 16px; }
+      .btn-start { padding: 16px 36px; font-size: 14px; letter-spacing: 3px; }
+
+      /* QUESTION */
+      .question-header { margin-bottom: 24px; }
+      .progress-text { font-size: 11px; letter-spacing: 2px; }
+      .staff-bubble { gap: 10px; margin-bottom: 20px; }
+      .staff-avatar { width: 40px; height: 40px; font-size: 10px; }
+      .staff-message { padding: 12px 14px; font-size: 12.5px; }
+      .question-title { font-size: 17px; letter-spacing: 2px; line-height: 1.8; margin-bottom: 24px; }
+
+      .option { padding: 14px 16px; font-size: 13px; gap: 12px; min-height: 56px; }
+      .option-letter { width: 24px; height: 24px; font-size: 11px; }
+      .options { gap: 10px; margin-bottom: 20px; }
+      .btn-back { padding: 9px 14px; font-size: 11px; letter-spacing: 1.5px; }
+
+      /* JUDGING */
+      .judging { padding: 60px 0; }
+      .judging h2 { font-size: 17px; letter-spacing: 3px; margin-bottom: 36px; }
+      .spinner { width: 48px; height: 48px; }
+
+      /* RESULT */
+      .result-label { font-size: 11px; letter-spacing: 4px; }
+      .result-intro { font-size: 13px; margin-bottom: 10px; }
+      .result-name { font-size: 21px; letter-spacing: 3px; margin-bottom: 18px; }
+      .result-visual { margin-bottom: 24px; }
+      .result-tag { font-size: 10px; padding: 3px 12px; margin-bottom: 14px; }
+      .result-description { font-size: 13px; line-height: 2.1; margin-bottom: 28px; }
+      .result-benefits { padding: 20px 18px; margin-bottom: 28px; }
+      .result-benefits-title { font-size: 14px; letter-spacing: 1.5px; }
+      .result-benefits p { font-size: 12px; line-height: 1.9; }
+      .result-cta { padding: 14px 18px; font-size: 13px; gap: 12px; min-height: 52px; }
+      .result-cta-icon { width: 32px; height: 32px; font-size: 14px; }
+      .result-footer p { font-size: 12px; }
+      .btn-retake { padding: 9px 18px; font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- WIREFRAME BAR -->
+  <div class="wireframe-bar">
+    <span class="badge">WIREFRAME</span>
+    <span>renri — 30秒診断</span>
+    <span class="page-path">/diagnosis/</span>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">renri</a>
+      <a href="/" class="back-to-top">サイトに戻る</a>
+    </div>
+  </header>
+
+  <!-- DIAGNOSIS APP -->
+  <main class="diagnosis-app">
+
+    <!-- INTRO SCREEN -->
+    <section class="screen active" data-screen="intro">
+      <div class="intro">
+        <div class="intro-en">RENRI DIAGNOSIS</div>
+        <span class="intro-tag">30秒カンタン診断</span>
+        <h1>おふたりにぴったりの<br>結婚指輪・婚約指輪は？</h1>
+        <div class="intro-visual">📷 スタッフ or アトリエのイメージ写真</div>
+        <p class="intro-lead">
+          renriのスタッフが、おふたりに合う<br>
+          指輪づくりのスタイルをご提案します。
+        </p>
+        <div class="intro-meta">
+          <span>全6問</span>
+          <span>所要時間 約30秒</span>
+          <span>結果は1コース提案</span>
+        </div>
+        <button class="btn-start" onclick="startDiagnosis()">診断スタート</button>
+      </div>
+    </section>
+
+    <!-- Q1 -->
+    <section class="screen" data-screen="q1">
+      <div class="question-header">
+        <div class="progress-bar"><div class="progress-fill" style="width:16.6%"></div></div>
+        <div class="progress-text">Q.1 / 6</div>
+      </div>
+      <div class="staff-bubble">
+        <div class="staff-avatar">📷</div>
+        <div class="staff-message">まずは、おふたりが今ご検討中のものを教えてください。</div>
+      </div>
+      <h2 class="question-title">どちらをお探しですか？</h2>
+      <div class="options">
+        <button class="option" onclick="answerQ('q1','A')"><span class="option-letter">A</span><span class="option-text">結婚指輪</span></button>
+        <button class="option" onclick="answerQ('q1','B')"><span class="option-letter">B</span><span class="option-text">婚約指輪（おふたりで一緒に選ぶ予定）</span></button>
+        <button class="option" onclick="answerQ('q1','C')"><span class="option-letter">C</span><span class="option-text">婚約指輪（サプライズで贈りたい）</span></button>
+        <button class="option" onclick="answerQ('q1','D')"><span class="option-letter">D</span><span class="option-text">まだ決めていない／両方検討中</span></button>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="goToScreen('intro')">戻る</button>
+      </div>
+    </section>
+
+    <!-- Q2 -->
+    <section class="screen" data-screen="q2">
+      <div class="question-header">
+        <div class="progress-bar"><div class="progress-fill" style="width:33.3%"></div></div>
+        <div class="progress-text">Q.2 / 6</div>
+      </div>
+      <div class="staff-bubble">
+        <div class="staff-avatar">📷</div>
+        <div class="staff-message">指輪選びには、いろいろなスタイルがあります。どんな時間が楽しみですか？</div>
+      </div>
+      <h2 class="question-title">指輪選びで、特に楽しみたい時間は？</h2>
+      <div class="options">
+        <button class="option" onclick="answerQ('q2','A')"><span class="option-letter">A</span><span class="option-text">自分たちの手で作っていく時間</span></button>
+        <button class="option" onclick="answerQ('q2','B')"><span class="option-letter">B</span><span class="option-text">デザイナーや職人と相談しながら、ふたりだけの一本を仕上げる時間</span></button>
+        <button class="option" onclick="answerQ('q2','C')"><span class="option-letter">C</span><span class="option-text">すでに完成された美しい指輪から、ぴったりの一本を見つける時間</span></button>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="goToScreen('q1')">戻る</button>
+      </div>
+    </section>
+
+    <!-- Q3 -->
+    <section class="screen" data-screen="q3">
+      <div class="question-header">
+        <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
+        <div class="progress-text">Q.3 / 6</div>
+      </div>
+      <div class="staff-bubble">
+        <div class="staff-avatar">📷</div>
+        <div class="staff-message">どんな雰囲気の指輪に、ふと心が惹かれますか？</div>
+      </div>
+      <h2 class="question-title">どんな雰囲気の指輪に惹かれますか？</h2>
+      <div class="options">
+        <button class="option" onclick="answerQ('q3','A')"><span class="option-letter">A</span><span class="option-text">シンプルで、毎日身につけたくなる温かい指輪</span></button>
+        <button class="option" onclick="answerQ('q3','B')"><span class="option-letter">B</span><span class="option-text">細部までこだわった、個性ある指輪</span></button>
+        <button class="option" onclick="answerQ('q3','C')"><span class="option-letter">C</span><span class="option-text">モチーフや想いが込められた、物語のある指輪</span></button>
+        <button class="option" onclick="answerQ('q3','D')"><span class="option-letter">D</span><span class="option-text">季節や自然をモチーフにした、可憐な指輪</span></button>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="goToScreen('q2')">戻る</button>
+      </div>
+    </section>
+
+    <!-- Q4 -->
+    <section class="screen" data-screen="q4">
+      <div class="question-header">
+        <div class="progress-bar"><div class="progress-fill" style="width:66.6%"></div></div>
+        <div class="progress-text">Q.4 / 6</div>
+      </div>
+      <div class="staff-bubble">
+        <div class="staff-avatar">📷</div>
+        <div class="staff-message">ご来店スタイルのご希望をお聞かせください。</div>
+      </div>
+      <h2 class="question-title">ご来店スタイルの希望は？</h2>
+      <div class="options">
+        <button class="option" onclick="answerQ('q4','A')"><span class="option-letter">A</span><span class="option-text">おふたり一緒に、ゆったり時間をとって</span></button>
+        <button class="option" onclick="answerQ('q4','B')"><span class="option-letter">B</span><span class="option-text">何度かじっくり打ち合わせを重ねて</span></button>
+        <button class="option" onclick="answerQ('q4','C')"><span class="option-letter">C</span><span class="option-text">お相手に内緒で、短時間で</span></button>
+        <button class="option" onclick="answerQ('q4','D')"><span class="option-letter">D</span><span class="option-text">アトリエへは行けない／ご自宅で過ごしたい</span></button>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="goToScreen('q3')">戻る</button>
+      </div>
+    </section>
+
+    <!-- Q5 -->
+    <section class="screen" data-screen="q5">
+      <div class="question-header">
+        <div class="progress-bar"><div class="progress-fill" style="width:83.3%"></div></div>
+        <div class="progress-text">Q.5 / 6</div>
+      </div>
+      <div class="staff-bubble">
+        <div class="staff-avatar">📷</div>
+        <div class="staff-message">指輪をお手元にお渡しするまでの、希望の時期はありますか？</div>
+      </div>
+      <h2 class="question-title">お渡しまでの希望時期は？</h2>
+      <div class="options">
+        <button class="option" onclick="answerQ('q5','A')"><span class="option-letter">A</span><span class="option-text">当日〜約1ヶ月以内</span></button>
+        <button class="option" onclick="answerQ('q5','B')"><span class="option-letter">B</span><span class="option-text">約1〜2ヶ月</span></button>
+        <button class="option" onclick="answerQ('q5','C')"><span class="option-letter">C</span><span class="option-text">2ヶ月以上、じっくりと</span></button>
+        <button class="option" onclick="answerQ('q5','D')"><span class="option-letter">D</span><span class="option-text">プロポーズの予定日に合わせたい</span></button>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="goToScreen('q4')">戻る</button>
+      </div>
+    </section>
+
+    <!-- Q6 -->
+    <section class="screen" data-screen="q6">
+      <div class="question-header">
+        <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+        <div class="progress-text">Q.6 / 6</div>
+      </div>
+      <div class="staff-bubble">
+        <div class="staff-avatar">📷</div>
+        <div class="staff-message">最後に、指輪に込めたい想いを教えてください。</div>
+      </div>
+      <h2 class="question-title">指輪に込めたい想いは？</h2>
+      <div class="options">
+        <button class="option" onclick="answerQ('q6','A')"><span class="option-letter">A</span><span class="option-text">制作の時間そのものを、思い出に</span></button>
+        <button class="option" onclick="answerQ('q6','B')"><span class="option-letter">B</span><span class="option-text">ふたりだけのオリジナリティを</span></button>
+        <button class="option" onclick="answerQ('q6','C')"><span class="option-letter">C</span><span class="option-text">ふたりの物語を、デザインに込める</span></button>
+        <button class="option" onclick="answerQ('q6','D')"><span class="option-letter">D</span><span class="option-text">プロポーズの瞬間を、特別なものに</span></button>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="goToScreen('q5')">戻る</button>
+      </div>
+    </section>
+
+    <!-- JUDGING SCREEN -->
+    <section class="screen" data-screen="judging">
+      <div class="judging">
+        <div class="judging-en">JUDGING</div>
+        <h2>おふたりにぴったりの指輪を<br>お選びしています…</h2>
+        <div class="spinner"></div>
+        <p class="judging-hint">少しだけお待ちください</p>
+      </div>
+    </section>
+
+    <!-- RESULT SCREEN -->
+    <section class="screen" data-screen="result">
+      <div class="result">
+        <div class="result-label">YOUR PERFECT CHOICE</div>
+        <p class="result-intro">おふたりにおすすめなのは</p>
+        <div class="result-name" id="resultName">— — —</div>
+        <div class="result-visual" id="resultVisual">📷 結果のメインビジュアル</div>
+        <span class="result-tag" id="resultTag">PERSONA</span>
+        <p class="result-description" id="resultDescription">— — —</p>
+
+        <div class="result-benefits">
+          <div class="result-benefits-label">BENEFIT</div>
+          <h3 class="result-benefits-title" id="resultBenefitTitle">— — —</h3>
+          <p id="resultBenefitText">— — —</p>
+        </div>
+
+        <div class="result-ctas">
+          <a href="#" class="result-cta primary" id="ctaCourse">
+            <span class="result-cta-icon">→</span>
+            <span class="result-cta-label" id="ctaCourseLabel">コースの詳細を見る</span>
+            <span class="result-cta-arrow">→</span>
+          </a>
+          <a href="#" class="result-cta">
+            <span class="result-cta-icon">¥</span>
+            <span class="result-cta-label">WEB見積もりで価格を確認する</span>
+            <span class="result-cta-arrow">→</span>
+          </a>
+          <a href="#" class="result-cta">
+            <span class="result-cta-icon">♡</span>
+            <span class="result-cta-label">お客様の声を見る</span>
+            <span class="result-cta-arrow">→</span>
+          </a>
+          <a href="#" class="result-cta">
+            <span class="result-cta-icon">✉</span>
+            <span class="result-cta-label">まずは来店予約・相談する</span>
+            <span class="result-cta-arrow">→</span>
+          </a>
+        </div>
+
+        <div class="result-footer">
+          <p>診断結果はあくまでご参考です。<br>ご来店時に、おふたりに合う最適なコースを一緒に整理します。</p>
+          <button class="btn-retake" onclick="retake()">もう一度診断する</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // ============================================
+    // 設定: 結果定義
+    // ============================================
+    const RESULTS = {
+      handmade: {
+        name: '手作りコース',
+        tag: 'HANDMADE COURSE',
+        description: 'おふたりの手で金属を叩き、形にしていく手作りコース。ジュエリー職人がそばで丁寧にサポートしますので、はじめての方もご安心ください。鍛造製法で永く愛用できる、思い出の詰まった一本に仕上がります。',
+        benefitTitle: '制作の時間そのものが、宝物になります',
+        benefitText: '工程ごとに職人が丁寧にサポートいたします。撮影もご自由に。ふたりらしさが、やさしく刻まれる一本に。',
+        courseLabel: '手作り結婚指輪を詳しく見る'
+      },
+      ordermade: {
+        name: 'オーダーメイドコース',
+        tag: 'ORDERMADE COURSE',
+        description: 'デザイナーがゼロからご提案する、世界にひとつのオーダーメイドコース。素材・デザイン・仕上げまで幅広い組み合わせの中から、おふたりの理想を丁寧にうかがいながら少しずつかたちにします。',
+        benefitTitle: 'ふたりだけのための一本を、ともに作り上げる',
+        benefitText: 'モチーフや物語、おふたりの想いを職人の技術で繊細に表現。世界にひとつの指輪を、ご一緒に。',
+        courseLabel: 'オーダーメイド結婚指輪を詳しく見る'
+      },
+      hanakoyomi: {
+        name: '花こよみ',
+        tag: 'HANAKOYOMI SERIES',
+        description: '季節の花をモチーフにしたrenriオリジナルの婚約指輪シリーズ「花こよみ」。全6型のデザインから、おふたりの想い出の季節を、一輪の花にたとえて。',
+        benefitTitle: 'おふたりの季節を、一輪の花に',
+        benefitText: 'デザイナーが想いを込めて描いた花のモチーフ。おふたりの「はじまりの季節」を、指輪に。',
+        courseLabel: '花こよみシリーズを詳しく見る'
+      },
+      littlebouquet: {
+        name: 'リトルブーケ',
+        tag: 'LITTLE BOUQUET SERIES',
+        description: '小さな花束を贈るように、日常に寄り添う婚約指輪「リトルブーケ」。定額制で安心、最短2週間でお届けします。¥143,000〜のお手頃価格も魅力。',
+        benefitTitle: '日常になじむ、やさしい婚約指輪',
+        benefitText: '定額制・短納期のシリーズだから、お忙しいおふたりにも安心。日々の中で気軽に身につけられます。',
+        courseLabel: 'リトルブーケシリーズを詳しく見る'
+      },
+      surprise: {
+        name: 'サプライズプロポーズ',
+        tag: 'SURPRISE PROPOSAL',
+        description: 'まずダイヤモンドだけを贈り、デザインは後からふたりで選ぶ新しいプロポーズの形。最短当日からご利用可能、¥48,000〜と手の届きやすい価格で、サプライズを叶えます。',
+        benefitTitle: 'プロポーズの瞬間を、最高の形に',
+        benefitText: 'ダイヤモンド先渡しプランで、サプライズを全力サポート。デザインは、おふたりでゆっくりお決めいただけます。',
+        courseLabel: 'サプライズプロポーズを詳しく見る'
+      },
+      uchideno: {
+        name: 'うちでのリング',
+        tag: 'UCHI DE NO RING',
+        description: 'ご自宅で手作り体験をお楽しみいただける「うちでのリング」。かわいいトランクに入れた手作りキットをお届け。おふたりのペースでじっくり、ゆっくり制作をお楽しみください。',
+        benefitTitle: 'おうちで、ふたりだけのアトリエ時間',
+        benefitText: '遠方の方やご来店が難しいおふたりにも、手作り体験をお届け。リラックスした時間で、心ゆくまで指輪づくりを。',
+        courseLabel: 'うちでのリングを詳しく見る'
+      }
+    };
+
+    // ============================================
+    // 設定: 配点表（各選択肢が各結果に与える点数）
+    // ============================================
+    const SCORING = {
+      q1: {
+        A: { handmade: 5, ordermade: 5, uchideno: 3 },
+        B: { handmade: 3, ordermade: 3, hanakoyomi: 5, littlebouquet: 5 },
+        C: { surprise: 15 },
+        D: { handmade: 2, ordermade: 2, hanakoyomi: 2, littlebouquet: 2, surprise: 1, uchideno: 1 }
+      },
+      q2: {
+        A: { handmade: 5, uchideno: 5 },
+        B: { ordermade: 5, hanakoyomi: 3 },
+        C: { hanakoyomi: 4, littlebouquet: 5 }
+      },
+      q3: {
+        A: { handmade: 4, littlebouquet: 3 },
+        B: { ordermade: 5 },
+        C: { ordermade: 4, hanakoyomi: 4 },
+        D: { hanakoyomi: 5 }
+      },
+      q4: {
+        A: { handmade: 5, ordermade: 2 },
+        B: { ordermade: 5, hanakoyomi: 2 },
+        C: { surprise: 5, littlebouquet: 2 },
+        D: { uchideno: 10 }
+      },
+      q5: {
+        A: { handmade: 4, littlebouquet: 3, surprise: 2, uchideno: 3 },
+        B: { ordermade: 3, hanakoyomi: 2 },
+        C: { ordermade: 4 },
+        D: { surprise: 5, littlebouquet: 2 }
+      },
+      q6: {
+        A: { handmade: 4, uchideno: 3 },
+        B: { ordermade: 3, hanakoyomi: 2 },
+        C: { ordermade: 4, hanakoyomi: 3 },
+        D: { surprise: 5, littlebouquet: 2 }
+      }
+    };
+
+    // ============================================
+    // 状態管理
+    // ============================================
+    const answers = {};
+
+    function startDiagnosis() {
+      goToScreen('q1');
+    }
+
+    function answerQ(q, value) {
+      answers[q] = value;
+      // 選択状態の視覚反映
+      const btn = event.target.closest('.option');
+      btn.parentElement.querySelectorAll('.option').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+
+      // 次の質問へ自動進行（0.4秒後）
+      setTimeout(() => {
+        if (q === 'q6') {
+          showJudging();
+        } else {
+          const next = 'q' + (parseInt(q[1]) + 1);
+          goToScreen(next);
+        }
+      }, 400);
+    }
+
+    function goToScreen(name) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      const target = document.querySelector(`[data-screen="${name}"]`);
+      if (target) {
+        target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function showJudging() {
+      goToScreen('judging');
+      setTimeout(() => {
+        const result = calculateResult();
+        showResult(result);
+      }, 1500);
+    }
+
+    function calculateResult() {
+      const scores = {
+        handmade: 0, ordermade: 0,
+        hanakoyomi: 0, littlebouquet: 0,
+        surprise: 0, uchideno: 0
+      };
+      Object.keys(answers).forEach(q => {
+        const value = answers[q];
+        const points = SCORING[q]?.[value] || {};
+        Object.keys(points).forEach(result => {
+          scores[result] += points[result];
+        });
+      });
+      // 最高点を返す
+      let topResult = 'handmade';
+      let topScore = 0;
+      Object.keys(scores).forEach(r => {
+        if (scores[r] > topScore) {
+          topScore = scores[r];
+          topResult = r;
+        }
+      });
+      console.log('診断スコア:', scores, '→', topResult);
+      return topResult;
+    }
+
+    function showResult(resultKey) {
+      const r = RESULTS[resultKey];
+      document.getElementById('resultName').textContent = r.name;
+      document.getElementById('resultTag').textContent = r.tag;
+      document.getElementById('resultDescription').textContent = r.description;
+      document.getElementById('resultBenefitTitle').textContent = r.benefitTitle;
+      document.getElementById('resultBenefitText').textContent = r.benefitText;
+      document.getElementById('ctaCourseLabel').textContent = r.courseLabel;
+      goToScreen('result');
+    }
+
+    function retake() {
+      Object.keys(answers).forEach(k => delete answers[k]);
+      document.querySelectorAll('.option.selected').forEach(o => o.classList.remove('selected'));
+      goToScreen('intro');
+    }
+  </script>
+
+</body>
+</html>
