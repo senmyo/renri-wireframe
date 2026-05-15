@@ -14,16 +14,12 @@
     <meta property="og:image" content="https://renri.jp/og-image.jpg">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://renri.jp/">
-    <!-- 画像 alt 例:「横浜・馬車道のアトリエで手作りされた結婚指輪」など、KWを含めた説明文を必ず付与 -->
-    <!-- 構造化データ: LocalBusiness は GTM 実装済み（2026/04 レポート参照）-->
+    <!-- 画像 alt 例:「横浜・馬車道のアトリエで手作りされた結婚指輪」-->
+    <!-- 構造化データ: LocalBusiness は GTM 実装済み。TOPには Service / Product / FAQ schema 追加推奨 -->
   -->
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
   <style>
-    /* ============================================
-       VARIABLES (course TOPs と統一)
-       ============================================ */
     :root {
       --gold: #555555;
       --gold-light: #777777;
@@ -55,1111 +51,1001 @@
       padding-top: 36px;
     }
 
-    /* ============================================
-       WIREFRAME ANNOTATION BAR (course TOPs と統一)
-       ============================================ */
+    /* WIREFRAME UI */
     .wireframe-bar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 9999;
-      background: #1a1a2e;
-      color: #fff;
-      padding: 8px 20px;
-      font-family: sans-serif;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+      background: #1a1a2e; color: #fff; padding: 8px 20px;
+      font-family: sans-serif; font-size: 12px;
+      display: flex; align-items: center; gap: 16px;
     }
     .wireframe-bar .badge {
-      background: #e94560;
-      color: #fff;
-      padding: 2px 10px;
-      border-radius: 3px;
-      font-weight: 700;
-      font-size: 11px;
-      letter-spacing: 0.5px;
+      background: #e94560; color: #fff; padding: 2px 10px;
+      border-radius: 3px; font-weight: 700; font-size: 11px;
     }
     .wireframe-bar .page-path { color: #a2d2ff; font-weight: 500; }
-
     .section-label {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: rgba(26, 26, 46, 0.85);
-      color: #a2d2ff;
-      font-family: sans-serif;
-      font-size: 11px;
-      padding: 3px 10px;
-      border-radius: 3px;
-      z-index: 10;
-      letter-spacing: 0.3px;
+      position: absolute; top: 12px; left: 12px;
+      background: rgba(26, 26, 46, 0.85); color: #a2d2ff;
+      font-family: sans-serif; font-size: 11px;
+      padding: 3px 10px; border-radius: 3px; z-index: 10;
     }
     .feedback-btn {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      z-index: 50;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      font-size: 12px;
-      color: #fff;
-      background: rgba(0,0,0,0.5);
-      border-radius: 20px;
-      text-decoration: none;
-      transition: background 0.3s ease;
+      position: absolute; top: 12px; right: 12px; z-index: 50;
+      padding: 6px 14px; font-size: 12px;
+      color: #fff; background: rgba(0,0,0,0.5);
+      border-radius: 20px; text-decoration: none;
     }
-    .feedback-btn:hover { background: rgba(0,0,0,0.75); }
-    .feedback-btn::before { content: "\270E"; font-size: 14px; }
 
-    /* ============================================
-       HEADER (SP最適化)
-       ============================================ */
+    /* HEADER */
     .header {
-      position: sticky;
-      top: 36px;
-      z-index: 100;
+      position: sticky; top: 36px; z-index: 100;
       background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border-light);
     }
     .header-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 14px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      max-width: 1200px; margin: 0 auto; padding: 14px 40px;
+      display: flex; align-items: center; justify-content: space-between;
     }
     .logo {
-      font-family: var(--serif-en);
-      font-size: 26px;
-      font-weight: 300;
-      letter-spacing: 4px;
-      color: var(--text-primary);
-      text-decoration: none;
+      font-family: var(--serif-en); font-size: 26px; font-weight: 300;
+      letter-spacing: 4px; color: var(--text-primary); text-decoration: none;
     }
     .nav { display: flex; gap: 24px; align-items: center; }
     .nav a {
-      font-size: 13px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      transition: var(--transition);
+      font-size: 13px; color: var(--text-secondary);
+      text-decoration: none; letter-spacing: 0.5px;
     }
     .nav a:hover { color: var(--gold); }
     .header-actions { display: flex; gap: 10px; align-items: center; }
     .header-reserve {
-      padding: 9px 18px;
-      background: var(--text-primary);
-      color: #fff;
-      font-size: 12px;
-      letter-spacing: 1.5px;
-      text-decoration: none;
-      border-radius: 2px;
-      transition: var(--transition);
+      padding: 9px 18px; background: var(--text-primary); color: #fff;
+      font-size: 12px; letter-spacing: 1.5px;
+      text-decoration: none; border-radius: 2px;
     }
-    .header-reserve:hover { background: var(--gold); }
-    .sp-menu-btn {
-      display: none;
-      width: 44px; height: 44px;
-      align-items: center; justify-content: center;
-      font-size: 20px;
-      color: var(--text-primary);
-      cursor: pointer;
-      background: none;
-      border: none;
-    }
+    .sp-menu-btn { display: none; }
 
-    /* ============================================
-       SECTION HEADING (course TOPs と統一)
-       ============================================ */
-    .section-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
-    .section-header {
-      text-align: center;
-      margin-bottom: 56px;
-    }
+    /* SECTION HEADER (course TOPs と統一) */
+    .section-inner { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+    .section-header { text-align: center; margin-bottom: 48px; }
     .section-header .en {
-      font-family: var(--serif-en);
-      font-size: 13px;
-      letter-spacing: 6px;
-      color: var(--text-light);
-      margin-bottom: 12px;
+      font-family: var(--serif-en); font-size: 13px;
+      letter-spacing: 6px; color: var(--text-light); margin-bottom: 12px;
     }
     .section-header h2 {
-      font-size: 24px;
-      font-weight: 300;
-      letter-spacing: 6px;
-      line-height: 1.7;
-      color: var(--text-primary);
+      font-size: 24px; font-weight: 300; letter-spacing: 6px;
+      line-height: 1.7; color: var(--text-primary);
     }
     .section-header .line {
-      width: 36px;
-      height: 1px;
-      background: var(--gold);
-      margin: 18px auto 0;
+      width: 36px; height: 1px; background: var(--gold); margin: 18px auto 0;
     }
     .section-header .desc {
-      font-size: 14px;
-      color: var(--text-secondary);
-      letter-spacing: 0.5px;
-      margin-top: 20px;
-      line-height: 2;
+      font-size: 14px; color: var(--text-secondary);
+      letter-spacing: 0.5px; margin-top: 20px; line-height: 2;
     }
 
-    /* ============================================
-       SECTION 1: HERO (minimal)
-       ============================================ */
+    /* HERO (minimal) */
     .hero {
-      position: relative;
-      height: 70vh;
-      min-height: 480px;
-      max-height: 720px;
+      position: relative; height: 70vh; min-height: 480px; max-height: 720px;
       background: linear-gradient(135deg, #b8b8b8 0%, #909090 50%, #707070 100%);
       overflow: hidden;
     }
     .hero::before {
-      content: '📷 メインビジュアル（完成指輪 or 制作シーン）';
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 14px;
-      font-family: sans-serif;
+      content: '📷 メインビジュアル'; position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255, 255, 255, 0.4); font-size: 14px; font-family: sans-serif;
     }
     .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
+      content: ''; position: absolute; inset: 0;
       background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.4) 100%);
     }
     .hero-copy {
-      position: absolute;
-      left: 0; right: 0;
-      bottom: 56px;
-      z-index: 2;
-      text-align: center;
-      color: #fff;
-      padding: 0 24px;
-      animation: heroFadeIn 1.4s ease-out 0.6s both;
+      position: absolute; left: 0; right: 0; bottom: 56px;
+      z-index: 2; text-align: center; color: #fff; padding: 0 24px;
     }
     .hero-en {
-      font-family: var(--serif-en);
-      font-size: 11px;
-      letter-spacing: 6px;
-      font-weight: 300;
-      margin-bottom: 12px;
-      opacity: 0.85;
+      font-family: var(--serif-en); font-size: 11px;
+      letter-spacing: 6px; margin-bottom: 12px; opacity: 0.85;
     }
-    .hero-main {
-      font-size: 18px;
-      font-weight: 300;
-      letter-spacing: 5px;
-      line-height: 1.9;
-    }
-    .hero-sub {
-      margin-top: 14px;
-      font-size: 12px;
-      letter-spacing: 4px;
-      opacity: 0.85;
-      font-weight: 300;
-    }
+    .hero-main { font-size: 18px; font-weight: 300; letter-spacing: 5px; line-height: 1.9; }
+    .hero-sub { margin-top: 14px; font-size: 12px; letter-spacing: 4px; opacity: 0.85; }
     .hero-scroll {
-      position: absolute;
-      bottom: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      color: rgba(255, 255, 255, 0.6);
-      font-family: var(--serif-en);
-      font-size: 10px;
-      letter-spacing: 3px;
+      position: absolute; bottom: 18px; left: 50%;
+      transform: translateX(-50%); z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.6); font-family: var(--serif-en);
+      font-size: 10px; letter-spacing: 3px;
     }
-    .hero-scroll::after {
-      content: '';
-      width: 1px;
-      height: 24px;
-      background: rgba(255, 255, 255, 0.4);
-    }
+    .hero-scroll::after { content: ''; width: 1px; height: 24px; background: rgba(255,255,255,0.4); }
 
-    /* ============================================
-       SECTION 2: ABOUT renri
-       ============================================ */
-    .about {
-      padding: 100px 40px;
-      background: var(--bg-white);
-    }
-    .about .section-inner { padding: 0; }
+    /* SECTION 2: CONCEPT */
+    .about { padding: 90px 40px; background: var(--bg-white); }
     .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-      max-width: 1100px;
-      margin: 0 auto;
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 56px; align-items: center;
     }
     .about-image {
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 4/5;
       background: linear-gradient(135deg, #c8c8c8, #a0a0a0);
-      border-radius: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(0,0,0,0.25);
-      font-family: sans-serif;
-      font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(0,0,0,0.25); font-size: 13px; font-family: sans-serif;
     }
     .about-text .en {
-      font-family: var(--serif-en);
-      font-size: 12px;
-      letter-spacing: 5px;
-      color: var(--text-light);
-      margin-bottom: 12px;
+      font-family: var(--serif-en); font-size: 12px;
+      letter-spacing: 5px; color: var(--text-light); margin-bottom: 12px;
     }
     .about-text h2 {
-      font-size: 22px;
-      font-weight: 300;
-      letter-spacing: 4px;
-      line-height: 2;
-      margin-bottom: 24px;
-      color: var(--text-primary);
+      font-size: 22px; font-weight: 300; letter-spacing: 4px;
+      line-height: 2; margin-bottom: 24px;
     }
     .about-text p {
-      font-size: 14px;
-      line-height: 2.4;
-      color: var(--text-secondary);
-      letter-spacing: 0.5px;
-      margin-bottom: 14px;
+      font-size: 14px; line-height: 2.3;
+      color: var(--text-secondary); letter-spacing: 0.5px; margin-bottom: 14px;
     }
     .about-more {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 18px;
-      font-size: 13px;
-      letter-spacing: 3px;
-      color: var(--text-primary);
+      display: inline-flex; gap: 10px; margin-top: 18px;
+      font-size: 13px; letter-spacing: 3px; color: var(--text-primary);
       text-decoration: none;
-      border-bottom: 1px solid var(--text-primary);
-      padding-bottom: 6px;
-      transition: var(--transition);
+      border-bottom: 1px solid var(--text-primary); padding-bottom: 6px;
     }
-    .about-more:hover { color: var(--gold); border-color: var(--gold); }
 
-    /* ============================================
-       SECTION 3: COURSES — 2大コースを対等に提示
-       (コンセプトの下に手作り・オーダーを並べる)
-       ============================================ */
-    .courses {
-      padding: 100px 40px;
-      background: var(--bg-cream);
+    /* SECTION 3: 見学会 BANNER */
+    .visit {
+      padding: 60px 40px; background: var(--bg-cream);
     }
-    .main-courses {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      max-width: 1100px;
-      margin: 0 auto 56px;
-    }
-    .main-course-card {
-      display: flex;
-      flex-direction: column;
+    .visit-inner {
+      max-width: 900px; margin: 0 auto;
+      display: flex; align-items: center; gap: 40px;
       background: var(--bg-white);
+      padding: 32px 36px; border-radius: 3px;
       border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 2px;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      transition: var(--transition);
     }
-    .main-course-card:hover {
-      box-shadow: var(--shadow-card);
-      transform: translateY(-3px);
+    .visit-icon {
+      width: 80px; height: 80px; flex-shrink: 0;
+      background: var(--bg-cream);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px;
     }
-    .main-course-image {
-      aspect-ratio: 4 / 3;
-      background: linear-gradient(135deg, #cccccc, #a0a0a0);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(0, 0, 0, 0.25);
-      font-size: 13px;
-      font-family: sans-serif;
-    }
-    .main-course-body {
-      padding: 32px 30px 36px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .main-course-body .en-label {
-      font-family: var(--serif-en);
-      font-size: 12px;
-      letter-spacing: 4px;
-      color: var(--text-light);
+    .visit-body { flex: 1; }
+    .visit-tag {
+      display: inline-block;
+      font-size: 11px; letter-spacing: 2px;
+      background: var(--gold); color: #fff;
+      padding: 3px 10px; border-radius: 2px;
       margin-bottom: 10px;
     }
+    .visit-body h3 { font-size: 18px; font-weight: 400; letter-spacing: 2px; margin-bottom: 8px; }
+    .visit-body p {
+      font-size: 13px; line-height: 1.9; color: var(--text-secondary);
+    }
+    .visit-cta {
+      flex-shrink: 0;
+      padding: 12px 28px;
+      border: 1px solid var(--text-primary);
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 13px; letter-spacing: 2px;
+      transition: var(--transition);
+    }
+    .visit-cta:hover { background: var(--text-primary); color: #fff; }
+
+    /* SECTION 4: 2 MAIN COURSES */
+    .courses { padding: 90px 40px; background: var(--bg-white); }
+    .main-courses {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 32px; max-width: 1100px; margin: 0 auto 48px;
+    }
+    .main-course-card {
+      background: var(--bg-white);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+      text-decoration: none; color: inherit;
+      transition: var(--transition);
+      display: flex; flex-direction: column;
+    }
+    .main-course-card:hover {
+      box-shadow: var(--shadow-card); transform: translateY(-3px);
+    }
+    .main-course-image {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #cccccc, #a0a0a0);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(0,0,0,0.25); font-size: 13px; font-family: sans-serif;
+    }
+    .main-course-body { padding: 28px 28px 32px; flex: 1; display: flex; flex-direction: column; }
+    .main-course-body .en-label {
+      font-family: var(--serif-en); font-size: 12px;
+      letter-spacing: 4px; color: var(--text-light); margin-bottom: 10px;
+    }
     .main-course-body h3 {
-      font-size: 22px;
-      letter-spacing: 4px;
-      font-weight: 400;
-      margin-bottom: 16px;
-      line-height: 1.6;
+      font-size: 20px; letter-spacing: 3px;
+      font-weight: 400; margin-bottom: 14px; line-height: 1.6;
     }
     .main-course-body .lead {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 2;
-      margin-bottom: 22px;
-      letter-spacing: 0.5px;
+      font-size: 13px; color: var(--text-secondary);
+      line-height: 2; margin-bottom: 18px;
     }
     .main-course-features {
-      list-style: none;
-      margin-bottom: 26px;
-      padding: 18px 0;
+      list-style: none; margin-bottom: 22px;
+      padding: 16px 0;
       border-top: 1px solid var(--border-light);
       border-bottom: 1px solid var(--border-light);
     }
     .main-course-features li {
-      font-size: 13px;
-      color: var(--text-secondary);
-      padding-left: 16px;
-      position: relative;
-      line-height: 2;
-      letter-spacing: 0.3px;
+      font-size: 12.5px; color: var(--text-secondary);
+      padding-left: 14px; position: relative; line-height: 2;
     }
     .main-course-features li::before {
-      content: '—';
-      position: absolute;
-      left: 0;
-      color: var(--gold);
+      content: '—'; position: absolute; left: 0; color: var(--gold);
     }
-    .main-course-body .btn-detail {
-      align-self: flex-start;
-      font-size: 13px;
-      letter-spacing: 3px;
+    .btn-detail-text {
+      align-self: flex-start; font-size: 13px; letter-spacing: 3px;
       color: var(--text-primary);
       border-bottom: 1px solid var(--text-primary);
-      padding-bottom: 6px;
-      transition: var(--transition);
-      margin-top: auto;
-    }
-    .main-course-card:hover .btn-detail {
-      color: var(--gold);
-      border-color: var(--gold);
+      padding-bottom: 6px; margin-top: auto;
     }
 
-    /* 迷ったら相談 (consult-box) */
+    /* 迷ったら相談ボックス */
     .consult-box {
-      max-width: 720px;
-      margin: 0 auto;
-      text-align: center;
-      padding: 40px 36px;
-      background: var(--bg-white);
-      border-radius: 3px;
-      border: 1px solid rgba(0,0,0,0.06);
+      max-width: 720px; margin: 0 auto;
+      text-align: center; padding: 36px 32px;
+      background: var(--bg-cream); border-radius: 3px;
     }
     .consult-box .en-label {
-      font-family: var(--serif-en);
-      font-size: 11px;
-      letter-spacing: 4px;
-      color: var(--text-light);
-      margin-bottom: 10px;
+      font-family: var(--serif-en); font-size: 11px;
+      letter-spacing: 4px; color: var(--text-light); margin-bottom: 8px;
     }
     .consult-box h4 {
-      font-size: 17px;
-      font-weight: 400;
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-      line-height: 1.7;
+      font-size: 16px; font-weight: 400; letter-spacing: 2px;
+      margin-bottom: 10px;
     }
     .consult-box .consult-desc {
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-bottom: 24px;
-      line-height: 2;
+      font-size: 13px; color: var(--text-secondary);
+      margin-bottom: 20px; line-height: 2;
     }
     .consult-box .consult-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 13px 36px;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      font-size: 13px;
-      letter-spacing: 2px;
-      text-decoration: none;
-      font-family: var(--serif-jp);
-      transition: var(--transition);
-      min-height: 44px;
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 32px;
+      border: 1px solid var(--gold); color: var(--gold);
+      font-size: 13px; letter-spacing: 2px;
+      text-decoration: none; min-height: 44px;
     }
-    .consult-box .consult-btn:hover {
-      background: var(--gold);
-      color: #fff;
-    }
+    .consult-box .consult-btn:hover { background: var(--gold); color: #fff; }
 
-    /* ============================================
-       SECTION 4: SERIES & SERVICE
-       オーダーメイドTOPのseries-cardパターン
-       ============================================ */
-    .series {
-      padding: 100px 40px;
-      background: var(--bg-white);
+    /* SECTION 5: 婚約指輪 */
+    .engagement { padding: 90px 40px; background: var(--bg-cream); }
+    .engagement-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 18px; max-width: 1100px; margin: 0 auto 32px;
     }
+    .eng-card {
+      background: var(--bg-white); text-decoration: none; color: inherit;
+      transition: var(--transition);
+    }
+    .eng-card:hover { box-shadow: var(--shadow-card); transform: translateY(-2px); }
+    .eng-card-image {
+      aspect-ratio: 1/1;
+      background: linear-gradient(135deg, #cccccc, #a0a0a0);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(0,0,0,0.25); font-size: 12px; font-family: sans-serif;
+    }
+    .eng-card-body { padding: 12px 14px 16px; }
+    .eng-card-title { font-size: 13px; letter-spacing: 1px; margin-bottom: 4px; }
+    .eng-card-price {
+      font-family: var(--serif-en); font-size: 12px;
+      color: var(--text-light); letter-spacing: 1px;
+    }
+    .engagement-cta { text-align: center; }
+
+    /* SECTION 6: SERIES & SERVICE (4 cards) */
+    .series { padding: 90px 40px; background: var(--bg-white); }
     .series-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      max-width: 1100px;
-      margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 20px; max-width: 1200px; margin: 0 auto;
     }
     .series-card {
       background: var(--bg-white);
       border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 2px;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
+      text-decoration: none; color: inherit;
       transition: var(--transition);
-      display: flex;
-      flex-direction: column;
+      display: flex; flex-direction: column;
     }
-    .series-card:hover {
-      box-shadow: var(--shadow-card);
-      transform: translateY(-3px);
-    }
+    .series-card:hover { box-shadow: var(--shadow-card); transform: translateY(-3px); }
     .series-card-image {
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 4/3;
       background: linear-gradient(135deg, #cccccc, #a8a8a8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(0,0,0,0.25);
-      font-size: 12px;
-      font-family: sans-serif;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(0,0,0,0.25); font-size: 12px; font-family: sans-serif;
     }
-    .series-card-body {
-      padding: 24px 22px 28px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
+    .series-card-body { padding: 18px 18px 22px; flex: 1; display: flex; flex-direction: column; }
     .series-card-body .en-label {
-      font-family: var(--serif-en);
-      font-size: 11px;
-      letter-spacing: 4px;
-      color: var(--text-light);
-      margin-bottom: 8px;
+      font-family: var(--serif-en); font-size: 10px;
+      letter-spacing: 3px; color: var(--text-light); margin-bottom: 6px;
     }
     .series-card-body h3 {
-      font-size: 18px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      line-height: 1.7;
-      margin-bottom: 8px;
+      font-size: 15px; font-weight: 500;
+      letter-spacing: 1.5px; line-height: 1.6; margin-bottom: 6px;
     }
     .series-card-body .series-tag {
-      font-size: 11px;
-      letter-spacing: 1px;
-      color: var(--gold);
-      background: var(--bg-cream);
-      padding: 4px 10px;
-      border-radius: 2px;
-      display: inline-block;
-      margin-bottom: 14px;
-      align-self: flex-start;
+      font-size: 10px; letter-spacing: 0.5px;
+      color: var(--gold); background: var(--bg-cream);
+      padding: 3px 8px; border-radius: 2px;
+      display: inline-block; margin-bottom: 10px; align-self: flex-start;
     }
     .series-card-body p {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 2;
-      letter-spacing: 0.3px;
+      font-size: 12px; color: var(--text-secondary); line-height: 1.8;
     }
 
-    /* ============================================
-       SECTION 5: VOICE
-       ============================================ */
-    .voice {
-      padding: 100px 40px;
-      background: var(--bg-cream);
+    /* SECTION 7: 素材・仕上げ・オプション (TABS) */
+    .materials { padding: 90px 40px; background: var(--bg-cream); }
+    .materials-inner { max-width: 1100px; margin: 0 auto; }
+    .tab-nav {
+      display: flex; justify-content: center; gap: 4px;
+      margin-bottom: 36px; border-bottom: 1px solid var(--border-light);
+      flex-wrap: wrap;
     }
+    .tab-btn {
+      padding: 14px 24px; font-family: var(--serif-jp);
+      font-size: 13px; letter-spacing: 2px;
+      background: none; border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-secondary); cursor: pointer;
+      transition: var(--transition); min-height: 44px;
+    }
+    .tab-btn:hover { color: var(--text-primary); }
+    .tab-btn.active {
+      color: var(--text-primary);
+      border-bottom-color: var(--gold);
+      font-weight: 500;
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .material-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    }
+    .material-item { text-align: center; }
+    .material-item-img {
+      aspect-ratio: 1/1; max-width: 140px; margin: 0 auto 14px;
+      background: linear-gradient(135deg, #d0d0d0, #aaa);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(0,0,0,0.25); font-size: 11px; font-family: sans-serif;
+    }
+    .material-item-name { font-size: 13px; letter-spacing: 1px; margin-bottom: 4px; }
+    .material-item-desc {
+      font-size: 11px; color: var(--text-light); line-height: 1.7;
+    }
+
+    /* SECTION 8: GALLERY (制作事例) */
+    .gallery { padding: 90px 40px; background: var(--bg-white); }
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; max-width: 1100px; margin: 0 auto 40px;
+    }
+    .gallery-card {
+      text-decoration: none; color: inherit;
+      transition: var(--transition);
+    }
+    .gallery-card:hover { transform: translateY(-2px); }
+    .gallery-card-image {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #cccccc, #a0a0a0);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(0,0,0,0.25); font-size: 12px; font-family: sans-serif;
+    }
+    .gallery-card-body { padding: 14px 4px; }
+    .gallery-card-meta {
+      display: flex; gap: 6px; margin-bottom: 6px;
+    }
+    .gallery-card-meta span {
+      font-size: 10px; letter-spacing: 1px;
+      padding: 2px 8px;
+      background: var(--bg-cream); color: var(--text-secondary);
+      border-radius: 2px;
+    }
+    .gallery-card-title {
+      font-size: 14px; letter-spacing: 1px;
+      line-height: 1.6; margin-bottom: 4px;
+    }
+    .gallery-card-desc {
+      font-size: 12px; color: var(--text-secondary);
+      line-height: 1.7;
+      display: -webkit-box; -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical; overflow: hidden;
+    }
+
+    /* SECTION 9: VOICE */
+    .voice { padding: 90px 40px; background: var(--bg-cream); }
     .voice-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      max-width: 1100px;
-      margin: 0 auto 40px;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; max-width: 1100px; margin: 0 auto 36px;
     }
     .voice-card {
-      background: var(--bg-white);
-      border-radius: 2px;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
+      background: var(--bg-white); text-decoration: none; color: inherit;
       transition: var(--transition);
     }
-    .voice-card:hover {
-      box-shadow: var(--shadow-card);
-      transform: translateY(-3px);
-    }
+    .voice-card:hover { box-shadow: var(--shadow-card); transform: translateY(-3px); }
     .voice-card-image {
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 4/3;
       background: linear-gradient(135deg, #cccccc, #a8a8a8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(0,0,0,0.25);
-      font-size: 12px;
-      font-family: sans-serif;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(0,0,0,0.25); font-size: 12px;
     }
-    .voice-card-body {
-      padding: 18px 20px 22px;
-    }
-    .voice-card-badges {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 10px;
-    }
+    .voice-card-body { padding: 16px 18px 20px; }
+    .voice-card-badges { display: flex; gap: 6px; margin-bottom: 10px; }
     .voice-card-badges .badge {
-      padding: 3px 10px;
-      font-size: 10px;
-      letter-spacing: 1px;
-      border-radius: 2px;
+      padding: 3px 10px; font-size: 10px;
+      letter-spacing: 1px; border-radius: 2px;
     }
-    .badge-handmade {
-      background: var(--bg-cream);
-      color: var(--text-primary);
-      border: 1px solid var(--border-light);
-    }
-    .badge-ordermade {
-      background: var(--text-primary);
-      color: #fff;
-    }
-    .badge-type {
-      background: var(--bg-cream);
-      color: var(--text-secondary);
-      border: 1px solid var(--border-light);
-    }
+    .badge-handmade { background: var(--bg-cream); color: var(--text-primary); border: 1px solid var(--border-light); }
+    .badge-ordermade { background: var(--text-primary); color: #fff; }
+    .badge-type { background: var(--bg-cream); color: var(--text-secondary); border: 1px solid var(--border-light); }
     .voice-card-title {
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      line-height: 1.7;
-      margin-bottom: 6px;
+      font-size: 14px; font-weight: 500; letter-spacing: 1px;
+      line-height: 1.7; margin-bottom: 6px;
     }
     .voice-card-excerpt {
-      font-size: 12px;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      font-size: 12px; color: var(--text-secondary); line-height: 1.8;
+      display: -webkit-box; -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical; overflow: hidden;
     }
 
-    /* ============================================
-       SECTION 6: GALLERY
-       ============================================ */
-    .gallery {
-      padding: 100px 40px;
-      background: var(--bg-white);
-    }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      max-width: 1100px;
-      margin: 0 auto 40px;
-    }
-    .gallery-item {
-      aspect-ratio: 1 / 1;
-      background: linear-gradient(135deg, #cccccc, #a8a8a8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(0,0,0,0.25);
-      font-size: 12px;
-      font-family: sans-serif;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .gallery-item:hover { opacity: 0.85; }
-
-    /* shared button */
-    .btn-outline {
-      display: inline-block;
-      padding: 14px 36px;
-      border: 1px solid var(--text-primary);
-      color: var(--text-primary);
-      font-size: 13px;
-      letter-spacing: 3px;
-      text-decoration: none;
-      transition: var(--transition);
-      background: transparent;
-    }
-    .btn-outline:hover {
-      background: var(--text-primary);
-      color: #fff;
-    }
-    .center { text-align: center; }
-
-    /* ============================================
-       SECTION 7: PROCESS (dark)
-       ============================================ */
-    .process {
-      padding: 100px 40px;
-      background: var(--bg-dark);
-      color: #fff;
-    }
+    /* SECTION 10: PROCESS */
+    .process { padding: 90px 40px; background: var(--bg-dark); color: #fff; }
     .process .section-header .en { color: rgba(255,255,255,0.5); }
     .process .section-header h2 { color: #fff; }
     .process .section-header .line { background: rgba(255,255,255,0.5); }
     .process .section-header .desc { color: rgba(255,255,255,0.65); }
+    .process-tabs {
+      display: flex; justify-content: center; gap: 4px;
+      margin-bottom: 36px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .process-tab-btn {
+      padding: 12px 24px;
+      font-family: var(--serif-jp); font-size: 13px;
+      letter-spacing: 2px;
+      background: none; border: none;
+      color: rgba(255,255,255,0.6);
+      border-bottom: 2px solid transparent;
+      cursor: pointer; min-height: 44px;
+    }
+    .process-tab-btn.active {
+      color: #fff;
+      border-bottom-color: rgba(255,255,255,0.7);
+    }
+    .process-panel { display: none; }
+    .process-panel.active { display: block; }
     .process-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      max-width: 1100px;
-      margin: 0 auto;
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 20px; max-width: 1100px; margin: 0 auto;
     }
-    .process-step {
-      text-align: center;
-    }
+    .process-step { text-align: center; }
     .process-step-num {
-      font-family: var(--serif-en);
-      font-size: 12px;
-      letter-spacing: 4px;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 12px;
+      font-family: var(--serif-en); font-size: 11px;
+      letter-spacing: 4px; color: rgba(255,255,255,0.5); margin-bottom: 12px;
     }
     .process-step-image {
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 1/1;
       background: linear-gradient(135deg, #555, #333);
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.3);
-      font-size: 12px;
-      font-family: sans-serif;
+      margin-bottom: 14px;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.3); font-size: 11px;
     }
-    .process-step-title {
-      font-size: 15px;
-      letter-spacing: 2px;
-      font-weight: 400;
-      margin-bottom: 8px;
-    }
-    .process-step-desc {
-      font-size: 12px;
-      color: rgba(255,255,255,0.65);
-      line-height: 1.9;
-    }
+    .process-step-title { font-size: 13px; letter-spacing: 1.5px; margin-bottom: 6px; }
+    .process-step-desc { font-size: 11px; color: rgba(255,255,255,0.65); line-height: 1.8; }
 
-    /* ============================================
-       SECTION 8: ACCESS
-       ============================================ */
-    .access {
-      padding: 100px 40px;
+    /* SECTION 11: PRICING */
+    .pricing { padding: 90px 40px; background: var(--bg-white); }
+    .pricing-formula {
+      max-width: 800px; margin: 0 auto 40px;
+      text-align: center;
+      padding: 24px 32px;
       background: var(--bg-cream);
+      border-radius: 3px;
     }
+    .pricing-formula-label {
+      font-family: var(--serif-en); font-size: 11px;
+      letter-spacing: 4px; color: var(--text-light); margin-bottom: 10px;
+    }
+    .pricing-formula-text {
+      font-size: 15px; letter-spacing: 1.5px; line-height: 1.8;
+    }
+    .pricing-formula-text strong {
+      font-family: var(--serif-en); font-size: 22px;
+      font-weight: 400; margin: 0 4px;
+    }
+    .pricing-samples-tabs {
+      display: flex; justify-content: center; gap: 4px;
+      margin: 0 auto 28px; border-bottom: 1px solid var(--border-light);
+      max-width: 800px; flex-wrap: wrap;
+    }
+    .pricing-tab-btn {
+      padding: 12px 18px; font-family: var(--serif-jp);
+      font-size: 12px; letter-spacing: 1.5px;
+      background: none; border: none;
+      color: var(--text-secondary);
+      border-bottom: 2px solid transparent;
+      cursor: pointer; min-height: 44px;
+    }
+    .pricing-tab-btn.active {
+      color: var(--text-primary); border-bottom-color: var(--gold);
+    }
+    .pricing-panel { display: none; }
+    .pricing-panel.active { display: block; }
+    .pricing-samples {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+      max-width: 1100px; margin: 0 auto 32px;
+    }
+    .pricing-sample {
+      background: var(--bg-cream);
+      border-radius: 2px; overflow: hidden;
+    }
+    .pricing-sample-image {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #d0d0d0, #aaa);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(0,0,0,0.25); font-size: 11px;
+    }
+    .pricing-sample-body { padding: 14px 16px 18px; }
+    .pricing-sample-name {
+      font-size: 13px; letter-spacing: 1px; margin-bottom: 6px;
+    }
+    .pricing-sample-prices {
+      font-family: var(--serif-en); font-size: 12px;
+      color: var(--text-secondary); letter-spacing: 0.5px;
+      line-height: 1.7;
+    }
+    .pricing-sample-prices strong {
+      color: var(--text-primary); font-weight: 500;
+    }
+    .pricing-cta { text-align: center; }
+
+    /* SECTION 12: AFTERCARE */
+    .aftercare { padding: 90px 40px; background: var(--bg-cream); }
+    .aftercare-hero {
+      max-width: 820px; margin: 0 auto 32px; text-align: center;
+    }
+    .aftercare-tag {
+      display: inline-block;
+      font-family: var(--serif-en);
+      font-size: 12px; letter-spacing: 4px;
+      color: var(--gold);
+      padding: 4px 16px;
+      border: 1px solid var(--gold); border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .aftercare-lead {
+      font-size: 14px; color: var(--text-secondary); line-height: 2;
+    }
+    .aftercare-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px; max-width: 1100px; margin: 0 auto 32px;
+    }
+    .aftercare-item {
+      background: var(--bg-white); padding: 24px 20px;
+      text-align: center; border-radius: 3px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .aftercare-item-icon {
+      width: 48px; height: 48px;
+      margin: 0 auto 14px;
+      background: var(--bg-cream); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+    .aftercare-item-title {
+      font-size: 14px; letter-spacing: 1px; margin-bottom: 6px;
+    }
+    .aftercare-item-cost {
+      font-family: var(--serif-en); font-size: 11px;
+      color: var(--gold); letter-spacing: 1px; margin-bottom: 8px;
+    }
+    .aftercare-item-desc {
+      font-size: 11px; color: var(--text-secondary); line-height: 1.7;
+    }
+    .aftercare-cta { text-align: center; }
+
+    /* SECTION 13: ACCESS */
+    .access { padding: 90px 40px; background: var(--bg-white); }
     .access-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 56px;
-      max-width: 1100px;
-      margin: 0 auto;
-      align-items: center;
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 56px; align-items: center;
     }
     .access-map {
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 4/3;
       background: linear-gradient(135deg, #d8d8d8, #b8b8b8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(0,0,0,0.25);
-      font-size: 13px;
-      font-family: sans-serif;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(0,0,0,0.25); font-size: 13px; font-family: sans-serif;
     }
     .access-text .en {
-      font-family: var(--serif-en);
-      font-size: 12px;
-      letter-spacing: 5px;
-      color: var(--text-light);
-      margin-bottom: 12px;
+      font-family: var(--serif-en); font-size: 12px;
+      letter-spacing: 5px; color: var(--text-light); margin-bottom: 12px;
     }
     .access-text h2 {
-      font-size: 22px;
-      font-weight: 300;
-      letter-spacing: 4px;
-      line-height: 1.8;
-      margin-bottom: 24px;
+      font-size: 22px; font-weight: 300; letter-spacing: 4px;
+      line-height: 1.8; margin-bottom: 22px;
     }
-    .access-info {
-      font-size: 13px;
-      line-height: 2;
-      color: var(--text-secondary);
-    }
-    .access-info dt {
-      font-size: 11px;
-      color: var(--text-light);
-      letter-spacing: 2px;
-      margin-top: 14px;
-    }
+    .access-info { font-size: 13px; line-height: 2; color: var(--text-secondary); }
+    .access-info dt { font-size: 11px; color: var(--text-light); letter-spacing: 2px; margin-top: 12px; }
     .access-info dt:first-child { margin-top: 0; }
     .access-info dd { color: var(--text-primary); }
     .access-more {
-      display: inline-flex;
-      gap: 10px;
-      margin-top: 24px;
-      font-size: 13px;
-      letter-spacing: 3px;
-      color: var(--text-primary);
+      display: inline-flex; gap: 10px; margin-top: 22px;
+      font-size: 13px; letter-spacing: 3px; color: var(--text-primary);
       text-decoration: none;
-      border-bottom: 1px solid var(--text-primary);
-      padding-bottom: 6px;
-      transition: var(--transition);
+      border-bottom: 1px solid var(--text-primary); padding-bottom: 6px;
     }
-    .access-more:hover { color: var(--gold); border-color: var(--gold); }
 
-    /* ============================================
-       SECTION 9: INFO (Blog + FAQ)
-       ============================================ */
-    .info {
-      padding: 100px 40px;
-      background: var(--bg-white);
+    /* SECTION 14: BLOG */
+    .blog-section { padding: 90px 40px; background: var(--bg-cream); }
+    .blog-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; max-width: 1100px; margin: 0 auto 36px;
     }
-    .info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 56px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .info-block h3 {
-      font-size: 18px;
-      font-weight: 400;
-      letter-spacing: 4px;
-      margin-bottom: 8px;
-    }
-    .info-block .en {
-      font-family: var(--serif-en);
-      font-size: 11px;
-      letter-spacing: 4px;
-      color: var(--text-light);
-      margin-bottom: 24px;
-      display: block;
-    }
-    .blog-list, .faq-list { list-style: none; }
-    .blog-list li, .faq-list li {
-      padding: 16px 0;
-      border-bottom: 1px solid var(--border-light);
-    }
-    .blog-list li a, .faq-list li a {
-      color: var(--text-primary);
-      text-decoration: none;
-      font-size: 13px;
-      letter-spacing: 0.5px;
-      line-height: 1.8;
-      display: flex;
-      gap: 16px;
-      align-items: baseline;
-      min-height: 44px;
+    .blog-card {
+      background: var(--bg-white); text-decoration: none; color: inherit;
       transition: var(--transition);
     }
-    .blog-list li a:hover, .faq-list li a:hover { color: var(--gold); }
-    .blog-list .date {
-      font-family: var(--serif-en);
-      font-size: 11px;
-      color: var(--text-light);
-      letter-spacing: 1px;
-      flex-shrink: 0;
+    .blog-card:hover { box-shadow: var(--shadow-card); transform: translateY(-2px); }
+    .blog-card-image {
+      aspect-ratio: 16/10;
+      background: linear-gradient(135deg, #cccccc, #a8a8a8);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(0,0,0,0.25); font-size: 12px;
     }
-    .faq-list .q {
-      font-family: var(--serif-en);
-      font-size: 14px;
-      color: var(--text-light);
-      letter-spacing: 1px;
-      flex-shrink: 0;
+    .blog-card-body { padding: 16px 18px 20px; }
+    .blog-card-date {
+      font-family: var(--serif-en); font-size: 11px;
+      color: var(--text-light); letter-spacing: 1px; margin-bottom: 8px;
     }
-    .info-more {
-      margin-top: 20px;
-      font-size: 12px;
-      letter-spacing: 3px;
-      color: var(--text-primary);
-      text-decoration: none;
-      border-bottom: 1px solid var(--text-primary);
-      padding-bottom: 4px;
-      display: inline-block;
-      transition: var(--transition);
+    .blog-card-title {
+      font-size: 14px; letter-spacing: 0.5px; line-height: 1.7;
     }
-    .info-more:hover { color: var(--gold); border-color: var(--gold); }
+    .blog-cta { text-align: center; }
 
-    /* ============================================
-       SECTION 10: BOTTOM CTA (consult-cta pattern)
-       ============================================ */
-    .bottom-cta {
-      padding: 100px 40px;
-      background: var(--bg-cream);
+    /* SECTION 15: FAQ (アコーディオン Q+A on page) */
+    .faq { padding: 90px 40px; background: var(--bg-white); }
+    .faq-list {
+      max-width: 860px; margin: 0 auto;
     }
-    .bottom-cta-inner {
-      max-width: 760px;
-      margin: 0 auto;
-      text-align: center;
-      padding: 56px 40px;
-      background: var(--bg-white);
-      border-radius: 3px;
-      border: 1px solid rgba(0,0,0,0.06);
-    }
-    .bottom-cta-en {
-      font-family: var(--serif-en);
-      font-size: 12px;
-      letter-spacing: 5px;
-      color: var(--text-light);
-      margin-bottom: 14px;
-    }
-    .bottom-cta-inner h2 {
-      font-size: 20px;
-      font-weight: 400;
-      letter-spacing: 4px;
-      line-height: 1.9;
-      margin-bottom: 14px;
-    }
-    .bottom-cta-inner p {
-      font-size: 13px;
-      color: var(--text-secondary);
-      letter-spacing: 0.5px;
-      line-height: 2;
+    .faq-cat {
       margin-bottom: 32px;
     }
-    .bottom-cta-buttons {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
+    .faq-cat-title {
+      font-family: var(--serif-en); font-size: 12px;
+      letter-spacing: 4px; color: var(--gold);
+      margin-bottom: 14px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-light);
     }
-    .btn-primary {
-      padding: 14px 36px;
-      background: var(--text-primary);
-      color: #fff;
-      font-size: 13px;
-      letter-spacing: 3px;
+    .faq-item {
+      border-bottom: 1px solid var(--border-light);
+    }
+    .faq-item summary {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 18px 0; cursor: pointer;
+      font-size: 14px; letter-spacing: 0.5px; line-height: 1.7;
+      list-style: none; position: relative;
+      min-height: 44px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::before {
+      content: 'Q.'; flex-shrink: 0;
+      font-family: var(--serif-en); font-size: 16px;
+      color: var(--gold); letter-spacing: 0.5px;
+    }
+    .faq-item summary::after {
+      content: '+'; position: absolute; right: 0; top: 18px;
+      font-size: 18px; color: var(--text-light);
+      transition: var(--transition);
+    }
+    .faq-item[open] summary::after { content: '−'; }
+    .faq-item .answer {
+      padding: 0 0 22px 36px;
+      font-size: 13px; line-height: 2; color: var(--text-secondary);
+    }
+    .faq-item .answer::before {
+      content: 'A. ';
+      color: var(--gold); font-family: var(--serif-en);
+      font-size: 15px; margin-right: 4px;
+    }
+
+    /* SECTION 16: GLOSSARY (用語集) */
+    .glossary { padding: 90px 40px; background: var(--bg-cream); }
+    .glossary-keywords {
+      max-width: 1000px; margin: 24px auto 32px;
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+    }
+    .keyword-chip {
+      padding: 8px 16px;
+      background: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      font-size: 12px; letter-spacing: 0.5px;
+      color: var(--text-secondary);
       text-decoration: none;
       transition: var(--transition);
-      border-radius: 2px;
-      min-height: 44px;
-      display: inline-flex;
-      align-items: center;
+      min-height: 36px;
+      display: inline-flex; align-items: center;
     }
-    .btn-primary:hover { background: var(--gold); }
+    .keyword-chip:hover {
+      border-color: var(--gold); color: var(--gold);
+    }
+    .glossary-intro {
+      max-width: 760px; margin: 0 auto;
+      padding: 28px 32px;
+      background: var(--bg-white); border-radius: 3px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .glossary-intro h3 {
+      font-size: 16px; letter-spacing: 2px; margin-bottom: 12px;
+    }
+    .glossary-intro p {
+      font-size: 13px; color: var(--text-secondary);
+      line-height: 2; letter-spacing: 0.3px;
+    }
+    .glossary-cta { text-align: center; margin-top: 24px; }
 
-    /* ============================================
-       FOOTER
-       ============================================ */
-    .footer {
-      padding: 60px 40px;
-      text-align: center;
-      background: #f5f5f5;
-      border-top: 1px solid #cccccc;
-      color: #666;
+    /* SECTION 17: BOTTOM CTA */
+    .bottom-cta { padding: 80px 40px; background: var(--bg-dark); color: #fff; }
+    .bottom-cta-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+    .bottom-cta .en {
+      font-family: var(--serif-en); font-size: 12px;
+      letter-spacing: 5px; opacity: 0.6; margin-bottom: 14px;
     }
-    .footer-sns {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 30px;
+    .bottom-cta h2 {
+      font-size: 22px; font-weight: 300; letter-spacing: 4px;
+      line-height: 1.9; margin-bottom: 14px;
     }
-    .footer-sns a {
-      width: 40px;
-      height: 40px;
-      border: 1px solid #999;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .bottom-cta p {
+      font-size: 13px; color: rgba(255,255,255,0.65);
+      letter-spacing: 0.5px; margin-bottom: 32px; line-height: 2;
+    }
+    .bottom-cta-buttons {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn-light {
+      padding: 14px 36px; background: #fff;
+      color: var(--text-primary); font-size: 13px; letter-spacing: 3px;
+      text-decoration: none; border-radius: 2px; min-height: 44px;
+      display: inline-flex; align-items: center;
+    }
+    .btn-light-outline {
+      padding: 14px 36px; background: transparent;
+      color: #fff; border: 1px solid rgba(255,255,255,0.5);
+      font-size: 13px; letter-spacing: 3px;
+      text-decoration: none; border-radius: 2px; min-height: 44px;
+      display: inline-flex; align-items: center;
+    }
+
+    /* shared outline button */
+    .btn-outline {
+      display: inline-block; padding: 13px 32px;
+      border: 1px solid var(--text-primary);
+      color: var(--text-primary);
+      font-size: 13px; letter-spacing: 3px;
       text-decoration: none;
-      color: #999;
-      font-size: 14px;
+      transition: var(--transition);
+      min-height: 44px; line-height: 1.6;
+    }
+    .btn-outline:hover { background: var(--text-primary); color: #fff; }
+    .center { text-align: center; }
+
+    /* FOOTER */
+    .footer {
+      padding: 60px 40px; text-align: center;
+      background: #f5f5f5; border-top: 1px solid #cccccc; color: #666;
+    }
+    .footer-sns { display: flex; justify-content: center; gap: 20px; margin-bottom: 24px; }
+    .footer-sns a {
+      width: 40px; height: 40px;
+      border: 1px solid #999; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; color: #999; font-size: 14px;
     }
     .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px 24px;
-      margin-bottom: 16px;
-      font-size: 13px;
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 12px 24px; margin-bottom: 16px; font-size: 13px;
     }
     .footer-links a { color: #666; text-decoration: none; }
     .footer-logo {
-      margin-top: 24px;
-      font-size: 24px;
-      letter-spacing: 6px;
-      font-family: var(--serif-en);
-      font-weight: 300;
-      margin-bottom: 8px;
+      margin-top: 24px; font-size: 24px; letter-spacing: 6px;
+      font-family: var(--serif-en); font-weight: 300; margin-bottom: 8px;
     }
     .footer-copy { font-size: 12px; letter-spacing: 1px; color: #999; }
 
-    /* ============================================
-       SP FLOATING CTA
-       ============================================ */
+    /* SP FLOATING CTA */
     .sp-floating-cta { display: none; }
 
-    /* ============================================
-       ANIMATIONS
-       ============================================ */
-    @keyframes heroFadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* ANIMATIONS */
     .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
+      opacity: 0; transform: translateY(20px);
       transition: opacity 0.7s ease-out, transform 0.7s ease-out;
     }
-    .fade-in.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .fade-in.is-visible { opacity: 1; transform: translateY(0); }
     .fade-in-d1 { transition-delay: 0.15s; }
     .fade-in-d2 { transition-delay: 0.3s; }
-    .fade-in-d3 { transition-delay: 0.45s; }
     @media (prefers-reduced-motion: reduce) {
-      .hero-copy { animation: none; }
       .fade-in { opacity: 1; transform: none; transition: none; }
     }
 
     /* ============================================
-       RESPONSIVE — TABLET (≤960px)
+       RESPONSIVE — TABLET ≤960px
        ============================================ */
     @media (max-width: 960px) {
-      .about-content,
-      .access-content,
-      .info-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-content, .access-content { grid-template-columns: 1fr; gap: 36px; }
+      .main-courses { grid-template-columns: 1fr; gap: 18px; }
+      .engagement-grid { grid-template-columns: repeat(2, 1fr); }
       .series-cards { grid-template-columns: repeat(2, 1fr); }
+      .material-grid { grid-template-columns: repeat(3, 1fr); }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
       .voice-grid { grid-template-columns: repeat(2, 1fr); }
-      .gallery-grid { grid-template-columns: repeat(3, 1fr); }
-      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+      .process-steps { grid-template-columns: repeat(3, 1fr); }
+      .aftercare-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-samples { grid-template-columns: repeat(2, 1fr); }
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     /* ============================================
-       RESPONSIVE — SP (≤768px)
-       ※ 90%以上のユーザーがモバイル。ここが本番。
+       RESPONSIVE — SP ≤768px (90% users)
        ============================================ */
     @media (max-width: 768px) {
       body { padding-top: 36px; padding-bottom: 60px; }
-
-      /* HEADER */
       .header-inner { padding: 10px 16px; }
       .logo { font-size: 22px; letter-spacing: 3px; }
       .nav { display: none; }
-      .header-actions { gap: 6px; }
       .header-reserve { padding: 8px 12px; font-size: 11px; letter-spacing: 1px; }
-      .sp-menu-btn { display: flex; }
+      .sp-menu-btn {
+        display: flex; width: 44px; height: 44px;
+        align-items: center; justify-content: center;
+        font-size: 20px; color: var(--text-primary);
+        cursor: pointer; background: none; border: none;
+      }
 
-      /* HERO */
-      .hero { height: calc(100vh - 100px); min-height: 480px; max-height: 720px; }
+      .hero { height: calc(100vh - 100px); }
       .hero-copy { bottom: 44px; padding: 0 20px; }
       .hero-en { font-size: 10px; letter-spacing: 4px; margin-bottom: 10px; }
-      .hero-main { font-size: 15px; letter-spacing: 3px; line-height: 2; }
+      .hero-main { font-size: 15px; letter-spacing: 3px; }
       .hero-sub { font-size: 10.5px; letter-spacing: 3px; margin-top: 10px; }
       .hero-scroll { display: none; }
 
-      /* COMMON section padding */
-      .about, .courses, .series, .voice, .gallery,
-      .process, .access, .info, .bottom-cta { padding: 56px 20px; }
+      .about, .visit, .courses, .engagement, .series,
+      .materials, .gallery, .voice, .process, .pricing,
+      .aftercare, .access, .blog-section, .faq, .glossary { padding: 50px 20px; }
+      .bottom-cta { padding: 56px 20px; }
 
-      /* Section header */
-      .section-header { margin-bottom: 32px; }
+      .section-header { margin-bottom: 28px; }
       .section-header .en { font-size: 11px; letter-spacing: 4px; }
       .section-header h2 { font-size: 18px; letter-spacing: 4px; line-height: 1.8; }
-      .section-header .desc { font-size: 13px; margin-top: 16px; }
+      .section-header .desc { font-size: 12.5px; margin-top: 14px; line-height: 1.9; }
 
       /* ABOUT */
       .about-content { gap: 24px; }
-      .about-image { aspect-ratio: 4 / 3; }
-      .about-text .en { font-size: 11px; letter-spacing: 4px; }
-      .about-text h2 { font-size: 18px; letter-spacing: 3px; line-height: 1.9; margin-bottom: 18px; }
-      .about-text p { font-size: 13px; line-height: 2.2; }
-      .about-more { font-size: 12px; letter-spacing: 2px; }
+      .about-image { aspect-ratio: 4/3; }
+      .about-text h2 { font-size: 18px; letter-spacing: 3px; line-height: 1.9; margin-bottom: 16px; }
+      .about-text p { font-size: 13px; line-height: 2.1; }
 
-      /* COURSES (main-course-card 2大コース) */
-      .main-courses { grid-template-columns: 1fr; gap: 20px; margin-bottom: 36px; }
-      .main-course-body { padding: 22px 20px 26px; }
-      .main-course-body .en-label { font-size: 11px; letter-spacing: 3px; }
-      .main-course-body h3 { font-size: 18px; letter-spacing: 3px; margin-bottom: 12px; }
-      .main-course-body .lead { font-size: 13px; line-height: 1.9; margin-bottom: 16px; }
-      .main-course-features { padding: 14px 0; margin-bottom: 20px; }
-      .main-course-features li { font-size: 12px; line-height: 1.9; padding-left: 14px; }
-      .main-course-body .btn-detail { font-size: 12px; letter-spacing: 2px; }
+      /* 見学会 */
+      .visit { padding: 28px 16px; }
+      .visit-inner { flex-direction: column; gap: 18px; padding: 22px 18px; text-align: center; }
+      .visit-icon { width: 56px; height: 56px; font-size: 24px; }
+      .visit-body h3 { font-size: 16px; }
+      .visit-body p { font-size: 12px; }
+      .visit-cta { padding: 10px 22px; font-size: 12px; min-height: 44px; display: inline-flex; align-items: center; }
 
-      .consult-box { padding: 28px 20px; }
-      .consult-box .en-label { font-size: 10px; letter-spacing: 3px; }
-      .consult-box h4 { font-size: 15px; letter-spacing: 1.5px; margin-bottom: 10px; line-height: 1.7; }
-      .consult-box .consult-desc { font-size: 12px; line-height: 1.9; margin-bottom: 20px; }
-      .consult-box .consult-btn { padding: 12px 24px; font-size: 12px; letter-spacing: 1.5px; }
+      /* COURSES */
+      .main-course-body { padding: 20px 18px 24px; }
+      .main-course-body h3 { font-size: 17px; letter-spacing: 2px; margin-bottom: 10px; }
+      .main-course-body .lead { font-size: 12.5px; line-height: 1.9; margin-bottom: 14px; }
+      .main-course-features { padding: 12px 0; margin-bottom: 16px; }
+      .main-course-features li { font-size: 11.5px; line-height: 1.9; }
+      .btn-detail-text { font-size: 12px; letter-spacing: 2px; }
+      .consult-box { padding: 24px 18px; }
+      .consult-box h4 { font-size: 14px; letter-spacing: 1.5px; }
+      .consult-box .consult-desc { font-size: 12px; }
+      .consult-box .consult-btn { padding: 11px 22px; font-size: 12px; letter-spacing: 1.5px; }
 
-      /* SERIES (single column SP) */
-      .series-cards { grid-template-columns: 1fr; gap: 16px; }
-      .series-card { flex-direction: row; align-items: stretch; }
-      .series-card-image { flex: 0 0 40%; aspect-ratio: auto; }
-      .series-card-body { padding: 14px 14px 16px; }
-      .series-card-body .en-label { font-size: 10px; letter-spacing: 2px; }
-      .series-card-body h3 { font-size: 15px; letter-spacing: 1px; margin-bottom: 4px; }
-      .series-card-body .series-tag { font-size: 10px; padding: 2px 6px; margin-bottom: 8px; }
-      .series-card-body p { font-size: 11px; line-height: 1.7; }
+      /* ENGAGEMENT */
+      .engagement-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .eng-card-body { padding: 10px; }
+      .eng-card-title { font-size: 12px; }
+      .eng-card-price { font-size: 11px; }
 
-      /* VOICE (2 col SP) */
-      .voice-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 28px; }
-      .voice-card-body { padding: 12px 14px 14px; }
-      .voice-card-badges { gap: 4px; margin-bottom: 8px; }
-      .voice-card-badges .badge { font-size: 9px; padding: 2px 6px; letter-spacing: 0.5px; }
-      .voice-card-title { font-size: 12px; letter-spacing: 0.5px; line-height: 1.6; }
-      .voice-card-excerpt { font-size: 10px; line-height: 1.7; }
+      /* SERIES */
+      .series-cards { grid-template-columns: 1fr; gap: 14px; }
+      .series-card { flex-direction: row; }
+      .series-card-image { flex: 0 0 38%; aspect-ratio: auto; }
+      .series-card-body { padding: 12px 14px 14px; }
+      .series-card-body h3 { font-size: 14px; letter-spacing: 1px; }
+      .series-card-body p { font-size: 11px; }
 
-      /* GALLERY (2 col SP) */
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 28px; }
+      /* MATERIALS TABS */
+      .tab-nav { gap: 0; }
+      .tab-btn { padding: 11px 14px; font-size: 12px; letter-spacing: 1px; }
+      .material-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .material-item-img { max-width: 90px; }
+      .material-item-name { font-size: 12px; }
+      .material-item-desc { font-size: 10.5px; }
+
+      /* GALLERY */
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .gallery-card-body { padding: 10px 4px; }
+      .gallery-card-title { font-size: 12px; line-height: 1.6; }
+      .gallery-card-desc { font-size: 11px; line-height: 1.6; }
+      .gallery-card-meta span { font-size: 9px; padding: 1px 6px; }
+
+      /* VOICE */
+      .voice-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .voice-card-body { padding: 12px 14px; }
+      .voice-card-title { font-size: 12px; letter-spacing: 0.5px; }
+      .voice-card-excerpt { font-size: 11px; }
+      .voice-card-badges .badge { font-size: 9px; padding: 2px 6px; }
 
       /* PROCESS */
-      .process-steps { grid-template-columns: 1fr 1fr; gap: 20px; }
-      .process-step-num { font-size: 11px; letter-spacing: 3px; margin-bottom: 8px; }
-      .process-step-image { margin-bottom: 12px; }
-      .process-step-title { font-size: 13px; letter-spacing: 1px; }
-      .process-step-desc { font-size: 11px; line-height: 1.8; }
+      .process-tabs { padding: 0 8px; }
+      .process-tab-btn { padding: 11px 16px; font-size: 12px; letter-spacing: 1.5px; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .process-step-num { font-size: 10px; }
+      .process-step-title { font-size: 12px; }
+      .process-step-desc { font-size: 10.5px; }
+
+      /* PRICING */
+      .pricing-formula { padding: 18px 20px; }
+      .pricing-formula-text { font-size: 13px; line-height: 1.8; }
+      .pricing-formula-text strong { font-size: 18px; }
+      .pricing-tab-btn { padding: 10px 12px; font-size: 11px; letter-spacing: 1px; }
+      .pricing-samples { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .pricing-sample-body { padding: 10px 12px 14px; }
+      .pricing-sample-name { font-size: 11.5px; }
+      .pricing-sample-prices { font-size: 10.5px; }
+
+      /* AFTERCARE */
+      .aftercare-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .aftercare-item { padding: 18px 14px; }
+      .aftercare-item-icon { width: 40px; height: 40px; font-size: 18px; }
+      .aftercare-item-title { font-size: 13px; }
+      .aftercare-item-cost { font-size: 10px; }
+      .aftercare-item-desc { font-size: 10.5px; }
 
       /* ACCESS */
       .access-content { gap: 24px; }
-      .access-text .en { font-size: 11px; letter-spacing: 4px; }
-      .access-text h2 { font-size: 18px; letter-spacing: 3px; line-height: 1.7; margin-bottom: 18px; }
-      .access-info { font-size: 12px; }
+      .access-text h2 { font-size: 18px; letter-spacing: 3px; }
+      .access-info { font-size: 12.5px; }
 
-      /* INFO */
-      .info-grid { gap: 32px; }
-      .info-block h3 { font-size: 16px; letter-spacing: 3px; }
-      .info-block .en { font-size: 10px; }
-      .blog-list li, .faq-list li { padding: 14px 0; }
-      .blog-list li a, .faq-list li a { font-size: 12px; gap: 10px; }
-      .blog-list .date, .faq-list .q { font-size: 10px; }
+      /* BLOG */
+      .blog-grid { grid-template-columns: 1fr; gap: 14px; }
+      .blog-card { display: flex; }
+      .blog-card-image { flex: 0 0 36%; aspect-ratio: auto; }
+      .blog-card-body { padding: 12px 14px; }
+      .blog-card-date { font-size: 10px; margin-bottom: 4px; }
+      .blog-card-title { font-size: 12.5px; line-height: 1.6; }
+
+      /* FAQ */
+      .faq-cat { margin-bottom: 24px; }
+      .faq-cat-title { font-size: 11px; letter-spacing: 3px; }
+      .faq-item summary { font-size: 13px; padding: 14px 0; padding-right: 24px; gap: 10px; }
+      .faq-item summary::before { font-size: 14px; }
+      .faq-item summary::after { top: 14px; font-size: 16px; }
+      .faq-item .answer { padding: 0 0 16px 28px; font-size: 12px; line-height: 1.9; }
+
+      /* GLOSSARY */
+      .glossary-keywords { gap: 6px; margin: 18px auto 24px; }
+      .keyword-chip { padding: 6px 12px; font-size: 11px; min-height: 30px; }
+      .glossary-intro { padding: 20px 18px; }
+      .glossary-intro h3 { font-size: 14px; letter-spacing: 1.5px; }
+      .glossary-intro p { font-size: 12px; line-height: 1.9; }
 
       /* BOTTOM CTA */
-      .bottom-cta-inner { padding: 36px 20px; }
-      .bottom-cta-inner h2 { font-size: 16px; letter-spacing: 3px; }
-      .bottom-cta-inner p { font-size: 12px; margin-bottom: 24px; }
+      .bottom-cta h2 { font-size: 17px; letter-spacing: 3px; }
+      .bottom-cta p { font-size: 12px; margin-bottom: 24px; }
       .bottom-cta-buttons { flex-direction: column; gap: 10px; }
-      .btn-primary, .btn-outline {
+      .btn-light, .btn-light-outline {
         width: 100%; max-width: 280px; margin: 0 auto;
-        padding: 14px 24px; font-size: 13px; letter-spacing: 2px;
+        padding: 13px 24px; font-size: 13px; letter-spacing: 2px;
         justify-content: center;
       }
 
@@ -1169,48 +1055,28 @@
 
       /* SP FLOATING CTA */
       .sp-floating-cta {
-        display: flex;
-        position: fixed;
-        bottom: 0; left: 0; right: 0;
-        z-index: 200;
-        background: rgba(255,255,255,0.97);
+        display: flex; position: fixed; bottom: 0; left: 0; right: 0;
+        z-index: 200; background: rgba(255,255,255,0.97);
         border-top: 1px solid var(--border-light);
-        padding: 8px 10px;
-        gap: 6px;
-        justify-content: space-between;
+        padding: 8px 10px; gap: 6px; justify-content: space-between;
         backdrop-filter: blur(10px);
       }
       .sp-floating-cta a {
-        flex: 1;
-        text-align: center;
-        padding: 11px 4px;
-        font-size: 10.5px;
-        font-family: var(--serif-jp);
-        letter-spacing: 0.3px;
-        color: var(--text-secondary);
-        text-decoration: none;
-        border-radius: 2px;
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        line-height: 1.3;
+        flex: 1; text-align: center; padding: 11px 4px;
+        font-size: 10.5px; font-family: var(--serif-jp);
+        letter-spacing: 0.3px; color: var(--text-secondary);
+        text-decoration: none; border-radius: 2px; min-height: 44px;
+        display: flex; align-items: center; justify-content: center;
       }
       .sp-floating-cta a.highlight {
-        background: var(--text-primary);
-        color: #fff;
+        background: var(--text-primary); color: #fff;
       }
     }
 
-    /* ============================================
-       RESPONSIVE — SMALL SP (≤380px)
-       ============================================ */
     @media (max-width: 380px) {
       .hero-main { font-size: 14px; letter-spacing: 2px; }
       .section-header h2 { font-size: 16px; letter-spacing: 3px; }
-      .main-course-body { padding: 18px 16px 22px; }
-      .main-course-body h3 { font-size: 16px; letter-spacing: 2px; }
-      .consult-box { padding: 24px 16px; }
+      .main-course-body { padding: 18px 14px 20px; }
     }
   </style>
 </head>
@@ -1219,7 +1085,7 @@
   <!-- WIREFRAME BAR -->
   <div class="wireframe-bar">
     <span class="badge">WIREFRAME</span>
-    <span>renri — TOPページ</span>
+    <span>renri — TOPページ（コンテンツ温存型ブラッシュアップ）</span>
     <span class="page-path">/</span>
   </div>
 
@@ -1242,11 +1108,9 @@
     </div>
   </header>
 
-  <!-- ============================================
-       SECTION 1 — HERO (minimal)
-       ============================================ -->
+  <!-- ① HERO -->
   <section class="hero" style="position:relative;">
-    <span class="section-label">① メイン画像 + キャッチ（最小限）</span>
+    <span class="section-label">① ヒーロー（ミニマル）</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="hero-copy">
       <div class="hero-en">WEDDING RINGS, YOKOHAMA</div>
@@ -1256,12 +1120,9 @@
     <div class="hero-scroll">SCROLL</div>
   </section>
 
-  <!-- ============================================
-       SECTION 2 — CONCEPT (ブランドコンセプト)
-       ※ ゼクシィ流入者がまず触れるブランド理解の入口
-       ============================================ -->
+  <!-- ② CONCEPT -->
   <section class="about" style="position:relative;">
-    <span class="section-label">② renriのコンセプト</span>
+    <span class="section-label">② コンセプト</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="about-content">
       <div class="about-image fade-in">📷 夫婦のポートレート or アトリエ内観</div>
@@ -1269,24 +1130,36 @@
         <div class="en">CONCEPT</div>
         <h2>ふたりの手で、<br>ふたりのための指輪を。</h2>
         <p>
-          renriは、横浜・馬車道の小さなアトリエ。
-          ジュエリーデザイナーと指輪職人の夫婦が、おふたりに寄り添いながら結婚指輪・婚約指輪をおつくりしています。
+          renriは、横浜・馬車道の小さなアトリエ。ジュエリーデザイナーと指輪職人の夫婦が、おふたりに寄り添いながら結婚指輪・婚約指輪をおつくりしています。
         </p>
         <p>
-          「少ないお客様に、より丁寧に」が私たちの信条。
-          手作りもオーダーメイドも、一日に数組だけお迎えし、十分な時間をかけて、ひとつひとつの想いをかたちにできます。
+          「少ないお客様に、より丁寧に」が私たちの信条。手作りもオーダーメイドも、一日に数組だけお迎えし、十分な時間をかけて、ひとつひとつの想いをかたちにできます。
         </p>
         <a href="#" class="about-more">renriについて、もっと知る →</a>
       </div>
     </div>
   </section>
 
-  <!-- ============================================
-       SECTION 3 — COURSES (2大コースを対等に提示)
-       ※ ブランドコンセプトの下に「手作り」「オーダー」を並列で配置
-       ============================================ -->
+  <!-- ③ 見学会 BANNER -->
+  <section class="visit" style="position:relative;">
+    <span class="section-label">③ 見学会 案内</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="visit-inner">
+      <div class="visit-icon">👋</div>
+      <div class="visit-body">
+        <span class="visit-tag">予約なしでもOK</span>
+        <h3>ご予約なしでの見学会</h3>
+        <p>
+          ふらっとrenriのアトリエに来ていただき、サンプルリングを実際に手に取って試しながら、オーダーまでの流れをご紹介します。
+        </p>
+      </div>
+      <a href="#" class="visit-cta">見学について詳しく</a>
+    </div>
+  </section>
+
+  <!-- ④ 2大コース -->
   <section class="courses" style="position:relative;">
-    <span class="section-label">③ コース紹介（手作り・オーダーメイド）</span>
+    <span class="section-label">④ 2大コース（手作り・オーダー）</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
@@ -1299,11 +1172,9 @@
         </p>
       </div>
 
-      <!-- 2 大コース：手作り / オーダーメイド -->
       <div class="main-courses">
-
         <a href="/handmade/" class="main-course-card fade-in">
-          <div class="main-course-image">📷 手作り風景 or 完成指輪</div>
+          <div class="main-course-image">📷 手作り風景</div>
           <div class="main-course-body">
             <div class="en-label">HANDMADE COURSE</div>
             <h3>手作り結婚指輪・婚約指輪</h3>
@@ -1316,12 +1187,12 @@
               <li>当日制作可能（納期：当日〜約1ヶ月）</li>
               <li>ジュエリー職人がそばで丁寧にサポート</li>
             </ul>
-            <span class="btn-detail">手作り結婚指輪を詳しく見る →</span>
+            <span class="btn-detail-text">手作り結婚指輪を詳しく見る →</span>
           </div>
         </a>
 
         <a href="/ordermade/" class="main-course-card fade-in fade-in-d1">
-          <div class="main-course-image">📷 オーダーメイド指輪 or 制作シーン</div>
+          <div class="main-course-image">📷 オーダーメイド指輪</div>
           <div class="main-course-body">
             <div class="en-label">ORDERMADE COURSE</div>
             <h3>オーダーメイド結婚指輪・婚約指輪</h3>
@@ -1334,13 +1205,11 @@
               <li>幅広い素材・宝石・加工技法から選択可</li>
               <li>納期：約1.5〜2ヶ月でお渡し</li>
             </ul>
-            <span class="btn-detail">オーダーメイド結婚指輪を詳しく見る →</span>
+            <span class="btn-detail-text">オーダーメイド結婚指輪を詳しく見る →</span>
           </div>
         </a>
-
       </div>
 
-      <!-- 迷ったら相談 -->
       <div class="consult-box fade-in fade-in-d2">
         <div class="en-label">CONSULTATION</div>
         <h4>まだ決められない方も、まずはご相談から</h4>
@@ -1348,33 +1217,76 @@
           当日に手作りとオーダーメイドを見比べながら、<br>
           おふたりに合うコースを一緒に整理することもできます。
         </p>
-        <a href="/reservation/" class="consult-btn">
-          比較しながら相談する <span>→</span>
-        </a>
+        <a href="/reservation/" class="consult-btn">比較しながら相談する <span>→</span></a>
       </div>
     </div>
   </section>
 
-  <!-- ============================================
-       SECTION 4 — SERIES & SERVICE (series-cards)
-       ※ オーダーTOPの series-card パターンを継承
-       ============================================ -->
+  <!-- ⑤ 婚約指輪 -->
+  <section class="engagement" style="position:relative;">
+    <span class="section-label">⑤ 婚約指輪</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="en">ENGAGEMENT RING</div>
+        <h2>婚約指輪</h2>
+        <div class="line"></div>
+        <p class="desc">
+          手作りの婚約指輪でサプライズプロポーズしたい方も、<br>
+          特別なデザインの婚約指輪を制作したい方も。手作り・オーダーメイドの両コースで承ります。
+        </p>
+      </div>
+
+      <div class="engagement-grid">
+        <a href="#" class="eng-card">
+          <div class="eng-card-image">📷</div>
+          <div class="eng-card-body">
+            <div class="eng-card-title">ストレートライン</div>
+            <div class="eng-card-price">¥190,000〜</div>
+          </div>
+        </a>
+        <a href="#" class="eng-card">
+          <div class="eng-card-image">📷</div>
+          <div class="eng-card-body">
+            <div class="eng-card-title">ハンマーテクスチャー</div>
+            <div class="eng-card-price">¥271,700〜</div>
+          </div>
+        </a>
+        <a href="#" class="eng-card">
+          <div class="eng-card-image">📷</div>
+          <div class="eng-card-body">
+            <div class="eng-card-title">ピンクゴールド エタニティ</div>
+            <div class="eng-card-price">¥249,000〜</div>
+          </div>
+        </a>
+        <a href="#" class="eng-card">
+          <div class="eng-card-image">📷</div>
+          <div class="eng-card-body">
+            <div class="eng-card-title">花蕾ブーケ</div>
+            <div class="eng-card-price">¥203,500〜</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="engagement-cta">
+        <a href="#" class="btn-outline">婚約指輪をもっと見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑥ SERIES & SERVICE -->
   <section class="series" style="position:relative;">
-    <span class="section-label">④ シリーズ & サービス</span>
+    <span class="section-label">⑥ シリーズ & サービス</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
         <div class="en">SERIES &amp; SERVICE</div>
         <h2>特別なシリーズ・サービス</h2>
         <div class="line"></div>
-        <p class="desc">
-          おふたりのシーンに合わせた、renriの特別なご提案。
-        </p>
       </div>
 
       <div class="series-cards">
-
-        <a href="#" class="series-card fade-in">
+        <a href="#" class="series-card">
           <div class="series-card-image">📷 花こよみ</div>
           <div class="series-card-body">
             <div class="en-label">HANAKOYOMI</div>
@@ -1383,8 +1295,7 @@
             <p>季節の花をモチーフにしたオリジナル婚約指輪。</p>
           </div>
         </a>
-
-        <a href="#" class="series-card fade-in fade-in-d1">
+        <a href="#" class="series-card">
           <div class="series-card-image">📷 リトルブーケ</div>
           <div class="series-card-body">
             <div class="en-label">LITTLE BOUQUET</div>
@@ -1393,8 +1304,7 @@
             <p>小さな花束を贈るように、日常に寄り添う婚約指輪。</p>
           </div>
         </a>
-
-        <a href="#" class="series-card fade-in fade-in-d2">
+        <a href="#" class="series-card">
           <div class="series-card-image">📷 サプライズ</div>
           <div class="series-card-body">
             <div class="en-label">SURPRISE PROPOSAL</div>
@@ -1403,17 +1313,159 @@
             <p>まずダイヤだけを贈り、デザインは後からふたりで。</p>
           </div>
         </a>
-
+        <a href="#" class="series-card">
+          <div class="series-card-image">📷 Uchi de no RING</div>
+          <div class="series-card-body">
+            <div class="en-label">UCHI DE NO RING</div>
+            <h3>うちでのリング</h3>
+            <span class="series-tag">出張不要｜自宅で手作り</span>
+            <p>ご自宅にいながら手作りできるキットをお届け。</p>
+          </div>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ============================================
-       SECTION 5 — VOICE (お客様の声)
-       ※ 「renri レビュー」検索の受け皿
-       ============================================ -->
+  <!-- ⑦ 素材・仕上げ・オプション (TABS) -->
+  <section class="materials" style="position:relative;">
+    <span class="section-label">⑦ 素材・仕上げ・オプション</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="materials-inner">
+      <div class="section-header fade-in">
+        <div class="en">MATERIALS &amp; CRAFTSMANSHIP</div>
+        <h2>renriで作れる指輪</h2>
+        <div class="line"></div>
+        <p class="desc">
+          プラチナやK18ゴールド、ミル打ちや手彫りまで。<br>
+          おふたりだけの一本をかたちにする選択肢を多彩にご用意しています。
+        </p>
+      </div>
+
+      <div class="tab-nav">
+        <button class="tab-btn active" data-tab="metal">素材</button>
+        <button class="tab-btn" data-tab="finish">仕上げ</button>
+        <button class="tab-btn" data-tab="option">オプション加工</button>
+        <button class="tab-btn" data-tab="stone">石留め</button>
+      </div>
+
+      <!-- METAL -->
+      <div class="tab-panel active" id="tab-metal">
+        <div class="material-grid">
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">Pt900 プラチナ</div><div class="material-item-desc">変色しにくい強度</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">K18 イエロー</div><div class="material-item-desc">温かみのある色合い</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">K18 ホワイト</div><div class="material-item-desc">気品ある白色</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">K18 ピンク</div><div class="material-item-desc">柔らかな桜色</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">K18 グリーン</div><div class="material-item-desc">淡いシャンパン色</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">K18 グレー</div><div class="material-item-desc">落ち着いた銀灰色</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">コンビカラー</div><div class="material-item-desc">2色の組み合わせ</div></div>
+        </div>
+      </div>
+
+      <!-- FINISH -->
+      <div class="tab-panel" id="tab-finish">
+        <div class="material-grid">
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">つや</div><div class="material-item-desc">光沢のある鏡面</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">マット</div><div class="material-item-desc">柔らかな艶消し</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">ハンマーテクスチャー</div><div class="material-item-desc">槌目（つちめ）模様</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">ヘアライン</div><div class="material-item-desc">細やかな筋目</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">サンドブラスト</div><div class="material-item-desc">砂吹き仕上げ</div></div>
+        </div>
+      </div>
+
+      <!-- OPTION -->
+      <div class="tab-panel" id="tab-option">
+        <div class="material-grid">
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">ミル打ち加工</div><div class="material-item-desc">縁に細かな粒を打つ装飾</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">レーザー刻印</div><div class="material-item-desc">内側に名前や日付を刻印</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">メビウスリング</div><div class="material-item-desc">捻りを加えた特殊形状</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">手彫り加工</div><div class="material-item-desc">唐草・月桂樹など</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">カーブ加工</div><div class="material-item-desc">U字・V字・S字など</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">チャンファーリング</div><div class="material-item-desc">面取りで角を落とす加工</div></div>
+        </div>
+      </div>
+
+      <!-- STONE -->
+      <div class="tab-panel" id="tab-stone">
+        <div class="material-grid">
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">ワンポイント留め</div><div class="material-item-desc">ふせ込み・4点留め・マス留め</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">エタニティタイプ</div><div class="material-item-desc">一周・ハーフエタニティ</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">誕生石</div><div class="material-item-desc">12種類からお選びいただけます</div></div>
+          <div class="material-item"><div class="material-item-img">📷</div><div class="material-item-name">ダイヤモンド4C</div><div class="material-item-desc">カラット・カラー・クラリティ・カット</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑧ GALLERY -->
+  <section class="gallery" style="position:relative;">
+    <span class="section-label">⑧ 制作事例</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="en">GALLERY</div>
+        <h2>制作事例</h2>
+        <div class="line"></div>
+        <p class="desc">これまでにrenriで生まれた、おふたりの指輪をご紹介します。</p>
+      </div>
+
+      <div class="gallery-grid">
+        <a href="#" class="gallery-card">
+          <div class="gallery-card-image">📷</div>
+          <div class="gallery-card-body">
+            <div class="gallery-card-meta"><span>手作り</span><span>結婚指輪</span></div>
+            <div class="gallery-card-title">異なる表情が寄り添う結婚指輪</div>
+            <div class="gallery-card-desc">プラチナ × イエローゴールド。マットとつやを組み合わせて...</div>
+          </div>
+        </a>
+        <a href="#" class="gallery-card">
+          <div class="gallery-card-image">📷</div>
+          <div class="gallery-card-body">
+            <div class="gallery-card-meta"><span>オーダーメイド</span><span>結婚指輪</span></div>
+            <div class="gallery-card-title">波の記憶を刻むご結婚指輪</div>
+            <div class="gallery-card-desc">思い出の海をモチーフに、デザイナーが波のテクスチャを一から...</div>
+          </div>
+        </a>
+        <a href="#" class="gallery-card">
+          <div class="gallery-card-image">📷</div>
+          <div class="gallery-card-body">
+            <div class="gallery-card-meta"><span>手作り</span><span>婚約指輪</span></div>
+            <div class="gallery-card-title">繊細な輝きが宿るご婚約指輪</div>
+            <div class="gallery-card-desc">サプライズ制作。お相手の好みを丁寧にヒアリングしながら...</div>
+          </div>
+        </a>
+        <a href="#" class="gallery-card">
+          <div class="gallery-card-image">📷</div>
+          <div class="gallery-card-body">
+            <div class="gallery-card-meta"><span>オーダーメイド</span><span>婚約指輪</span></div>
+            <div class="gallery-card-title">桜の花びらが舞うご婚約指輪</div>
+            <div class="gallery-card-desc">春に出会ったおふたりから着想し、側面に桜の彫刻を...</div>
+          </div>
+        </a>
+        <a href="#" class="gallery-card">
+          <div class="gallery-card-image">📷</div>
+          <div class="gallery-card-body">
+            <div class="gallery-card-meta"><span>手作り</span><span>結婚指輪</span></div>
+            <div class="gallery-card-title">艷やかに美しいご結婚指輪</div>
+            <div class="gallery-card-desc">鏡面仕上げの美しさにこだわったプラチナの結婚指輪。永遠の...</div>
+          </div>
+        </a>
+        <a href="#" class="gallery-card">
+          <div class="gallery-card-image">📷</div>
+          <div class="gallery-card-body">
+            <div class="gallery-card-meta"><span>手作り</span><span>結婚指輪</span></div>
+            <div class="gallery-card-title">温もり溢れるご結婚指輪</div>
+            <div class="gallery-card-desc">K18イエローゴールドのあたたかみある色合いに、マット仕上げを...</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="center"><a href="#" class="btn-outline">すべての制作事例を見る</a></div>
+    </div>
+  </section>
+
+  <!-- ⑨ お客様の声 -->
   <section class="voice" style="position:relative;">
-    <span class="section-label">⑤ お客様の声</span>
+    <span class="section-label">⑨ お客様の声</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
@@ -1424,83 +1476,39 @@
       </div>
 
       <div class="voice-grid">
-        <a href="#" class="voice-card fade-in">
+        <a href="#" class="voice-card">
           <div class="voice-card-image">📷</div>
           <div class="voice-card-body">
-            <div class="voice-card-badges">
-              <span class="badge badge-handmade">手作り</span>
-              <span class="badge badge-type">結婚指輪</span>
-            </div>
+            <div class="voice-card-badges"><span class="badge badge-handmade">手作り</span><span class="badge badge-type">結婚指輪</span></div>
             <div class="voice-card-title">異なる表情が寄り添う結婚指輪</div>
             <div class="voice-card-excerpt">おふたりの手で一本ずつ丁寧に仕上げた結婚指輪...</div>
           </div>
         </a>
-        <a href="#" class="voice-card fade-in fade-in-d1">
+        <a href="#" class="voice-card">
           <div class="voice-card-image">📷</div>
           <div class="voice-card-body">
-            <div class="voice-card-badges">
-              <span class="badge badge-ordermade">オーダーメイド</span>
-              <span class="badge badge-type">結婚指輪</span>
-            </div>
+            <div class="voice-card-badges"><span class="badge badge-ordermade">オーダーメイド</span><span class="badge badge-type">結婚指輪</span></div>
             <div class="voice-card-title">波の記憶を刻むご結婚指輪</div>
-            <div class="voice-card-excerpt">おふたりの思い出の海をモチーフに、デザイナーが波のテクスチャ...</div>
+            <div class="voice-card-excerpt">おふたりの思い出の海をモチーフに...</div>
           </div>
         </a>
-        <a href="#" class="voice-card fade-in fade-in-d2">
+        <a href="#" class="voice-card">
           <div class="voice-card-image">📷</div>
           <div class="voice-card-body">
-            <div class="voice-card-badges">
-              <span class="badge badge-handmade">手作り</span>
-              <span class="badge badge-type">婚約指輪</span>
-            </div>
+            <div class="voice-card-badges"><span class="badge badge-handmade">手作り</span><span class="badge badge-type">婚約指輪</span></div>
             <div class="voice-card-title">繊細な輝きが宿るご婚約指輪</div>
             <div class="voice-card-excerpt">サプライズで制作された婚約指輪。お相手の好みを丁寧に...</div>
           </div>
         </a>
       </div>
 
-      <div class="center">
-        <a href="#" class="btn-outline">お客様の声をもっと見る</a>
-      </div>
+      <div class="center"><a href="#" class="btn-outline">お客様の声をもっと見る</a></div>
     </div>
   </section>
 
-  <!-- ============================================
-       SECTION 6 — GALLERY (制作事例)
-       ============================================ -->
-  <section class="gallery" style="position:relative;">
-    <span class="section-label">⑥ 制作事例</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
-    <div class="section-inner">
-      <div class="section-header fade-in">
-        <div class="en">GALLERY</div>
-        <h2>制作事例</h2>
-        <div class="line"></div>
-        <p class="desc">これまでにrenriで生まれた、おふたりの指輪をご紹介。</p>
-      </div>
-
-      <div class="gallery-grid">
-        <div class="gallery-item">📷</div>
-        <div class="gallery-item">📷</div>
-        <div class="gallery-item">📷</div>
-        <div class="gallery-item">📷</div>
-        <div class="gallery-item">📷</div>
-        <div class="gallery-item">📷</div>
-        <div class="gallery-item">📷</div>
-        <div class="gallery-item">📷</div>
-      </div>
-
-      <div class="center">
-        <a href="#" class="btn-outline">制作事例をもっと見る</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================
-       SECTION 7 — PROCESS (制作の流れ・暗背景)
-       ============================================ -->
+  <!-- ⑩ 制作の流れ -->
   <section class="process" style="position:relative;">
-    <span class="section-label">⑦ 制作の流れ</span>
+    <span class="section-label">⑩ 制作の流れ</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
@@ -1510,40 +1518,147 @@
         <p class="desc">ご来店からお渡しまで、丁寧にサポートいたします。</p>
       </div>
 
-      <div class="process-steps">
-        <div class="process-step fade-in">
-          <div class="process-step-num">STEP 01</div>
-          <div class="process-step-image">📷</div>
-          <div class="process-step-title">ご予約・ご相談</div>
-          <div class="process-step-desc">WEBまたはお電話で<br>ご来店のご予約。</div>
+      <div class="process-tabs">
+        <button class="process-tab-btn active" data-tab="proc-handmade">手作りコース</button>
+        <button class="process-tab-btn" data-tab="proc-ordermade">オーダーメイドコース</button>
+      </div>
+
+      <div class="process-panel active" id="proc-handmade">
+        <div class="process-steps">
+          <div class="process-step"><div class="process-step-num">STEP 01</div><div class="process-step-image">📷</div><div class="process-step-title">ご相談・予約</div><div class="process-step-desc">WEB/お電話で来店予約</div></div>
+          <div class="process-step"><div class="process-step-num">STEP 02</div><div class="process-step-image">📷</div><div class="process-step-title">金属棒からスタート</div><div class="process-step-desc">素材を選び、バーナーで成形</div></div>
+          <div class="process-step"><div class="process-step-num">STEP 03</div><div class="process-step-image">📷</div><div class="process-step-title">加工・テクスチャ</div><div class="process-step-desc">表情をつけ、形を整える</div></div>
+          <div class="process-step"><div class="process-step-num">STEP 04</div><div class="process-step-image">📷</div><div class="process-step-title">仕上げ・磨き</div><div class="process-step-desc">職人と一緒に内側まで丁寧に</div></div>
+          <div class="process-step"><div class="process-step-num">STEP 05</div><div class="process-step-image">📷</div><div class="process-step-title">完成・お渡し</div><div class="process-step-desc">当日〜約1ヶ月でお渡し</div></div>
         </div>
-        <div class="process-step fade-in fade-in-d1">
-          <div class="process-step-num">STEP 02</div>
-          <div class="process-step-image">📷</div>
-          <div class="process-step-title">デザイン決定</div>
-          <div class="process-step-desc">素材・形・仕上げを<br>おふたりで決定。</div>
-        </div>
-        <div class="process-step fade-in fade-in-d2">
-          <div class="process-step-num">STEP 03</div>
-          <div class="process-step-image">📷</div>
-          <div class="process-step-title">制作・仕上げ</div>
-          <div class="process-step-desc">手作り当日制作 or<br>職人による精密制作。</div>
-        </div>
-        <div class="process-step fade-in fade-in-d3">
-          <div class="process-step-num">STEP 04</div>
-          <div class="process-step-image">📷</div>
-          <div class="process-step-title">お渡し</div>
-          <div class="process-step-desc">永久補償の<br>アフターケアまで。</div>
+      </div>
+
+      <div class="process-panel" id="proc-ordermade">
+        <div class="process-steps">
+          <div class="process-step"><div class="process-step-num">STEP 01</div><div class="process-step-image">📷</div><div class="process-step-title">ご相談・予約</div><div class="process-step-desc">ご希望・予算をヒアリング</div></div>
+          <div class="process-step"><div class="process-step-num">STEP 02</div><div class="process-step-image">📷</div><div class="process-step-title">デザイン提案・試作</div><div class="process-step-desc">デザイナーがゼロから提案</div></div>
+          <div class="process-step"><div class="process-step-num">STEP 03</div><div class="process-step-image">📷</div><div class="process-step-title">フィッティング</div><div class="process-step-desc">試作品で着け心地を確認</div></div>
+          <div class="process-step"><div class="process-step-num">STEP 04</div><div class="process-step-image">📷</div><div class="process-step-title">本制作</div><div class="process-step-desc">職人が本物の素材で制作</div></div>
+          <div class="process-step"><div class="process-step-num">STEP 05</div><div class="process-step-image">📷</div><div class="process-step-title">完成・お渡し</div><div class="process-step-desc">約1.5〜2ヶ月でお渡し</div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================
-       SECTION 8 — ACCESS
-       ============================================ -->
+  <!-- ⑪ 価格 -->
+  <section class="pricing" style="position:relative;">
+    <span class="section-label">⑪ 価格</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="en">PRICE</div>
+        <h2>価格について</h2>
+        <div class="line"></div>
+        <p class="desc">renriではシンプルでわかりやすい価格設定を心がけています。</p>
+      </div>
+
+      <div class="pricing-formula">
+        <div class="pricing-formula-label">PRICE FORMULA</div>
+        <div class="pricing-formula-text">
+          制作料金 <strong>¥22,000</strong> ＋ 材料費 ＋ オプション加工費
+        </div>
+      </div>
+
+      <div class="pricing-samples-tabs">
+        <button class="pricing-tab-btn active" data-tab="price-h-m">手作り｜結婚指輪</button>
+        <button class="pricing-tab-btn" data-tab="price-o-m">オーダー｜結婚指輪</button>
+        <button class="pricing-tab-btn" data-tab="price-h-e">手作り｜婚約指輪</button>
+        <button class="pricing-tab-btn" data-tab="price-o-e">オーダー｜婚約指輪</button>
+      </div>
+
+      <div class="pricing-panel active" id="price-h-m">
+        <div class="pricing-samples">
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">ハンマーテクスチャー</div><div class="pricing-sample-prices">M's <strong>¥185,000</strong><br>L's <strong>¥119,000</strong></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">メビウスリング</div><div class="pricing-sample-prices">M's <strong>¥174,000</strong><br>L's <strong>¥183,000</strong></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">テクスチャーワンサイド</div><div class="pricing-sample-prices">M's <strong>¥264,000</strong><br>L's <strong>¥179,000</strong></div></div></div>
+        </div>
+      </div>
+
+      <div class="pricing-panel" id="price-o-m">
+        <div class="pricing-samples">
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">スリットワンポイント</div><div class="pricing-sample-prices">M's <strong>¥217,000</strong><br>L's <strong>¥186,000</strong></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">月桂樹手彫り</div><div class="pricing-sample-prices">M's <strong>¥263,000</strong><br>L's <strong>¥302,000</strong></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">チャンファーリング</div><div class="pricing-sample-prices">M's <strong>¥172,000</strong><br>L's <strong>¥178,000</strong></div></div></div>
+        </div>
+      </div>
+
+      <div class="pricing-panel" id="price-h-e">
+        <div class="pricing-samples">
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">ストレートライン</div><div class="pricing-sample-prices">L's <strong>¥190,000</strong><br><span style="color:var(--text-light);">石 約3.5mm</span></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">ハンマーテクスチャー</div><div class="pricing-sample-prices">L's <strong>¥271,700</strong><br><span style="color:var(--text-light);">石 約4mm</span></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">ピンクゴールド エタニティ</div><div class="pricing-sample-prices">L's <strong>¥249,000</strong></div></div></div>
+        </div>
+      </div>
+
+      <div class="pricing-panel" id="price-o-e">
+        <div class="pricing-samples">
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">スクエアシャープ</div><div class="pricing-sample-prices">L's <strong>¥440,000</strong><br><span style="color:var(--text-light);">石 約4.5mm</span></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">花蕾ブーケ</div><div class="pricing-sample-prices">L's <strong>¥203,500</strong></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">ヘイローセッティング</div><div class="pricing-sample-prices">L's <strong>¥455,000</strong><br><span style="color:var(--text-light);">石 約4.5mm</span></div></div></div>
+        </div>
+      </div>
+
+      <div class="pricing-cta"><a href="#" class="btn-outline">価格の詳細・WEB見積もり</a></div>
+    </div>
+  </section>
+
+  <!-- ⑫ アフターケア -->
+  <section class="aftercare" style="position:relative;">
+    <span class="section-label">⑫ アフターケア・永久保証</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="en">AFTERCARE</div>
+        <h2>アフターケア・永久保証</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="aftercare-hero">
+        <span class="aftercare-tag">PERMANENT GUARANTEE</span>
+        <p class="aftercare-lead">
+          renriでお作りいただいた結婚指輪・婚約指輪は、おふたりが長く愛用できるよう、永久保証のアフターケアをご提供しています。
+        </p>
+      </div>
+
+      <div class="aftercare-grid">
+        <div class="aftercare-item">
+          <div class="aftercare-item-icon">✨</div>
+          <div class="aftercare-item-title">クリーニング</div>
+          <div class="aftercare-item-cost">永久無償</div>
+          <div class="aftercare-item-desc">輝きを取り戻すお手入れ。1週間程度お預かりします。</div>
+        </div>
+        <div class="aftercare-item">
+          <div class="aftercare-item-icon">⚙</div>
+          <div class="aftercare-item-title">サイズ直し</div>
+          <div class="aftercare-item-cost">永久無償</div>
+          <div class="aftercare-item-desc">体の変化に合わせて、いつでもサイズ調整を承ります。</div>
+        </div>
+        <div class="aftercare-item">
+          <div class="aftercare-item-icon">💎</div>
+          <div class="aftercare-item-title">石の追加</div>
+          <div class="aftercare-item-cost">有償</div>
+          <div class="aftercare-item-desc">結婚5周年・10周年などの記念に宝石をお追加できます。</div>
+        </div>
+        <div class="aftercare-item">
+          <div class="aftercare-item-icon">🔧</div>
+          <div class="aftercare-item-title">修理・刻印追加</div>
+          <div class="aftercare-item-cost">要相談</div>
+          <div class="aftercare-item-desc">歪み直し、石留め直し、お子様の名前刻印などに対応。</div>
+        </div>
+      </div>
+
+      <div class="aftercare-cta"><a href="#" class="btn-outline">アフターケアの詳細</a></div>
+    </div>
+  </section>
+
+  <!-- ⑬ 店舗情報 -->
   <section class="access" style="position:relative;">
-    <span class="section-label">⑧ 店舗情報・アクセス</span>
+    <span class="section-label">⑬ 店舗情報・アクセス</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="access-content">
       <div class="access-map fade-in">🗺 Googleマップ</div>
@@ -1551,90 +1666,199 @@
         <div class="en">ACCESS</div>
         <h2>renri 横浜アトリエ<br>馬車道駅すぐ</h2>
         <dl class="access-info">
-          <dt>住所</dt>
-          <dd>〒231-0011<br>神奈川県横浜市中区太田町2-28<br>大黒ビル1F B</dd>
-          <dt>営業時間</dt>
-          <dd>10:00 〜 18:00 / 不定休</dd>
-          <dt>電話番号</dt>
-          <dd>045-264-8310</dd>
+          <dt>住所</dt><dd>〒231-0011<br>神奈川県横浜市中区太田町2-28<br>大黒ビル1F B</dd>
+          <dt>営業時間</dt><dd>10:00 〜 18:00（定休日：木）</dd>
+          <dt>電話番号</dt><dd>045-264-8310</dd>
         </dl>
         <a href="#" class="access-more">店舗情報を詳しく見る →</a>
       </div>
     </div>
   </section>
 
-  <!-- ============================================
-       SECTION 9 — BLOG & FAQ teaser
-       ============================================ -->
-  <section class="info" style="position:relative;">
-    <span class="section-label">⑨ ブログ & FAQ</span>
+  <!-- ⑭ ブログ -->
+  <section class="blog-section" style="position:relative;">
+    <span class="section-label">⑭ スタッフブログ</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
-    <div class="info-grid">
-      <div class="info-block fade-in">
-        <span class="en">JOURNAL</span>
-        <h3>スタッフブログ</h3>
-        <ul class="blog-list">
-          <li><a href="#"><span class="date">2026.04.20</span><span>結婚指輪の相場と、renriで作る場合の費用感</span></a></li>
-          <li><a href="#"><span class="date">2026.04.10</span><span>手作り結婚指輪、当日制作はどこまで？</span></a></li>
-          <li><a href="#"><span class="date">2026.03.28</span><span>サプライズ婚約指輪の作り方ガイド</span></a></li>
-        </ul>
-        <a href="#" class="info-more">記事一覧へ →</a>
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="en">JOURNAL</div>
+        <h2>スタッフブログ</h2>
+        <div class="line"></div>
+      </div>
+      <div class="blog-grid">
+        <a href="#" class="blog-card">
+          <div class="blog-card-image">📷</div>
+          <div class="blog-card-body">
+            <div class="blog-card-date">2026.04.20</div>
+            <div class="blog-card-title">結婚指輪の相場と、renriで作る場合の費用感</div>
+          </div>
+        </a>
+        <a href="#" class="blog-card">
+          <div class="blog-card-image">📷</div>
+          <div class="blog-card-body">
+            <div class="blog-card-date">2026.04.10</div>
+            <div class="blog-card-title">手作り結婚指輪、当日制作はどこまでできる？</div>
+          </div>
+        </a>
+        <a href="#" class="blog-card">
+          <div class="blog-card-image">📷</div>
+          <div class="blog-card-body">
+            <div class="blog-card-date">2026.03.28</div>
+            <div class="blog-card-title">サプライズ婚約指輪の作り方ガイド</div>
+          </div>
+        </a>
+      </div>
+      <div class="blog-cta"><a href="#" class="btn-outline">記事一覧へ</a></div>
+    </div>
+  </section>
+
+  <!-- ⑮ FAQ (アコーディオン Q+A on-page) -->
+  <section class="faq" style="position:relative;">
+    <span class="section-label">⑮ よくあるご質問（Q+A on-page アコーディオン）</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="en">FAQ</div>
+        <h2>よくあるご質問</h2>
+        <div class="line"></div>
       </div>
 
-      <div class="info-block fade-in fade-in-d1">
-        <span class="en">FAQ</span>
-        <h3>よくあるご質問</h3>
-        <ul class="faq-list">
-          <li><a href="#"><span class="q">Q.</span><span>制作にどれくらい時間がかかりますか？</span></a></li>
-          <li><a href="#"><span class="q">Q.</span><span>当日予約なしでも見学できますか？</span></a></li>
-          <li><a href="#"><span class="q">Q.</span><span>サイズ直しなどのアフターケアは？</span></a></li>
-        </ul>
-        <a href="#" class="info-more">FAQ一覧へ →</a>
+      <div class="faq-list">
+
+        <div class="faq-cat">
+          <div class="faq-cat-title">ABOUT COURSE — コース・制作について</div>
+          <details class="faq-item">
+            <summary>手作りコースとオーダーメイドコースの違いは？</summary>
+            <div class="answer">手作りコースはおふたりの手で金属を叩き、鍛造製法で指輪を仕上げるコースです。オーダーメイドコースは、デザイナーがゼロからデザインを提案し、職人が制作するコースです。制作体験を重視するなら手作り、デザインの自由度を重視するならオーダーメイドがおすすめです。</div>
+          </details>
+          <details class="faq-item">
+            <summary>事前相談・打ち合わせは必須ですか？</summary>
+            <div class="answer">手作りコースは事前打ち合わせなしで当日制作も可能です。オーダーメイドコースはデザインを練るため、初回ご相談からお渡しまで1.5〜2ヶ月程度かかります。</div>
+          </details>
+          <details class="faq-item">
+            <summary>不器用でも手作りで制作できますか？</summary>
+            <div class="answer">経験豊富な職人がそばで丁寧にサポートしますので、不器用な方でも安心して制作いただけます。これまでにご制作いただいたほぼ全てのお客様が、満足のいく仕上がりに至っています。</div>
+          </details>
+          <details class="faq-item">
+            <summary>制作中の撮影はできますか？</summary>
+            <div class="answer">はい、おふたりのカメラやスマートフォンで自由に撮影いただけます。手作りコースでは制作の各工程を写真に残せるよう、職人がタイミングをご案内します。</div>
+          </details>
+        </div>
+
+        <div class="faq-cat">
+          <div class="faq-cat-title">ABOUT PRICE — 価格・支払いについて</div>
+          <details class="faq-item">
+            <summary>金額が一律ではないのはなぜですか？</summary>
+            <div class="answer">renriの指輪は「制作料金22,000円 + 材料費 + オプション加工費」の合算です。素材（プラチナ、K18ゴールド）の選択や加工内容により金額が変わるため、おふたりの選択に応じた最適な価格でご提供できます。</div>
+          </details>
+          <details class="faq-item">
+            <summary>予算が少ない場合の対応は？</summary>
+            <div class="answer">ご予算に合わせた素材や仕上げのご提案が可能です。例えばK18ホワイトゴールドを選ぶことで、プラチナよりお手頃にお作りできます。お気軽にご相談ください。</div>
+          </details>
+          <details class="faq-item">
+            <summary>支払いのタイミング・カード利用は？</summary>
+            <div class="answer">お渡し時のお支払いとなります。各種クレジットカード・現金にてお支払いいただけます。詳しくはお問い合わせください。</div>
+          </details>
+        </div>
+
+        <div class="faq-cat">
+          <div class="faq-cat-title">ABOUT VISIT — ご来店・予約について</div>
+          <details class="faq-item">
+            <summary>来店予約は必要ですか？</summary>
+            <div class="answer">ご制作・ご相談は予約制ですが、見学のみであればご予約なしでもご来店いただけます。サンプルリングを実際にご覧いただけます。</div>
+          </details>
+          <details class="faq-item">
+            <summary>マリッジリングとエンゲージリングの違いは？</summary>
+            <div class="answer">マリッジリング（結婚指輪）はおふたりで日常的に身につけるペアリング。エンゲージリング（婚約指輪）はプロポーズや結婚の約束として贈られる、宝石付きの指輪です。renriではどちらも手作り・オーダーメイドの両コースで承ります。</div>
+          </details>
+        </div>
+
+        <div class="faq-cat">
+          <div class="faq-cat-title">ABOUT AFTERCARE — アフターケアについて</div>
+          <details class="faq-item">
+            <summary>アフターケアサービスはありますか？</summary>
+            <div class="answer">クリーニング・サイズ直しは永久無償でご提供しています。歪み直しや石の留め直し、刻印追加なども承ります。長く愛用いただけるよう、しっかりサポートいたします。</div>
+          </details>
+        </div>
+
+      </div>
+
+      <div class="center" style="margin-top: 32px;">
+        <a href="#" class="btn-outline">FAQ一覧をすべて見る</a>
       </div>
     </div>
   </section>
 
-  <!-- ============================================
-       SECTION 10 — BOTTOM CTA (consult-cta style)
-       ============================================ -->
+  <!-- ⑯ 用語集 / 関連キーワード -->
+  <section class="glossary" style="position:relative;">
+    <span class="section-label">⑯ 用語集・関連キーワード</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="en">KEYWORDS</div>
+        <h2>結婚指輪・婚約指輪の用語集</h2>
+        <div class="line"></div>
+        <p class="desc">指輪づくりに関する用語や、関連する情報をご紹介します。</p>
+      </div>
+
+      <div class="glossary-keywords">
+        <a href="#" class="keyword-chip">手作り結婚指輪とは</a>
+        <a href="#" class="keyword-chip">鍛造製法</a>
+        <a href="#" class="keyword-chip">ワックス製法</a>
+        <a href="#" class="keyword-chip">ハンドメイドリング</a>
+        <a href="#" class="keyword-chip">プラチナとは</a>
+        <a href="#" class="keyword-chip">K18ゴールドの種類</a>
+        <a href="#" class="keyword-chip">ダイヤモンド4C</a>
+        <a href="#" class="keyword-chip">結婚指輪のサイズ直し</a>
+        <a href="#" class="keyword-chip">婚約指輪と結婚指輪の違い</a>
+        <a href="#" class="keyword-chip">結婚指輪 相場</a>
+        <a href="#" class="keyword-chip">結婚指輪 後悔</a>
+        <a href="#" class="keyword-chip">サプライズプロポーズ</a>
+        <a href="#" class="keyword-chip">エタニティリング</a>
+        <a href="#" class="keyword-chip">誕生石</a>
+        <a href="#" class="keyword-chip">レーザー刻印</a>
+        <a href="#" class="keyword-chip">ミル打ち</a>
+      </div>
+
+      <div class="glossary-intro fade-in">
+        <h3>手作り結婚指輪とは？</h3>
+        <p>
+          結婚指輪・婚約指輪を自分たちの手で作るハンドメイドリングのこと。「ブランドにこだわりがない」「指輪制作自体を結婚の思い出にしたい」「ふたりだけのオリジナルの指輪がほしい」というカップルに人気です。主に金属を叩いて作る<strong>鍛造製法</strong>か、ワックス（ろう）で指輪の原型を作る<strong>ワックス製法</strong>があります。renriでは鍛造製法を採用しています。
+        </p>
+      </div>
+
+      <div class="glossary-cta">
+        <a href="#" class="btn-outline">用語集をすべて見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑰ ボトムCTA -->
   <section class="bottom-cta" style="position:relative;">
-    <span class="section-label">⑩ 最終CTA</span>
+    <span class="section-label">⑰ 最終CTA</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="bottom-cta-inner">
-      <div class="bottom-cta-en">CONTACT</div>
+      <div class="en">CONTACT</div>
       <h2>おふたりだけの指輪づくり、<br>はじめてみませんか？</h2>
-      <p>来店予約・ご相談は、WEBまたはお電話で承っています。<br>迷っている段階でもご予約いただけます。</p>
+      <p>ご来店予約・ご相談は、WEBまたはお電話で承っています。<br>迷っている段階でもご予約いただけます。</p>
       <div class="bottom-cta-buttons">
-        <a href="#" class="btn-primary">ご来店予約</a>
-        <a href="#" class="btn-outline">WEB見積もり</a>
+        <a href="#" class="btn-light">ご来店予約</a>
+        <a href="#" class="btn-light-outline">WEB見積もり</a>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-sns">
-      <a href="#">f</a>
-      <a href="#">ig</a>
+    <div class="footer-sns"><a href="#">f</a><a href="#">ig</a></div>
+    <div class="footer-links">
+      <a href="#">renriとは</a><a href="#">手作りコース</a><a href="#">オーダーメイドコース</a>
+      <a href="#">Uchi de no RING</a><a href="#">価格について</a><a href="#">制作事例</a>
+      <a href="#">お客様の声</a><a href="#">店舗情報</a>
     </div>
     <div class="footer-links">
-      <a href="#">renriとは</a>
-      <a href="#">手作りコース</a>
-      <a href="#">オーダーメイドコース</a>
-      <a href="#">Uchi de no RING</a>
-      <a href="#">価格について</a>
-      <a href="#">制作事例</a>
-      <a href="#">お客様の声</a>
-      <a href="#">店舗情報</a>
-    </div>
-    <div class="footer-links">
-      <a href="#">アフターケア</a>
-      <a href="#">よくあるご質問</a>
-      <a href="#">スタッフブログ</a>
-      <a href="#">用語集</a>
-      <a href="#">プライバシーポリシー</a>
-      <a href="#">お問い合わせ</a>
-      <a href="#">会社概要</a>
+      <a href="#">アフターケア</a><a href="#">よくあるご質問</a><a href="#">スタッフブログ</a>
+      <a href="#">用語集</a><a href="#">プライバシーポリシー</a><a href="#">お問い合わせ</a><a href="#">会社概要</a>
     </div>
     <div class="footer-logo">renri</div>
     <p class="footer-copy">&copy; 2026 renri.</p>
@@ -1649,6 +1873,7 @@
   </div>
 
   <script>
+    // Fade-in observer
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1658,6 +1883,39 @@
       });
     }, { threshold: 0.12 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Materials tabs
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.dataset.tab;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + tab).classList.add('active');
+      });
+    });
+
+    // Process tabs
+    document.querySelectorAll('.process-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.dataset.tab;
+        document.querySelectorAll('.process-tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.process-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(tab).classList.add('active');
+      });
+    });
+
+    // Pricing tabs
+    document.querySelectorAll('.pricing-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.dataset.tab;
+        document.querySelectorAll('.pricing-tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.pricing-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(tab).classList.add('active');
+      });
+    });
   </script>
 
 </body>
