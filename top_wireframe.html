@@ -445,48 +445,15 @@
     }
     .situation-card:hover .situation-arrow { color: var(--text-primary); }
 
-    /* compact comparison table */
-    .compact-comparison {
+    /* courses footnote (TOPはカードのみ。詳細比較はコースTOPへ) */
+    .courses-footnote {
       max-width: 800px;
-      margin: 0 auto;
-    }
-    .compact-comparison h3 {
-      font-size: 14px;
-      font-weight: 400;
-      letter-spacing: 2px;
-      color: var(--text-secondary);
+      margin: 32px auto 0;
       text-align: center;
-      margin-bottom: 20px;
-    }
-    .compact-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-      background: var(--bg-white);
-    }
-    .compact-table th,
-    .compact-table td {
-      padding: 14px 16px;
-      text-align: center;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-      line-height: 1.6;
-    }
-    .compact-table thead th {
-      font-weight: 500;
-      font-size: 14px;
-      padding: 14px 16px;
-      border-bottom: 1px solid rgba(0,0,0,0.12);
-    }
-    .compact-table th:first-child {
-      text-align: left;
-      color: var(--text-light);
-      font-weight: 400;
-      width: 120px;
-    }
-    .compact-table td:first-child {
-      text-align: left;
-      color: var(--text-light);
       font-size: 12px;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+      line-height: 1.8;
     }
 
     /* ============================================
@@ -1085,13 +1052,7 @@
       .persona-tags { margin-top: 8px; gap: 4px; }
       .persona-tag { font-size: 10px; padding: 2px 6px; }
       .situation-arrow { width: 36px; font-size: 16px; }
-      .compact-comparison h3 { font-size: 13px; margin-bottom: 16px; }
-      .compact-table { font-size: 11px; }
-      .compact-table th,
-      .compact-table td { padding: 10px 8px; }
-      .compact-table thead th { font-size: 12px; }
-      .compact-table th:first-child { width: 80px; }
-      .compact-table td:first-child { font-size: 10px; }
+      .courses-footnote { font-size: 11px; margin-top: 24px; }
 
       /* SERIES (single column SP) */
       .series-cards { grid-template-columns: 1fr; gap: 16px; }
@@ -1339,21 +1300,9 @@
 
       </div>
 
-      <!-- Compact comparison table -->
-      <div class="compact-comparison fade-in fade-in-d2">
-        <h3>コースの比較</h3>
-        <table class="compact-table">
-          <thead>
-            <tr><th></th><th>手作り</th><th>オーダーメイド</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>大切にしたいこと</td><td>制作体験と思い出</td><td>理想のデザインと物語</td></tr>
-            <tr><td>進め方</td><td>ふたりで手を動かす</td><td>提案を受けて形にする</td></tr>
-            <tr><td>納期</td><td>当日〜約1ヶ月</td><td>約1.5〜2ヶ月</td></tr>
-            <tr><td>価格目安</td><td>¥110,000〜 / ペア</td><td>¥200,000〜 / ペア</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <p class="courses-footnote fade-in fade-in-d2">
+        ※ 各コースの詳しい比較・価格・納期は、コースページでご覧いただけます。
+      </p>
     </div>
   </section>
 
