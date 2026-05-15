@@ -339,121 +339,155 @@
     .about-more:hover { color: var(--gold); border-color: var(--gold); }
 
     /* ============================================
-       SECTION 3: COURSE SELECTION (situation-card)
-       course TOPs と同じパターン
+       SECTION 3: COURSES — 2大コースを対等に提示
+       (コンセプトの下に手作り・オーダーを並べる)
        ============================================ */
     .courses {
       padding: 100px 40px;
       background: var(--bg-cream);
     }
-    .situation-intro {
-      text-align: center;
-      font-size: 14px;
-      color: var(--text-secondary);
-      letter-spacing: 1px;
-      line-height: 2.2;
-      margin-bottom: 40px;
-    }
-    .situation-cards {
+    .main-courses {
       display: grid;
-      gap: 16px;
-      max-width: 800px;
-      margin: 0 auto 40px;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 1100px;
+      margin: 0 auto 56px;
     }
-    .situation-card {
+    .main-course-card {
       display: flex;
-      align-items: stretch;
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 3px;
+      flex-direction: column;
+      background: var(--bg-white);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 2px;
       overflow: hidden;
       text-decoration: none;
       color: inherit;
       transition: var(--transition);
-      background: var(--bg-white);
-      min-height: 100px;
     }
-    .situation-card:hover {
+    .main-course-card:hover {
       box-shadow: var(--shadow-card);
-      border-color: rgba(0,0,0,0.15);
+      transform: translateY(-3px);
     }
-    .situation-icon {
-      width: 80px;
+    .main-course-image {
+      aspect-ratio: 4 / 3;
+      background: linear-gradient(135deg, #cccccc, #a0a0a0);
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      background: var(--bg-cream);
+      color: rgba(0, 0, 0, 0.25);
+      font-size: 13px;
+      font-family: sans-serif;
     }
-    .situation-icon svg {
-      width: 32px; height: 32px;
-      stroke: var(--text-secondary);
-      stroke-width: 1.2;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-    .situation-card.consult .situation-icon { background: rgba(0,0,0,0.04); }
-    .situation-body {
+    .main-course-body {
+      padding: 32px 30px 36px;
       flex: 1;
-      padding: 18px 22px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
     }
-    .situation-label {
+    .main-course-body .en-label {
       font-family: var(--serif-en);
-      font-size: 11px;
-      letter-spacing: 3px;
+      font-size: 12px;
+      letter-spacing: 4px;
       color: var(--text-light);
-      margin-bottom: 4px;
+      margin-bottom: 10px;
     }
-    .situation-title {
-      font-size: 16px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      margin-bottom: 6px;
-      color: var(--text-primary);
+    .main-course-body h3 {
+      font-size: 22px;
+      letter-spacing: 4px;
+      font-weight: 400;
+      margin-bottom: 16px;
+      line-height: 1.6;
     }
-    .situation-desc {
+    .main-course-body .lead {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 2;
+      margin-bottom: 22px;
+      letter-spacing: 0.5px;
+    }
+    .main-course-features {
+      list-style: none;
+      margin-bottom: 26px;
+      padding: 18px 0;
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .main-course-features li {
       font-size: 13px;
       color: var(--text-secondary);
+      padding-left: 16px;
+      position: relative;
+      line-height: 2;
+      letter-spacing: 0.3px;
+    }
+    .main-course-features li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+    }
+    .main-course-body .btn-detail {
+      align-self: flex-start;
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--text-primary);
+      padding-bottom: 6px;
+      transition: var(--transition);
+      margin-top: auto;
+    }
+    .main-course-card:hover .btn-detail {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    /* 迷ったら相談 (consult-box) */
+    .consult-box {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 40px 36px;
+      background: var(--bg-white);
+      border-radius: 3px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .consult-box .en-label {
+      font-family: var(--serif-en);
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--text-light);
+      margin-bottom: 10px;
+    }
+    .consult-box h4 {
+      font-size: 17px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
       line-height: 1.7;
     }
-    .persona-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-    }
-    .persona-tag {
-      font-size: 11px;
-      background: rgba(0,0,0,0.03);
-      padding: 2px 8px;
-      border-radius: 10px;
+    .consult-box .consult-desc {
+      font-size: 13px;
       color: var(--text-secondary);
-      border: 1px solid var(--border-light);
+      margin-bottom: 24px;
+      line-height: 2;
     }
-    .situation-arrow {
-      width: 48px;
-      display: flex;
+    .consult-box .consult-btn {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      color: var(--text-light);
-      font-size: 18px;
-      flex-shrink: 0;
+      gap: 10px;
+      padding: 13px 36px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-decoration: none;
+      font-family: var(--serif-jp);
       transition: var(--transition);
+      min-height: 44px;
     }
-    .situation-card:hover .situation-arrow { color: var(--text-primary); }
-
-    /* courses footnote (TOPはカードのみ。詳細比較はコースTOPへ) */
-    .courses-footnote {
-      max-width: 800px;
-      margin: 32px auto 0;
-      text-align: center;
-      font-size: 12px;
-      color: var(--text-light);
-      letter-spacing: 0.5px;
-      line-height: 1.8;
+    .consult-box .consult-btn:hover {
+      background: var(--gold);
+      color: #fff;
     }
 
     /* ============================================
@@ -1039,20 +1073,21 @@
       .about-text p { font-size: 13px; line-height: 2.2; }
       .about-more { font-size: 12px; letter-spacing: 2px; }
 
-      /* COURSES (situation-cards) */
-      .situation-intro { font-size: 13px; line-height: 2; margin-bottom: 28px; }
-      .situation-cards { gap: 12px; margin-bottom: 32px; }
-      .situation-card { min-height: 88px; }
-      .situation-icon { width: 60px; }
-      .situation-icon svg { width: 26px; height: 26px; }
-      .situation-body { padding: 14px 14px; }
-      .situation-label { font-size: 10px; letter-spacing: 2px; }
-      .situation-title { font-size: 14px; letter-spacing: 0.5px; margin-bottom: 4px; }
-      .situation-desc { font-size: 12px; line-height: 1.7; }
-      .persona-tags { margin-top: 8px; gap: 4px; }
-      .persona-tag { font-size: 10px; padding: 2px 6px; }
-      .situation-arrow { width: 36px; font-size: 16px; }
-      .courses-footnote { font-size: 11px; margin-top: 24px; }
+      /* COURSES (main-course-card 2大コース) */
+      .main-courses { grid-template-columns: 1fr; gap: 20px; margin-bottom: 36px; }
+      .main-course-body { padding: 22px 20px 26px; }
+      .main-course-body .en-label { font-size: 11px; letter-spacing: 3px; }
+      .main-course-body h3 { font-size: 18px; letter-spacing: 3px; margin-bottom: 12px; }
+      .main-course-body .lead { font-size: 13px; line-height: 1.9; margin-bottom: 16px; }
+      .main-course-features { padding: 14px 0; margin-bottom: 20px; }
+      .main-course-features li { font-size: 12px; line-height: 1.9; padding-left: 14px; }
+      .main-course-body .btn-detail { font-size: 12px; letter-spacing: 2px; }
+
+      .consult-box { padding: 28px 20px; }
+      .consult-box .en-label { font-size: 10px; letter-spacing: 3px; }
+      .consult-box h4 { font-size: 15px; letter-spacing: 1.5px; margin-bottom: 10px; line-height: 1.7; }
+      .consult-box .consult-desc { font-size: 12px; line-height: 1.9; margin-bottom: 20px; }
+      .consult-box .consult-btn { padding: 12px 24px; font-size: 12px; letter-spacing: 1.5px; }
 
       /* SERIES (single column SP) */
       .series-cards { grid-template-columns: 1fr; gap: 16px; }
@@ -1152,9 +1187,9 @@
     @media (max-width: 380px) {
       .hero-main { font-size: 14px; letter-spacing: 2px; }
       .section-header h2 { font-size: 16px; letter-spacing: 3px; }
-      .situation-icon { width: 52px; }
-      .situation-body { padding: 12px 10px; }
-      .situation-arrow { width: 30px; }
+      .main-course-body { padding: 18px 16px 22px; }
+      .main-course-body h3 { font-size: 16px; letter-spacing: 2px; }
+      .consult-box { padding: 24px 16px; }
     }
   </style>
 </head>
@@ -1200,23 +1235,24 @@
   </section>
 
   <!-- ============================================
-       SECTION 2 — ABOUT renri
+       SECTION 2 — CONCEPT (ブランドコンセプト)
+       ※ ゼクシィ流入者がまず触れるブランド理解の入口
        ============================================ -->
   <section class="about" style="position:relative;">
-    <span class="section-label">② renriについて（アトリエ紹介）</span>
+    <span class="section-label">② renriのコンセプト</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="about-content">
       <div class="about-image fade-in">📷 夫婦のポートレート or アトリエ内観</div>
       <div class="about-text fade-in fade-in-d1">
-        <div class="en">ABOUT renri</div>
+        <div class="en">CONCEPT</div>
         <h2>ふたりの手で、<br>ふたりのための指輪を。</h2>
         <p>
-          renriは、横浜・馬車道の路地裏にある小さなアトリエです。
-          ジュエリーデザイナーと指輪職人、夫婦ふたりだけのお店。
+          renriは、横浜・馬車道の小さなアトリエ。
+          ジュエリーデザイナーと指輪職人の夫婦が、おふたりに寄り添いながら指輪をつくっています。
         </p>
         <p>
-          結婚指輪も婚約指輪も、おふたりの手で作る「手作りコース」と、
-          デザイナーが一から提案する「オーダーメイドコース」の両方をご用意しています。
+          「少ないお客様に、より丁寧に」が私たちの信条。
+          一日にお迎えするのは数組のおふたりだけ。だからこそ、十分な時間をかけて、ひとつひとつの想いをかたちにできます。
         </p>
         <a href="#" class="about-more">renriについて、もっと知る →</a>
       </div>
@@ -1224,85 +1260,76 @@
   </section>
 
   <!-- ============================================
-       SECTION 3 — COURSE SELECTION (situation-cards)
-       ※ course TOPs と同じパターンを TOP でも採用
+       SECTION 3 — COURSES (2大コースを対等に提示)
+       ※ ブランドコンセプトの下に「手作り」「オーダー」を並列で配置
        ============================================ -->
   <section class="courses" style="position:relative;">
-    <span class="section-label">③ コース選択（気持ちから選ぶ）</span>
+    <span class="section-label">③ コース紹介（手作り・オーダーメイド）</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
-        <div class="en">FIND YOUR STYLE</div>
-        <h2>どんな時間を大切にしたいですか</h2>
+        <div class="en">OUR COURSES</div>
+        <h2>renriの指輪づくり</h2>
         <div class="line"></div>
+        <p class="desc">
+          renriでは、おふたりの想いに合わせて<br>
+          ふたつのコースをご用意しています。
+        </p>
       </div>
 
-      <p class="situation-intro fade-in">
-        renriは手作り・オーダーメイドの両方を承っています。<br>
-        どちらが向いているか、おふたりの気持ちからお選びください。
-      </p>
+      <!-- 2 大コース：手作り / オーダーメイド -->
+      <div class="main-courses">
 
-      <div class="situation-cards fade-in fade-in-d1">
-
-        <a href="/handmade/" class="situation-card handmade">
-          <div class="situation-icon">
-            <svg viewBox="0 0 32 32"><circle cx="12" cy="18" r="7"/><circle cx="20" cy="18" r="7"/></svg>
+        <a href="/handmade/" class="main-course-card fade-in">
+          <div class="main-course-image">📷 手作り風景 or 完成指輪</div>
+          <div class="main-course-body">
+            <div class="en-label">HANDMADE COURSE</div>
+            <h3>手作りコース</h3>
+            <p class="lead">
+              ふたりの手で金属を叩き、形にする。<br>
+              制作の時間そのものが宝物になる、renri原点のコースです。
+            </p>
+            <ul class="main-course-features">
+              <li>鍛造製法で永く愛用できる強度と表情</li>
+              <li>当日制作可能（納期：当日〜約1ヶ月）</li>
+              <li>ジュエリー職人がそばで丁寧にサポート</li>
+            </ul>
+            <span class="btn-detail">手作りコースを詳しく見る →</span>
           </div>
-          <div class="situation-body">
-            <div class="situation-label">HANDMADE COURSE</div>
-            <div class="situation-title">思い出も一緒に残したい</div>
-            <div class="situation-desc">
-              ふたりの手で指輪を作る時間も含めて、宝物にしたいおふたりへ。
-            </div>
-            <div class="persona-tags">
-              <span class="persona-tag">制作体験を残したい</span>
-              <span class="persona-tag">手を動かしたい</span>
-            </div>
-          </div>
-          <div class="situation-arrow">&rsaquo;</div>
         </a>
 
-        <a href="/ordermade/" class="situation-card ordermade">
-          <div class="situation-icon">
-            <svg viewBox="0 0 32 32"><path d="M16 28 L4 12 L9 4 L23 4 L28 12 Z"/><polyline points="4,12 16,12 28,12"/><line x1="9" y1="4" x2="16" y2="12"/><line x1="23" y1="4" x2="16" y2="12"/></svg>
+        <a href="/ordermade/" class="main-course-card fade-in fade-in-d1">
+          <div class="main-course-image">📷 オーダーメイド指輪 or 制作シーン</div>
+          <div class="main-course-body">
+            <div class="en-label">ORDERMADE COURSE</div>
+            <h3>オーダーメイドコース</h3>
+            <p class="lead">
+              デザイナーがゼロからご提案。<br>
+              モチーフや物語まで込められる、世界にひとつの一本を。
+            </p>
+            <ul class="main-course-features">
+              <li>完全オリジナルデザインを職人が形に</li>
+              <li>幅広い素材・宝石・加工技法から選択可</li>
+              <li>納期：約1.5〜2ヶ月でお渡し</li>
+            </ul>
+            <span class="btn-detail">オーダーメイドコースを詳しく見る →</span>
           </div>
-          <div class="situation-body">
-            <div class="situation-label">ORDERMADE COURSE</div>
-            <div class="situation-title">提案を受けて、ふたりだけの一本を形に</div>
-            <div class="situation-desc">
-              世界にひとつの物語やモチーフを丁寧に形にしたい方へ。
-            </div>
-            <div class="persona-tags">
-              <span class="persona-tag">唯一性を大切に</span>
-              <span class="persona-tag">物語を込めたい</span>
-            </div>
-          </div>
-          <div class="situation-arrow">&rsaquo;</div>
-        </a>
-
-        <a href="/reservation/" class="situation-card consult">
-          <div class="situation-icon">
-            <svg viewBox="0 0 32 32"><path d="M6 22 L6 8 C6 6.9 6.9 6 8 6 L24 6 C25.1 6 26 6.9 26 8 L26 18 C26 19.1 25.1 20 24 20 L12 20 L6 26 Z"/></svg>
-          </div>
-          <div class="situation-body">
-            <div class="situation-label">CONSULTATION</div>
-            <div class="situation-title">まだ決められない・比較しながら相談したい</div>
-            <div class="situation-desc">
-              当日に手作りとオーダーメイドを見比べながら相談できます。
-            </div>
-            <div class="persona-tags">
-              <span class="persona-tag">違いを知りたい</span>
-              <span class="persona-tag">来店してから決めたい</span>
-            </div>
-          </div>
-          <div class="situation-arrow">&rsaquo;</div>
         </a>
 
       </div>
 
-      <p class="courses-footnote fade-in fade-in-d2">
-        ※ 各コースの詳しい比較・価格・納期は、コースページでご覧いただけます。
-      </p>
+      <!-- 迷ったら相談 -->
+      <div class="consult-box fade-in fade-in-d2">
+        <div class="en-label">CONSULTATION</div>
+        <h4>まだ決められない方も、まずはご相談から</h4>
+        <p class="consult-desc">
+          当日に手作りとオーダーメイドを見比べながら、<br>
+          おふたりに合うコースを一緒に整理することもできます。
+        </p>
+        <a href="/reservation/" class="consult-btn">
+          比較しながら相談する <span>→</span>
+        </a>
+      </div>
     </div>
   </section>
 
