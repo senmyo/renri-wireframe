@@ -489,7 +489,43 @@
       -webkit-box-orient: vertical; overflow: hidden;
     }
 
-    /* SECTION 9: PROCESS (縦並びでSEO最大化) */
+    /* SECTION 9: MEDIA (メディア掲載) */
+    .media { padding: 80px 40px; background: var(--bg-white); }
+    .media-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 20px; max-width: 1100px; margin: 0 auto 32px;
+    }
+    .media-card {
+      background: var(--bg-cream);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 2px;
+      padding: 24px 20px;
+      text-align: center;
+      text-decoration: none; color: inherit;
+      transition: var(--transition);
+    }
+    .media-card:hover {
+      box-shadow: var(--shadow-card);
+      transform: translateY(-2px);
+      background: var(--bg-white);
+    }
+    .media-card-logo {
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #e0e0e0, #c0c0c0);
+      margin-bottom: 14px;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(0,0,0,0.35); font-size: 12px; font-family: sans-serif;
+      letter-spacing: 2px;
+    }
+    .media-card-title {
+      font-size: 13px; letter-spacing: 1px; margin-bottom: 6px;
+    }
+    .media-card-issue {
+      font-family: var(--serif-en); font-size: 11px;
+      color: var(--text-light); letter-spacing: 1px;
+    }
+
+    /* SECTION 10: PROCESS (縦並びでSEO最大化) */
     .process { padding: 90px 40px; background: var(--bg-dark); color: #fff; }
     .process .section-header .en { color: rgba(255,255,255,0.5); }
     .process .section-header h2 { color: #fff; }
@@ -700,7 +736,41 @@
     }
     .blog-cta { text-align: center; }
 
-    /* SECTION 15: FAQ (アコーディオン Q+A on page) */
+    /* SECTION 15: NEWS (お知らせ) */
+    .news { padding: 70px 40px; background: var(--bg-white); }
+    .news-list {
+      max-width: 860px; margin: 0 auto;
+    }
+    .news-item {
+      display: flex; align-items: baseline; gap: 20px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-light);
+      text-decoration: none; color: inherit;
+      transition: var(--transition);
+      min-height: 44px;
+    }
+    .news-item:first-child { border-top: 1px solid var(--border-light); }
+    .news-item:hover { background: var(--bg-cream); padding-left: 12px; padding-right: 12px; }
+    .news-date {
+      font-family: var(--serif-en); font-size: 12px;
+      color: var(--text-light); letter-spacing: 1px;
+      flex-shrink: 0; min-width: 100px;
+    }
+    .news-tag {
+      font-size: 10px; letter-spacing: 1px;
+      padding: 2px 8px; border-radius: 2px;
+      background: var(--bg-cream); color: var(--text-secondary);
+      border: 1px solid var(--border-light);
+      flex-shrink: 0;
+    }
+    .news-title {
+      font-size: 13px; letter-spacing: 0.5px;
+      line-height: 1.6; color: var(--text-primary);
+      flex: 1;
+    }
+    .news-cta { text-align: center; margin-top: 28px; }
+
+    /* SECTION 16: FAQ (アコーディオン Q+A on page) */
     .faq { padding: 90px 40px; background: var(--bg-white); }
     .faq-list {
       max-width: 860px; margin: 0 auto;
@@ -875,6 +945,7 @@
       .material-grid { grid-template-columns: repeat(3, 1fr); }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
       .voice-grid { grid-template-columns: repeat(2, 1fr); }
+      .media-grid { grid-template-columns: repeat(2, 1fr); }
       .process-steps { grid-template-columns: repeat(3, 1fr); }
       .aftercare-grid { grid-template-columns: repeat(2, 1fr); }
       .pricing-samples { grid-template-columns: repeat(2, 1fr); }
@@ -905,8 +976,8 @@
       .hero-scroll { display: none; }
 
       .about, .visit, .courses, .series,
-      .materials, .gallery, .voice, .process, .pricing,
-      .aftercare, .access, .blog-section, .faq, .glossary { padding: 50px 20px; }
+      .materials, .gallery, .voice, .media, .process, .pricing,
+      .aftercare, .access, .blog-section, .news, .faq, .glossary { padding: 50px 20px; }
       .bottom-cta { padding: 56px 20px; }
 
       .section-header { margin-bottom: 28px; }
@@ -971,6 +1042,18 @@
       .voice-card-title { font-size: 12px; letter-spacing: 0.5px; }
       .voice-card-excerpt { font-size: 11px; }
       .voice-card-badges .badge { font-size: 9px; padding: 2px 6px; }
+
+      /* MEDIA */
+      .media-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .media-card { padding: 16px 14px; }
+      .media-card-title { font-size: 12px; }
+      .media-card-issue { font-size: 10px; }
+
+      /* NEWS */
+      .news-item { flex-wrap: wrap; gap: 8px 12px; padding: 12px 0; min-height: auto; }
+      .news-date { font-size: 11px; min-width: 80px; }
+      .news-tag { font-size: 9px; padding: 1px 6px; }
+      .news-title { font-size: 12px; flex-basis: 100%; line-height: 1.6; }
 
       /* PROCESS (縦並び) */
       .process-block { margin-bottom: 36px; }
@@ -1454,6 +1537,32 @@
             </dl>
           </div>
         </a>
+        <a href="#" class="gallery-card">
+          <div class="gallery-card-image">📷</div>
+          <div class="gallery-card-body">
+            <div class="gallery-card-meta"><span>手作り</span><span>結婚指輪</span></div>
+            <div class="gallery-card-title">やわらかな曲線が重なるご結婚指輪</div>
+            <div class="gallery-card-desc">ゆるやかなウェーブが特徴のペアリング。重ね着けしたときの調和まで考えられた。</div>
+            <dl class="gallery-card-spec">
+              <div class="spec-item"><span class="spec-label">素材</span><span class="spec-value">Pt900</span></div>
+              <div class="spec-item"><span class="spec-label">総額</span><span class="spec-value">¥246,000</span></div>
+              <div class="spec-item"><span class="spec-label">納期</span><span class="spec-value">約3週間</span></div>
+            </dl>
+          </div>
+        </a>
+        <a href="#" class="gallery-card">
+          <div class="gallery-card-image">📷</div>
+          <div class="gallery-card-body">
+            <div class="gallery-card-meta"><span>オーダーメイド</span><span>結婚指輪</span></div>
+            <div class="gallery-card-title">想いを形づけるご結婚指輪</div>
+            <div class="gallery-card-desc">出会いのエピソードから着想したデザインを、職人が丁寧に形にした特別な一組。</div>
+            <dl class="gallery-card-spec">
+              <div class="spec-item"><span class="spec-label">素材</span><span class="spec-value">Pt900 ／ K18WG</span></div>
+              <div class="spec-item"><span class="spec-label">総額</span><span class="spec-value">¥412,000</span></div>
+              <div class="spec-item"><span class="spec-label">納期</span><span class="spec-value">約2ヶ月</span></div>
+            </dl>
+          </div>
+        </a>
       </div>
 
       <div class="center"><a href="#" class="btn-outline">すべての制作事例を見る</a></div>
@@ -1503,9 +1612,50 @@
     </div>
   </section>
 
-  <!-- ⑨ 制作の流れ (縦並びでSEO最大化) -->
+  <!-- ⑨ メディア掲載 -->
+  <section class="media" style="position:relative;">
+    <span class="section-label">⑨ メディア掲載</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="en">MEDIA</div>
+        <h2>メディア掲載</h2>
+        <div class="line"></div>
+        <p class="desc">renriは各種ブライダル雑誌・WEBメディアにご紹介いただいています。</p>
+      </div>
+
+      <div class="media-grid">
+        <a href="#" class="media-card">
+          <div class="media-card-logo">ZEXY LOGO</div>
+          <div class="media-card-title">ゼクシィ</div>
+          <div class="media-card-issue">2026 SPRING ISSUE</div>
+        </a>
+        <a href="#" class="media-card">
+          <div class="media-card-logo">ZEXY net</div>
+          <div class="media-card-title">ゼクシィ net</div>
+          <div class="media-card-issue">掲載中</div>
+        </a>
+        <a href="#" class="media-card">
+          <div class="media-card-logo">MAGAZINE</div>
+          <div class="media-card-title">結婚スタイルマガジン</div>
+          <div class="media-card-issue">2026 No.34</div>
+        </a>
+        <a href="#" class="media-card">
+          <div class="media-card-logo">MYNAVI</div>
+          <div class="media-card-title">マイナビウェディング</div>
+          <div class="media-card-issue">掲載中</div>
+        </a>
+      </div>
+
+      <div class="center">
+        <a href="#" class="btn-outline">メディア掲載一覧を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑩ 制作の流れ (縦並びでSEO最大化) -->
   <section class="process" style="position:relative;">
-    <span class="section-label">⑨ 制作の流れ</span>
+    <span class="section-label">⑩ 制作の流れ</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
@@ -1549,7 +1699,7 @@
 
   <!-- ⑪ 価格 -->
   <section class="pricing" style="position:relative;">
-    <span class="section-label">⑩ 価格</span>
+    <span class="section-label">⑪ 価格</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
@@ -1611,7 +1761,7 @@
 
   <!-- ⑫ アフターケア -->
   <section class="aftercare" style="position:relative;">
-    <span class="section-label">⑪ アフターケア・永久保証</span>
+    <span class="section-label">⑫ アフターケア・永久保証</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
@@ -1660,7 +1810,7 @@
 
   <!-- ⑬ 店舗情報 -->
   <section class="access" style="position:relative;">
-    <span class="section-label">⑫ 店舗情報・アクセス</span>
+    <span class="section-label">⑬ 店舗情報・アクセス</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="access-content">
       <div class="access-map fade-in">🗺 Googleマップ</div>
@@ -1679,7 +1829,7 @@
 
   <!-- ⑭ ブログ -->
   <section class="blog-section" style="position:relative;">
-    <span class="section-label">⑬ スタッフブログ</span>
+    <span class="section-label">⑭ スタッフブログ</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
@@ -1714,9 +1864,52 @@
     </div>
   </section>
 
-  <!-- ⑮ FAQ (アコーディオン Q+A on-page) -->
+  <!-- ⑮ お知らせ -->
+  <section class="news" style="position:relative;">
+    <span class="section-label">⑮ お知らせ</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="en">NEWS</div>
+        <h2>お知らせ</h2>
+        <div class="line"></div>
+      </div>
+      <div class="news-list">
+        <a href="#" class="news-item">
+          <span class="news-date">2026.05.10</span>
+          <span class="news-tag">CAMPAIGN</span>
+          <span class="news-title">6月のご来店予約キャンペーン受付開始のお知らせ</span>
+        </a>
+        <a href="#" class="news-item">
+          <span class="news-date">2026.04.25</span>
+          <span class="news-tag">NEW</span>
+          <span class="news-title">新作シリーズ「花こよみ」春の婚約指輪が登場しました</span>
+        </a>
+        <a href="#" class="news-item">
+          <span class="news-date">2026.04.18</span>
+          <span class="news-tag">INFO</span>
+          <span class="news-title">ゴールデンウィーク期間中（4/29〜5/6）の営業について</span>
+        </a>
+        <a href="#" class="news-item">
+          <span class="news-date">2026.04.05</span>
+          <span class="news-tag">MEDIA</span>
+          <span class="news-title">ゼクシィ 2026年春号にrenriが掲載されました</span>
+        </a>
+        <a href="#" class="news-item">
+          <span class="news-date">2026.03.20</span>
+          <span class="news-tag">INFO</span>
+          <span class="news-title">「うちでのリング」キット販売の在庫情報について</span>
+        </a>
+      </div>
+      <div class="news-cta">
+        <a href="#" class="btn-outline">お知らせ一覧を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑯ FAQ (アコーディオン Q+A on-page) -->
   <section class="faq" style="position:relative;">
-    <span class="section-label">⑭ よくあるご質問（Q+A on-page アコーディオン）</span>
+    <span class="section-label">⑯ よくあるご質問（Q+A on-page アコーディオン）</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
@@ -1738,6 +1931,26 @@
             <div class="answer">手作りコースは事前打ち合わせなしで当日制作も可能です。オーダーメイドコースはデザインを練るため、初回ご相談からお渡しまで1.5〜2ヶ月程度かかります。</div>
           </details>
           <details class="faq-item">
+            <summary>コース決定のタイミングは？</summary>
+            <div class="answer">ご来店当日にコースをお決めいただけます。サンプルリングや実際の素材を見比べながら、手作りとオーダーメイドのどちらがおふたりに合うか、その場でゆっくりお選びください。事前に決めておく必要はありません。</div>
+          </details>
+          <details class="faq-item">
+            <summary>手作りの制作方法（鍛造製法）について教えてください</summary>
+            <div class="answer">renriの手作りコースは「鍛造製法」を採用しています。金属の棒をバーナーで熱し、叩いて伸ばしながら指輪の形に成形していく伝統的な技法です。金属の組織が密になるため、鋳造製法より強度が高く、長く愛用いただける指輪に仕上がります。</div>
+          </details>
+          <details class="faq-item">
+            <summary>手作りで制作可能なデザインの範囲は？</summary>
+            <div class="answer">ストレート、カーブ、ハンマーテクスチャー、マット、つや、ヘアラインなどの基本的な仕上げに加え、ミル打ちやレーザー刻印、メビウスリングなどのオプション加工にも対応しています。複雑なデザインや細かい彫金が必要な場合はオーダーメイドコースをおすすめします。</div>
+          </details>
+          <details class="faq-item">
+            <summary>オーダーメイドで制作できないデザインはありますか？</summary>
+            <div class="answer">基本的には幅広いデザインに対応可能ですが、構造上強度が確保できないデザインや、極端に細すぎる形状は耐久性の観点からおすすめできない場合があります。具体的なご希望があれば、デザイナーがご相談のうえ最適な形をご提案します。</div>
+          </details>
+          <details class="faq-item">
+            <summary>ノープランでも制作できますか？</summary>
+            <div class="answer">はい、何も決まっていない状態でもご来店いただけます。サンプルリングを見ながらおふたりの好みを引き出し、当日制作可能なデザインまでご案内します。手作り結婚指輪は当日制作も可能です。</div>
+          </details>
+          <details class="faq-item">
             <summary>不器用でも手作りで制作できますか？</summary>
             <div class="answer">経験豊富な職人がそばで丁寧にサポートしますので、不器用な方でも安心して制作いただけます。これまでにご制作いただいたほぼ全てのお客様が、満足のいく仕上がりに至っています。</div>
           </details>
@@ -1752,6 +1965,10 @@
           <details class="faq-item">
             <summary>金額が一律ではないのはなぜですか？</summary>
             <div class="answer">renriの指輪は「制作料金22,000円 + 材料費 + オプション加工費」の合算です。素材（プラチナ、K18ゴールド）の選択や加工内容により金額が変わるため、おふたりの選択に応じた最適な価格でご提供できます。</div>
+          </details>
+          <details class="faq-item">
+            <summary>ブランド品と比べて価格が抑えられている理由は？</summary>
+            <div class="answer">renriは小さなアトリエ運営で、大型店舗や大規模広告にコストをかけていません。その分を素材費や制作の丁寧さに還元することで、ブランド品と同等の品質をより手の届く価格でご提供しています。一日に数組限定だからこそ実現できる、丁寧でリーズナブルな価格設定です。</div>
           </details>
           <details class="faq-item">
             <summary>予算が少ない場合の対応は？</summary>
@@ -1776,6 +1993,22 @@
         </div>
 
         <div class="faq-cat">
+          <div class="faq-cat-title">ABOUT PRODUCT — 素材・宝石について</div>
+          <details class="faq-item">
+            <summary>プラチナとゴールド、どちらが良いですか？</summary>
+            <div class="answer">プラチナは変色しにくく、強度も高いため日常使いに適しています。K18ゴールドは色のバリエーション（イエロー・ホワイト・ピンク・グリーン・グレー）が豊富で、おふたりの肌色や好みに合わせて選べる楽しさがあります。価格はK18ゴールドの方が比較的お手頃です。どちらも結婚指輪に長く適した素材です。</div>
+          </details>
+          <details class="faq-item">
+            <summary>K18ゴールドの色が異なる理由は？</summary>
+            <div class="answer">K18ゴールドは、純金75%に他の金属（銀・銅・パラジウムなど）を混ぜた合金です。混ぜる金属の種類と比率によって、イエロー（銀+銅）、ピンク（銅多め）、ホワイト（パラジウム）、グリーン（銀多め）、グレーなど、様々な色が生まれます。すべて金の含有率は同じ75%です。</div>
+          </details>
+          <details class="faq-item">
+            <summary>ダイヤモンドの4Cとは？</summary>
+            <div class="answer">ダイヤモンドの品質を表す4つの指標です。<strong>Carat（カラット・重さ）</strong>、<strong>Color（カラー・色）</strong>、<strong>Clarity（クラリティ・透明度）</strong>、<strong>Cut（カット・研磨形状）</strong>の頭文字。同じ大きさに見えても4Cの組み合わせで価格が大きく変わります。renriではご予算と好みに合わせて最適なダイヤモンドをご提案します。</div>
+          </details>
+        </div>
+
+        <div class="faq-cat">
           <div class="faq-cat-title">ABOUT AFTERCARE — アフターケアについて</div>
           <details class="faq-item">
             <summary>アフターケアサービスはありますか？</summary>
@@ -1793,7 +2026,7 @@
 
   <!-- ⑯ 用語集 / 関連キーワード -->
   <section class="glossary" style="position:relative;">
-    <span class="section-label">⑮ 用語集・関連キーワード</span>
+    <span class="section-label">⑰ 用語集・関連キーワード</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
@@ -1837,7 +2070,7 @@
 
   <!-- ⑰ ボトムCTA -->
   <section class="bottom-cta" style="position:relative;">
-    <span class="section-label">⑯ 最終CTA</span>
+    <span class="section-label">⑱ 最終CTA</span>
     <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="bottom-cta-inner">
       <div class="en">CONTACT</div>
