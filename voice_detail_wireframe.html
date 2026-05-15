@@ -145,12 +145,34 @@
     .breadcrumb .sep { margin: 0 8px; }
 
     /* ============================================
+       CUSTOMER MAIN IMAGE (ACF: メイン画像)
+       ============================================ */
+    .customer-main-image {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 24px 40px 0;
+    }
+    .customer-main-image-inner {
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      background: linear-gradient(135deg, #c8c8c8, #a8a8a8);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(0, 0, 0, 0.25);
+      font-size: 14px;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
+
+    /* ============================================
        ARTICLE HEADER
        ============================================ */
     .article-header {
       max-width: 800px;
       margin: 0 auto;
-      padding: 40px 40px 0;
+      padding: 32px 40px 0;
       text-align: center;
     }
     .article-badges {
@@ -619,7 +641,9 @@
 
       .breadcrumb { padding: 10px 20px; font-size: 11px; }
 
-      .article-header { padding: 28px 20px 0; }
+      .customer-main-image { padding: 16px 20px 0; }
+
+      .article-header { padding: 24px 20px 0; }
       .article-title { font-size: 20px; letter-spacing: 2px; }
       .article-badges { gap: 6px; margin-bottom: 14px; }
       .badge { font-size: 10px; padding: 4px 12px; }
@@ -731,6 +755,11 @@
     <a href="/voice/">お客様の声</a>
     <span class="sep">&gt;</span>
     <span>ふたつの質感が調和するご結婚指輪</span>
+  </div>
+
+  <!-- CUSTOMER MAIN IMAGE (ACF: メイン画像) -->
+  <div class="customer-main-image fade-in">
+    <div class="customer-main-image-inner">📷 お客様のメイン画像</div>
   </div>
 
   <!-- ARTICLE HEADER (ACF: バッジ + 日付 + キャッチコピー) -->

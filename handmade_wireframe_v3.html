@@ -936,6 +936,50 @@
   .compact-table th:first-child { text-align: left; color: var(--text-light); font-weight: 400; width: 120px; }
   .compact-table td:first-child { text-align: left; color: var(--text-light); }
 
+  .consult-cta {
+    text-align: center;
+    padding: 40px 30px;
+    background: var(--bg-cream);
+    border-radius: 3px;
+  }
+  .consult-cta .cta-label {
+    font-family: var(--serif-en);
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--text-light);
+    margin-bottom: 10px;
+  }
+  .consult-cta .cta-title {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .consult-cta .cta-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    line-height: 1.8;
+  }
+  .consult-cta .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 36px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    font-family: var(--serif-jp);
+    transition: var(--transition);
+    background: transparent;
+  }
+  .consult-cta .btn:hover {
+    background: var(--gold);
+    color: #fff;
+  }
+
   @media (max-width: 600px) {
     .situation-icon { width: 60px; font-size: 22px; }
     .situation-body { padding: 16px; }
@@ -1131,7 +1175,7 @@
         <div class="situation-icon"><svg viewBox="0 0 32 32"><path d="M6 22 L6 8 C6 6.9 6.9 6 8 6 L24 6 C25.1 6 26 6.9 26 8 L26 18 C26 19.1 25.1 20 24 20 L12 20 L6 26 Z"/></svg></div>
         <div class="situation-body">
           <div class="situation-label">CONSULTATION</div>
-          <div class="situation-title">手作りとオーダーメイドを見比べて決めたい</div>
+          <div class="situation-title">まだ決めきれないから、比較しながら相談したい</div>
           <div class="situation-desc">当日に手作りとオーダーメイドを見比べながら相談することもできます。おふたりに合う進め方を、その場で一緒に整理します。</div>
           <div class="persona-tags">
             <span class="persona-tag">まず違いを知りたい</span>
@@ -1183,11 +1227,25 @@
           </tr>
           <tr>
             <td>価格目安</td>
-            <td>&yen;200,000〜 / ペア</td>
+            <td>&yen;110,000〜 / ペア</td>
             <td>&yen;200,000〜 / ペア</td>
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <!-- Undecided user CTA -->
+    <div class="consult-cta">
+      <div class="cta-label">FOR YOU</div>
+      <div class="cta-title">迷っている段階でもご予約いただけます</div>
+      <div class="cta-desc">
+        どちらかを決めてから来店する必要はありません。<br>
+        実物や制作方法を見比べながら、おふたりに合うコースを一緒に整理します。
+      </div>
+      <a href="/reservation/" class="btn">
+        比較しながら相談する
+        <span>&rarr;</span>
+      </a>
     </div>
 
   </div>
