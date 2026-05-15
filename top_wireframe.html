@@ -118,20 +118,17 @@
     .sp-menu-btn { display: none; }
 
     /* ============================================
-       SECTION 1: HERO
+       SECTION 1: HERO (minimal)
        ============================================ */
     .hero {
       position: relative;
       height: calc(100vh - 64px);
       min-height: 600px;
       background: linear-gradient(135deg, #b8b8b8 0%, #909090 50%, #707070 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       overflow: hidden;
     }
     .hero::before {
-      content: '📷 メインビジュアル（手作り風景 or 完成指輪）';
+      content: '📷 メインビジュアル（完成指輪 or 制作シーン）';
       position: absolute;
       inset: 0;
       display: flex;
@@ -145,89 +142,55 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.35) 100%);
     }
     .hero-copy {
-      position: relative;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 60px;
       z-index: 2;
       text-align: center;
       color: #fff;
-      max-width: 760px;
       padding: 0 40px;
-      animation: heroFadeIn 1.2s ease-out 0.4s both;
+      animation: heroFadeIn 1.4s ease-out 0.6s both;
     }
     .hero-en {
       font-family: var(--serif-en);
-      font-size: 14px;
-      letter-spacing: 8px;
+      font-size: 11px;
+      letter-spacing: 6px;
       font-weight: 300;
-      margin-bottom: 28px;
-      opacity: 0.85;
+      margin-bottom: 14px;
+      opacity: 0.8;
     }
     .hero-main {
-      font-size: 30px;
+      font-size: 18px;
       font-weight: 300;
-      letter-spacing: 8px;
+      letter-spacing: 6px;
       line-height: 1.9;
-      margin-bottom: 36px;
     }
-    .hero-sub {
-      font-size: 13px;
-      letter-spacing: 2px;
-      line-height: 2.2;
-      opacity: 0.9;
-      margin-bottom: 48px;
-    }
-    .hero-cta {
-      display: inline-flex;
-      gap: 16px;
-      align-items: center;
-    }
-    .btn-primary {
-      padding: 16px 44px;
-      background: rgba(255, 255, 255, 0.95);
-      color: var(--text-primary);
-      border: none;
-      font-family: var(--serif-jp);
-      font-size: 14px;
-      letter-spacing: 4px;
-      cursor: pointer;
-      transition: var(--transition);
-      text-decoration: none;
-      border-radius: 2px;
-      font-weight: 400;
-    }
-    .btn-primary:hover { background: #fff; transform: translateY(-2px); }
-    .btn-text {
-      color: #fff;
-      font-size: 13px;
-      letter-spacing: 2px;
-      text-decoration: none;
-      padding: 14px 8px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-      transition: var(--transition);
-    }
-    .btn-text:hover { border-bottom-color: #fff; }
 
     .hero-scroll {
       position: absolute;
-      bottom: 32px;
+      bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
-      color: rgba(255, 255, 255, 0.7);
-      font-family: var(--serif-en);
-      font-size: 11px;
-      letter-spacing: 3px;
-      writing-mode: vertical-rl;
       z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, 0.6);
+      font-family: var(--serif-en);
+      font-size: 10px;
+      letter-spacing: 3px;
     }
     .hero-scroll::after {
       content: '';
       display: block;
       width: 1px;
-      height: 40px;
-      background: rgba(255, 255, 255, 0.5);
-      margin: 12px auto 0;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.4);
     }
 
     /* ============================================
@@ -1092,25 +1055,15 @@
   </header>
 
   <!-- ============================================
-       SECTION 1 — HERO
-       目的: ブランド世界観の確立 / 最小限のCTA
-       SEO: "結婚指輪" "手作り" "横浜" "馬車道" を本文に自然配置
+       SECTION 1 — HERO (minimal)
+       目的: 画像で世界観を語る / テキスト最小限
+       SEO: H1にのみKW配置（"結婚指輪""横浜""馬車道"）
+       CTA: ヘッダーの「来店予約」が常時表示で代替
        ============================================ -->
   <section class="hero">
     <div class="hero-copy">
-      <div class="hero-en">HANDMADE & ORDERMADE WEDDING RINGS, YOKOHAMA</div>
-      <h1 class="hero-main">
-        横浜・馬車道のアトリエで<br>
-        結婚指輪を、おふたりの手で。
-      </h1>
-      <p class="hero-sub">
-        ジュエリーデザイナーと職人の夫婦が営む小さなアトリエ。<br>
-        手作り・オーダーメイド、どちらの結婚指輪・婚約指輪も承ります。
-      </p>
-      <div class="hero-cta">
-        <a href="#" class="btn-primary">ご来店予約</a>
-        <a href="#" class="btn-text">まずはご相談 →</a>
-      </div>
+      <div class="hero-en">WEDDING RINGS, YOKOHAMA</div>
+      <h1 class="hero-main">横浜・馬車道のアトリエで作る、結婚指輪</h1>
     </div>
     <div class="hero-scroll">SCROLL</div>
   </section>
