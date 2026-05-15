@@ -8,6 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
   <style>
+    /* ============================================
+       VARIABLES (course TOPs と統一)
+       ============================================ */
     :root {
       --gold: #555555;
       --gold-light: #777777;
@@ -29,7 +32,6 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
     body {
       font-family: var(--serif-jp);
       color: var(--text-primary);
@@ -37,32 +39,74 @@
       line-height: 1.8;
       font-size: 15px;
       -webkit-font-smoothing: antialiased;
-    }
-
-    .annotation {
-      position: fixed;
-      top: 50%;
-      right: 8px;
-      transform: translateY(-50%);
-      z-index: 9998;
-      background: rgba(26, 26, 46, 0.92);
-      color: #fff;
-      font-family: sans-serif;
-      font-size: 11px;
-      padding: 10px 14px;
-      border-radius: 4px;
-      max-width: 200px;
-      line-height: 1.6;
-      pointer-events: none;
-      display: none;
+      padding-top: 36px;
     }
 
     /* ============================================
-       HEADER
+       WIREFRAME ANNOTATION BAR (course TOPs と統一)
+       ============================================ */
+    .wireframe-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 9999;
+      background: #1a1a2e;
+      color: #fff;
+      padding: 8px 20px;
+      font-family: sans-serif;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .wireframe-bar .badge {
+      background: #e94560;
+      color: #fff;
+      padding: 2px 10px;
+      border-radius: 3px;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+    .wireframe-bar .page-path { color: #a2d2ff; font-weight: 500; }
+
+    .section-label {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(26, 26, 46, 0.85);
+      color: #a2d2ff;
+      font-family: sans-serif;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 3px;
+      z-index: 10;
+      letter-spacing: 0.3px;
+    }
+    .feedback-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 50;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      font-size: 12px;
+      color: #fff;
+      background: rgba(0,0,0,0.5);
+      border-radius: 20px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .feedback-btn:hover { background: rgba(0,0,0,0.75); }
+    .feedback-btn::before { content: "\270E"; font-size: 14px; }
+
+    /* ============================================
+       HEADER (SP最適化)
        ============================================ */
     .header {
       position: sticky;
-      top: 0;
+      top: 36px;
       z-index: 100;
       background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(10px);
@@ -71,24 +115,20 @@
     .header-inner {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 16px 40px;
+      padding: 14px 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
     .logo {
       font-family: var(--serif-en);
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 300;
       letter-spacing: 4px;
       color: var(--text-primary);
       text-decoration: none;
     }
-    .nav {
-      display: flex;
-      gap: 28px;
-      align-items: center;
-    }
+    .nav { display: flex; gap: 24px; align-items: center; }
     .nav a {
       font-size: 13px;
       color: var(--text-secondary);
@@ -97,33 +137,77 @@
       transition: var(--transition);
     }
     .nav a:hover { color: var(--gold); }
-    .header-cta {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-    .header-cta a {
-      padding: 8px 16px;
-      font-size: 12px;
-      letter-spacing: 1px;
-      text-decoration: none;
-      transition: var(--transition);
-      border-radius: 2px;
-    }
-    .header-cta .reserve {
+    .header-actions { display: flex; gap: 10px; align-items: center; }
+    .header-reserve {
+      padding: 9px 18px;
       background: var(--text-primary);
       color: #fff;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: var(--transition);
     }
-    .header-cta .reserve:hover { background: var(--gold); }
-    .sp-menu-btn { display: none; }
+    .header-reserve:hover { background: var(--gold); }
+    .sp-menu-btn {
+      display: none;
+      width: 44px; height: 44px;
+      align-items: center; justify-content: center;
+      font-size: 20px;
+      color: var(--text-primary);
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    /* ============================================
+       SECTION HEADING (course TOPs と統一)
+       ============================================ */
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .section-header .en {
+      font-family: var(--serif-en);
+      font-size: 13px;
+      letter-spacing: 6px;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+    .section-header h2 {
+      font-size: 24px;
+      font-weight: 300;
+      letter-spacing: 6px;
+      line-height: 1.7;
+      color: var(--text-primary);
+    }
+    .section-header .line {
+      width: 36px;
+      height: 1px;
+      background: var(--gold);
+      margin: 18px auto 0;
+    }
+    .section-header .desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      letter-spacing: 0.5px;
+      margin-top: 20px;
+      line-height: 2;
+    }
 
     /* ============================================
        SECTION 1: HERO (minimal)
        ============================================ */
     .hero {
       position: relative;
-      height: calc(100vh - 64px);
-      min-height: 600px;
+      height: 70vh;
+      min-height: 480px;
+      max-height: 720px;
       background: linear-gradient(135deg, #b8b8b8 0%, #909090 50%, #707070 100%);
       overflow: hidden;
     }
@@ -142,17 +226,16 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.35) 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.4) 100%);
     }
     .hero-copy {
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 60px;
+      left: 0; right: 0;
+      bottom: 56px;
       z-index: 2;
       text-align: center;
       color: #fff;
-      padding: 0 40px;
+      padding: 0 24px;
       animation: heroFadeIn 1.4s ease-out 0.6s both;
     }
     .hero-en {
@@ -160,19 +243,18 @@
       font-size: 11px;
       letter-spacing: 6px;
       font-weight: 300;
-      margin-bottom: 14px;
-      opacity: 0.8;
+      margin-bottom: 12px;
+      opacity: 0.85;
     }
     .hero-main {
       font-size: 18px;
       font-weight: 300;
-      letter-spacing: 6px;
+      letter-spacing: 5px;
       line-height: 1.9;
     }
-
     .hero-scroll {
       position: absolute;
-      bottom: 24px;
+      bottom: 18px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 2;
@@ -187,95 +269,65 @@
     }
     .hero-scroll::after {
       content: '';
-      display: block;
       width: 1px;
-      height: 28px;
+      height: 24px;
       background: rgba(255, 255, 255, 0.4);
     }
 
     /* ============================================
-       SECTION HEADING (共通)
+       SECTION 2: ABOUT renri
        ============================================ */
-    .section-heading {
-      text-align: center;
-      margin-bottom: 56px;
-    }
-    .section-heading .en {
-      font-family: var(--serif-en);
-      font-size: 13px;
-      letter-spacing: 6px;
-      color: var(--text-light);
-      margin-bottom: 12px;
-      display: block;
-    }
-    .section-heading .jp {
-      font-size: 24px;
-      font-weight: 300;
-      letter-spacing: 6px;
-      line-height: 1.8;
-      color: var(--text-primary);
-    }
-    .section-heading .sub {
-      font-size: 13px;
-      color: var(--text-secondary);
-      letter-spacing: 1px;
-      margin-top: 16px;
-      line-height: 2;
-    }
-
-    /* ============================================
-       SECTION 2: ATELIER STORY
-       ============================================ */
-    .atelier {
-      padding: 120px 40px;
+    .about {
+      padding: 100px 40px;
       background: var(--bg-white);
     }
-    .atelier-inner {
-      max-width: 1100px;
-      margin: 0 auto;
+    .about .section-inner { padding: 0; }
+    .about-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      gap: 60px;
       align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
     }
-    .atelier-image {
+    .about-image {
       aspect-ratio: 4 / 5;
       background: linear-gradient(135deg, #c8c8c8, #a0a0a0);
       border-radius: 2px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(0, 0, 0, 0.25);
+      color: rgba(0,0,0,0.25);
       font-family: sans-serif;
       font-size: 13px;
     }
-    .atelier-text .en-label {
+    .about-text .en {
       font-family: var(--serif-en);
-      font-size: 13px;
-      letter-spacing: 6px;
+      font-size: 12px;
+      letter-spacing: 5px;
       color: var(--text-light);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
-    .atelier-text h2 {
+    .about-text h2 {
       font-size: 22px;
       font-weight: 300;
       letter-spacing: 4px;
       line-height: 2;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       color: var(--text-primary);
     }
-    .atelier-text p {
+    .about-text p {
       font-size: 14px;
       line-height: 2.4;
       color: var(--text-secondary);
       letter-spacing: 0.5px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
-    .atelier-text .more-link {
+    .about-more {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      margin-top: 24px;
+      gap: 10px;
+      margin-top: 18px;
       font-size: 13px;
       letter-spacing: 3px;
       color: var(--text-primary);
@@ -284,26 +336,177 @@
       padding-bottom: 6px;
       transition: var(--transition);
     }
-    .atelier-text .more-link:hover { color: var(--gold); border-color: var(--gold); }
+    .about-more:hover { color: var(--gold); border-color: var(--gold); }
 
     /* ============================================
-       SECTION 3: COURSE SELECTION (4 CARDS)
+       SECTION 3: COURSE SELECTION (situation-card)
+       course TOPs と同じパターン
        ============================================ */
     .courses {
-      padding: 120px 40px;
+      padding: 100px 40px;
       background: var(--bg-cream);
     }
-    .courses-inner {
-      max-width: 1200px;
+    .situation-intro {
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-secondary);
+      letter-spacing: 1px;
+      line-height: 2.2;
+      margin-bottom: 40px;
+    }
+    .situation-cards {
+      display: grid;
+      gap: 16px;
+      max-width: 800px;
+      margin: 0 auto 40px;
+    }
+    .situation-card {
+      display: flex;
+      align-items: stretch;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 3px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+      background: var(--bg-white);
+      min-height: 100px;
+    }
+    .situation-card:hover {
+      box-shadow: var(--shadow-card);
+      border-color: rgba(0,0,0,0.15);
+    }
+    .situation-icon {
+      width: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: var(--bg-cream);
+    }
+    .situation-icon svg {
+      width: 32px; height: 32px;
+      stroke: var(--text-secondary);
+      stroke-width: 1.2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .situation-card.consult .situation-icon { background: rgba(0,0,0,0.04); }
+    .situation-body {
+      flex: 1;
+      padding: 18px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .situation-label {
+      font-family: var(--serif-en);
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+    .situation-title {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+    .situation-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .persona-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .persona-tag {
+      font-size: 11px;
+      background: rgba(0,0,0,0.03);
+      padding: 2px 8px;
+      border-radius: 10px;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-light);
+    }
+    .situation-arrow {
+      width: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 18px;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+    .situation-card:hover .situation-arrow { color: var(--text-primary); }
+
+    /* compact comparison table */
+    .compact-comparison {
+      max-width: 800px;
       margin: 0 auto;
     }
-    .course-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
+    .compact-comparison h3 {
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      color: var(--text-secondary);
+      text-align: center;
+      margin-bottom: 20px;
     }
-    .course-card {
+    .compact-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
       background: var(--bg-white);
+    }
+    .compact-table th,
+    .compact-table td {
+      padding: 14px 16px;
+      text-align: center;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      line-height: 1.6;
+    }
+    .compact-table thead th {
+      font-weight: 500;
+      font-size: 14px;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(0,0,0,0.12);
+    }
+    .compact-table th:first-child {
+      text-align: left;
+      color: var(--text-light);
+      font-weight: 400;
+      width: 120px;
+    }
+    .compact-table td:first-child {
+      text-align: left;
+      color: var(--text-light);
+      font-size: 12px;
+    }
+
+    /* ============================================
+       SECTION 4: SERIES & SERVICE
+       オーダーメイドTOPのseries-cardパターン
+       ============================================ */
+    .series {
+      padding: 100px 40px;
+      background: var(--bg-white);
+    }
+    .series-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .series-card {
+      background: var(--bg-white);
+      border: 1px solid rgba(0,0,0,0.06);
       border-radius: 2px;
       overflow: hidden;
       text-decoration: none;
@@ -312,136 +515,71 @@
       display: flex;
       flex-direction: column;
     }
-    .course-card:hover {
+    .series-card:hover {
       box-shadow: var(--shadow-card);
-      transform: translateY(-4px);
+      transform: translateY(-3px);
     }
-    .course-card-image {
-      aspect-ratio: 4 / 5;
-      background: linear-gradient(135deg, #cccccc, #a0a0a0);
+    .series-card-image {
+      aspect-ratio: 4 / 3;
+      background: linear-gradient(135deg, #cccccc, #a8a8a8);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(0, 0, 0, 0.25);
+      color: rgba(0,0,0,0.25);
       font-size: 12px;
       font-family: sans-serif;
-      position: relative;
     }
-    .course-card-image .badge {
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      background: rgba(255, 255, 255, 0.95);
-      color: var(--text-primary);
-      font-size: 10px;
-      letter-spacing: 2px;
-      padding: 4px 10px;
-      border-radius: 2px;
-    }
-    .course-card-body {
-      padding: 28px 24px 32px;
-      text-align: center;
+    .series-card-body {
+      padding: 24px 22px 28px;
       flex: 1;
       display: flex;
       flex-direction: column;
     }
-    .course-card-en {
+    .series-card-body .en-label {
       font-family: var(--serif-en);
       font-size: 11px;
       letter-spacing: 4px;
       color: var(--text-light);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
-    .course-card-title {
-      font-size: 16px;
+    .series-card-body h3 {
+      font-size: 18px;
       font-weight: 500;
-      letter-spacing: 3px;
-      line-height: 1.8;
-      margin-bottom: 14px;
-      color: var(--text-primary);
+      letter-spacing: 2px;
+      line-height: 1.7;
+      margin-bottom: 8px;
     }
-    .course-card-desc {
-      font-size: 12px;
-      line-height: 2;
-      color: var(--text-secondary);
-      letter-spacing: 0.5px;
-      margin-bottom: 20px;
-      flex: 1;
-    }
-    .course-card-arrow {
-      display: inline-block;
-      font-family: var(--serif-en);
+    .series-card-body .series-tag {
       font-size: 11px;
-      letter-spacing: 3px;
-      color: var(--text-primary);
-      padding-top: 12px;
-      border-top: 1px solid var(--border-light);
-    }
-
-    /* ============================================
-       SECTION 4: GALLERY (制作事例)
-       ============================================ */
-    .gallery {
-      padding: 120px 40px;
-      background: var(--bg-white);
-    }
-    .gallery-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 48px;
-    }
-    .gallery-item {
-      aspect-ratio: 1 / 1;
-      background: linear-gradient(135deg, #cccccc, #a0a0a0);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(0, 0, 0, 0.25);
-      font-size: 12px;
-      font-family: sans-serif;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .gallery-item:hover { opacity: 0.85; }
-    .gallery-cta {
-      text-align: center;
-    }
-    .btn-outline {
-      display: inline-block;
-      padding: 14px 40px;
-      border: 1px solid var(--text-primary);
-      color: var(--text-primary);
-      font-size: 13px;
-      letter-spacing: 4px;
-      text-decoration: none;
-      transition: var(--transition);
-    }
-    .btn-outline:hover {
-      background: var(--text-primary);
-      color: #fff;
-    }
-
-    /* ============================================
-       SECTION 5: VOICE (お客様の声)
-       ============================================ */
-    .voice-section {
-      padding: 120px 40px;
+      letter-spacing: 1px;
+      color: var(--gold);
       background: var(--bg-cream);
+      padding: 4px 10px;
+      border-radius: 2px;
+      display: inline-block;
+      margin-bottom: 14px;
+      align-self: flex-start;
     }
-    .voice-inner {
-      max-width: 1200px;
-      margin: 0 auto;
+    .series-card-body p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 2;
+      letter-spacing: 0.3px;
+    }
+
+    /* ============================================
+       SECTION 5: VOICE
+       ============================================ */
+    .voice {
+      padding: 100px 40px;
+      background: var(--bg-cream);
     }
     .voice-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      margin-bottom: 48px;
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto 40px;
     }
     .voice-card {
       background: var(--bg-white);
@@ -453,20 +591,20 @@
     }
     .voice-card:hover {
       box-shadow: var(--shadow-card);
-      transform: translateY(-4px);
+      transform: translateY(-3px);
     }
     .voice-card-image {
       aspect-ratio: 4 / 3;
-      background: linear-gradient(135deg, #cccccc, #a0a0a0);
+      background: linear-gradient(135deg, #cccccc, #a8a8a8);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(0, 0, 0, 0.25);
+      color: rgba(0,0,0,0.25);
       font-size: 12px;
       font-family: sans-serif;
     }
     .voice-card-body {
-      padding: 20px 22px 24px;
+      padding: 18px 20px 22px;
     }
     .voice-card-badges {
       display: flex;
@@ -479,15 +617,26 @@
       letter-spacing: 1px;
       border-radius: 2px;
     }
-    .badge-handmade { background: var(--bg-cream); color: var(--text-primary); border: 1px solid var(--border-light); }
-    .badge-ordermade { background: var(--text-primary); color: #fff; }
-    .badge-type { background: var(--bg-cream); color: var(--text-secondary); border: 1px solid var(--border-light); }
+    .badge-handmade {
+      background: var(--bg-cream);
+      color: var(--text-primary);
+      border: 1px solid var(--border-light);
+    }
+    .badge-ordermade {
+      background: var(--text-primary);
+      color: #fff;
+    }
+    .badge-type {
+      background: var(--bg-cream);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-light);
+    }
     .voice-card-title {
       font-size: 14px;
       font-weight: 500;
       letter-spacing: 1px;
       line-height: 1.7;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .voice-card-excerpt {
       font-size: 12px;
@@ -498,102 +647,90 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-    .voice-cta {
-      text-align: center;
-    }
 
     /* ============================================
-       SECTION 6: MATERIALS & OPTIONS
+       SECTION 6: GALLERY
        ============================================ */
-    .materials {
-      padding: 120px 40px;
+    .gallery {
+      padding: 100px 40px;
       background: var(--bg-white);
     }
-    .materials-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .materials-grid {
+    .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      max-width: 1100px;
+      margin: 0 auto 40px;
     }
-    .material-item {
-      text-align: center;
-    }
-    .material-item-image {
+    .gallery-item {
       aspect-ratio: 1 / 1;
-      background: linear-gradient(135deg, #d0d0d0, #aaa);
-      border-radius: 50%;
-      max-width: 200px;
-      margin: 0 auto 24px;
+      background: linear-gradient(135deg, #cccccc, #a8a8a8);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(0, 0, 0, 0.25);
+      color: rgba(0,0,0,0.25);
       font-size: 12px;
       font-family: sans-serif;
+      cursor: pointer;
+      transition: var(--transition);
     }
-    .material-item-en {
-      font-family: var(--serif-en);
-      font-size: 12px;
-      letter-spacing: 4px;
-      color: var(--text-light);
-      margin-bottom: 8px;
-    }
-    .material-item-title {
-      font-size: 16px;
-      letter-spacing: 3px;
-      font-weight: 400;
-      margin-bottom: 14px;
-    }
-    .material-item-desc {
+    .gallery-item:hover { opacity: 0.85; }
+
+    /* shared button */
+    .btn-outline {
+      display: inline-block;
+      padding: 14px 36px;
+      border: 1px solid var(--text-primary);
+      color: var(--text-primary);
       font-size: 13px;
-      line-height: 2;
-      color: var(--text-secondary);
-      letter-spacing: 0.5px;
+      letter-spacing: 3px;
+      text-decoration: none;
+      transition: var(--transition);
+      background: transparent;
     }
+    .btn-outline:hover {
+      background: var(--text-primary);
+      color: #fff;
+    }
+    .center { text-align: center; }
 
     /* ============================================
-       SECTION 7: PROCESS FLOW
+       SECTION 7: PROCESS (dark)
        ============================================ */
     .process {
-      padding: 120px 40px;
+      padding: 100px 40px;
       background: var(--bg-dark);
       color: #fff;
     }
-    .process-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .process .section-heading .en { color: rgba(255, 255, 255, 0.5); }
-    .process .section-heading .jp { color: #fff; }
+    .process .section-header .en { color: rgba(255,255,255,0.5); }
+    .process .section-header h2 { color: #fff; }
+    .process .section-header .line { background: rgba(255,255,255,0.5); }
+    .process .section-header .desc { color: rgba(255,255,255,0.65); }
     .process-steps {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 24px;
-      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
     }
     .process-step {
       text-align: center;
-      position: relative;
     }
     .process-step-num {
       font-family: var(--serif-en);
-      font-size: 13px;
+      font-size: 12px;
       letter-spacing: 4px;
-      color: rgba(255, 255, 255, 0.5);
-      margin-bottom: 16px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 12px;
     }
     .process-step-image {
       aspect-ratio: 1 / 1;
       background: linear-gradient(135deg, #555, #333);
-      border-radius: 2px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(255, 255, 255, 0.3);
+      color: rgba(255,255,255,0.3);
       font-size: 12px;
       font-family: sans-serif;
     }
@@ -605,66 +742,24 @@
     }
     .process-step-desc {
       font-size: 12px;
-      color: rgba(255, 255, 255, 0.65);
+      color: rgba(255,255,255,0.65);
       line-height: 1.9;
-      letter-spacing: 0.5px;
     }
 
     /* ============================================
-       SECTION 8: PRICING
-       ============================================ */
-    .pricing {
-      padding: 120px 40px;
-      background: var(--bg-white);
-    }
-    .pricing-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .pricing-rows {
-      margin: 48px auto 40px;
-      max-width: 700px;
-    }
-    .pricing-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 24px 0;
-      border-bottom: 1px solid var(--border-light);
-      font-size: 14px;
-    }
-    .pricing-row:first-child { border-top: 1px solid var(--border-light); }
-    .pricing-row-label {
-      letter-spacing: 2px;
-      color: var(--text-primary);
-    }
-    .pricing-row-value {
-      font-family: var(--serif-en);
-      font-size: 17px;
-      letter-spacing: 1px;
-      color: var(--text-primary);
-    }
-    .pricing-note {
-      font-size: 12px;
-      color: var(--text-light);
-      letter-spacing: 0.5px;
-      margin-bottom: 32px;
-    }
-
-    /* ============================================
-       SECTION 9: ACCESS
+       SECTION 8: ACCESS
        ============================================ */
     .access {
-      padding: 120px 40px;
+      padding: 100px 40px;
       background: var(--bg-cream);
     }
-    .access-inner {
-      max-width: 1100px;
-      margin: 0 auto;
+    .access-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 60px;
+      gap: 56px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
     }
     .access-map {
       aspect-ratio: 4 / 3;
@@ -672,56 +767,64 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(0, 0, 0, 0.25);
+      color: rgba(0,0,0,0.25);
       font-size: 13px;
       font-family: sans-serif;
     }
-    .access-text {
-      padding-top: 20px;
-    }
-    .access-text .en-label {
+    .access-text .en {
       font-family: var(--serif-en);
-      font-size: 13px;
-      letter-spacing: 6px;
+      font-size: 12px;
+      letter-spacing: 5px;
       color: var(--text-light);
       margin-bottom: 12px;
     }
     .access-text h2 {
       font-size: 22px;
       font-weight: 300;
-      letter-spacing: 5px;
-      margin-bottom: 24px;
+      letter-spacing: 4px;
       line-height: 1.8;
+      margin-bottom: 24px;
     }
     .access-info {
       font-size: 13px;
-      line-height: 2.2;
+      line-height: 2;
       color: var(--text-secondary);
-      letter-spacing: 0.5px;
-      margin-bottom: 24px;
     }
     .access-info dt {
       font-size: 11px;
       color: var(--text-light);
       letter-spacing: 2px;
-      margin-top: 12px;
+      margin-top: 14px;
     }
     .access-info dt:first-child { margin-top: 0; }
     .access-info dd { color: var(--text-primary); }
+    .access-more {
+      display: inline-flex;
+      gap: 10px;
+      margin-top: 24px;
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: var(--text-primary);
+      text-decoration: none;
+      border-bottom: 1px solid var(--text-primary);
+      padding-bottom: 6px;
+      transition: var(--transition);
+    }
+    .access-more:hover { color: var(--gold); border-color: var(--gold); }
 
     /* ============================================
-       SECTION 10: BLOG & FAQ TEASER
+       SECTION 9: INFO (Blog + FAQ)
        ============================================ */
-    .info-section {
-      padding: 120px 40px;
+    .info {
+      padding: 100px 40px;
       background: var(--bg-white);
     }
     .info-grid {
-      max-width: 1100px;
-      margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 60px;
+      gap: 56px;
+      max-width: 1100px;
+      margin: 0 auto;
     }
     .info-block h3 {
       font-size: 18px;
@@ -737,9 +840,7 @@
       margin-bottom: 24px;
       display: block;
     }
-    .blog-list, .faq-list {
-      list-style: none;
-    }
+    .blog-list, .faq-list { list-style: none; }
     .blog-list li, .faq-list li {
       padding: 16px 0;
       border-bottom: 1px solid var(--border-light);
@@ -748,11 +849,12 @@
       color: var(--text-primary);
       text-decoration: none;
       font-size: 13px;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
       line-height: 1.8;
       display: flex;
       gap: 16px;
       align-items: baseline;
+      min-height: 44px;
       transition: var(--transition);
     }
     .blog-list li a:hover, .faq-list li a:hover { color: var(--gold); }
@@ -771,7 +873,7 @@
       flex-shrink: 0;
     }
     .info-more {
-      margin-top: 24px;
+      margin-top: 20px;
       font-size: 12px;
       letter-spacing: 3px;
       color: var(--text-primary);
@@ -784,61 +886,62 @@
     .info-more:hover { color: var(--gold); border-color: var(--gold); }
 
     /* ============================================
-       BOTTOM CTA
+       SECTION 10: BOTTOM CTA (consult-cta pattern)
        ============================================ */
     .bottom-cta {
-      background: var(--bg-dark);
-      color: #fff;
       padding: 100px 40px;
-      text-align: center;
+      background: var(--bg-cream);
     }
-    .bottom-cta .en {
+    .bottom-cta-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 56px 40px;
+      background: var(--bg-white);
+      border-radius: 3px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .bottom-cta-en {
       font-family: var(--serif-en);
       font-size: 12px;
-      letter-spacing: 6px;
-      opacity: 0.6;
-      margin-bottom: 16px;
+      letter-spacing: 5px;
+      color: var(--text-light);
+      margin-bottom: 14px;
     }
-    .bottom-cta h2 {
-      font-size: 22px;
-      font-weight: 300;
-      letter-spacing: 6px;
-      line-height: 2;
-      margin-bottom: 16px;
+    .bottom-cta-inner h2 {
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 4px;
+      line-height: 1.9;
+      margin-bottom: 14px;
     }
-    .bottom-cta p {
+    .bottom-cta-inner p {
       font-size: 13px;
-      color: rgba(255, 255, 255, 0.65);
-      letter-spacing: 1px;
-      margin-bottom: 40px;
+      color: var(--text-secondary);
+      letter-spacing: 0.5px;
+      line-height: 2;
+      margin-bottom: 32px;
     }
     .bottom-cta-buttons {
       display: flex;
-      gap: 16px;
+      gap: 14px;
       justify-content: center;
+      flex-wrap: wrap;
     }
-    .btn-dark-primary {
-      padding: 16px 48px;
-      background: #fff;
-      color: var(--text-primary);
-      font-size: 14px;
-      letter-spacing: 4px;
-      text-decoration: none;
-      transition: var(--transition);
-      border-radius: 2px;
-    }
-    .btn-dark-primary:hover { background: #f0f0f0; }
-    .btn-dark-outline {
-      padding: 16px 48px;
-      border: 1px solid rgba(255, 255, 255, 0.5);
+    .btn-primary {
+      padding: 14px 36px;
+      background: var(--text-primary);
       color: #fff;
-      font-size: 14px;
-      letter-spacing: 4px;
+      font-size: 13px;
+      letter-spacing: 3px;
       text-decoration: none;
       transition: var(--transition);
       border-radius: 2px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
     }
-    .btn-dark-outline:hover { border-color: #fff; background: rgba(255, 255, 255, 0.08); }
+    .btn-primary:hover { background: var(--gold); }
 
     /* ============================================
        FOOTER
@@ -872,7 +975,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 12px 28px;
+      gap: 12px 24px;
       margin-bottom: 16px;
       font-size: 13px;
     }
@@ -902,7 +1005,7 @@
     .fade-in {
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
     }
     .fade-in.is-visible {
       opacity: 1;
@@ -911,128 +1014,197 @@
     .fade-in-d1 { transition-delay: 0.15s; }
     .fade-in-d2 { transition-delay: 0.3s; }
     .fade-in-d3 { transition-delay: 0.45s; }
-
     @media (prefers-reduced-motion: reduce) {
       .hero-copy { animation: none; }
       .fade-in { opacity: 1; transform: none; transition: none; }
     }
 
     /* ============================================
-       RESPONSIVE — TABLET
+       RESPONSIVE — TABLET (≤960px)
        ============================================ */
     @media (max-width: 960px) {
-      .atelier-inner, .access-inner, .info-grid { grid-template-columns: 1fr; gap: 48px; }
-      .course-grid { grid-template-columns: repeat(2, 1fr); }
-      .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+      .about-content,
+      .access-content,
+      .info-grid { grid-template-columns: 1fr; gap: 40px; }
+      .series-cards { grid-template-columns: repeat(2, 1fr); }
       .voice-grid { grid-template-columns: repeat(2, 1fr); }
-      .materials-grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
-      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 28px; }
     }
 
     /* ============================================
-       RESPONSIVE — SP
+       RESPONSIVE — SP (≤768px)
+       ※ 90%以上のユーザーがモバイル。ここが本番。
        ============================================ */
     @media (max-width: 768px) {
-      .header-inner { padding: 12px 16px; }
-      .nav { display: none; }
-      .header-cta a:not(.reserve) { display: none; }
-      .header-cta .reserve { padding: 6px 12px; font-size: 11px; }
-      .sp-menu-btn {
-        display: flex;
-        width: 32px; height: 32px;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-        color: var(--text-primary);
-        cursor: pointer;
-        margin-left: 8px;
-      }
+      body { padding-top: 36px; padding-bottom: 60px; }
 
-      .hero { height: calc(100vh - 56px); min-height: 500px; }
-      .hero-main { font-size: 21px; letter-spacing: 5px; line-height: 2; }
-      .hero-sub { font-size: 12px; letter-spacing: 1px; }
-      .hero-cta { flex-direction: column; gap: 14px; }
-      .btn-primary { padding: 14px 36px; font-size: 13px; letter-spacing: 3px; }
+      /* HEADER */
+      .header-inner { padding: 10px 16px; }
+      .logo { font-size: 22px; letter-spacing: 3px; }
+      .nav { display: none; }
+      .header-actions { gap: 6px; }
+      .header-reserve { padding: 8px 12px; font-size: 11px; letter-spacing: 1px; }
+      .sp-menu-btn { display: flex; }
+
+      /* HERO */
+      .hero { height: calc(100vh - 100px); min-height: 480px; max-height: 720px; }
+      .hero-copy { bottom: 44px; padding: 0 20px; }
+      .hero-en { font-size: 10px; letter-spacing: 4px; margin-bottom: 10px; }
+      .hero-main { font-size: 15px; letter-spacing: 3px; line-height: 2; }
       .hero-scroll { display: none; }
 
-      .section-heading { margin-bottom: 36px; }
-      .section-heading .jp { font-size: 18px; letter-spacing: 4px; }
-      .section-heading .sub { font-size: 12px; }
+      /* COMMON section padding */
+      .about, .courses, .series, .voice, .gallery,
+      .process, .access, .info, .bottom-cta { padding: 56px 20px; }
 
-      .atelier, .courses, .gallery, .voice-section,
-      .materials, .process, .pricing, .access, .info-section, .bottom-cta { padding: 60px 20px; }
+      /* Section header */
+      .section-header { margin-bottom: 32px; }
+      .section-header .en { font-size: 11px; letter-spacing: 4px; }
+      .section-header h2 { font-size: 18px; letter-spacing: 4px; line-height: 1.8; }
+      .section-header .desc { font-size: 13px; margin-top: 16px; }
 
-      .atelier-text h2 { font-size: 18px; letter-spacing: 3px; }
-      .atelier-text p { font-size: 13px; }
+      /* ABOUT */
+      .about-content { gap: 24px; }
+      .about-image { aspect-ratio: 4 / 3; }
+      .about-text .en { font-size: 11px; letter-spacing: 4px; }
+      .about-text h2 { font-size: 18px; letter-spacing: 3px; line-height: 1.9; margin-bottom: 18px; }
+      .about-text p { font-size: 13px; line-height: 2.2; }
+      .about-more { font-size: 12px; letter-spacing: 2px; }
 
-      .course-grid { grid-template-columns: 1fr; gap: 16px; }
-      .course-card { flex-direction: row; align-items: stretch; }
-      .course-card-image { flex: 0 0 40%; aspect-ratio: auto; }
-      .course-card-body { padding: 18px 16px; text-align: left; }
-      .course-card-title { font-size: 14px; letter-spacing: 2px; }
-      .course-card-desc { font-size: 11px; margin-bottom: 12px; }
-      .course-card-arrow { font-size: 10px; padding-top: 8px; }
+      /* COURSES (situation-cards) */
+      .situation-intro { font-size: 13px; line-height: 2; margin-bottom: 28px; }
+      .situation-cards { gap: 12px; margin-bottom: 32px; }
+      .situation-card { min-height: 88px; }
+      .situation-icon { width: 60px; }
+      .situation-icon svg { width: 26px; height: 26px; }
+      .situation-body { padding: 14px 14px; }
+      .situation-label { font-size: 10px; letter-spacing: 2px; }
+      .situation-title { font-size: 14px; letter-spacing: 0.5px; margin-bottom: 4px; }
+      .situation-desc { font-size: 12px; line-height: 1.7; }
+      .persona-tags { margin-top: 8px; gap: 4px; }
+      .persona-tag { font-size: 10px; padding: 2px 6px; }
+      .situation-arrow { width: 36px; font-size: 16px; }
+      .compact-comparison h3 { font-size: 13px; margin-bottom: 16px; }
+      .compact-table { font-size: 11px; }
+      .compact-table th,
+      .compact-table td { padding: 10px 8px; }
+      .compact-table thead th { font-size: 12px; }
+      .compact-table th:first-child { width: 80px; }
+      .compact-table td:first-child { font-size: 10px; }
 
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      /* SERIES (single column SP) */
+      .series-cards { grid-template-columns: 1fr; gap: 16px; }
+      .series-card { flex-direction: row; align-items: stretch; }
+      .series-card-image { flex: 0 0 40%; aspect-ratio: auto; }
+      .series-card-body { padding: 14px 14px 16px; }
+      .series-card-body .en-label { font-size: 10px; letter-spacing: 2px; }
+      .series-card-body h3 { font-size: 15px; letter-spacing: 1px; margin-bottom: 4px; }
+      .series-card-body .series-tag { font-size: 10px; padding: 2px 6px; margin-bottom: 8px; }
+      .series-card-body p { font-size: 11px; line-height: 1.7; }
 
-      .voice-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .voice-card-body { padding: 12px; }
-      .voice-card-title { font-size: 12px; }
-      .voice-card-excerpt { font-size: 11px; }
-      .voice-card-badges .badge { font-size: 9px; padding: 2px 6px; }
+      /* VOICE (2 col SP) */
+      .voice-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 28px; }
+      .voice-card-body { padding: 12px 14px 14px; }
+      .voice-card-badges { gap: 4px; margin-bottom: 8px; }
+      .voice-card-badges .badge { font-size: 9px; padding: 2px 6px; letter-spacing: 0.5px; }
+      .voice-card-title { font-size: 12px; letter-spacing: 0.5px; line-height: 1.6; }
+      .voice-card-excerpt { font-size: 10px; line-height: 1.7; }
 
-      .materials-grid { grid-template-columns: 1fr; gap: 32px; }
-      .material-item-image { max-width: 140px; }
+      /* GALLERY (2 col SP) */
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 28px; }
 
-      .process-steps { grid-template-columns: 1fr; gap: 24px; }
+      /* PROCESS */
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .process-step-num { font-size: 11px; letter-spacing: 3px; margin-bottom: 8px; }
+      .process-step-image { margin-bottom: 12px; }
+      .process-step-title { font-size: 13px; letter-spacing: 1px; }
+      .process-step-desc { font-size: 11px; line-height: 1.8; }
 
-      .pricing-rows { margin: 32px auto 24px; }
-      .pricing-row { padding: 16px 0; font-size: 13px; }
-      .pricing-row-value { font-size: 14px; }
+      /* ACCESS */
+      .access-content { gap: 24px; }
+      .access-text .en { font-size: 11px; letter-spacing: 4px; }
+      .access-text h2 { font-size: 18px; letter-spacing: 3px; line-height: 1.7; margin-bottom: 18px; }
+      .access-info { font-size: 12px; }
 
-      .access-text h2 { font-size: 18px; letter-spacing: 3px; }
-
+      /* INFO */
+      .info-grid { gap: 32px; }
       .info-block h3 { font-size: 16px; letter-spacing: 3px; }
+      .info-block .en { font-size: 10px; }
+      .blog-list li, .faq-list li { padding: 14px 0; }
+      .blog-list li a, .faq-list li a { font-size: 12px; gap: 10px; }
+      .blog-list .date, .faq-list .q { font-size: 10px; }
 
-      .bottom-cta h2 { font-size: 17px; letter-spacing: 4px; }
-      .bottom-cta-buttons { flex-direction: column; align-items: center; }
-      .btn-dark-primary, .btn-dark-outline { width: 100%; max-width: 320px; }
+      /* BOTTOM CTA */
+      .bottom-cta-inner { padding: 36px 20px; }
+      .bottom-cta-inner h2 { font-size: 16px; letter-spacing: 3px; }
+      .bottom-cta-inner p { font-size: 12px; margin-bottom: 24px; }
+      .bottom-cta-buttons { flex-direction: column; gap: 10px; }
+      .btn-primary, .btn-outline {
+        width: 100%; max-width: 280px; margin: 0 auto;
+        padding: 14px 24px; font-size: 13px; letter-spacing: 2px;
+        justify-content: center;
+      }
 
+      /* FOOTER */
       .footer { padding: 40px 20px; }
+      .footer-links { gap: 10px 18px; font-size: 12px; }
 
+      /* SP FLOATING CTA */
       .sp-floating-cta {
         display: flex;
         position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        bottom: 0; left: 0; right: 0;
         z-index: 200;
-        background: rgba(255, 255, 255, 0.97);
+        background: rgba(255,255,255,0.97);
         border-top: 1px solid var(--border-light);
-        padding: 8px 12px;
+        padding: 8px 10px;
         gap: 6px;
         justify-content: space-between;
+        backdrop-filter: blur(10px);
       }
       .sp-floating-cta a {
         flex: 1;
         text-align: center;
-        padding: 10px 4px;
-        font-size: 11px;
+        padding: 11px 4px;
+        font-size: 10.5px;
         font-family: var(--serif-jp);
-        letter-spacing: 0.5px;
+        letter-spacing: 0.3px;
         color: var(--text-secondary);
         text-decoration: none;
         border-radius: 2px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1.3;
       }
       .sp-floating-cta a.highlight {
         background: var(--text-primary);
         color: #fff;
       }
-      body { padding-bottom: 60px; }
+    }
+
+    /* ============================================
+       RESPONSIVE — SMALL SP (≤380px)
+       ============================================ */
+    @media (max-width: 380px) {
+      .hero-main { font-size: 14px; letter-spacing: 2px; }
+      .section-header h2 { font-size: 16px; letter-spacing: 3px; }
+      .situation-icon { width: 52px; }
+      .situation-body { padding: 12px 10px; }
+      .situation-arrow { width: 30px; }
     }
   </style>
 </head>
 <body>
+
+  <!-- WIREFRAME BAR -->
+  <div class="wireframe-bar">
+    <span class="badge">WIREFRAME</span>
+    <span>renri — TOPページ</span>
+    <span class="page-path">/</span>
+  </div>
 
   <!-- HEADER -->
   <header class="header">
@@ -1040,27 +1212,25 @@
       <a href="/" class="logo">renri</a>
       <nav class="nav">
         <a href="#">renriとは</a>
-        <a href="#">手作りコース</a>
-        <a href="#">オーダーメイドコース</a>
+        <a href="/handmade/">手作りコース</a>
+        <a href="/ordermade/">オーダーメイドコース</a>
         <a href="#">制作事例</a>
         <a href="#">お客様の声</a>
         <a href="#">店舗情報</a>
       </nav>
-      <div class="header-cta">
-        <a href="#">WEB見積もり</a>
-        <a href="#" class="reserve">来店予約</a>
-        <div class="sp-menu-btn">☰</div>
+      <div class="header-actions">
+        <a href="#" class="header-reserve">来店予約</a>
+        <button class="sp-menu-btn" aria-label="メニュー">☰</button>
       </div>
     </div>
   </header>
 
   <!-- ============================================
        SECTION 1 — HERO (minimal)
-       目的: 画像で世界観を語る / テキスト最小限
-       SEO: H1にのみKW配置（"結婚指輪""横浜""馬車道"）
-       CTA: ヘッダーの「来店予約」が常時表示で代替
        ============================================ -->
-  <section class="hero">
+  <section class="hero" style="position:relative;">
+    <span class="section-label">① メイン画像 + キャッチ（最小限）</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="hero-copy">
       <div class="hero-en">WEDDING RINGS, YOKOHAMA</div>
       <h1 class="hero-main">横浜・馬車道のアトリエで作る、結婚指輪</h1>
@@ -1069,121 +1239,246 @@
   </section>
 
   <!-- ============================================
-       SECTION 2 — ATELIER STORY
-       目的: 差別化の核「夫婦の職人」のストーリー
-       ブランディング比重: 高
+       SECTION 2 — ABOUT renri
        ============================================ -->
-  <section class="atelier">
-    <div class="atelier-inner">
-      <div class="atelier-image fade-in">📷 夫婦のポートレート or アトリエ内観</div>
-      <div class="atelier-text fade-in fade-in-d1">
-        <div class="en-label">ABOUT renri</div>
-        <h2>
-          ふたりの手で、<br>
-          ふたりのための指輪を。
-        </h2>
+  <section class="about" style="position:relative;">
+    <span class="section-label">② renriについて（アトリエ紹介）</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="about-content">
+      <div class="about-image fade-in">📷 夫婦のポートレート or アトリエ内観</div>
+      <div class="about-text fade-in fade-in-d1">
+        <div class="en">ABOUT renri</div>
+        <h2>ふたりの手で、<br>ふたりのための指輪を。</h2>
         <p>
           renriは、横浜・馬車道の路地裏にある小さなアトリエです。
           ジュエリーデザイナーと指輪職人、夫婦ふたりだけのお店。
-          だからこそ、おふたりの想いをじっくりお聞きし、ひと組ずつ丁寧に向き合います。
         </p>
         <p>
           結婚指輪も婚約指輪も、おふたりの手で作る「手作りコース」と、
           デザイナーが一から提案する「オーダーメイドコース」の両方をご用意しています。
         </p>
-        <a href="#" class="more-link">renriについて、もっと知る →</a>
+        <a href="#" class="about-more">renriについて、もっと知る →</a>
       </div>
     </div>
   </section>
 
   <!-- ============================================
-       SECTION 3 — COURSE SELECTION (4 CARDS)
-       目的: 最大CV施策 / シチュエーション別導線
-       注: 診断ではなくシンプルなカード型。CTAバランス: 50/50
-       SEO: 各見出しに主要KW
+       SECTION 3 — COURSE SELECTION (situation-cards)
+       ※ course TOPs と同じパターンを TOP でも採用
        ============================================ -->
-  <section class="courses">
-    <div class="courses-inner">
-      <div class="section-heading">
-        <span class="en">OUR COURSES</span>
-        <div class="jp">指輪づくりの選び方</div>
-        <p class="sub">
-          おふたりのご希望から、最適なコースをお選びください。<br>
-          迷われる方も多くいらっしゃいます。お気軽にご相談ください。
+  <section class="courses" style="position:relative;">
+    <span class="section-label">③ コース選択（気持ちから選ぶ）</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="en">FIND YOUR STYLE</div>
+        <h2>どんな時間を大切にしたいですか</h2>
+        <div class="line"></div>
+      </div>
+
+      <p class="situation-intro fade-in">
+        renriは手作り・オーダーメイドの両方を承っています。<br>
+        どちらが向いているか、おふたりの気持ちからお選びください。
+      </p>
+
+      <div class="situation-cards fade-in fade-in-d1">
+
+        <a href="/handmade/" class="situation-card handmade">
+          <div class="situation-icon">
+            <svg viewBox="0 0 32 32"><circle cx="12" cy="18" r="7"/><circle cx="20" cy="18" r="7"/></svg>
+          </div>
+          <div class="situation-body">
+            <div class="situation-label">HANDMADE COURSE</div>
+            <div class="situation-title">思い出も一緒に残したい</div>
+            <div class="situation-desc">
+              ふたりの手で指輪を作る時間も含めて、宝物にしたいおふたりへ。
+            </div>
+            <div class="persona-tags">
+              <span class="persona-tag">制作体験を残したい</span>
+              <span class="persona-tag">手を動かしたい</span>
+            </div>
+          </div>
+          <div class="situation-arrow">&rsaquo;</div>
+        </a>
+
+        <a href="/ordermade/" class="situation-card ordermade">
+          <div class="situation-icon">
+            <svg viewBox="0 0 32 32"><path d="M16 28 L4 12 L9 4 L23 4 L28 12 Z"/><polyline points="4,12 16,12 28,12"/><line x1="9" y1="4" x2="16" y2="12"/><line x1="23" y1="4" x2="16" y2="12"/></svg>
+          </div>
+          <div class="situation-body">
+            <div class="situation-label">ORDERMADE COURSE</div>
+            <div class="situation-title">提案を受けて、ふたりだけの一本を形に</div>
+            <div class="situation-desc">
+              世界にひとつの物語やモチーフを丁寧に形にしたい方へ。
+            </div>
+            <div class="persona-tags">
+              <span class="persona-tag">唯一性を大切に</span>
+              <span class="persona-tag">物語を込めたい</span>
+            </div>
+          </div>
+          <div class="situation-arrow">&rsaquo;</div>
+        </a>
+
+        <a href="/reservation/" class="situation-card consult">
+          <div class="situation-icon">
+            <svg viewBox="0 0 32 32"><path d="M6 22 L6 8 C6 6.9 6.9 6 8 6 L24 6 C25.1 6 26 6.9 26 8 L26 18 C26 19.1 25.1 20 24 20 L12 20 L6 26 Z"/></svg>
+          </div>
+          <div class="situation-body">
+            <div class="situation-label">CONSULTATION</div>
+            <div class="situation-title">まだ決められない・比較しながら相談したい</div>
+            <div class="situation-desc">
+              当日に手作りとオーダーメイドを見比べながら相談できます。
+            </div>
+            <div class="persona-tags">
+              <span class="persona-tag">違いを知りたい</span>
+              <span class="persona-tag">来店してから決めたい</span>
+            </div>
+          </div>
+          <div class="situation-arrow">&rsaquo;</div>
+        </a>
+
+      </div>
+
+      <!-- Compact comparison table -->
+      <div class="compact-comparison fade-in fade-in-d2">
+        <h3>コースの比較</h3>
+        <table class="compact-table">
+          <thead>
+            <tr><th></th><th>手作り</th><th>オーダーメイド</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>大切にしたいこと</td><td>制作体験と思い出</td><td>理想のデザインと物語</td></tr>
+            <tr><td>進め方</td><td>ふたりで手を動かす</td><td>提案を受けて形にする</td></tr>
+            <tr><td>納期</td><td>当日〜約1ヶ月</td><td>約1.5〜2ヶ月</td></tr>
+            <tr><td>価格目安</td><td>¥110,000〜 / ペア</td><td>¥200,000〜 / ペア</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 4 — SERIES & SERVICE (series-cards)
+       ※ オーダーTOPの series-card パターンを継承
+       ============================================ -->
+  <section class="series" style="position:relative;">
+    <span class="section-label">④ シリーズ & サービス</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="en">SERIES &amp; SERVICE</div>
+        <h2>特別なシリーズ・サービス</h2>
+        <div class="line"></div>
+        <p class="desc">
+          おふたりのシーンに合わせた、renriの特別なご提案。
         </p>
       </div>
 
-      <div class="course-grid">
-        <a href="#" class="course-card fade-in">
-          <div class="course-card-image">
-            <span class="badge">人気</span>
-            📷 手作り風景
-          </div>
-          <div class="course-card-body">
-            <div class="course-card-en">HANDMADE</div>
-            <div class="course-card-title">ふたりで手作り<br>結婚指輪</div>
-            <p class="course-card-desc">
-              鍛造製法で、おふたりの手で仕上げる<br>世界にひとつの結婚指輪。<br>制作体験そのものが宝物に。
-            </p>
-            <span class="course-card-arrow">VIEW MORE →</span>
+      <div class="series-cards">
+
+        <a href="#" class="series-card fade-in">
+          <div class="series-card-image">📷 花こよみ</div>
+          <div class="series-card-body">
+            <div class="en-label">HANAKOYOMI</div>
+            <h3>花こよみ</h3>
+            <span class="series-tag">婚約指輪｜全6型</span>
+            <p>季節の花をモチーフにしたオリジナル婚約指輪。</p>
           </div>
         </a>
 
-        <a href="#" class="course-card fade-in fade-in-d1">
-          <div class="course-card-image">
-            📷 オーダー指輪
-          </div>
-          <div class="course-card-body">
-            <div class="course-card-en">ORDERMADE</div>
-            <div class="course-card-title">オーダーメイド<br>結婚指輪</div>
-            <p class="course-card-desc">
-              デザイナーがゼロからご提案。<br>職人の技術で繊細なデザインも実現。<br>細部までこだわりたい方へ。
-            </p>
-            <span class="course-card-arrow">VIEW MORE →</span>
+        <a href="#" class="series-card fade-in fade-in-d1">
+          <div class="series-card-image">📷 リトルブーケ</div>
+          <div class="series-card-body">
+            <div class="en-label">LITTLE BOUQUET</div>
+            <h3>リトルブーケ</h3>
+            <span class="series-tag">定額制｜最短2週間｜¥143,000〜</span>
+            <p>小さな花束を贈るように、日常に寄り添う婚約指輪。</p>
           </div>
         </a>
 
-        <a href="#" class="course-card fade-in fade-in-d2">
-          <div class="course-card-image">
-            📷 婚約指輪
-          </div>
-          <div class="course-card-body">
-            <div class="course-card-en">ENGAGEMENT</div>
-            <div class="course-card-title">婚約指輪<br>サプライズ対応</div>
-            <p class="course-card-desc">
-              おひとりでのご来店も歓迎。<br>ダイヤモンド先渡しプランなど、<br>プロポーズを全力でサポート。
-            </p>
-            <span class="course-card-arrow">VIEW MORE →</span>
+        <a href="#" class="series-card fade-in fade-in-d2">
+          <div class="series-card-image">📷 サプライズ</div>
+          <div class="series-card-body">
+            <div class="en-label">SURPRISE PROPOSAL</div>
+            <h3>サプライズプロポーズ</h3>
+            <span class="series-tag">ダイヤ先渡し｜最短当日｜¥48,000〜</span>
+            <p>まずダイヤだけを贈り、デザインは後からふたりで。</p>
           </div>
         </a>
 
-        <a href="#" class="course-card fade-in fade-in-d3">
-          <div class="course-card-image">
-            📷 ご相談風景
-          </div>
-          <div class="course-card-body">
-            <div class="course-card-en">CONSULTATION</div>
-            <div class="course-card-title">まずは<br>ご相談から</div>
-            <p class="course-card-desc">
-              「まだ決められない」「両方知りたい」。<br>おふたりに合う指輪づくりを、<br>一緒に見つけましょう。
-            </p>
-            <span class="course-card-arrow">VIEW MORE →</span>
-          </div>
-        </a>
       </div>
     </div>
   </section>
 
   <!-- ============================================
-       SECTION 4 — GALLERY (制作事例)
-       目的: 視覚訴求 / 内部リンク強化
+       SECTION 5 — VOICE (お客様の声)
+       ※ 「renri レビュー」検索の受け皿
        ============================================ -->
-  <section class="gallery">
-    <div class="gallery-inner">
-      <div class="section-heading">
-        <span class="en">GALLERY</span>
-        <div class="jp">制作事例</div>
-        <p class="sub">これまでにrenriで生まれた、おふたりの指輪をご紹介します。</p>
+  <section class="voice" style="position:relative;">
+    <span class="section-label">⑤ お客様の声</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="en">CUSTOMER'S VOICE</div>
+        <h2>お客様の声</h2>
+        <div class="line"></div>
+        <p class="desc">renriで指輪をお作りいただいた、おふたりのご感想を。</p>
+      </div>
+
+      <div class="voice-grid">
+        <a href="#" class="voice-card fade-in">
+          <div class="voice-card-image">📷</div>
+          <div class="voice-card-body">
+            <div class="voice-card-badges">
+              <span class="badge badge-handmade">手作り</span>
+              <span class="badge badge-type">結婚指輪</span>
+            </div>
+            <div class="voice-card-title">異なる表情が寄り添う結婚指輪</div>
+            <div class="voice-card-excerpt">おふたりの手で一本ずつ丁寧に仕上げた結婚指輪...</div>
+          </div>
+        </a>
+        <a href="#" class="voice-card fade-in fade-in-d1">
+          <div class="voice-card-image">📷</div>
+          <div class="voice-card-body">
+            <div class="voice-card-badges">
+              <span class="badge badge-ordermade">オーダーメイド</span>
+              <span class="badge badge-type">結婚指輪</span>
+            </div>
+            <div class="voice-card-title">波の記憶を刻むご結婚指輪</div>
+            <div class="voice-card-excerpt">おふたりの思い出の海をモチーフに、デザイナーが波のテクスチャ...</div>
+          </div>
+        </a>
+        <a href="#" class="voice-card fade-in fade-in-d2">
+          <div class="voice-card-image">📷</div>
+          <div class="voice-card-body">
+            <div class="voice-card-badges">
+              <span class="badge badge-handmade">手作り</span>
+              <span class="badge badge-type">婚約指輪</span>
+            </div>
+            <div class="voice-card-title">繊細な輝きが宿るご婚約指輪</div>
+            <div class="voice-card-excerpt">サプライズで制作された婚約指輪。お相手の好みを丁寧に...</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="center">
+        <a href="#" class="btn-outline">お客様の声をもっと見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SECTION 6 — GALLERY (制作事例)
+       ============================================ -->
+  <section class="gallery" style="position:relative;">
+    <span class="section-label">⑥ 制作事例</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="en">GALLERY</div>
+        <h2>制作事例</h2>
+        <div class="line"></div>
+        <p class="desc">これまでにrenriで生まれた、おふたりの指輪をご紹介。</p>
       </div>
 
       <div class="gallery-grid">
@@ -1197,118 +1492,24 @@
         <div class="gallery-item">📷</div>
       </div>
 
-      <div class="gallery-cta">
+      <div class="center">
         <a href="#" class="btn-outline">制作事例をもっと見る</a>
       </div>
     </div>
   </section>
 
   <!-- ============================================
-       SECTION 5 — VOICE (お客様の声)
-       目的: 「renri レビュー」検索の受け皿 / 信頼担保
-       上方配置の意図: 検討層が口コミを探しているデータあり
+       SECTION 7 — PROCESS (制作の流れ・暗背景)
        ============================================ -->
-  <section class="voice-section">
-    <div class="voice-inner">
-      <div class="section-heading">
-        <span class="en">CUSTOMER'S VOICE</span>
-        <div class="jp">お客様の声</div>
-        <p class="sub">renriで指輪をお作りいただいた、おふたりのご感想をご紹介します。</p>
-      </div>
-
-      <div class="voice-grid">
-        <a href="#" class="voice-card fade-in">
-          <div class="voice-card-image">📷</div>
-          <div class="voice-card-body">
-            <div class="voice-card-badges">
-              <span class="badge badge-handmade">手作り</span>
-              <span class="badge badge-type">結婚指輪</span>
-            </div>
-            <div class="voice-card-title">異なる表情が寄り添う結婚指輪</div>
-            <div class="voice-card-excerpt">おふたりの手で一本ずつ丁寧に仕上げた結婚指輪。異なるテクスチャが並ぶと...</div>
-          </div>
-        </a>
-        <a href="#" class="voice-card fade-in fade-in-d1">
-          <div class="voice-card-image">📷</div>
-          <div class="voice-card-body">
-            <div class="voice-card-badges">
-              <span class="badge badge-ordermade">オーダーメイド</span>
-              <span class="badge badge-type">結婚指輪</span>
-            </div>
-            <div class="voice-card-title">波の記憶を刻むご結婚指輪</div>
-            <div class="voice-card-excerpt">おふたりの思い出の海をモチーフに、デザイナーが波のテクスチャを一から設計した...</div>
-          </div>
-        </a>
-        <a href="#" class="voice-card fade-in fade-in-d2">
-          <div class="voice-card-image">📷</div>
-          <div class="voice-card-body">
-            <div class="voice-card-badges">
-              <span class="badge badge-handmade">手作り</span>
-              <span class="badge badge-type">婚約指輪</span>
-            </div>
-            <div class="voice-card-title">繊細な輝きが宿るご婚約指輪</div>
-            <div class="voice-card-excerpt">サプライズで制作された婚約指輪。お相手の好みを丁寧にヒアリングしながら...</div>
-          </div>
-        </a>
-      </div>
-
-      <div class="voice-cta" style="text-align:center;">
-        <a href="#" class="btn-outline">お客様の声をもっと見る</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================
-       SECTION 6 — MATERIALS & OPTIONS
-       目的: 価値訴求 / ロングテールSEO（素材名、加工技法）
-       ============================================ -->
-  <section class="materials">
-    <div class="materials-inner">
-      <div class="section-heading">
-        <span class="en">MATERIALS &amp; CRAFTSMANSHIP</span>
-        <div class="jp">renriの素材と仕上げ</div>
-        <p class="sub">プラチナやK18ゴールド、ミル打ちや手彫りなど、<br>おふたりだけの一本をかたちにする選択肢をご用意しています。</p>
-      </div>
-
-      <div class="materials-grid">
-        <div class="material-item fade-in">
-          <div class="material-item-image">📷 素材サンプル</div>
-          <div class="material-item-en">METAL</div>
-          <div class="material-item-title">素材</div>
-          <p class="material-item-desc">
-            プラチナ、K18ゴールド5色、<br>K10など多彩な地金から<br>お選びいただけます。
-          </p>
-        </div>
-        <div class="material-item fade-in fade-in-d1">
-          <div class="material-item-image">📷 仕上げサンプル</div>
-          <div class="material-item-en">FINISH</div>
-          <div class="material-item-title">仕上げ</div>
-          <p class="material-item-desc">
-            鏡面・マット・ヘアラインなど、<br>表情を変える仕上げを<br>自由に組み合わせ可能。
-          </p>
-        </div>
-        <div class="material-item fade-in fade-in-d2">
-          <div class="material-item-image">📷 加工サンプル</div>
-          <div class="material-item-en">OPTION</div>
-          <div class="material-item-title">オプション加工</div>
-          <p class="material-item-desc">
-            ミル打ち・手彫り・<br>レーザー刻印など、<br>細部のこだわりを叶える加工を。
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================
-       SECTION 7 — PROCESS FLOW
-       目的: 不安解消 / "結婚指輪 作り方"系のSEO
-       ============================================ -->
-  <section class="process">
-    <div class="process-inner">
-      <div class="section-heading">
-        <span class="en">PROCESS</span>
-        <div class="jp">制作の流れ</div>
-        <p class="sub" style="color: rgba(255,255,255,0.65);">ご来店からお渡しまで、丁寧にサポートいたします。</p>
+  <section class="process" style="position:relative;">
+    <span class="section-label">⑦ 制作の流れ</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="section-inner">
+      <div class="section-header fade-in">
+        <div class="en">PROCESS</div>
+        <h2>制作の流れ</h2>
+        <div class="line"></div>
+        <p class="desc">ご来店からお渡しまで、丁寧にサポートいたします。</p>
       </div>
 
       <div class="process-steps">
@@ -1316,112 +1517,67 @@
           <div class="process-step-num">STEP 01</div>
           <div class="process-step-image">📷</div>
           <div class="process-step-title">ご予約・ご相談</div>
-          <div class="process-step-desc">
-            ご希望のコース・日程を<br>WEBまたはお電話でご予約。
-          </div>
+          <div class="process-step-desc">WEBまたはお電話で<br>ご来店のご予約。</div>
         </div>
         <div class="process-step fade-in fade-in-d1">
           <div class="process-step-num">STEP 02</div>
           <div class="process-step-image">📷</div>
           <div class="process-step-title">デザイン決定</div>
-          <div class="process-step-desc">
-            素材・形・仕上げを<br>おふたりで選んで決定。
-          </div>
+          <div class="process-step-desc">素材・形・仕上げを<br>おふたりで決定。</div>
         </div>
         <div class="process-step fade-in fade-in-d2">
           <div class="process-step-num">STEP 03</div>
           <div class="process-step-image">📷</div>
           <div class="process-step-title">制作・仕上げ</div>
-          <div class="process-step-desc">
-            手作り当日制作 or<br>職人による精密な制作。
-          </div>
+          <div class="process-step-desc">手作り当日制作 or<br>職人による精密制作。</div>
         </div>
         <div class="process-step fade-in fade-in-d3">
           <div class="process-step-num">STEP 04</div>
           <div class="process-step-image">📷</div>
           <div class="process-step-title">お渡し</div>
-          <div class="process-step-desc">
-            完成後、永久補償の<br>アフターケアまでお任せ。
-          </div>
+          <div class="process-step-desc">永久補償の<br>アフターケアまで。</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================
-       SECTION 8 — PRICING
-       目的: 価格"案内"（バナーではなく品位ある情報提供）
-       SEO: "結婚指輪 価格" "結婚指輪 相場" 系
+       SECTION 8 — ACCESS
        ============================================ -->
-  <section class="pricing">
-    <div class="pricing-inner">
-      <div class="section-heading">
-        <span class="en">PRICE</span>
-        <div class="jp">価格について</div>
-        <p class="sub">renriでは、シンプルでわかりやすい価格設定を心がけています。<br>地金代＋制作料金＋オプション加工料金の合算でご案内します。</p>
-      </div>
-
-      <div class="pricing-rows">
-        <div class="pricing-row">
-          <span class="pricing-row-label">手作り制作料金</span>
-          <span class="pricing-row-value">¥22,000 〜</span>
-        </div>
-        <div class="pricing-row">
-          <span class="pricing-row-label">オーダーメイド制作料金</span>
-          <span class="pricing-row-value">お問い合わせ</span>
-        </div>
-        <div class="pricing-row">
-          <span class="pricing-row-label">地金代（プラチナ・ゴールド）</span>
-          <span class="pricing-row-value">時価</span>
-        </div>
-      </div>
-
-      <p class="pricing-note">※ 詳細な価格・概算は「WEB見積もり」または来店時にご案内します。</p>
-
-      <a href="#" class="btn-outline">価格表・WEB見積もりを見る</a>
-    </div>
-  </section>
-
-  <!-- ============================================
-       SECTION 9 — ACCESS
-       目的: LocalSEO / 構造化データと連動
-       ============================================ -->
-  <section class="access">
-    <div class="access-inner">
+  <section class="access" style="position:relative;">
+    <span class="section-label">⑧ 店舗情報・アクセス</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="access-content">
       <div class="access-map fade-in">🗺 Googleマップ</div>
       <div class="access-text fade-in fade-in-d1">
-        <div class="en-label">ACCESS</div>
-        <h2>
-          renri 横浜アトリエ<br>
-          馬車道駅すぐ
-        </h2>
+        <div class="en">ACCESS</div>
+        <h2>renri 横浜アトリエ<br>馬車道駅すぐ</h2>
         <dl class="access-info">
           <dt>住所</dt>
           <dd>〒231-0011<br>神奈川県横浜市中区太田町2-28<br>大黒ビル1F B</dd>
           <dt>営業時間</dt>
-          <dd>10:00 〜 18:00</dd>
-          <dt>定休日</dt>
-          <dd>不定休</dd>
+          <dd>10:00 〜 18:00 / 不定休</dd>
           <dt>電話番号</dt>
           <dd>045-264-8310</dd>
         </dl>
-        <a href="#" class="more-link" style="border-bottom: 1px solid var(--text-primary); padding-bottom: 6px; text-decoration: none; color: var(--text-primary); letter-spacing: 3px; font-size: 13px;">店舗情報を詳しく見る →</a>
+        <a href="#" class="access-more">店舗情報を詳しく見る →</a>
       </div>
     </div>
   </section>
 
   <!-- ============================================
-       SECTION 10 — BLOG & FAQ TEASER
-       目的: 周辺SEO / 既存記事への送客
+       SECTION 9 — BLOG & FAQ teaser
        ============================================ -->
-  <section class="info-section">
+  <section class="info" style="position:relative;">
+    <span class="section-label">⑨ ブログ & FAQ</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
     <div class="info-grid">
       <div class="info-block fade-in">
         <span class="en">JOURNAL</span>
         <h3>スタッフブログ</h3>
         <ul class="blog-list">
           <li><a href="#"><span class="date">2026.04.20</span><span>結婚指輪の相場と、renriで作る場合の費用感</span></a></li>
-          <li><a href="#"><span class="date">2026.04.10</span><span>手作り結婚指輪、当日制作はどこまでできる？</span></a></li>
+          <li><a href="#"><span class="date">2026.04.10</span><span>手作り結婚指輪、当日制作はどこまで？</span></a></li>
           <li><a href="#"><span class="date">2026.03.28</span><span>サプライズ婚約指輪の作り方ガイド</span></a></li>
         </ul>
         <a href="#" class="info-more">記事一覧へ →</a>
@@ -1441,18 +1597,19 @@
   </section>
 
   <!-- ============================================
-       BOTTOM CTA
+       SECTION 10 — BOTTOM CTA (consult-cta style)
        ============================================ -->
-  <section class="bottom-cta">
-    <div class="en">CONTACT</div>
-    <h2>
-      おふたりだけの指輪づくり、<br>
-      はじめてみませんか？
-    </h2>
-    <p>ご来店予約・ご相談は、WEBまたはお電話で承っています。</p>
-    <div class="bottom-cta-buttons">
-      <a href="#" class="btn-dark-primary">ご来店予約</a>
-      <a href="#" class="btn-dark-outline">WEB見積もり</a>
+  <section class="bottom-cta" style="position:relative;">
+    <span class="section-label">⑩ 最終CTA</span>
+    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <div class="bottom-cta-inner">
+      <div class="bottom-cta-en">CONTACT</div>
+      <h2>おふたりだけの指輪づくり、<br>はじめてみませんか？</h2>
+      <p>来店予約・ご相談は、WEBまたはお電話で承っています。<br>迷っている段階でもご予約いただけます。</p>
+      <div class="bottom-cta-buttons">
+        <a href="#" class="btn-primary">ご来店予約</a>
+        <a href="#" class="btn-outline">WEB見積もり</a>
+      </div>
     </div>
   </section>
 
@@ -1487,9 +1644,9 @@
 
   <!-- SP FLOATING CTA -->
   <div class="sp-floating-cta">
-    <a href="#">手作り結婚指輪</a>
-    <a href="#">オーダーメイド</a>
-    <a href="#">制作事例</a>
+    <a href="#">手作り</a>
+    <a href="#">オーダー</a>
+    <a href="#">事例</a>
     <a href="#" class="highlight">来店予約</a>
   </div>
 
