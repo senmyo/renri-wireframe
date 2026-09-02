@@ -426,8 +426,6 @@
     .gallery-card-desc {
       font-size: 12px; color: var(--text-secondary);
       line-height: 1.7; margin-bottom: 10px;
-      display: -webkit-box; -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical; overflow: hidden;
     }
     .gallery-card-spec {
       display: flex; gap: 10px; flex-wrap: wrap;
@@ -444,7 +442,8 @@
       margin-right: 6px; font-family: var(--serif-jp);
     }
     .gallery-card-spec .spec-item {
-      display: flex; gap: 4px; align-items: baseline;
+      display: grid; grid-template-columns: 48px 1fr;
+      gap: 6px; align-items: start; flex: 1 0 100%;
     }
     .gallery-card-spec .spec-label {
       color: var(--text-light); font-size: 10px;
@@ -1035,7 +1034,7 @@
       .material-item-desc { font-size: 10.5px; }
 
       /* GALLERY */
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .gallery-grid { grid-template-columns: 1fr; gap: 28px; }
       .gallery-card-body { padding: 10px 4px; }
       .gallery-card-title { font-size: 12px; line-height: 1.6; }
       .gallery-card-desc { font-size: 11px; line-height: 1.6; }
@@ -1450,104 +1449,157 @@
       </div>
 
       <div class="gallery-grid">
-        <a href="https://renri.jp/marriage/" class="gallery-card">
+        <a href="https://renri.jp/price/" class="gallery-card">
           <div class="gallery-card-image">📷</div>
           <div class="gallery-card-body">
             <div class="gallery-card-meta"><span>手作り</span><span>結婚指輪</span></div>
             <div class="gallery-card-title">ランダムなテクスチャーが楽しい、カジュアルデザイン</div>
-            <div class="gallery-card-desc">ランダムな表情を楽しむ、カジュアルな手作り結婚指輪。</div>
+            <div class="gallery-card-desc">打ち加減で表情が変わるハンマーテクスチャー。ツヤ・マットで印象を選べます。</div>
             <dl class="gallery-card-spec">
-              <div class="spec-item"><span class="spec-label">M's</span><span class="spec-value">¥154,000</span></div>
-              <div class="spec-item"><span class="spec-label">L's</span><span class="spec-value">¥101,000</span></div>
+              <div class="spec-item"><span class="spec-label">素材</span><span class="spec-value">プラチナ 3mm幅（男性）<br>プラチナ 2mm幅（女性）</span></div>
+              <div class="spec-item"><span class="spec-label">総額</span><span class="spec-value">M's：¥154,000<br>L's：¥101,000</span></div>
             </dl>
           </div>
         </a>
-        <a href="https://renri.jp/order_marriage/" class="gallery-card">
-          <div class="gallery-card-image">📷</div>
-          <div class="gallery-card-body">
-            <div class="gallery-card-meta"><span>オーダーメイド</span><span>結婚指輪</span></div>
-            <div class="gallery-card-title">スリットでつくる、シャープなワンポイントデザイン</div>
-            <div class="gallery-card-desc">スリットをワンポイントにした、シャープなオーダーメイド結婚指輪。</div>
-            <dl class="gallery-card-spec">
-              <div class="spec-item"><span class="spec-label">M's</span><span class="spec-value">¥191,000</span></div>
-              <div class="spec-item"><span class="spec-label">L's</span><span class="spec-value">¥167,000</span></div>
-            </dl>
-          </div>
-        </a>
-        <a href="https://renri.jp/engagement/" class="gallery-card">
-          <div class="gallery-card-image">📷</div>
-          <div class="gallery-card-body">
-            <div class="gallery-card-meta"><span>手作り</span><span>婚約指輪</span></div>
-            <div class="gallery-card-title">すっきりとした、ストレートラインのエンゲージリング</div>
-            <div class="gallery-card-desc">すっきりとしたストレートラインの、手作り婚約指輪。</div>
-            <dl class="gallery-card-spec">
-              <div class="spec-item"><span class="spec-label">L's</span><span class="spec-value">¥176,000</span></div>
-              <div class="spec-item"><span class="spec-label">センター</span><span class="spec-value">約3.5mm</span></div>
-            </dl>
-          </div>
-        </a>
-        <a href="https://renri.jp/order_engagement/" class="gallery-card">
-          <div class="gallery-card-image">📷</div>
-          <div class="gallery-card-body">
-            <div class="gallery-card-meta"><span>オーダーメイド</span><span>婚約指輪</span></div>
-            <div class="gallery-card-title">シャープな菱形で構成された、特徴的なデザイン</div>
-            <div class="gallery-card-desc">菱形のフォルムが印象的な、オーダーメイド婚約指輪。</div>
-            <dl class="gallery-card-spec">
-              <div class="spec-item"><span class="spec-label">L's</span><span class="spec-value">¥413,000</span></div>
-              <div class="spec-item"><span class="spec-label">センター</span><span class="spec-value">約4.5mm</span></div>
-            </dl>
-          </div>
-        </a>
-        <a href="https://renri.jp/marriage/" class="gallery-card">
+        <a href="https://renri.jp/price/" class="gallery-card">
           <div class="gallery-card-image">📷</div>
           <div class="gallery-card-body">
             <div class="gallery-card-meta"><span>手作り</span><span>結婚指輪</span></div>
             <div class="gallery-card-title">フォルムを楽しむ、流動的なメビウスリング</div>
-            <div class="gallery-card-desc">流動的なフォルムを楽しむ、メビウスデザインの手作り結婚指輪。</div>
+            <div class="gallery-card-desc">自然なねじれを活かしたメビウスシルエット。洗練されたスタイリッシュなデザインです。</div>
             <dl class="gallery-card-spec">
-              <div class="spec-item"><span class="spec-label">M's</span><span class="spec-value">¥147,000</span></div>
-              <div class="spec-item"><span class="spec-label">L's</span><span class="spec-value">¥163,000</span></div>
+              <div class="spec-item"><span class="spec-label">素材</span><span class="spec-value">プラチナ 2mm幅（男性）<br>ピンクゴールド 2mm幅（女性）</span></div>
+              <div class="spec-item"><span class="spec-label">総額</span><span class="spec-value">M's：¥147,000<br>L's：¥163,000</span></div>
             </dl>
           </div>
         </a>
-        <a href="https://renri.jp/engagement/" class="gallery-card">
+        <a href="https://renri.jp/price/" class="gallery-card">
           <div class="gallery-card-image">📷</div>
           <div class="gallery-card-body">
-            <div class="gallery-card-meta"><span>手作り</span><span>婚約指輪</span></div>
-            <div class="gallery-card-title">ダイヤモンドのラインが華やか、ピンクゴールドのエタニティリング</div>
-            <div class="gallery-card-desc">ダイヤモンドのラインが華やかな、ピンクゴールドの手作り婚約指輪。</div>
+            <div class="gallery-card-meta"><span>手作り</span><span>結婚指輪</span></div>
+            <div class="gallery-card-title">ワンサイドの輝きがスタイリッシュなテクスチャー</div>
+            <div class="gallery-card-desc">布地のような質感に艶のラインを加えた、シャープなテクスチャーデザイン。</div>
             <dl class="gallery-card-spec">
-              <div class="spec-item"><span class="spec-label">L's</span><span class="spec-value">¥231,000</span></div>
+              <div class="spec-item"><span class="spec-label">素材</span><span class="spec-value">グリーンゴールド 3mm幅（男性）<br>プラチナ 2.5mm幅（女性）</span></div>
+              <div class="spec-item"><span class="spec-label">総額</span><span class="spec-value">M's：¥236,000<br>L's：¥151,000</span></div>
             </dl>
           </div>
         </a>
-        <a href="https://renri.jp/order_marriage/" class="gallery-card">
+        <a href="https://renri.jp/price/" class="gallery-card">
+          <div class="gallery-card-image">📷</div>
+          <div class="gallery-card-body">
+            <div class="gallery-card-meta"><span>オーダーメイド</span><span>結婚指輪</span></div>
+            <div class="gallery-card-title">スリットでつくる、シャープなワンポイントデザイン</div>
+            <div class="gallery-card-desc">細身のフォルムをスリットで分け、コントラストを効かせたデザイン。</div>
+            <dl class="gallery-card-spec">
+              <div class="spec-item"><span class="spec-label">素材</span><span class="spec-value">ホワイトゴールド 2.5mm幅（男性）<br>ホワイトゴールド 2mm幅（女性）</span></div>
+              <div class="spec-item"><span class="spec-label">総額</span><span class="spec-value">M's：¥191,000<br>L's：¥167,000</span></div>
+            </dl>
+          </div>
+        </a>
+        <a href="https://renri.jp/price/" class="gallery-card">
+          <div class="gallery-card-image">📷</div>
+          <div class="gallery-card-body">
+            <div class="gallery-card-meta"><span>オーダーメイド</span><span>結婚指輪</span></div>
+            <div class="gallery-card-title">プラスワンでより特別に、手彫りを活かした月桂樹リング</div>
+            <div class="gallery-card-desc">月桂樹の手彫りと山型のボリューム、コンビカラーを組み合わせたデザイン。</div>
+            <dl class="gallery-card-spec">
+              <div class="spec-item"><span class="spec-label">素材</span><span class="spec-value">イエローゴールド 3.5mm幅（男性）<br>プラチナ×イエローゴールド 3mm幅（女性）</span></div>
+              <div class="spec-item"><span class="spec-label">総額</span><span class="spec-value">M's：¥236,000<br>L's：¥258,000</span></div>
+            </dl>
+          </div>
+        </a>
+        <a href="https://renri.jp/price/" class="gallery-card">
           <div class="gallery-card-image">📷</div>
           <div class="gallery-card-body">
             <div class="gallery-card-meta"><span>オーダーメイド</span><span>結婚指輪</span></div>
             <div class="gallery-card-title">モダンな雰囲気で装う、シャープなフォルムが美しい</div>
-            <div class="gallery-card-desc">シャープなフォルムを活かした、モダンなオーダーメイド結婚指輪。</div>
+            <div class="gallery-card-desc">丸みを抑えた面で構成する「チャンファーリング」。モダンな印象のデザインです。</div>
             <dl class="gallery-card-spec">
-              <div class="spec-item"><span class="spec-label">M's</span><span class="spec-value">¥147,000</span></div>
-              <div class="spec-item"><span class="spec-label">L's</span><span class="spec-value">¥163,000</span></div>
+              <div class="spec-item"><span class="spec-label">素材</span><span class="spec-value">プラチナ 2.5mm幅（男性）<br>ピンクゴールド 2mm幅（女性）</span></div>
+              <div class="spec-item"><span class="spec-label">総額</span><span class="spec-value">M's：¥147,000<br>L's：¥163,000</span></div>
             </dl>
           </div>
         </a>
-        <a href="https://renri.jp/order_engagement/" class="gallery-card">
+        <a href="https://renri.jp/price/" class="gallery-card">
+          <div class="gallery-card-image">📷</div>
+          <div class="gallery-card-body">
+            <div class="gallery-card-meta"><span>手作り</span><span>婚約指輪</span></div>
+            <div class="gallery-card-title">すっきりとした、ストレートラインのエンゲージリング</div>
+            <div class="gallery-card-desc">石が際立つシンプルなストレートライン。結婚指輪との重ね付けにも向くデザインです。</div>
+            <dl class="gallery-card-spec">
+              <div class="spec-item"><span class="spec-label">素材</span><span class="spec-value">プラチナ 1.5mm幅</span></div>
+              <div class="spec-item"><span class="spec-label">総額</span><span class="spec-value">L's：¥176,000</span></div>
+              <div class="spec-item"><span class="spec-label">石サイズ</span><span class="spec-value">約3.5mm</span></div>
+            </dl>
+          </div>
+        </a>
+        <a href="https://renri.jp/price/" class="gallery-card">
+          <div class="gallery-card-image">📷</div>
+          <div class="gallery-card-body">
+            <div class="gallery-card-meta"><span>手作り</span><span>婚約指輪</span></div>
+            <div class="gallery-card-title">ハンマーテクスチャーであたたかみのある、クラシカルなデザイン</div>
+            <div class="gallery-card-desc">マットなゴールドにハンマーテクスチャーとミルグレインを加えた、アンティーク調の仕上がり。</div>
+            <dl class="gallery-card-spec">
+              <div class="spec-item"><span class="spec-label">素材</span><span class="spec-value">イエローゴールド 2mm幅</span></div>
+              <div class="spec-item"><span class="spec-label">総額</span><span class="spec-value">L's：¥258,000</span></div>
+              <div class="spec-item"><span class="spec-label">石サイズ</span><span class="spec-value">約4mm</span></div>
+            </dl>
+          </div>
+        </a>
+        <a href="https://renri.jp/price/" class="gallery-card">
+          <div class="gallery-card-image">📷</div>
+          <div class="gallery-card-body">
+            <div class="gallery-card-meta"><span>手作り</span><span>婚約指輪</span></div>
+            <div class="gallery-card-title">ダイヤモンドのラインが華やか、ピンクゴールドのエタニティリング</div>
+            <div class="gallery-card-desc">メレダイヤを敷き詰め、肌なじみのよいピンクゴールドで華やかに仕上げたデザイン。</div>
+            <dl class="gallery-card-spec">
+              <div class="spec-item"><span class="spec-label">素材</span><span class="spec-value">ピンクゴールド 2.5mm幅</span></div>
+              <div class="spec-item"><span class="spec-label">総額</span><span class="spec-value">L's：¥231,000</span></div>
+            </dl>
+          </div>
+        </a>
+        <a href="https://renri.jp/price/" class="gallery-card">
+          <div class="gallery-card-image">📷</div>
+          <div class="gallery-card-body">
+            <div class="gallery-card-meta"><span>オーダーメイド</span><span>婚約指輪</span></div>
+            <div class="gallery-card-title">シャープな菱形で構成された、特徴的なデザイン</div>
+            <div class="gallery-card-desc">センターストーンをすっきり見せ、サイドをミルグレインで留めたスクエアデザイン。</div>
+            <dl class="gallery-card-spec">
+              <div class="spec-item"><span class="spec-label">素材</span><span class="spec-value">プラチナ 2〜2.5mm幅</span></div>
+              <div class="spec-item"><span class="spec-label">総額</span><span class="spec-value">L's：¥413,000</span></div>
+              <div class="spec-item"><span class="spec-label">石サイズ</span><span class="spec-value">約4.5mm</span></div>
+            </dl>
+          </div>
+        </a>
+        <a href="https://renri.jp/price/" class="gallery-card">
+          <div class="gallery-card-image">📷</div>
+          <div class="gallery-card-body">
+            <div class="gallery-card-meta"><span>オーダーメイド</span><span>婚約指輪</span></div>
+            <div class="gallery-card-title">小さなつぼみを束ねて贈る、可愛らしいデザイン</div>
+            <div class="gallery-card-desc">リトルブーケシリーズ「花蕾」。つぼみのような石座とミルグレインが特徴です。</div>
+            <dl class="gallery-card-spec">
+              <div class="spec-item"><span class="spec-label">素材</span><span class="spec-value">ピンクゴールド 1.5mm幅</span></div>
+              <div class="spec-item"><span class="spec-label">総額</span><span class="spec-value">L's：¥203,500</span></div>
+            </dl>
+          </div>
+        </a>
+        <a href="https://renri.jp/price/" class="gallery-card">
           <div class="gallery-card-image">📷</div>
           <div class="gallery-card-body">
             <div class="gallery-card-meta"><span>オーダーメイド</span><span>婚約指輪</span></div>
             <div class="gallery-card-title">輝きを存分に楽しむ、ヘイローセッティングのエンゲージリング</div>
-            <div class="gallery-card-desc">センターダイヤをメレダイヤが囲む、華やかなオーダーメイド婚約指輪。</div>
+            <div class="gallery-card-desc">センターダイヤをメレダイヤが囲む、シンプルなフォルムと華やかな輝きのデザイン。</div>
             <dl class="gallery-card-spec">
-              <div class="spec-item"><span class="spec-label">L's</span><span class="spec-value">¥436,000</span></div>
-              <div class="spec-item"><span class="spec-label">センター</span><span class="spec-value">約4.5mm</span></div>
+              <div class="spec-item"><span class="spec-label">素材</span><span class="spec-value">プラチナ 2mm幅</span></div>
+              <div class="spec-item"><span class="spec-label">総額</span><span class="spec-value">L's：¥436,000</span></div>
+              <div class="spec-item"><span class="spec-label">石サイズ</span><span class="spec-value">約4.5mm</span></div>
             </dl>
           </div>
         </a>
       </div>
 
-      <div class="center"><a href="#" class="btn-outline">すべての制作事例を見る</a></div>
+      <div class="center"><a href="https://renri.jp/case/" class="btn-outline">すべての制作事例を見る</a></div>
     </div>
   </section>
 
