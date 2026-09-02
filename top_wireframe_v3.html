@@ -397,6 +397,13 @@
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 24px; max-width: 1100px; margin: 0 auto 40px;
     }
+    .gallery-content-note {
+      max-width: 1100px; margin: -16px auto 24px;
+      padding: 9px 14px; text-align: center;
+      border: 1px dashed var(--border-light);
+      color: var(--text-light); font-size: 11px;
+      letter-spacing: 1px;
+    }
     .gallery-card {
       text-decoration: none; color: inherit;
       transition: var(--transition);
@@ -625,6 +632,16 @@
     .pricing-sample-name {
       font-size: 13px; letter-spacing: 1px; margin-bottom: 6px;
     }
+    .pricing-sample-material {
+      min-height: 56px; margin-bottom: 8px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 10.5px; line-height: 1.7;
+      color: var(--text-secondary); letter-spacing: 0.4px;
+    }
+    .pricing-sample-material span {
+      display: block; margin-bottom: 2px;
+      color: var(--text-light); font-size: 9px; letter-spacing: 1px;
+    }
     .pricing-sample-prices {
       font-family: var(--serif-en); font-size: 12px;
       color: var(--text-secondary); letter-spacing: 0.5px;
@@ -633,7 +650,20 @@
     .pricing-sample-prices strong {
       color: var(--text-primary); font-weight: 500;
     }
-    .pricing-cta { text-align: center; }
+    .pricing-sample-prices .price-label {
+      display: block; font-family: var(--serif-jp);
+      color: var(--text-light); font-size: 9px;
+      letter-spacing: 1px;
+    }
+    .pricing-sample-note {
+      display: block; margin-top: 3px;
+      font-family: var(--serif-jp);
+      color: var(--text-light); font-size: 9.5px;
+    }
+    .pricing-cta {
+      display: flex; justify-content: center;
+      gap: 12px; flex-wrap: wrap;
+    }
 
     /* SECTION 12: AFTERCARE */
     .aftercare { padding: 90px 40px; background: var(--bg-cream); }
@@ -1074,9 +1104,14 @@
       .pricing-formula-text { font-size: 13px; line-height: 1.8; }
       .pricing-formula-text strong { font-size: 18px; }
       .pricing-tab-btn { padding: 10px 12px; font-size: 11px; letter-spacing: 1px; }
-      .pricing-samples { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .pricing-samples { grid-template-columns: 1fr; gap: 12px; }
+      .pricing-sample {
+        display: grid; grid-template-columns: 38% 1fr;
+      }
+      .pricing-sample-image { aspect-ratio: auto; min-height: 170px; }
       .pricing-sample-body { padding: 10px 12px 14px; }
       .pricing-sample-name { font-size: 11.5px; }
+      .pricing-sample-material { min-height: 0; font-size: 10px; }
       .pricing-sample-prices { font-size: 10.5px; }
 
       /* AFTERCARE */
@@ -1445,68 +1480,58 @@
         <div class="en">GALLERY</div>
         <h2>制作事例</h2>
         <div class="line"></div>
-        <p class="desc">公開中の制作事例から、手作り・オーダーメイドの代表例をご紹介します。</p>
+        <p class="desc">手作り・オーダーメイドで叶えられる、素材・色・技法・フォルムの多彩な組み合わせをご紹介します。</p>
       </div>
 
+      <p class="gallery-content-note">※掲載画像・タイトル・紹介文は、新規にご用意いただく素材を使用</p>
+
       <div class="gallery-grid">
-        <a href="https://renri.jp/price/" class="gallery-card">
-          <div class="gallery-card-image">📷</div>
+        <a href="https://renri.jp/case/" class="gallery-card">
+          <div class="gallery-card-image">📷 新規画像</div>
           <div class="gallery-card-body">
             <div class="gallery-card-meta"><span>手作り</span><span>結婚指輪</span></div>
-            <div class="gallery-card-title">ランダムなテクスチャーが楽しい、カジュアルデザイン</div>
-            <dl class="gallery-card-spec">
-              <div class="spec-item"><span class="spec-label">参考価格</span><span class="spec-value">M's：¥154,000<br>L's：¥101,000</span></div>
-            </dl>
+            <div class="gallery-card-title">テクスチャーのバリエーション</div>
+            <div class="gallery-card-desc">【新規原稿】仕上げや質感の違いが伝わる事例</div>
           </div>
         </a>
-        <a href="https://renri.jp/price/" class="gallery-card">
-          <div class="gallery-card-image">📷</div>
+        <a href="https://renri.jp/case/" class="gallery-card">
+          <div class="gallery-card-image">📷 新規画像</div>
           <div class="gallery-card-body">
             <div class="gallery-card-meta"><span>手作り</span><span>結婚指輪</span></div>
-            <div class="gallery-card-title">フォルムを楽しむ、流動的なメビウスリング</div>
-            <dl class="gallery-card-spec">
-              <div class="spec-item"><span class="spec-label">参考価格</span><span class="spec-value">M's：¥147,000<br>L's：¥163,000</span></div>
-            </dl>
+            <div class="gallery-card-title">素材・カラーのバリエーション</div>
+            <div class="gallery-card-desc">【新規原稿】地金やコンビカラーの違いが伝わる事例</div>
           </div>
         </a>
-        <a href="https://renri.jp/price/" class="gallery-card">
-          <div class="gallery-card-image">📷</div>
+        <a href="https://renri.jp/case/" class="gallery-card">
+          <div class="gallery-card-image">📷 新規画像</div>
           <div class="gallery-card-body">
             <div class="gallery-card-meta"><span>オーダーメイド</span><span>結婚指輪</span></div>
-            <div class="gallery-card-title">スリットでつくる、シャープなワンポイントデザイン</div>
-            <dl class="gallery-card-spec">
-              <div class="spec-item"><span class="spec-label">参考価格</span><span class="spec-value">M's：¥191,000<br>L's：¥167,000</span></div>
-            </dl>
+            <div class="gallery-card-title">手彫り・装飾のバリエーション</div>
+            <div class="gallery-card-desc">【新規原稿】彫り模様やミル打ちが伝わる事例</div>
           </div>
         </a>
-        <a href="https://renri.jp/price/" class="gallery-card">
-          <div class="gallery-card-image">📷</div>
+        <a href="https://renri.jp/case/" class="gallery-card">
+          <div class="gallery-card-image">📷 新規画像</div>
           <div class="gallery-card-body">
             <div class="gallery-card-meta"><span>オーダーメイド</span><span>結婚指輪</span></div>
-            <div class="gallery-card-title">プラスワンでより特別に、手彫りを活かした月桂樹リング</div>
-            <dl class="gallery-card-spec">
-              <div class="spec-item"><span class="spec-label">参考価格</span><span class="spec-value">M's：¥236,000<br>L's：¥258,000</span></div>
-            </dl>
+            <div class="gallery-card-title">フォルム・構造のバリエーション</div>
+            <div class="gallery-card-desc">【新規原稿】カーブや立体的な造形が伝わる事例</div>
           </div>
         </a>
-        <a href="https://renri.jp/price/" class="gallery-card">
-          <div class="gallery-card-image">📷</div>
+        <a href="https://renri.jp/case/" class="gallery-card">
+          <div class="gallery-card-image">📷 新規画像</div>
           <div class="gallery-card-body">
-            <div class="gallery-card-meta"><span>手作り</span><span>婚約指輪</span></div>
-            <div class="gallery-card-title">すっきりとした、ストレートラインのエンゲージリング</div>
-            <dl class="gallery-card-spec">
-              <div class="spec-item"><span class="spec-label">参考価格</span><span class="spec-value">L's：¥176,000</span></div>
-            </dl>
+            <div class="gallery-card-meta"><span>手作り／オーダーメイド</span><span>婚約指輪</span></div>
+            <div class="gallery-card-title">石座・ダイヤモンドのバリエーション</div>
+            <div class="gallery-card-desc">【新規原稿】石の留め方や印象の違いが伝わる事例</div>
           </div>
         </a>
-        <a href="https://renri.jp/price/" class="gallery-card">
-          <div class="gallery-card-image">📷</div>
+        <a href="https://renri.jp/case/" class="gallery-card">
+          <div class="gallery-card-image">📷 新規画像</div>
           <div class="gallery-card-body">
-            <div class="gallery-card-meta"><span>オーダーメイド</span><span>婚約指輪</span></div>
-            <div class="gallery-card-title">輝きを存分に楽しむ、ヘイローセッティングのエンゲージリング</div>
-            <dl class="gallery-card-spec">
-              <div class="spec-item"><span class="spec-label">参考価格</span><span class="spec-value">L's：¥436,000</span></div>
-            </dl>
+            <div class="gallery-card-meta"><span>手作り／オーダーメイド</span><span>セットリング</span></div>
+            <div class="gallery-card-title">重ねづけのバリエーション</div>
+            <div class="gallery-card-desc">【新規原稿】結婚指輪と婚約指輪の組み合わせ事例</div>
           </div>
         </a>
       </div>
@@ -1669,57 +1694,61 @@
         <div class="en">PRICE</div>
         <h2>価格について</h2>
         <div class="line"></div>
-        <p class="desc">renriではシンプルでわかりやすい価格設定を心がけています。</p>
+        <p class="desc">制作料金の仕組みと、公開中の価格表に掲載している実例価格をご紹介します。</p>
       </div>
 
       <div class="pricing-formula">
-        <div class="pricing-formula-label">PRICE FORMULA</div>
+        <div class="pricing-formula-label">制作料金（1本あたり）</div>
         <div class="pricing-formula-text">
-          制作料金 <strong>¥22,000〜</strong> ＋ 材料費 ＋ オプション加工費<br>
+          手作り <strong>¥22,000</strong> ／ オーダーメイド <strong>¥22,000〜</strong><br>
+          ＋ 材料費 ＋ オプション加工費<br>
           <small>婚約指輪は、ダイヤモンド代・石留め代が加わります。</small>
         </div>
       </div>
 
       <div class="pricing-samples-tabs">
         <button class="pricing-tab-btn active" data-tab="price-h-m">手作り｜結婚指輪</button>
-        <button class="pricing-tab-btn" data-tab="price-o-m">オーダー｜結婚指輪</button>
+        <button class="pricing-tab-btn" data-tab="price-o-m">オーダーメイド｜結婚指輪</button>
         <button class="pricing-tab-btn" data-tab="price-h-e">手作り｜婚約指輪</button>
-        <button class="pricing-tab-btn" data-tab="price-o-e">オーダー｜婚約指輪</button>
+        <button class="pricing-tab-btn" data-tab="price-o-e">オーダーメイド｜婚約指輪</button>
       </div>
 
       <div class="pricing-panel active" id="price-h-m">
         <div class="pricing-samples">
-          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">ランダムなテクスチャー</div><div class="pricing-sample-prices">M's <strong>¥154,000</strong><br>L's <strong>¥101,000</strong></div></div></div>
-          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">メビウスリング</div><div class="pricing-sample-prices">M's <strong>¥147,000</strong><br>L's <strong>¥163,000</strong></div></div></div>
-          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">ワンサイドテクスチャー</div><div class="pricing-sample-prices">M's <strong>¥236,000</strong><br>L's <strong>¥151,000</strong></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">ランダムなテクスチャーが楽しい、カジュアルデザイン</div><div class="pricing-sample-material"><span>素材・幅</span>プラチナ 3mm幅（男性）<br>プラチナ 2mm幅（女性）</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>M's <strong>¥154,000</strong><br>L's <strong>¥101,000</strong></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">フォルムを楽しむ、流動的なメビウスリング</div><div class="pricing-sample-material"><span>素材・幅</span>プラチナ 2mm幅（男性）<br>ピンクゴールド 2mm幅（女性）</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>M's <strong>¥147,000</strong><br>L's <strong>¥163,000</strong></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">ワンサイドの輝きがスタイリッシュなテクスチャー</div><div class="pricing-sample-material"><span>素材・幅</span>グリーンゴールド 3mm幅（男性）<br>プラチナ 2.5mm幅（女性）</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>M's <strong>¥236,000</strong><br>L's <strong>¥151,000</strong></div></div></div>
         </div>
       </div>
 
       <div class="pricing-panel" id="price-o-m">
         <div class="pricing-samples">
-          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">スリットワンポイント</div><div class="pricing-sample-prices">M's <strong>¥191,000</strong><br>L's <strong>¥167,000</strong></div></div></div>
-          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">シャープなフォルム</div><div class="pricing-sample-prices">M's <strong>¥147,000</strong><br>L's <strong>¥163,000</strong></div></div></div>
-          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">月桂樹の手彫り</div><div class="pricing-sample-prices">M's <strong>¥236,000</strong><br>L's <strong>¥258,000</strong></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">スリットでつくる、シャープなワンポイントデザイン</div><div class="pricing-sample-material"><span>素材・幅</span>ホワイトゴールド 2.5mm幅（男性）<br>ホワイトゴールド 2mm幅（女性）</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>M's <strong>¥191,000</strong><br>L's <strong>¥167,000</strong></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">プラスワンでより特別に、手彫りを活かした月桂樹リング</div><div class="pricing-sample-material"><span>素材・幅</span>イエローゴールド 3.5mm幅（男性）<br>プラチナ×イエローゴールド 3mm幅（女性）</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>M's <strong>¥236,000</strong><br>L's <strong>¥258,000</strong></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">モダンな雰囲気で装う、シャープなフォルムが美しい</div><div class="pricing-sample-material"><span>素材・幅</span>プラチナ 2.5mm幅（男性）<br>ピンクゴールド 2mm幅（女性）</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>M's <strong>¥147,000</strong><br>L's <strong>¥163,000</strong></div></div></div>
         </div>
       </div>
 
       <div class="pricing-panel" id="price-h-e">
         <div class="pricing-samples">
-          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">ストレートライン</div><div class="pricing-sample-prices">L's <strong>¥176,000</strong><br><span style="color:var(--text-light);">センター 約3.5mm</span></div></div></div>
-          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">ピンクゴールド エタニティ</div><div class="pricing-sample-prices">L's <strong>¥231,000</strong></div></div></div>
-          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">ハンマーテクスチャー</div><div class="pricing-sample-prices">L's <strong>¥258,000</strong><br><span style="color:var(--text-light);">センター 約4mm</span></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">すっきりとした、ストレートラインのエンゲージリング</div><div class="pricing-sample-material"><span>素材・幅</span>プラチナ 1.5mm幅</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>L's <strong>¥176,000</strong><span class="pricing-sample-note">センターストーン：約3.5mm</span></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">ハンマーテクスチャーであたたかみのある、クラシカルなデザイン</div><div class="pricing-sample-material"><span>素材・幅</span>イエローゴールド 2mm幅</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>L's <strong>¥258,000</strong><span class="pricing-sample-note">センターストーン：約4mm</span></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">ダイヤモンドのラインが華やか、ピンクゴールドのエタニティリング</div><div class="pricing-sample-material"><span>素材・幅</span>ピンクゴールド 2.5mm幅</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>L's <strong>¥231,000</strong></div></div></div>
         </div>
       </div>
 
       <div class="pricing-panel" id="price-o-e">
         <div class="pricing-samples">
-          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">菱形のシャープデザイン</div><div class="pricing-sample-prices">L's <strong>¥413,000</strong><br><span style="color:var(--text-light);">センター 約4.5mm</span></div></div></div>
-          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">花蕾ブーケ</div><div class="pricing-sample-prices">L's <strong>¥203,500</strong></div></div></div>
-          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">ヘイローセッティング</div><div class="pricing-sample-prices">L's <strong>¥436,000</strong><br><span style="color:var(--text-light);">センター 約4.5mm</span></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">シャープな菱形で構成された、特徴的なデザイン</div><div class="pricing-sample-material"><span>素材・幅</span>プラチナ 2〜2.5mm幅</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>L's <strong>¥413,000</strong><span class="pricing-sample-note">センターストーン：約4.5mm</span></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">小さなつぼみを束ねて贈る、可愛らしいデザイン</div><div class="pricing-sample-material"><span>素材・幅</span>ピンクゴールド 1.5mm幅</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>L's <strong>¥203,500</strong></div></div></div>
+          <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">輝きを存分に楽しむ、ヘイローセッティングのエンゲージリング</div><div class="pricing-sample-material"><span>素材・幅</span>プラチナ 2mm幅</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>L's <strong>¥436,000</strong><span class="pricing-sample-note">センターストーン：約4.5mm</span></div></div></div>
         </div>
       </div>
 
-      <div class="pricing-cta"><a href="https://renri.jp/contact/" class="btn-outline">ご予算・お見積もりを相談する</a></div>
+      <div class="pricing-cta">
+        <a href="https://renri.jp/price/" class="btn-outline">価格表を詳しく見る</a>
+        <a href="https://renri.jp/contact/" class="btn-outline">ご予算・お見積もりを相談する</a>
+      </div>
     </div>
   </section>
 
