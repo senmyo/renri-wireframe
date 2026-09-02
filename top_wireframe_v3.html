@@ -515,6 +515,7 @@
     .process .section-header h2 { color: #fff; }
     .process .section-header .line { background: rgba(255,255,255,0.5); }
     .process .section-header .desc { color: rgba(255,255,255,0.65); }
+    .process-tabs { display: none; }
     .process-block {
       max-width: 1100px; margin: 0 auto 56px;
     }
@@ -592,6 +593,7 @@
     }
     .pricing-panel { display: none; }
     .pricing-panel.active { display: block; }
+    .pricing-panel-title { display: none; }
     .pricing-samples {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
       max-width: 1100px; margin: 0 auto 32px;
@@ -973,6 +975,7 @@
        ============================================ */
     @media (max-width: 768px) {
       body { padding-top: 36px; padding-bottom: 60px; }
+      .section-inner { padding: 0; }
       .header-inner { padding: 10px 16px; }
       .logo { font-size: 22px; letter-spacing: 3px; }
       .nav { display: none; }
@@ -993,10 +996,10 @@
 
       .about, .courses, .series,
       .materials, .gallery, .voice, .media, .process, .pricing,
-      .aftercare, .access, .blog-section, .news, .faq, .glossary { padding: 50px 20px; }
-      .bottom-cta { padding: 56px 20px; }
+      .aftercare, .access, .blog-section, .news, .faq, .glossary { padding: 44px 16px; }
+      .bottom-cta { padding: 52px 16px; }
 
-      .section-header { margin-bottom: 28px; }
+      .section-header { margin-bottom: 24px; }
       .section-header .en { font-size: 11px; letter-spacing: 4px; }
       .section-header h2 { font-size: 18px; letter-spacing: 4px; line-height: 1.8; }
       .section-header .desc { font-size: 12.5px; margin-top: 14px; line-height: 1.9; }
@@ -1008,12 +1011,17 @@
       .about-text p { font-size: 13px; line-height: 2.1; }
 
       /* COURSES */
-      .main-course-body { padding: 20px 18px 24px; }
-      .main-course-body h3 { font-size: 17px; letter-spacing: 2px; margin-bottom: 10px; }
-      .main-course-body .lead { font-size: 12.5px; line-height: 1.9; margin-bottom: 14px; }
-      .main-course-features { padding: 12px 0; margin-bottom: 16px; }
-      .main-course-features li { font-size: 11.5px; line-height: 1.9; }
-      .btn-detail-text { font-size: 12px; letter-spacing: 2px; }
+      .main-courses { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .main-course-image { aspect-ratio: 16/10; }
+      .main-course-body { padding: 12px 10px 14px; }
+      .main-course-body .en-label { font-size: 8px; letter-spacing: 1.5px; margin-bottom: 5px; }
+      .main-course-body h3 { font-size: 13px; letter-spacing: 1px; margin-bottom: 7px; }
+      .main-course-body .lead {
+        display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+        font-size: 10.5px; line-height: 1.7; margin-bottom: 10px;
+      }
+      .main-course-features { display: none; }
+      .btn-detail-text { font-size: 10px; letter-spacing: 0.5px; line-height: 1.6; }
       .consult-box { padding: 24px 18px; }
       .consult-box { margin-top: 20px; }
       .consult-box h3 { font-size: 14px; letter-spacing: 1.5px; }
@@ -1029,12 +1037,14 @@
       .consult-visit-link { justify-self: center; min-height: 44px; display: inline-flex; align-items: center; }
 
       /* SERIES */
-      .series-cards { grid-template-columns: 1fr; gap: 14px; }
-      .series-card { flex-direction: row; }
-      .series-card-image { flex: 0 0 38%; aspect-ratio: auto; }
-      .series-card-body { padding: 12px 14px 14px; }
-      .series-card-body h3 { font-size: 14px; letter-spacing: 1px; }
-      .series-card-body p { font-size: 11px; }
+      .series-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .series-card { flex-direction: column; }
+      .series-card-image { flex: none; aspect-ratio: 16/10; }
+      .series-card-body { padding: 10px 10px 12px; }
+      .series-card-body .en-label { font-size: 8px; letter-spacing: 1.2px; }
+      .series-card-body h3 { font-size: 12px; letter-spacing: 0.5px; }
+      .series-card-body .series-tag { font-size: 8.5px; line-height: 1.5; }
+      .series-card-body p { display: none; }
 
       /* MATERIALS (縦並び) */
       .material-cat { margin-bottom: 32px; }
@@ -1047,23 +1057,36 @@
       .material-item-desc { font-size: 10.5px; }
 
       /* GALLERY */
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .gallery-card-body { padding: 10px 4px; }
-      .gallery-card-title { font-size: 12px; line-height: 1.6; }
-      .gallery-card-desc { font-size: 11px; line-height: 1.6; }
-      .gallery-card-meta span { font-size: 9px; padding: 1px 6px; }
+      .gallery-grid {
+        display: flex; gap: 14px; max-width: none;
+        margin: 0 -16px 28px; padding: 0 16px 8px;
+        overflow-x: auto; scroll-snap-type: x mandatory;
+      }
+      .gallery-card { flex: 0 0 82vw; max-width: 340px; scroll-snap-align: start; }
+      .gallery-card-image { aspect-ratio: 16/10; }
+      .gallery-card-body { padding: 12px 2px 0; }
+      .gallery-card-title { font-size: 13px; line-height: 1.6; }
+      .gallery-card-desc { font-size: 11.5px; line-height: 1.7; }
+      .gallery-card-meta span { font-size: 9px; padding: 2px 7px; }
 
       /* VOICE */
-      .voice-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .voice-card-body { padding: 12px 14px; }
-      .voice-card-title { font-size: 12px; letter-spacing: 0.5px; }
-      .voice-card-excerpt { font-size: 11px; }
-      .voice-card-badges .badge { font-size: 9px; padding: 2px 6px; }
+      .voice-grid { grid-template-columns: 1fr; gap: 16px; }
+      .voice-card:nth-child(n+3) { display: none; }
+      .voice-card-image { aspect-ratio: 16/10; }
+      .voice-card-body { padding: 14px 16px 16px; }
+      .voice-card-title { font-size: 13px; letter-spacing: 0.5px; }
+      .voice-card-excerpt { font-size: 11.5px; }
+      .voice-card-badges .badge { font-size: 9px; padding: 2px 7px; }
 
       /* MEDIA */
-      .media-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .media-card { padding: 16px 14px; }
-      .media-card-title { font-size: 12px; }
+      .media-grid {
+        display: flex; gap: 14px; max-width: none;
+        margin: 0 -16px 26px; padding: 0 16px 8px;
+        overflow-x: auto; scroll-snap-type: x mandatory;
+      }
+      .media-card { flex: 0 0 76vw; max-width: 300px; padding: 14px; scroll-snap-align: start; }
+      .media-card-logo { aspect-ratio: 16/9; margin-bottom: 10px; }
+      .media-card-title { font-size: 13px; }
       .media-card-issue { font-size: 10px; }
 
       /* NEWS */
@@ -1072,30 +1095,74 @@
       .news-tag { font-size: 9px; padding: 1px 6px; }
       .news-title { font-size: 12px; flex-basis: 100%; line-height: 1.6; }
 
-      /* PROCESS (縦並び) */
-      .process-block { margin-bottom: 36px; }
-      .process-block-header { gap: 10px; margin-bottom: 18px; padding-bottom: 8px; }
-      .process-block-en { font-size: 11px; letter-spacing: 3px; }
+      /* PROCESS（コースタブ＋縦型ステップ） */
+      .process-tabs {
+        display: grid; grid-template-columns: repeat(2, 1fr);
+        max-width: 420px; margin: 0 auto 28px;
+        border: 1px solid rgba(255,255,255,0.35);
+      }
+      .process-tab-btn {
+        min-height: 48px; padding: 10px 8px;
+        border: 0; border-right: 1px solid rgba(255,255,255,0.35);
+        background: transparent; color: rgba(255,255,255,0.68);
+        font-family: var(--serif-jp); font-size: 12px; letter-spacing: 1px;
+      }
+      .process-tab-btn:last-child { border-right: 0; }
+      .process-tab-btn.active { background: #fff; color: var(--text-primary); }
+      .process-block { display: none; margin-bottom: 0; }
+      .process-block.active { display: block; }
+      .process-block-header {
+        display: block; margin-bottom: 22px; padding-bottom: 0;
+        border-bottom: 0; text-align: center;
+      }
+      .process-block-en { display: none; }
       .process-block-jp { font-size: 15px; letter-spacing: 2px; }
-      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-      .process-step-num { font-size: 10px; }
-      .process-step-title { font-size: 12px; }
-      .process-step-desc { font-size: 10.5px; }
+      .process-steps { display: block; }
+      .process-step {
+        display: grid; grid-template-columns: 46px minmax(0, 1fr);
+        column-gap: 12px; text-align: left;
+        padding: 0 0 28px; margin-bottom: 28px;
+        border-bottom: 1px solid rgba(255,255,255,0.16);
+      }
+      .process-step:last-child { margin-bottom: 0; }
+      .process-step-num {
+        grid-column: 1; grid-row: 1 / span 3;
+        margin: 0; padding-top: 2px;
+        font-size: 9px; letter-spacing: 1px; line-height: 1.5;
+      }
+      .process-step-title { grid-column: 2; grid-row: 1; font-size: 13px; margin-bottom: 10px; }
+      .process-step-image {
+        grid-column: 2; grid-row: 2;
+        width: 100%; aspect-ratio: 16/9; margin-bottom: 12px;
+      }
+      .process-step-desc { grid-column: 2; grid-row: 3; font-size: 11px; line-height: 1.8; }
 
       /* PRICING */
       .pricing-formula { padding: 18px 20px; }
       .pricing-formula-text { font-size: 13px; line-height: 1.8; }
       .pricing-formula-text strong { font-size: 18px; }
-      .pricing-tab-btn { padding: 10px 12px; font-size: 11px; letter-spacing: 1px; }
-      .pricing-samples { grid-template-columns: 1fr; gap: 12px; }
-      .pricing-sample {
-        display: grid; grid-template-columns: 38% 1fr;
+      .pricing-samples-tabs { display: none; }
+      .pricing-panel, .pricing-panel.active { display: block; }
+      .pricing-panel + .pricing-panel { margin-top: 38px; }
+      .pricing-panel-title {
+        display: block; max-width: 1100px; margin: 0 auto 14px;
+        font-size: 14px; font-weight: 400; letter-spacing: 1.5px;
       }
-      .pricing-sample-image { aspect-ratio: auto; min-height: 170px; }
-      .pricing-sample-body { padding: 10px 12px 14px; }
-      .pricing-sample-name { font-size: 11.5px; }
+      .pricing-samples {
+        display: flex; gap: 14px; max-width: none;
+        margin: 0 -16px 0; padding: 0 16px 8px;
+        overflow-x: auto; scroll-snap-type: x mandatory;
+      }
+      .pricing-sample {
+        display: block; flex: 0 0 82vw; max-width: 320px;
+        scroll-snap-align: start;
+      }
+      .pricing-sample-image { aspect-ratio: 16/10; min-height: 0; }
+      .pricing-sample-body { padding: 12px 14px 16px; }
+      .pricing-sample-name { font-size: 12px; }
       .pricing-sample-material { min-height: 0; font-size: 10px; }
-      .pricing-sample-prices { font-size: 10.5px; }
+      .pricing-sample-prices { font-size: 11px; }
+      .pricing-cta { margin-top: 32px; }
 
       /* AFTERCARE */
       .aftercare-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -1111,12 +1178,45 @@
       .access-info { font-size: 12.5px; }
 
       /* BLOG */
-      .blog-grid { grid-template-columns: 1fr; gap: 14px; }
-      .blog-card { display: flex; }
-      .blog-card-image { flex: 0 0 36%; aspect-ratio: auto; }
-      .blog-card-body { padding: 12px 14px; }
-      .blog-card-date { font-size: 10px; margin-bottom: 4px; }
-      .blog-card-title { font-size: 12.5px; line-height: 1.6; }
+      .blog-grid {
+        display: flex; gap: 14px; max-width: none;
+        margin: 0 -16px 28px; padding: 0 16px 8px;
+        overflow-x: auto; scroll-snap-type: x mandatory;
+      }
+      .blog-card { display: block; flex: 0 0 82vw; max-width: 330px; scroll-snap-align: start; }
+      .blog-card-image { aspect-ratio: 16/10; }
+      .blog-card-body { padding: 12px 14px 16px; }
+      .blog-card-date { font-size: 10px; margin-bottom: 5px; }
+      .blog-card-title { font-size: 13px; line-height: 1.7; }
+
+      /* SP画像はPC画像の縮小ではなく、指輪が切れない横長素材を別途用意 */
+      .main-course-image,
+      .series-card-image,
+      .gallery-card-image,
+      .voice-card-image,
+      .media-card-logo,
+      .process-step-image,
+      .pricing-sample-image,
+      .blog-card-image { font-size: 0; }
+      .main-course-image::after,
+      .series-card-image::after,
+      .gallery-card-image::after,
+      .voice-card-image::after,
+      .media-card-logo::after,
+      .process-step-image::after,
+      .pricing-sample-image::after,
+      .blog-card-image::after {
+        content: '📷 SP用横長画像';
+        font-family: sans-serif; font-size: 10px; letter-spacing: 0.5px;
+      }
+      .gallery-grid,
+      .media-grid,
+      .pricing-samples,
+      .blog-grid { scrollbar-width: none; }
+      .gallery-grid::-webkit-scrollbar,
+      .media-grid::-webkit-scrollbar,
+      .pricing-samples::-webkit-scrollbar,
+      .blog-grid::-webkit-scrollbar { display: none; }
 
       /* FAQ */
       .faq-cat { margin-bottom: 24px; }
@@ -1626,8 +1726,13 @@
         <p class="desc">手作り・オーダーメイド、それぞれの結婚指輪が完成するまでの流れをご紹介します。</p>
       </div>
 
+      <div class="process-tabs" role="tablist" aria-label="結婚指輪の制作コース">
+        <button class="process-tab-btn active" type="button" role="tab" aria-selected="true" aria-controls="process-handmade" data-process-tab="process-handmade">手作り</button>
+        <button class="process-tab-btn" type="button" role="tab" aria-selected="false" aria-controls="process-ordermade" data-process-tab="process-ordermade">オーダーメイド</button>
+      </div>
+
       <!-- 手作りコース -->
-      <div class="process-block fade-in">
+      <div class="process-block active fade-in" id="process-handmade" role="tabpanel">
         <div class="process-block-header">
           <span class="process-block-en">HANDMADE COURSE</span>
           <h3 class="process-block-jp">手作り結婚指輪の流れ</h3>
@@ -1642,7 +1747,7 @@
       </div>
 
       <!-- オーダーメイドコース -->
-      <div class="process-block fade-in">
+      <div class="process-block fade-in" id="process-ordermade" role="tabpanel">
         <div class="process-block-header">
           <span class="process-block-en">ORDER MADE COURSE</span>
           <h3 class="process-block-jp">オーダーメイド結婚指輪の流れ</h3>
@@ -1687,6 +1792,7 @@
       </div>
 
       <div class="pricing-panel active" id="price-h-m">
+        <h3 class="pricing-panel-title">手作り｜結婚指輪</h3>
         <div class="pricing-samples">
           <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">ランダムなテクスチャーが楽しい、カジュアルデザイン</div><div class="pricing-sample-material"><span>素材・幅</span>プラチナ 3mm幅（男性）<br>プラチナ 2mm幅（女性）</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>M's <strong>¥154,000</strong><br>L's <strong>¥101,000</strong></div></div></div>
           <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">フォルムを楽しむ、流動的なメビウスリング</div><div class="pricing-sample-material"><span>素材・幅</span>プラチナ 2mm幅（男性）<br>ピンクゴールド 2mm幅（女性）</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>M's <strong>¥147,000</strong><br>L's <strong>¥163,000</strong></div></div></div>
@@ -1695,6 +1801,7 @@
       </div>
 
       <div class="pricing-panel" id="price-o-m">
+        <h3 class="pricing-panel-title">オーダーメイド｜結婚指輪</h3>
         <div class="pricing-samples">
           <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">スリットでつくる、シャープなワンポイントデザイン</div><div class="pricing-sample-material"><span>素材・幅</span>ホワイトゴールド 2.5mm幅（男性）<br>ホワイトゴールド 2mm幅（女性）</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>M's <strong>¥191,000</strong><br>L's <strong>¥167,000</strong></div></div></div>
           <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">プラスワンでより特別に、手彫りを活かした月桂樹リング</div><div class="pricing-sample-material"><span>素材・幅</span>イエローゴールド 3.5mm幅（男性）<br>プラチナ×イエローゴールド 3mm幅（女性）</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>M's <strong>¥236,000</strong><br>L's <strong>¥258,000</strong></div></div></div>
@@ -1703,6 +1810,7 @@
       </div>
 
       <div class="pricing-panel" id="price-h-e">
+        <h3 class="pricing-panel-title">手作り｜婚約指輪</h3>
         <div class="pricing-samples">
           <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">すっきりとした、ストレートラインのエンゲージリング</div><div class="pricing-sample-material"><span>素材・幅</span>プラチナ 1.5mm幅</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>L's <strong>¥176,000</strong><span class="pricing-sample-note">センターストーン：約3.5mm</span></div></div></div>
           <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">ハンマーテクスチャーであたたかみのある、クラシカルなデザイン</div><div class="pricing-sample-material"><span>素材・幅</span>イエローゴールド 2mm幅</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>L's <strong>¥258,000</strong><span class="pricing-sample-note">センターストーン：約4mm</span></div></div></div>
@@ -1711,6 +1819,7 @@
       </div>
 
       <div class="pricing-panel" id="price-o-e">
+        <h3 class="pricing-panel-title">オーダーメイド｜婚約指輪</h3>
         <div class="pricing-samples">
           <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">シャープな菱形で構成された、特徴的なデザイン</div><div class="pricing-sample-material"><span>素材・幅</span>プラチナ 2〜2.5mm幅</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>L's <strong>¥413,000</strong><span class="pricing-sample-note">センターストーン：約4.5mm</span></div></div></div>
           <div class="pricing-sample"><div class="pricing-sample-image">📷</div><div class="pricing-sample-body"><div class="pricing-sample-name">小さなつぼみを束ねて贈る、可愛らしいデザイン</div><div class="pricing-sample-material"><span>素材・幅</span>ピンクゴールド 1.5mm幅</div><div class="pricing-sample-prices"><span class="price-label">総額（税込）</span>L's <strong>¥203,500</strong></div></div></div>
@@ -2084,6 +2193,21 @@
       });
     }, { threshold: 0.12 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Process tabs（SPのみ表示）
+    document.querySelectorAll('.process-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const panelId = btn.dataset.processTab;
+        document.querySelectorAll('.process-tab-btn').forEach(tab => {
+          const isActive = tab === btn;
+          tab.classList.toggle('active', isActive);
+          tab.setAttribute('aria-selected', String(isActive));
+        });
+        document.querySelectorAll('.process-block').forEach(panel => {
+          panel.classList.toggle('active', panel.id === panelId);
+        });
+      });
+    });
 
     // Pricing tabs
     document.querySelectorAll('.pricing-tab-btn').forEach(btn => {
