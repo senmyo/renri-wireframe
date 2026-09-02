@@ -63,12 +63,6 @@
       border-radius: 3px; font-weight: 700; font-size: 11px;
     }
     .wireframe-bar .page-path { color: #a2d2ff; font-weight: 500; }
-    .section-label {
-      position: absolute; top: 12px; left: 12px;
-      background: rgba(26, 26, 46, 0.85); color: #a2d2ff;
-      font-family: sans-serif; font-size: 11px;
-      padding: 3px 10px; border-radius: 3px; z-index: 10;
-    }
     .feedback-btn {
       position: absolute; top: 12px; right: 12px; z-index: 50;
       padding: 6px 14px; font-size: 12px;
@@ -124,14 +118,14 @@
       letter-spacing: 0.5px; margin-top: 20px; line-height: 2;
     }
 
-    /* HERO (minimal) */
+    /* HERO (single static visual) */
     .hero {
       position: relative; height: 70vh; min-height: 480px; max-height: 720px;
       background: linear-gradient(135deg, #b8b8b8 0%, #909090 50%, #707070 100%);
       overflow: hidden;
     }
     .hero::before {
-      content: '📷 メインビジュアル'; position: absolute; inset: 0;
+      content: '📷 メインビジュアル（静止画1枚）'; position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
       color: rgba(255, 255, 255, 0.4); font-size: 14px; font-family: sans-serif;
     }
@@ -382,6 +376,7 @@
       display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 24px; max-width: 1100px; margin: 0 auto 40px;
     }
+    .sp-slider-guide { display: none; }
     .gallery-card {
       text-decoration: none; color: inherit;
       transition: var(--transition);
@@ -1057,6 +1052,17 @@
       .material-item-desc { font-size: 10.5px; }
 
       /* GALLERY */
+      .sp-slider-guide {
+        display: flex; align-items: center; justify-content: flex-end; gap: 7px;
+        max-width: 340px; margin: -12px 0 12px auto;
+        color: var(--text-secondary); font-family: sans-serif;
+        font-size: 10px; letter-spacing: 1px;
+      }
+      .sp-slider-arrow {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 25px; height: 25px; border: 1px solid var(--text-secondary);
+        border-radius: 50%; font-size: 18px; line-height: 1;
+      }
       .gallery-grid {
         display: flex; gap: 14px; max-width: none;
         margin: 0 -16px 28px; padding: 0 16px 8px;
@@ -1080,11 +1086,11 @@
 
       /* MEDIA */
       .media-grid {
-        display: flex; gap: 14px; max-width: none;
-        margin: 0 -16px 26px; padding: 0 16px 8px;
-        overflow-x: auto; scroll-snap-type: x mandatory;
+        display: grid; grid-template-columns: 1fr; gap: 16px;
+        max-width: 420px; margin: 0 auto 26px;
       }
-      .media-card { flex: 0 0 76vw; max-width: 300px; padding: 14px; scroll-snap-align: start; }
+      .media-card { display: block; max-width: none; padding: 14px; }
+      .media-card:nth-child(n+3) { display: none; }
       .media-card-logo { aspect-ratio: 16/9; margin-bottom: 10px; }
       .media-card-title { font-size: 13px; }
       .media-card-issue { font-size: 10px; }
@@ -1149,14 +1155,12 @@
         font-size: 14px; font-weight: 400; letter-spacing: 1.5px;
       }
       .pricing-samples {
-        display: flex; gap: 14px; max-width: none;
-        margin: 0 -16px 0; padding: 0 16px 8px;
-        overflow-x: auto; scroll-snap-type: x mandatory;
+        display: block; max-width: 420px; margin: 0 auto;
       }
       .pricing-sample {
-        display: block; flex: 0 0 82vw; max-width: 320px;
-        scroll-snap-align: start;
+        display: block; width: 100%; max-width: none;
       }
+      .pricing-sample:nth-child(n+2) { display: none; }
       .pricing-sample-image { aspect-ratio: 16/10; min-height: 0; }
       .pricing-sample-body { padding: 12px 14px 16px; }
       .pricing-sample-name { font-size: 12px; }
@@ -1179,11 +1183,11 @@
 
       /* BLOG */
       .blog-grid {
-        display: flex; gap: 14px; max-width: none;
-        margin: 0 -16px 28px; padding: 0 16px 8px;
-        overflow-x: auto; scroll-snap-type: x mandatory;
+        display: grid; grid-template-columns: 1fr; gap: 16px;
+        max-width: 420px; margin: 0 auto 28px;
       }
-      .blog-card { display: block; flex: 0 0 82vw; max-width: 330px; scroll-snap-align: start; }
+      .blog-card { display: block; max-width: none; }
+      .blog-card:nth-child(n+3) { display: none; }
       .blog-card-image { aspect-ratio: 16/10; }
       .blog-card-body { padding: 12px 14px 16px; }
       .blog-card-date { font-size: 10px; margin-bottom: 5px; }
@@ -1209,14 +1213,8 @@
         content: '📷 SP用横長画像';
         font-family: sans-serif; font-size: 10px; letter-spacing: 0.5px;
       }
-      .gallery-grid,
-      .media-grid,
-      .pricing-samples,
-      .blog-grid { scrollbar-width: none; }
-      .gallery-grid::-webkit-scrollbar,
-      .media-grid::-webkit-scrollbar,
-      .pricing-samples::-webkit-scrollbar,
-      .blog-grid::-webkit-scrollbar { display: none; }
+      .gallery-grid { scrollbar-width: none; }
+      .gallery-grid::-webkit-scrollbar { display: none; }
 
       /* FAQ */
       .faq-cat { margin-bottom: 24px; }
@@ -1304,20 +1302,18 @@
 
   <!-- ① HERO -->
   <section class="hero" style="position:relative;">
-    <span class="section-label">① ヒーロー（ミニマル）</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=TOPページv3&amp;entry.1525828345=ヒーロー" target="_blank" rel="noopener">修正コメント</a>
     <div class="hero-copy">
-      <div class="hero-en">WEDDING RINGS, YOKOHAMA</div>
-      <h1 class="hero-main">横浜・馬車道のアトリエで作る、結婚指輪</h1>
-      <p class="hero-sub">手作り ／ オーダーメイド</p>
+      <div class="hero-en">ENGLISH COPY（要検討）</div>
+      <h1 class="hero-main">メインコピー（要検討）</h1>
+      <p class="hero-sub">サブコピー（要検討）</p>
     </div>
     <div class="hero-scroll">SCROLL</div>
   </section>
 
   <!-- ② CONCEPT -->
   <section class="about" style="position:relative;">
-    <span class="section-label">② コンセプト</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=TOPページv3&amp;entry.1525828345=コンセプト" target="_blank" rel="noopener">修正コメント</a>
     <div class="about-content">
       <div class="about-image fade-in">📷 夫婦のポートレート or アトリエ内観</div>
       <div class="about-text fade-in fade-in-d1">
@@ -1336,8 +1332,7 @@
 
   <!-- ③ 2つのつくり方 + 相談 -->
   <section class="courses" style="position:relative;">
-    <span class="section-label">③ 2つのつくり方</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=TOPページv3&amp;entry.1525828345=2つのつくり方" target="_blank" rel="noopener">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
         <div class="en">OUR COURSES</div>
@@ -1413,8 +1408,7 @@
 
   <!-- ④ SERIES & SERVICE -->
   <section class="series" style="position:relative;">
-    <span class="section-label">④ シリーズ & サービス</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=TOPページv3&amp;entry.1525828345=特別なシリーズ・サービス" target="_blank" rel="noopener">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
         <div class="en">SERIES &amp; SERVICE</div>
@@ -1465,8 +1459,7 @@
 
   <!-- ⑤ 素材・仕上げ・オプション・石留め (縦並びでSEO最大化) -->
   <section class="materials" style="position:relative;">
-    <span class="section-label">⑤ 素材・仕上げ・オプション</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=TOPページv3&amp;entry.1525828345=素材・仕上げ・オプション・石留め" target="_blank" rel="noopener">修正コメント</a>
     <div class="materials-inner">
       <div class="section-header fade-in">
         <div class="en">MATERIALS &amp; CRAFTSMANSHIP</div>
@@ -1565,14 +1558,17 @@
 
   <!-- ⑥ GALLERY -->
   <section class="gallery" style="position:relative;">
-    <span class="section-label">⑥ 制作事例</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=TOPページv3&amp;entry.1525828345=制作事例" target="_blank" rel="noopener">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
         <div class="en">GALLERY</div>
         <h2>制作事例</h2>
         <div class="line"></div>
         <p class="desc">手作り・オーダーメイドで叶えられる、素材・色・技法・フォルムの多彩な組み合わせをご紹介します。</p>
+      </div>
+
+      <div class="sp-slider-guide" aria-hidden="true">
+        <span>横にスライド</span><span class="sp-slider-arrow">›</span>
       </div>
 
       <div class="gallery-grid">
@@ -1632,8 +1628,7 @@
 
   <!-- ⑦ お客様の声 -->
   <section class="voice" style="position:relative;">
-    <span class="section-label">⑦ お客様の声</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=TOPページv3&amp;entry.1525828345=お客様の声" target="_blank" rel="noopener">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
         <div class="en">CUSTOMER'S VOICE</div>
@@ -1675,8 +1670,7 @@
 
   <!-- ⑧ メディア掲載 -->
   <section class="media" style="position:relative;">
-    <span class="section-label">⑧ メディア掲載</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=TOPページv3&amp;entry.1525828345=メディア掲載" target="_blank" rel="noopener">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
         <div class="en">MEDIA</div>
@@ -1716,8 +1710,7 @@
 
   <!-- ⑨ 制作の流れ (縦並びでSEO最大化) -->
   <section class="process" style="position:relative;">
-    <span class="section-label">⑨ 制作の流れ</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=TOPページv3&amp;entry.1525828345=結婚指輪ができるまで" target="_blank" rel="noopener">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
         <div class="en">PROCESS</div>
@@ -1765,8 +1758,7 @@
 
   <!-- ⑩ 価格 -->
   <section class="pricing" style="position:relative;">
-    <span class="section-label">⑩ 価格</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=TOPページv3&amp;entry.1525828345=価格について" target="_blank" rel="noopener">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
         <div class="en">PRICE</div>
@@ -1836,8 +1828,7 @@
 
   <!-- ⑪ アフターケア -->
   <section class="aftercare" style="position:relative;">
-    <span class="section-label">⑪ アフターケア</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=TOPページv3&amp;entry.1525828345=アフターケア" target="_blank" rel="noopener">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
         <div class="en">AFTERCARE</div>
@@ -1885,8 +1876,7 @@
 
   <!-- ⑫ 店舗情報 -->
   <section class="access" style="position:relative;">
-    <span class="section-label">⑫ 店舗情報・アクセス</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=TOPページv3&amp;entry.1525828345=店舗情報・アクセス" target="_blank" rel="noopener">修正コメント</a>
     <div class="access-content">
       <div class="access-map fade-in">🗺 Googleマップ</div>
       <div class="access-text fade-in fade-in-d1">
@@ -1904,8 +1894,7 @@
 
   <!-- ⑬ ブログ -->
   <section class="blog-section" style="position:relative;">
-    <span class="section-label">⑬ スタッフブログ</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=TOPページv3&amp;entry.1525828345=スタッフブログ" target="_blank" rel="noopener">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
         <div class="en">JOURNAL</div>
@@ -1941,8 +1930,7 @@
 
   <!-- ⑭ お知らせ -->
   <section class="news" style="position:relative;">
-    <span class="section-label">⑭ お知らせ</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=TOPページv3&amp;entry.1525828345=お知らせ" target="_blank" rel="noopener">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
         <div class="en">NEWS</div>
@@ -1984,8 +1972,7 @@
 
   <!-- ⑮ FAQ (アコーディオン Q+A on-page) -->
   <section class="faq" style="position:relative;">
-    <span class="section-label">⑮ よくあるご質問（Q+A on-page アコーディオン）</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=TOPページv3&amp;entry.1525828345=よくあるご質問" target="_blank" rel="noopener">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
         <div class="en">FAQ</div>
@@ -2101,8 +2088,7 @@
 
   <!-- ⑯ 用語集 / 関連キーワード -->
   <section class="glossary" style="position:relative;">
-    <span class="section-label">⑯ 用語集・関連キーワード</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=TOPページv3&amp;entry.1525828345=用語集・関連キーワード" target="_blank" rel="noopener">修正コメント</a>
     <div class="section-inner">
       <div class="section-header fade-in">
         <div class="en">KEYWORDS</div>
@@ -2145,8 +2131,7 @@
 
   <!-- ⑰ ボトムCTA -->
   <section class="bottom-cta" style="position:relative;">
-    <span class="section-label">⑰ 最終CTA</span>
-    <a class="feedback-btn" href="#" target="_blank">修正コメント</a>
+    <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=TOPページv3&amp;entry.1525828345=最終CTA" target="_blank" rel="noopener">修正コメント</a>
     <div class="bottom-cta-inner">
       <div class="en">CONTACT</div>
       <h2>おふたりだけの指輪づくり、<br>はじめてみませんか？</h2>
