@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>renri 価格について｜ワイヤーフレーム v1</title>
+  <style>
+    :root {
+      --text: #2e2b2a;
+      --sub: #6f6a67;
+      --light: #99938f;
+      --line: #d7d3d0;
+      --paper: #fff;
+      --soft: #f5f4f3;
+      --dark: #232323;
+      --new: #d54848;
+      --serif-jp: "Yu Mincho", "Hiragino Mincho ProN", serif;
+      --serif-en: Georgia, "Times New Roman", serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { color: var(--text); background: var(--paper); font-family: var(--serif-jp); font-size: 14px; line-height: 1.8; }
+    a { color: inherit; }
+    img { display: block; width: 100%; }
+    .new-copy { color: var(--new) !important; }
+    .wire-bar { min-height: 34px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 5px 24px; background: #1a1a2e; color: #fff; font-family: sans-serif; font-size: 11px; }
+    .wire-label { display: inline-block; margin-right: 14px; padding: 3px 10px; border-radius: 3px; background: #ee4865; font-weight: 700; }
+    .wire-note { color: #ff8d8d; }
+    .header { border-bottom: 1px solid var(--line); background: #fff; }
+    .header-inner { width: min(1180px, calc(100% - 48px)); min-height: 86px; margin: auto; display: grid; grid-template-columns: 180px 1fr auto; align-items: center; gap: 24px; }
+    .logo { font-family: var(--serif-en); font-size: 24px; letter-spacing: 8px; text-decoration: none; }
+    .nav { display: flex; align-items: center; justify-content: center; gap: 24px; }
+    .nav a { font-size: 12px; letter-spacing: 1px; text-decoration: none; white-space: nowrap; }
+    .reserve { min-width: 96px; padding: 11px 17px; background: var(--dark); color: #fff; text-align: center; text-decoration: none; }
+    .sp-header, .sp-drawer { display: none; }
+    .hero { padding: 72px 24px 54px; text-align: center; }
+    .hero .en { margin-bottom: 12px; color: var(--light); font-family: var(--serif-en); font-size: 13px; letter-spacing: 8px; }
+    .hero h1 { font-size: 31px; font-weight: 300; letter-spacing: 6px; }
+    .section { position: relative; padding: 72px 24px; }
+    .section:nth-of-type(even) { background: var(--soft); }
+    .inner { width: min(1080px, 100%); margin: auto; }
+    .section-title { margin-bottom: 48px; text-align: center; }
+    .section-title .en { color: var(--light); font-family: var(--serif-en); font-size: 12px; letter-spacing: 6px; }
+    .section-title h2 { margin-top: 8px; font-size: 26px; font-weight: 300; letter-spacing: 5px; }
+    .feedback { position: absolute; top: 18px; right: 18px; z-index: 2; padding: 6px 14px; border-radius: 18px; background: #777; color: #fff; font-family: sans-serif; font-size: 11px; text-decoration: none; }
+    .price-box + .price-box { margin-top: 50px; }
+    .price-box h3 { margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid #999; font-size: 21px; font-weight: 400; letter-spacing: 3px; }
+    .price-box h3 small { margin-left: 8px; color: var(--sub); font-size: 12px; letter-spacing: 1px; }
+    .price-table { width: 100%; border-collapse: collapse; background: #fff; }
+    .price-table th, .price-table td { padding: 17px 20px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+    .price-table th { width: 68%; font-weight: 400; }
+    .price-table td { text-align: right; white-space: nowrap; }
+    .price-table small { display: block; margin-top: 4px; color: var(--sub); font-size: 10px; line-height: 1.7; }
+    .materials { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; margin-bottom: 34px; text-align: center; }
+    .material img { aspect-ratio: 1; object-fit: cover; }
+    .material p { margin-top: 9px; font-size: 11px; line-height: 1.6; }
+    .small-note { display: block; margin-top: 10px; color: var(--sub); font-size: 11px; }
+    .option-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .option-item { display: grid; grid-template-columns: 112px 1fr; min-height: 112px; background: #fff; }
+    .option-item img { width: 112px; height: 112px; object-fit: cover; }
+    .option-info { display: flex; flex-direction: column; justify-content: center; padding: 16px 20px; }
+    .option-info strong { font-size: 14px; font-weight: 400; }
+    .option-info span { margin-top: 4px; color: var(--sub); font-size: 12px; }
+    .after-link { display: inline-block; margin-top: 24px; border-bottom: 1px solid #777; text-decoration: none; }
+    .gallery-head { margin-bottom: 34px; text-align: center; }
+    .gallery-head .en { color: var(--light); font-family: var(--serif-en); font-size: 12px; letter-spacing: 6px; }
+    .gallery-head h2 { margin-top: 8px; font-size: 27px; font-weight: 300; letter-spacing: 5px; }
+    .ring-group + .ring-group { margin-top: 84px; }
+    .ring-group-title { margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid #999; font-size: 22px; font-weight: 400; letter-spacing: 4px; }
+    .collection-models { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 28px; }
+    .collection-model-card { display: block; border: 1px solid #e59898; background: #fff; color: var(--new); text-decoration: none; }
+    .collection-image { min-height: 190px; display: grid; place-items: center; background: #d0d0d0; color: var(--new); font-family: sans-serif; font-size: 12px; text-align: center; }
+    .collection-body { padding: 20px; color: var(--new); }
+    .collection-body h3 { margin-bottom: 12px; font-size: 17px; font-weight: 400; letter-spacing: 2px; }
+    .collection-price { padding-top: 12px; border-top: 1px solid #efbcbc; font-size: 13px; }
+    .collection-link { display: inline-block; margin-top: 16px; border-bottom: 1px solid currentColor; font-size: 11px; }
+    .collection-all-link { display: block; width: fit-content; margin: -4px 0 36px auto; padding-bottom: 4px; border-bottom: 1px solid currentColor; color: var(--new); font-size: 12px; letter-spacing: 1px; text-decoration: none; }
+    .sample-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px 18px; }
+    .sample-card { border: 1px solid var(--line); background: #fff; }
+    .sample-course { padding: 7px 12px; border-bottom: 1px solid var(--line); font-size: 11px; letter-spacing: 1px; }
+    .sample-card img { aspect-ratio: 4 / 3; object-fit: cover; }
+    .sample-body { padding: 18px; }
+    .sample-body .description { min-height: 142px; color: var(--sub); font-size: 11px; line-height: 1.9; }
+    .sample-body dl { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 11px; }
+    .sample-body dt { margin-top: 8px; font-weight: 700; }
+    .sample-body dd { color: var(--sub); }
+    .footer { padding: 60px 24px 90px; background: var(--dark); color: #fff; text-align: center; }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 24px; margin-bottom: 16px; }
+    .footer-links a { font-size: 11px; text-decoration: none; }
+    .footer-logo { margin-top: 34px; font-family: var(--serif-en); font-size: 26px; letter-spacing: 8px; }
+    .footer-copy { margin-top: 8px; color: #aaa; font-family: sans-serif; font-size: 9px; }
+    .sp-floating { display: none; }
+
+    @media (max-width: 980px) {
+      .header { display: none; }
+      .sp-header { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; min-height: 66px; padding: 0 15px; border-bottom: 1px solid var(--line); background: #fff; }
+      .sp-menu-btn { width: 44px; height: 44px; display: grid; place-items: center; border: 0; background: transparent; }
+      .sp-menu-icon, .sp-menu-icon::before, .sp-menu-icon::after { width: 24px; height: 1px; display: block; background: var(--text); content: ""; }
+      .sp-menu-icon { position: relative; }
+      .sp-menu-icon::before { position: absolute; top: -7px; }
+      .sp-menu-icon::after { position: absolute; top: 7px; }
+      .sp-logo { justify-self: center; font-family: var(--serif-en); font-size: 20px; letter-spacing: 6px; text-decoration: none; }
+      .sp-drawer { position: fixed; inset: 34px 0 0; z-index: 20; display: block; padding: 22px 18px 110px; overflow-y: auto; background: #fff; transform: translateX(-100%); transition: transform .25s ease; }
+      .sp-drawer.is-open { transform: translateX(0); }
+      .sp-drawer h2 { margin: 20px 0 8px; padding-bottom: 6px; border-bottom: 1px solid var(--line); font-family: var(--serif-en); font-size: 12px; font-weight: 400; letter-spacing: 3px; }
+      .sp-drawer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+      .sp-drawer-grid a { min-height: 48px; display: flex; align-items: center; justify-content: center; padding: 9px; background: #fff; font-size: 11px; text-align: center; text-decoration: none; }
+      .materials { grid-template-columns: repeat(3, 1fr); }
+      .sample-grid { grid-template-columns: repeat(2, 1fr); }
+      .collection-models { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      body { padding-bottom: 54px; }
+      .wire-bar { padding: 5px 10px; font-size: 9px; }
+      .wire-note { display: none; }
+      .hero { padding: 48px 18px 38px; }
+      .hero h1 { font-size: 23px; letter-spacing: 4px; }
+      .section { padding: 54px 16px; }
+      .section-title { margin-bottom: 34px; }
+      .section-title h2 { font-size: 21px; }
+      .feedback { top: 8px; right: 8px; padding: 5px 10px; font-size: 9px; }
+      .price-box + .price-box { margin-top: 42px; }
+      .price-box h3 { font-size: 18px; }
+      .price-table th, .price-table td { padding: 13px 10px; font-size: 11px; }
+      .price-table th { width: 60%; }
+      .materials { gap: 10px; }
+      .material p { font-size: 9px; }
+      .option-grid { grid-template-columns: 1fr; }
+      .option-item { grid-template-columns: 96px 1fr; min-height: 96px; }
+      .option-item img { width: 96px; height: 96px; }
+      .collection-models { grid-template-columns: 1fr; gap: 12px; }
+      .collection-model-card { display: grid; grid-template-columns: 38% 1fr; }
+      .collection-image { min-height: 150px; }
+      .collection-body { padding: 18px; }
+      .sample-grid { grid-template-columns: 1fr; gap: 16px; }
+      .sample-body .description { min-height: 0; }
+      .sp-floating { position: fixed; right: 0; bottom: 0; left: 0; z-index: 18; display: grid; grid-template-columns: repeat(4, 1fr); min-height: 54px; border-top: 1px solid var(--line); background: #fff; }
+      .sp-floating a { display: flex; align-items: center; justify-content: center; border-right: 1px solid var(--line); font-size: 9px; text-align: center; text-decoration: none; }
+      .sp-floating a:last-child { background: var(--dark); color: #fff; }
+    }
+  </style>
+  <link rel="stylesheet" href="wireframe_header.css">
+</head>
+<body>
+  <div class="wire-bar">
+    <span><b class="wire-label">WIREFRAME</b>renri — 価格ページ v1</span>
+    <span class="wire-note">赤字：コレクション追加に伴う変更箇所</span>
+  </div>
+
+  <header class="header">
+    <div class="header-showcase">
+      <span aria-hidden="true"></span>
+      <a class="header-logo-image" href="top_wireframe_v4.html" aria-label="renri TOP">
+        <img src="https://renri.jp/admin/wp-content/themes/renri/img/common/header_logo.png" alt="renri">
+      </a>
+      <div class="header-contact">
+        <div class="header-contact-actions">
+          <a href="https://renri.jp/estimate/">WEB見積もり</a>
+          <a href="https://renri.jp/contact/">来店予約</a>
+        </div>
+        <a class="header-phone" href="tel:0452648310"><small>TEL.</small>045-264-8310</a>
+      </div>
+    </div>
+    <div class="header-inner">
+      <a class="logo" href="top_wireframe_v4.html">renri</a>
+      <nav class="nav">
+        <a href="about_wireframe_v1.html">renriとは</a>
+        <a class="new-copy" href="collection_wireframe_v1.html">コレクション</a>
+        <a href="handmade_wireframe_v4.html">手作り</a>
+        <a href="ordermade_wireframe_v4.html">オーダーメイド</a>
+        <a href="top_wireframe_v4.html#gallery">制作事例</a>
+        <a href="price_wireframe_v1.html">価格</a>
+        <a href="top_wireframe_v4.html#voice">お客様の声</a>
+        <a href="top_wireframe_v4.html#access">店舗情報</a>
+      </nav>
+      <a class="reserve" href="https://renri.jp/contact/">来店予約</a>
+    </div>
+  </header>
+
+  <header class="sp-header">
+    <button class="sp-menu-btn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="sp-drawer"><span class="sp-menu-icon"></span></button>
+    <a class="sp-logo" href="top_wireframe_v4.html">renri</a>
+    <span aria-hidden="true"></span>
+  </header>
+  <aside class="sp-drawer" id="sp-drawer" aria-hidden="true">
+    <div class="sp-drawer-grid"><a href="about_wireframe_v1.html">renriとは</a><a class="new-copy" href="collection_wireframe_v1.html">コレクション</a><a href="handmade_wireframe_v4.html">手作り</a><a href="ordermade_wireframe_v4.html">オーダーメイド</a><a href="top_wireframe_v4.html#gallery">制作事例</a><a href="price_wireframe_v1.html">価格</a><a href="top_wireframe_v4.html#voice">お客様の声</a><a href="top_wireframe_v4.html#access">店舗情報</a></div>
+    <h2>CONTENT</h2>
+    <div class="sp-drawer-grid"><a href="https://renri.jp/aftercare/">アフターケア</a><a href="https://renri.jp/faq/">よくあるご質問</a><a href="https://renri.jp/blog/">スタッフブログ</a><a href="https://renri.jp/keyword/">用語集</a><a href="https://renri.jp/contact/">お問い合わせ</a><a href="https://renri.jp/privacy/">プライバシーポリシー</a></div>
+  </aside>
+
+  <main>
+    <section class="hero">
+      <div class="en">PRICE</div>
+      <h1>価格について</h1>
+    </section>
+
+    <section class="section" id="details">
+      <a class="feedback" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=価格ページv1&amp;entry.1525828345=PRICE+DETAILS" target="_blank" rel="noopener">修正コメント</a>
+      <div class="inner">
+        <div class="section-title"><h2>PRICE DETAILS</h2></div>
+
+        <section class="price-box">
+          <h3>制作費 <small>（1本あたり）</small></h3>
+          <table class="price-table">
+            <tr><th>手作りコース<small>※地金からの制作の場合となります。原型から制作するワックス製法の場合はオーダーメイドと同じ価格です。</small></th><td>22,000円</td></tr>
+            <tr><th>オーダーメイド</th><td>22,000円～</td></tr>
+            <tr class="new-copy"><th>コレクション<small class="new-copy">モデルごとの標準仕様を含む基本価格を設定します。</small></th><td>モデルごとに明示</td></tr>
+          </table>
+        </section>
+
+        <section class="price-box">
+          <h3>材料費 <small>（貴金属地金代）</small></h3>
+          <div class="materials">
+            <div class="material"><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/price_mat_platinum.jpg" alt="プラチナ"><p>Pt900<br>プラチナ</p></div>
+            <div class="material"><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/price_mat_yellow.jpg" alt="イエローゴールド"><p>K18<br>イエローゴールド</p></div>
+            <div class="material"><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/price_mat_white.jpg" alt="ホワイトゴールド"><p>K18<br>ホワイトゴールド</p></div>
+            <div class="material"><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/price_mat_pink.jpg" alt="ピンクゴールド"><p>K18<br>ピンクゴールド</p></div>
+            <div class="material"><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/price_mat_green.jpg" alt="グリーンゴールド"><p>K18<br>グリーンゴールド</p></div>
+            <div class="material"><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/price_mat_gray.jpg" alt="グレーゴールド"><p>K18<br>グレーゴールド</p></div>
+          </div>
+          <table class="price-table">
+            <tr><th>プラチナ</th><td>18,700円/g</td></tr>
+            <tr><th>カラーゴールド（イエロー、ピンク、グリーンゴールド）</th><td>30,800円/g</td></tr>
+            <tr><th>ホワイトゴールド</th><td>31,900円/g</td></tr>
+            <tr><th>グレーゴールド</th><td>35,200円/g</td></tr>
+          </table>
+          <small class="small-note">※相場によって価格は変動いたします</small>
+        </section>
+
+        <section class="price-box">
+          <h3>ダイヤモンド</h3>
+          <table class="price-table"><tr><th>ダイヤモンド</th><td>平均価格　0.15ct　64,000円<br>0.2ct　90,000円<br>0.25ct　130,000円</td></tr></table>
+          <small class="small-note">お客様のご要望・ご予算にあったダイヤモンドもご用意致します。</small>
+        </section>
+
+        <section class="price-box">
+          <h3>オプション <small>（追加の場合）</small></h3>
+          <div class="option-grid">
+            <div class="option-item"><img src="https://renri.jp/admin/wp-content/uploads/2019/04/978bacc38badeaffdad043f925542289.jpg" alt="ミル打ち加工"><div class="option-info"><strong>ミル打ち加工</strong><span>8,800円～</span></div></div>
+            <div class="option-item"><img src="https://renri.jp/admin/wp-content/uploads/2019/04/d35070faa0c5620a1fca0425fb7d0f4d.jpg" alt="レーザー刻印"><div class="option-info"><strong>レーザー刻印</strong><span>9,900円～</span></div></div>
+            <div class="option-item"><img src="https://renri.jp/admin/wp-content/uploads/2019/04/721bbdfc159ba573cc5bb2131a623fc1.jpg" alt="メビウスリング加工"><div class="option-info"><strong>メビウスリング加工</strong><span>5,500円</span></div></div>
+            <div class="option-item"><img src="https://renri.jp/admin/wp-content/uploads/2019/04/cc1e0d472277fec6b2f317a3c875ced3.jpg" alt="コンビカラー加工"><div class="option-info"><strong>コンビカラー加工</strong><span>16,500円～</span></div></div>
+            <div class="option-item"><img src="https://renri.jp/admin/wp-content/uploads/2019/04/9c9e4b3992e28f024f571504cbee2fc3.jpg" alt="手彫り加工"><div class="option-info"><strong>手彫り加工</strong><span>5,500円～</span></div></div>
+            <div class="option-item"><img src="https://renri.jp/admin/wp-content/uploads/2020/06/ca8471b2c274434a1edb4281137a18e1-1.jpg" alt="ハンマーテクスチャー"><div class="option-info"><strong>ハンマーテクスチャー</strong><span>無料</span></div></div>
+            <div class="option-item"><img src="https://renri.jp/admin/wp-content/uploads/2020/06/8a27b9c14123e13cebbfbcd7c52d38eb.jpg" alt="カーブ加工"><div class="option-info"><strong>カーブ加工</strong><span>5,500円</span></div></div>
+          </div>
+        </section>
+
+        <section class="price-box">
+          <h3>石留加工</h3>
+          <div class="option-grid">
+            <div class="option-item"><img src="https://renri.jp/admin/wp-content/uploads/2019/04/ea5474cc49210985c816363330bf0b4b.jpg" alt="ワンポイント留め"><div class="option-info"><strong>ワンポイント留め</strong><span>5,500円～</span></div></div>
+            <div class="option-item"><img src="https://renri.jp/admin/wp-content/uploads/2019/04/7dfa284131de4decd0ed221a6be0bdd2.jpg" alt="エタニティタイプ"><div class="option-info"><strong>エタニティタイプ</strong><span>3,300円×個数（10石以上の場合）</span></div></div>
+            <div class="option-item"><img src="https://renri.jp/admin/wp-content/uploads/2019/04/87cc016a08934341ed406f8003100b49.jpg" alt="石代"><div class="option-info"><strong>石代</strong><span>ダイヤモンド 1個3,300円～<br>その他天然石 1個2,200円～</span></div></div>
+          </div>
+        </section>
+
+        <section class="price-box">
+          <h3>アフターメンテナンス</h3>
+          <div class="option-grid">
+            <div class="option-item"><img src="https://renri.jp/admin/wp-content/uploads/2019/04/279cf31025bc718f34ca28b539d1ff0d.jpg" alt="サイズ直し"><div class="option-info"><strong>サイズ直し</strong><span>前後1号サイズ基本無料</span></div></div>
+            <div class="option-item"><img src="https://renri.jp/admin/wp-content/uploads/2019/04/78b4574806f414c7763993d8801f324c.jpg" alt="クリーニング"><div class="option-info"><strong>クリーニング</strong><span>基本無料</span></div></div>
+            <div class="option-item"><img src="https://renri.jp/admin/wp-content/uploads/2019/04/44ba0cee5c7a1cb40576ba1acd47c5c0.jpg" alt="追加加工"><div class="option-info"><strong>追加加工</strong><span>ご納品後も追加オプション料金で承っております。</span></div></div>
+          </div>
+          <a class="after-link" href="https://renri.jp/blog/アフターフォロー/">アフターメンテナンスの詳細はこちら</a>
+        </section>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <a class="feedback" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=価格ページv1&amp;entry.1525828345=GALLERY" target="_blank" rel="noopener">修正コメント</a>
+      <div class="inner">
+        <div class="gallery-head"><div class="en">GALLERY</div><h2>SAMPLE</h2></div>
+
+        <section class="ring-group">
+          <h3 class="ring-group-title">結婚指輪</h3>
+          <div class="collection-models">
+            <a class="collection-model-card" href="collection_product_wireframe_v1.html"><div class="collection-image">📷 結婚指輪｜モデル画像</div><div class="collection-body"><h3>モデル名 A</h3><div class="collection-price">基本価格　¥---,---（税込）</div><span class="collection-link">商品詳細を見る →</span></div></a>
+            <a class="collection-model-card" href="collection_product_wireframe_v1.html"><div class="collection-image">📷 結婚指輪｜モデル画像</div><div class="collection-body"><h3>モデル名 B</h3><div class="collection-price">基本価格　¥---,---（税込）</div><span class="collection-link">商品詳細を見る →</span></div></a>
+            <a class="collection-model-card" href="collection_product_wireframe_v1.html"><div class="collection-image">📷 結婚指輪｜モデル画像</div><div class="collection-body"><h3>モデル名 C</h3><div class="collection-price">基本価格　¥---,---（税込）</div><span class="collection-link">商品詳細を見る →</span></div></a>
+          </div>
+          <a class="collection-all-link" href="collection_wireframe_v1.html#marriage-models">結婚指輪の全モデルを見る →</a>
+          <div class="sample-grid">
+            <article class="sample-card"><div class="sample-course">手作り</div><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/top_price1_01.jpg" alt="ハンマーテクスチャーリング"><div class="sample-body"><p class="description">【ランダムなテクスチャーが楽しい、カジュアルデザイン】ひとつひとつの模様が打ち加減で変わるハンマーテクスチャーリング。仕上げで華やかなツヤ感、落ち着いたマットとお好みの印象を楽しんでいただけます。</p><dl><dt>◆ 素材</dt><dd>プラチナ 3㎜幅（男性リング）<br>プラチナ 2㎜幅（女性リング）</dd><dt>◆ 総額（税込）</dt><dd>M's：￥154,000<br>L's：￥101,000</dd></dl></div></article>
+            <article class="sample-card"><div class="sample-course">手作り</div><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/top_price1_02.jpg" alt="メビウスリング"><div class="sample-body"><p class="description">【フォルムを楽しむ、流動的なメビウスリング】金属が生み出す自然なねじれの動きが美しいメビウスのシルエット。作りこみすぎない洗練されたフォルムが目を引くスタイリッシュなデザインです。</p><dl><dt>◆ 素材</dt><dd>プラチナ 2㎜幅（男性リング）<br>ピンクゴールド 2㎜幅（女性リング）</dd><dt>◆ 総額（税込）</dt><dd>M's：￥147,000<br>L's：￥163,000</dd></dl></div></article>
+            <article class="sample-card"><div class="sample-course">手作り</div><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/top_price1_03.jpg" alt="ワンサイドテクスチャー"><div class="sample-body"><p class="description">【ワンサイドの輝きがスタイリッシュなテクスチャー】布地のような落ち着いた質感のテクスチャーを打ち込んだ指輪は、使い込むことでより味のある風合いに。艶のラインを作ることで一筋の光が差し込むようなシャープな印象のデザインになります。</p><dl><dt>◆ 素材</dt><dd>グリーンゴールド 3㎜幅（男性リング）<br>プラチナ 2.5㎜幅（女性リング）</dd><dt>◆ 総額（税込）</dt><dd>M's：￥236,000<br>L's：￥151,000</dd></dl></div></article>
+            <article class="sample-card"><div class="sample-course">オーダーメイド</div><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/top_price1_04.jpg" alt="スリットデザイン"><div class="sample-body"><p class="description">【スリットでつくる、シャープなワンポイントデザイン】細身のシャープなリングシルエットを生かして、ポイントデザインをスリットで分けた、甘くなりすぎないコントラストが際立つデザインリングです。</p><dl><dt>◆ 素材</dt><dd>ホワイトゴールド 2.5㎜幅（男性リング）<br>ホワイトゴールド 2㎜幅（女性リング）</dd><dt>◆ 総額（税込）</dt><dd>M's：￥191,000<br>L's：￥167,000</dd></dl></div></article>
+            <article class="sample-card"><div class="sample-course">オーダーメイド</div><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/top_price1_05.jpg" alt="月桂樹リング"><div class="sample-body"><p class="description">【プラスワンでより特別に、手彫りを活かした月桂樹リング】お揃いで彫り入れた月桂樹の模様は、ボリュームのある山型デザインで重厚感のある雰囲気に。ふたつの素材で飾るコンビカラーなどそれぞれの好みを取り入れているのが印象的です。</p><dl><dt>◆ 素材</dt><dd>イエローゴールド 3.5㎜幅（男性リング）<br>プラチナ×イエローゴールド 3㎜幅（女性リング）</dd><dt>◆ 総額（税込）</dt><dd>M's：￥236,000<br>L's：￥258,000</dd></dl></div></article>
+            <article class="sample-card"><div class="sample-course">オーダーメイド</div><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/top_price1_06.jpg" alt="チャンファーリング"><div class="sample-body"><p class="description">【モダンな雰囲気で装う、シャープなフォルムが美しい】鍛造製法で手作りできる新たな印台スタイルのリングデザイン「チャンファーリング」。丸みを抑えたシャープな面で構成されたファッションリングのようなモダンな雰囲気のデザインリングです。</p><dl><dt>◆ 素材</dt><dd>プラチナ 2.5㎜幅（男性リング）<br>ピンクゴールド 2㎜幅（女性リング）</dd><dt>◆ 総額（税込）</dt><dd>M's：￥147,000<br>L's：￥163,000</dd></dl></div></article>
+          </div>
+        </section>
+
+        <section class="ring-group">
+          <h3 class="ring-group-title">婚約指輪</h3>
+          <div class="collection-models">
+            <a class="collection-model-card" href="collection_product_wireframe_v1.html"><div class="collection-image">📷 婚約指輪｜モデル画像</div><div class="collection-body"><h3>モデル名 A</h3><div class="collection-price">基本価格　¥---,---（税込）</div><span class="collection-link">商品詳細を見る →</span></div></a>
+            <a class="collection-model-card" href="collection_product_wireframe_v1.html"><div class="collection-image">📷 婚約指輪｜モデル画像</div><div class="collection-body"><h3>モデル名 B</h3><div class="collection-price">基本価格　¥---,---（税込）</div><span class="collection-link">商品詳細を見る →</span></div></a>
+            <a class="collection-model-card" href="collection_product_wireframe_v1.html"><div class="collection-image">📷 婚約指輪｜モデル画像</div><div class="collection-body"><h3>モデル名 C</h3><div class="collection-price">基本価格　¥---,---（税込）</div><span class="collection-link">商品詳細を見る →</span></div></a>
+          </div>
+          <a class="collection-all-link" href="collection_wireframe_v1.html#engagement-models">婚約指輪の全モデルを見る →</a>
+          <div class="sample-grid">
+            <article class="sample-card"><div class="sample-course">手作り</div><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/top_price2_01.jpg" alt="ストレートラインの婚約指輪"><div class="sample-body"><p class="description">【すっきりとした、ストレートラインのエンゲージリング】ストレートラインのご婚約指輪は石が際立ち、シンプルながらも飽きがこないデザイン。ご結婚指輪と重ね付けもしやすいのでセットリングにもおすすめです。</p><dl><dt>◆ 素材</dt><dd>プラチナ 1.5㎜幅</dd><dt>◆ 総額（税込）</dt><dd>L's：￥176,000<br>センターストーンサイズは約3.5㎜</dd></dl></div></article>
+            <article class="sample-card"><div class="sample-course">手作り</div><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/top_price2_02.jpg" alt="クラシカルな婚約指輪"><div class="sample-body"><p class="description">【ハンマーテクスチャーであたたかみのある、クラシカルなデザイン】マットな質感が落ち着きのあるゴールドカラーのエンゲージリングは、あたたかみのあるハンマーテクスチャーや繊細なミルグレインの装飾をプラスしてアンティークのようなぬくもりのある仕上がりになっています。</p><dl><dt>◆ 素材</dt><dd>イエローゴールド 2㎜幅</dd><dt>◆ 総額（税込）</dt><dd>L's：￥258,000<br>センターストーンサイズは約4㎜</dd></dl></div></article>
+            <article class="sample-card"><div class="sample-course">手作り</div><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/top_price2_03.jpg" alt="エタニティリング"><div class="sample-body"><p class="description">【ダイヤモンドのラインが華やか、ピンクゴールドのエタニティリング】メレダイヤモンドを敷き詰めたエタニティリング。肌なじみの良いピンクゴールドは柔らかく指元に華やぎのある印象を与えてくれます。</p><dl><dt>◆ 素材</dt><dd>ピンクゴールド 2.5㎜幅</dd><dt>◆ 総額（税込）</dt><dd>L's：￥231,000</dd></dl></div></article>
+            <article class="sample-card"><div class="sample-course">オーダーメイド</div><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/top_price2_04.jpg" alt="スクエアの婚約指輪"><div class="sample-body"><p class="description">【シャープな菱形で構成された、特徴的なデザイン】センターストーンはすっきりと、サイドストーンはミルグレインで繊細に留めたスタイリッシュなスクエアの石枠が印象的なデザインリングです。</p><dl><dt>◆ 素材</dt><dd>プラチナ 2～2.5㎜幅</dd><dt>◆ 総額（税込）</dt><dd>L's：￥413,000<br>センターストーンサイズは約4.5㎜</dd></dl></div></article>
+            <article class="sample-card"><div class="sample-course">オーダーメイド</div><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/top_price2_05.jpg" alt="リトルブーケ"><div class="sample-body"><p class="description">【小さなつぼみを束ねて贈る、可愛らしいデザイン】セミオーダーのリトルブーケシリーズ。「花蕾」つぼみのような石座にダイヤモンドが輝くデザインです。ミルグレインで装飾された縁取りはアンティーク仕上げにもぴったりです。</p><dl><dt>◆ 素材</dt><dd>ピンクゴールド 1.5㎜幅</dd><dt>◆ 総額（税込）</dt><dd>L's：￥203,500</dd></dl></div></article>
+            <article class="sample-card"><div class="sample-course">オーダーメイド</div><img src="https://renri.jp/admin/wp-content/themes/renri/img/common/top_price2_06.jpg" alt="ヘイローセッティング"><div class="sample-body"><p class="description">【輝きを存分に楽しむ、ヘイローセッティングのエンゲージリング】センターダイヤモンドをぐるりと取り巻くようにメレダイヤモンドを留めて、シンプルなフォルムながらも贅沢に輝きを楽しむことのできるエンゲージリングです。</p><dl><dt>◆ 素材</dt><dd>プラチナ 2㎜幅</dd><dt>◆ 総額（税込）</dt><dd>L's：￥436,000<br>センターストーンサイズ約4.5㎜</dd></dl></div></article>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-links"><a href="about_wireframe_v1.html">renriとは</a><a class="new-copy" href="collection_wireframe_v1.html">コレクション</a><a href="handmade_wireframe_v4.html">手作り</a><a href="ordermade_wireframe_v4.html">オーダーメイド</a><a href="#details">料金の内訳</a><a href="#gallery">サンプル</a></div>
+    <div class="footer-links"><a href="top_wireframe_v4.html#gallery">制作事例</a><a href="top_wireframe_v4.html#voice">お客様の声</a><a href="top_wireframe_v4.html#access">店舗情報</a><a href="https://renri.jp/contact/">お問い合わせ</a></div>
+    <div class="footer-logo">renri</div><p class="footer-copy">&copy; 2026 renri.</p>
+  </footer>
+  <div class="sp-floating"><a href="#details">料金内訳</a><a href="#gallery">サンプル</a><a class="new-copy" href="collection_wireframe_v1.html">コレクション</a><a href="https://renri.jp/contact/">来店予約</a></div>
+
+  <script>
+    const menuButton = document.querySelector('.sp-menu-btn');
+    const drawer = document.querySelector('.sp-drawer');
+    menuButton?.addEventListener('click', () => {
+      const open = drawer.classList.toggle('is-open');
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+      drawer.setAttribute('aria-hidden', String(!open));
+    });
+    drawer?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      drawer.classList.remove('is-open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+    }));
+  </script>
+</body>
+</html>

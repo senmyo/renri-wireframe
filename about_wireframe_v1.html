@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>renriとは v1 | renri ワイヤーフレーム</title>
+  <style>
+    :root {
+      --ink: #292724;
+      --muted: #77736d;
+      --line: #d8d5d0;
+      --soft: #f2f1ef;
+      --paper: #fff;
+      --accent: #bd3d2d;
+      --gold: #c7a25b;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+      letter-spacing: .06em;
+      line-height: 2;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .wire-note {
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      color: #6f3029;
+      background: #fff4f1;
+      border-top: 3px solid #262839;
+      border-bottom: 1px solid #ead0cb;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      font-size: 12px;
+      letter-spacing: .04em;
+    }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid var(--line);
+    }
+    .header-inner {
+      height: 78px;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .brand {
+      width: 112px;
+      flex: 0 0 auto;
+      text-align: center;
+      font-size: 25px;
+      letter-spacing: .28em;
+    }
+    .nav {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      font-size: 12px;
+      letter-spacing: .04em;
+    }
+    .nav a { white-space: nowrap; }
+    .nav a.active { color: var(--accent); border-bottom: 1px solid currentColor; }
+    .header-reserve {
+      min-width: 102px;
+      padding: 10px 14px;
+      color: #fff;
+      background: #292724;
+      text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      font-size: 12px;
+    }
+    .sp-menu-btn { display: none; }
+    .sp-drawer { display: none; }
+    .breadcrumb {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      color: var(--muted);
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      font-size: 11px;
+    }
+    .hero {
+      position: relative;
+      min-height: 430px;
+      display: grid;
+      place-items: center;
+      background: #d7d7d7;
+      border-top: 1px solid #c8c8c8;
+      border-bottom: 1px solid #c8c8c8;
+      overflow: hidden;
+    }
+    .hero::before,
+    .image-placeholder::before,
+    .staff-photo::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(135deg, transparent 0 18px, rgba(0,0,0,.025) 18px 20px);
+      pointer-events: none;
+    }
+    .hero-placeholder {
+      color: #6d6d6d;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      font-size: 14px;
+    }
+    .hero h1 {
+      position: absolute;
+      left: 8vw;
+      bottom: 46px;
+      margin: 0;
+      font-size: clamp(32px, 4vw, 54px);
+      font-weight: 400;
+      letter-spacing: .14em;
+    }
+    .section { position: relative; padding: 112px 24px; }
+    .section.soft { background: var(--soft); }
+    .section-inner { max-width: 1120px; margin: 0 auto; }
+    .concept-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr);
+      align-items: start;
+      gap: 80px;
+    }
+    .concept-copy p { margin: 0 0 24px; font-size: 15px; }
+    .concept-copy .changed { color: var(--accent); }
+    .concept-copy .changed strong {
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 1.8;
+    }
+    .image-placeholder {
+      position: relative;
+      min-height: 520px;
+      display: grid;
+      place-items: center;
+      color: #696969;
+      background: #d2d2d2;
+      border: 1px solid #c7c7c7;
+      text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      font-size: 13px;
+    }
+    .profile-section { position: relative; padding: 112px 24px 0; background: #fff; }
+    .profile-inner { max-width: 940px; margin: 0 auto; }
+    .profile-heading { margin: 0 0 40px; text-align: center; }
+    .profile-heading .en {
+      margin-bottom: 10px;
+      color: var(--gold);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      letter-spacing: .18em;
+    }
+    .profile-heading h2 { margin: 0; font-size: 14px; font-weight: 400; letter-spacing: .4em; }
+    .unchanged-note { margin: -18px 0 22px; color: var(--accent); text-align: center; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; font-size: 12px; letter-spacing: .04em; }
+    .profile-row { min-height: 255px; padding: 60px; overflow: hidden; }
+    .staff-photo {
+      position: relative;
+      float: left;
+      width: 96px;
+      min-height: 135px;
+      margin-right: 36px;
+      display: grid;
+      place-items: center;
+      color: #777;
+      background: #d4d4d4;
+      border: 1px solid #c7c7c7;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      font-size: 12px;
+    }
+    .staff-photo.cat { width: 120px; }
+    .profile-summary { overflow: hidden; text-align: left; }
+    .staff-role {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .staff-name { display: block; margin-top: 2px; font-size: 14px; }
+    .staff-bio { margin: 22px 0 0; color: #555; font-size: 14px; line-height: 1.8; }
+    .detail-section { padding: 0 24px 80px; background: #fff; }
+    .detail-media { padding: 60px; overflow: hidden; }
+    .detail-image { width: 100%; min-height: 460px; }
+    .detail-text { display: block; margin: 0 48px; }
+    .detail-text p { margin: 36px 0 0; color: #555; font-size: 14px; line-height: 1.8; }
+    .site-footer {
+      padding: 78px 24px 96px;
+      color: #4e4a45;
+      background: #fff;
+    }
+    .footer-banners { max-width: 1020px; margin: 0 auto 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .footer-banner {
+      position: relative;
+      aspect-ratio: 2 / 1;
+      display: grid;
+      place-items: center;
+      color: #5f5a54;
+      background: #d2d0cc;
+      border: 1px solid var(--gold);
+      text-align: center;
+      font-size: 15px;
+      letter-spacing: .12em;
+    }
+    .footer-banner small { display: block; margin-top: 4px; font-family: sans-serif; font-size: 10px; letter-spacing: .05em; }
+    .footer-sns { display: flex; justify-content: center; gap: 18px; margin-bottom: 34px; }
+    .footer-sns a { width: 38px; height: 38px; display: grid; place-items: center; color: var(--gold); border: 1px solid var(--gold); border-radius: 50%; font-family: Georgia, serif; }
+    .footer-navigation { margin-inline: -24px; padding: 28px 24px; background: #f4f4f4; }
+    .footer-links { max-width: 1020px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 28px; font-size: 11px; }
+    .footer-brand { margin-top: 44px; text-align: center; font-size: 26px; letter-spacing: .3em; }
+    .copyright { margin-top: 38px; color: #77726b; text-align: center; font-family: sans-serif; font-size: 10px; }
+    .feedback-btn {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      z-index: 2;
+      padding: 6px 15px;
+      color: #fff;
+      background: #777;
+      border-radius: 18px;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0;
+    }
+    @media (max-width: 1080px) {
+      .header-inner { padding: 0 20px; gap: 14px; }
+      .nav { gap: 9px; font-size: 10.5px; }
+      .header-reserve { min-width: 88px; padding-inline: 10px; }
+    }
+    @media (max-width: 760px) {
+      body { padding-bottom: 58px; }
+      .wire-note { min-height: 38px; height: auto; padding: 7px 12px; text-align: center; font-size: 10px; line-height: 1.45; }
+      .header-inner { position: relative; height: 92px; padding: 0 20px; justify-content: center; }
+      .brand { width: auto; font-size: 23px; }
+      .nav, .header-reserve { display: none; }
+      .sp-menu-btn {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        padding: 0;
+        background: transparent;
+        border: 0;
+        transform: translateY(-50%);
+      }
+      .sp-menu-icon,
+      .sp-menu-icon::before,
+      .sp-menu-icon::after { width: 28px; height: 2px; display: block; background: #444; content: ""; }
+      .sp-menu-icon { position: relative; }
+      .sp-menu-icon::before { position: absolute; top: -9px; }
+      .sp-menu-icon::after { position: absolute; top: 9px; }
+      .sp-drawer {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        padding-bottom: 32px;
+        background: #fff;
+        transform: translateX(-102%);
+        transition: transform .25s ease;
+      }
+      .sp-drawer.is-open { transform: translateX(0); }
+      .sp-drawer-head {
+        order: 0;
+        min-height: 92px;
+        display: grid;
+        grid-template-columns: 60px 1fr 60px;
+        align-items: center;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--line);
+      }
+      .sp-drawer-logo { grid-column: 2; justify-self: center; font-size: 23px; letter-spacing: .3em; }
+      .sp-drawer-close { grid-column: 1; grid-row: 1; padding: 0; background: transparent; border: 0; font-size: 46px; font-weight: 200; line-height: 1; }
+      .sp-nav-section { order: 3; border-bottom: 1px solid var(--line); }
+      .sp-nav-title {
+        margin: 0;
+        padding: 5px 16px;
+        background: #dedede;
+        font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: .14em;
+      }
+      .sp-nav-section.main { order: 1; }
+      .sp-nav-section.consult { order: 2; }
+      .sp-ring-group { border-bottom: 1px solid #ddd; }
+      .sp-ring-heading { min-height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; }
+      .sp-ring-heading strong { display: block; font-size: 18px; font-weight: 400; }
+      .sp-ring-heading small { display: block; margin-top: 1px; color: #8b867f; font-family: sans-serif; font-size: 10px; }
+      .sp-ring-group.is-current .sp-ring-heading { color: var(--accent); }
+      .sp-ring-sublinks { display: grid; grid-template-columns: 1fr 1fr; padding: 0 14px 13px; gap: 8px; }
+      .sp-ring-sublinks a { padding: 9px 6px; background: #f4f4f4; border: 1px solid #ddd; text-align: center; font-size: 11px; }
+      .sp-nav-grid { display: grid; grid-template-columns: 1fr 1fr; }
+      .sp-nav-link { min-height: 54px; display: grid; place-items: center; padding: 9px; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; text-align: center; font-size: 13px; }
+      .sp-nav-primary { display: block; margin: 12px 14px; padding: 13px; color: #fff; background: var(--gold); text-align: center; font-size: 18px; }
+      .sp-nav-primary small { display: block; font-family: sans-serif; font-size: 9px; }
+      .sp-ring-guide { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 0 14px 14px; }
+      .sp-ring-guide a { padding: 10px 5px; background: #f5f5f5; border: 1px solid #ddd; text-align: center; font-size: 11px; }
+      .breadcrumb { padding: 10px 18px; font-size: 9px; }
+      .hero { min-height: 320px; }
+      .hero h1 { left: 22px; bottom: 25px; font-size: 32px; }
+      .section { padding: 72px 20px; }
+      .concept-grid { grid-template-columns: 1fr; gap: 36px; }
+      .concept-copy { order: 1; }
+      .concept-grid > .image-placeholder { order: 2; min-height: 350px; }
+      .concept-copy p { font-size: 14px; }
+      .concept-copy .changed strong { font-size: 20px; }
+      .profile-section { padding: 72px 18px 0; }
+      .profile-heading { margin-bottom: 30px; }
+      .profile-heading .en { font-size: 16px; }
+      .profile-heading h2 { font-size: 12px; }
+      .unchanged-note { margin: -12px 0 18px; font-size: 11px; }
+      .profile-row { min-height: 0; padding: 6px; }
+      .profile-summary { clear: both; width: 100%; min-height: 102px; overflow: visible; text-align: left; }
+      .staff-bio { margin-top: 36px; font-size: 12px; }
+      .detail-section { padding: 0 18px 72px; }
+      .detail-media { padding: 6px; }
+      .detail-image { min-height: 280px; }
+      .detail-text { margin: 0; }
+      .detail-text p { margin-top: 36px; font-size: 12px; }
+      .site-footer { padding: 58px 18px 92px; }
+      .footer-banners { width: min(82%, 320px); grid-template-columns: 1fr; gap: 10px; margin-bottom: 32px; }
+      .footer-sns { margin-bottom: 28px; }
+      .footer-navigation { margin-inline: -18px; padding: 0; }
+      .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+      .footer-links a { min-height: 38px; display: grid; place-items: center; border-right: 1px solid #e4e4e4; border-bottom: 1px solid #e4e4e4; text-align: center; font-size: 10px; }
+      .footer-brand { display: none; }
+      .copyright { margin-top: 48px; }
+      .feedback-btn { top: 12px; right: 14px; }
+      .sp-bottom-nav {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 30;
+        height: 58px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2px;
+        padding: 3px;
+        background: #eee;
+        border-top: 1px solid #d2c19d;
+      }
+      .sp-bottom-nav a { display: grid; place-items: center; color: #fff; background: #888; text-align: center; font-size: 10px; line-height: 1.25; }
+      .sp-bottom-nav a:last-child { background: var(--gold); font-size: 13px; }
+    }
+    @media (min-width: 761px) { .sp-bottom-nav { display: none; } }
+  </style>
+  <link rel="stylesheet" href="wireframe_header.css">
+</head>
+<body>
+  <div class="wire-note">WIREFRAME renri — 「renriとは」v1　｜　構成・要素は現行踏襲　｜　<span style="color:#bd3d2d; margin-left:.5em;">赤字：変更テキスト</span></div>
+
+  <header class="site-header">
+    <div class="header-showcase">
+      <span aria-hidden="true"></span>
+      <a class="header-logo-image" href="top_wireframe_v4.html" aria-label="renri TOP">
+        <img src="https://renri.jp/admin/wp-content/themes/renri/img/common/header_logo.png" alt="renri">
+      </a>
+      <div class="header-contact">
+        <div class="header-contact-actions">
+          <a href="https://renri.jp/estimate/">WEB見積もり</a>
+          <a href="https://renri.jp/contact/">来店予約</a>
+        </div>
+        <a class="header-phone" href="tel:0452648310"><small>TEL.</small>045-264-8310</a>
+      </div>
+    </div>
+    <div class="header-inner">
+      <a class="brand" href="top_wireframe_v4.html" aria-label="renri TOP">renri</a>
+      <nav class="nav" aria-label="グローバルメニュー">
+        <a class="active" href="about_wireframe_v1.html">renriとは</a>
+        <a href="collection_wireframe_v1.html">コレクション</a>
+        <a href="handmade_wireframe_v4.html">手作り</a>
+        <a href="ordermade_wireframe_v4.html">オーダーメイド</a>
+        <a href="top_wireframe_v4.html#gallery">制作事例</a>
+        <a href="price_wireframe_v1.html">価格</a>
+        <a href="top_wireframe_v4.html#voice">お客様の声</a>
+        <a href="top_wireframe_v4.html#access">店舗情報</a>
+      </nav>
+      <a class="header-reserve" href="https://renri.jp/contact/">来店予約</a>
+      <button class="sp-menu-btn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="sp-drawer"><span class="sp-menu-icon" aria-hidden="true"></span></button>
+    </div>
+  </header>
+
+  <div class="sp-drawer" id="sp-drawer" aria-hidden="true">
+    <div class="sp-drawer-head"><a href="top_wireframe_v4.html" class="sp-drawer-logo">renri</a><button class="sp-drawer-close" type="button" aria-label="メニューを閉じる">×</button></div>
+    <section class="sp-nav-section main" aria-labelledby="sp-main-title">
+      <h2 class="sp-nav-title" id="sp-main-title">メインメニュー</h2>
+      <div class="sp-ring-list">
+        <div class="sp-ring-group is-current"><a href="about_wireframe_v1.html" class="sp-ring-heading"><span><strong>renriとは</strong><small>ブランドの考え方を知る</small></span></a></div>
+        <div class="sp-ring-group"><a href="collection_wireframe_v1.html" class="sp-ring-heading"><span><strong>コレクション</strong><small>renriの定番デザインから選ぶ</small></span></a><div class="sp-ring-sublinks"><a href="collection_wireframe_v1.html#marriage-models">コレクション結婚指輪</a><a href="collection_wireframe_v1.html#engagement-models">コレクション婚約指輪</a></div></div>
+        <div class="sp-ring-group"><a href="handmade_wireframe_v4.html" class="sp-ring-heading"><span><strong>手作りコース</strong><small>ふたりで手を動かして作る</small></span></a><div class="sp-ring-sublinks"><a href="https://renri.jp/marriage/">手作り結婚指輪</a><a href="https://renri.jp/engagement/">手作り婚約指輪</a></div></div>
+        <div class="sp-ring-group"><a href="ordermade_wireframe_v4.html" class="sp-ring-heading"><span><strong>オーダーメイドコース</strong><small>デザイナーとゼロから仕立てる</small></span></a><div class="sp-ring-sublinks"><a href="https://renri.jp/order_marriage/">オーダーメイド結婚指輪</a><a href="https://renri.jp/order_engagement/">オーダーメイド婚約指輪</a></div></div>
+      </div>
+      <div class="sp-nav-grid"><a href="top_wireframe_v4.html#gallery" class="sp-nav-link">制作事例</a><a href="price_wireframe_v1.html" class="sp-nav-link">価格</a><a href="top_wireframe_v4.html#voice" class="sp-nav-link">お客様の声</a><a href="top_wireframe_v4.html#access" class="sp-nav-link">店舗情報</a></div>
+      <a href="https://renri.jp/contact/" class="sp-nav-primary"><span>来店予約<small>空席確認・ご予約はこちら</small></span></a>
+      <div class="sp-ring-guide"><a href="top_wireframe_v4.html#ways">3つの選び方を比較</a><a href="top_wireframe_v4.html#consultation">まだ決めていない方へ</a></div>
+    </section>
+    <section class="sp-nav-section consult" aria-labelledby="sp-consult-title">
+      <h2 class="sp-nav-title" id="sp-consult-title">ご相談・お見積もり</h2>
+      <div class="sp-nav-grid"><a href="https://renri.jp/estimate/" class="sp-nav-link">WEB見積もり</a><a href="https://renri.jp/blog/%E3%83%AC%E3%83%B3%E3%83%AA%E3%81%AE%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E7%9B%B8%E8%AB%87%E3%80%90%E3%81%8A%E3%81%86%E3%81%A1%E3%81%A7%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E7%9B%B8%E8%AB%87/" class="sp-nav-link">オンライン相談</a><a href="https://renri.jp/contact/?id=inquiry" class="sp-nav-link">相談・打ち合わせ</a><a href="tel:0452648310" class="sp-nav-link">電話で相談</a></div>
+    </section>
+    <section class="sp-nav-section"><h2 class="sp-nav-title">自宅・オンライン</h2><div class="sp-nav-grid"><a href="https://renri.jp/uchi-de-no-ring/" class="sp-nav-link">Uchi de no RING</a><a href="https://renri.jp/blog/%E3%83%AC%E3%83%B3%E3%83%AA%E3%81%AE%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E7%9B%B8%E8%AB%87%E3%80%90%E3%81%8A%E3%81%86%E3%81%A1%E3%81%A7%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E7%9B%B8%E8%AB%87/" class="sp-nav-link">オンライン相談</a></div></section>
+    <section class="sp-nav-section"><h2 class="sp-nav-title">来店・サポート</h2><div class="sp-nav-grid"><a href="https://renri.jp/shop/" class="sp-nav-link">アクセス</a><a href="https://renri.jp/blog/%E6%96%B0%E3%81%9F%E3%81%AA%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%92%E9%96%8B%E5%A7%8B%EF%BC%81%EF%BC%81%E3%81%94%E4%BA%88%E7%B4%84%E3%81%AA%E3%81%97%E3%81%A7%E3%82%82%E6%8C%87%E8%BC%AA%E3%81%AE/" class="sp-nav-link">見学会</a><a href="https://renri.jp/inquiry/" class="sp-nav-link">お問い合わせ</a></div></section>
+    <section class="sp-nav-section"><h2 class="sp-nav-title">コンテンツ</h2><div class="sp-nav-grid"><a href="https://renri.jp/blog/%E3%82%A2%E3%83%95%E3%82%BF%E3%83%BC%E3%83%95%E3%82%A9%E3%83%AD%E3%83%BC/" class="sp-nav-link">アフターケア</a><a href="https://renri.jp/faq/" class="sp-nav-link">よくあるご質問</a><a href="https://renri.jp/blog/" class="sp-nav-link">スタッフブログ</a><a href="https://renri.jp/keyword/" class="sp-nav-link">用語集</a><a href="https://renri.jp/privacy/" class="sp-nav-link">プライバシーポリシー</a></div></section>
+  </div>
+
+  <div class="breadcrumb"><a href="top_wireframe_v4.html">TOP</a>　›　renriとは</div>
+
+  <main>
+    <section class="hero">
+      <div class="hero-placeholder">📷 現行のABOUTメイン画像</div>
+      <h1>renriとは</h1>
+    </section>
+
+    <section class="section" id="concept-copy">
+      <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=renriとはページv1&amp;entry.1525828345=コンセプト本文" target="_blank" rel="noopener">修正コメント</a>
+      <div class="section-inner concept-grid">
+        <div class="concept-copy">
+          <p>ふたつの木が連なって理（木目）が通じた様子。<br>お互いを深く想い、共に永く歩んでいく夫婦の姿とされるのが連理（レンリ）。</p>
+          <div class="changed">
+            <p><strong>ふたりらしい選び方から、<br>ふたりのための指輪を。</strong></p>
+            <p>renriは、横浜の古いビルの2階にある小さなアトリエです。ジュエリーデザイナーと指輪職人の夫婦が、これから新たに夫婦となるお二人のために始めました。</p>
+            <p>指輪の選び方に、ひとつの正解はありません。</p>
+            <p>renriの定番から選ぶ「コレクション」。<br>ふたりの手で形にする「手作り」。<br>デザイナーと理想を一から形にする「オーダーメイド」。</p>
+            <p>完成したデザインから安心して選びたい。指輪を作る時間も思い出にしたい。ふたりだけのデザインを追求したい。お二人の想いや価値観に合わせて、指輪の選び方からご提案します。</p>
+            <p>違うのは、指輪との出会い方。<br>変わらないのは、お二人に寄り添い、職人が一つひとつ丁寧に仕立てることです。</p>
+            <p>まだ作り方が決まっていなくても大丈夫。<br>「これがお二人らしい」と思える一本を、横浜の小さなアトリエで一緒に見つけていきます。</p>
+          </div>
+        </div>
+        <div class="image-placeholder">📷 現行のABOUT画像</div>
+      </div>
+    </section>
+
+    <section class="profile-section" id="staff">
+      <div class="profile-inner">
+        <div class="profile-heading"><div class="en">ABOUT</div><h2>スタッフ紹介</h2></div>
+        <p class="unchanged-note">※以下変更なし</p>
+
+        <article class="profile-row"><div class="staff-photo">📷</div><div class="profile-summary"><p class="staff-role">Craftsman</p><span class="staff-name">芳田 慎平</span><p class="staff-bio">京都生まれ。<br>京都の金工作家、竹影堂鎚舞に出会い、ものづくりの道へ。ジュエリーメーカーでの制作、開発職を担当、横浜にアトリエ「renri」をオープンする。またアクセサリーブランド「nibi」の代表としても活動。</p></div></article>
+        <article class="profile-row"><div class="staff-photo">📷</div><div class="profile-summary"><p class="staff-role">Designer</p><span class="staff-name">芳田 真美</span><p class="staff-bio">横浜生まれ、千葉育ち。<br>ジュエリー専門学校を卒業し、ジュエリーデザイナーとしてハイジュエリーメーカーの商品開発を手がける。<br>フリーのジュエリーデザイナーとして、「nibi」のデザイナーとして、「renri」のデザイナーとして、様々なクリエイションに携わる。</p></div></article>
+        <article class="profile-row"><div class="staff-photo">📷</div><div class="profile-summary"><p class="staff-role">Craftsman</p><span class="staff-name">日髙</span></div></article>
+        <article class="profile-row"><div class="staff-photo">📷</div><div class="profile-summary"><p class="staff-role">Craftsman</p><span class="staff-name">三尋木</span></div></article>
+        <article class="profile-row"><div class="staff-photo">📷</div><div class="profile-summary"><p class="staff-role">Designer</p><span class="staff-name">市川</span></div></article>
+        <article class="profile-row"><div class="staff-photo">📷</div><div class="profile-summary"><p class="staff-role">Craftsman</p><span class="staff-name">黒澤</span></div></article>
+        <article class="profile-row"><div class="staff-photo">📷</div><div class="profile-summary"><p class="staff-role">Designer</p><span class="staff-name">濵﨑</span></div></article>
+        <article class="profile-row"><div class="staff-photo">📷</div><div class="profile-summary"><p class="staff-role">Designer</p><span class="staff-name">山本</span></div></article>
+        <article class="profile-row"><div class="staff-photo">📷</div><div class="profile-summary"><p class="staff-role">Craftsman ＆ Designer</p><span class="staff-name">森田</span></div></article>
+        <article class="profile-row"><div class="staff-photo">📷</div><div class="profile-summary"><p class="staff-role">Designer</p><span class="staff-name">藤田</span></div></article>
+        <article class="profile-row"><div class="staff-photo cat">📷</div><div class="profile-summary"><span class="staff-name">朔　Saku　&amp;　満月　Mitsuki</span><p class="staff-bio">グレーでモフモフな毛並みのマイペースな朔くんとちょっぴり人見知りのつややかな黒猫の満月ちゃんです。<br>不定期でアトリエに出勤していて、お客様とスタッフの癒し担当です。</p></div></article>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <div class="profile-inner">
+        <div class="detail-media"><div class="image-placeholder detail-image">📷 現行のアトリエ画像</div></div>
+        <div class="detail-media"><div class="detail-text"><p>静かにたたずむアトリエ<br><br>renriのアトリエは、ジュエリーショップのようなキラキラした感じはありません。夫婦でつくったアトリエはアンティーク家具とたくさんの観葉植物に彩られています。女性だけではなく、男性からもみても敷居の高い雰囲気ではなく落ち着いてお話ができる静かな空間となっております。専門工具で集中して指輪の手作りに没頭できる制作室は男性にも好評です。ご来店いただいたご夫婦が周囲を気にせずお二人らしさをだせるように。</p></div></div>
+        <div class="detail-media"><div class="image-placeholder detail-image">📷 現行のアフターケア画像</div></div>
+        <div class="detail-media"><div class="detail-text"><p>夫婦の証としてのご結婚指輪を永くご愛用いただくため<br><br>結婚指輪はこれから夫婦が二人で歩んでいくための証です。永くお付き合いいただくために、renriでは永久無料でクリーニングやサイズなおしなどアフターメンテナンスを行っています。また記念日に追加での石留や、仕上げ方法の変更なども承っておりますので、お気軽にご相談くださいませ。</p></div></div>
+        <div class="detail-media"><div class="image-placeholder detail-image">📷 現行の猫の画像</div></div>
+        <div class="detail-media"><div class="detail-text"><p>オーナーの飼い猫である2匹の猫ちゃんはときどきアトリエに出勤。<br>たまに顔を出してくれる可愛げな2匹に癒されるとご好評です。<br><br>※猫アレルギーや動物が苦手という方は事前にお知らせいただけると幸いです。<br>お留守番させるなど対処させていただきます。</p></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-banners">
+      <a class="footer-banner" href="top_wireframe_v4.html#gallery"><span>PRODUCT CASE<small>制作事例</small></span></a>
+      <a class="footer-banner" href="https://renri.jp/faq/"><span>FAQ<small>よくあるご質問</small></span></a>
+      <a class="footer-banner" href="https://renri.jp/contact/"><span>RESERVATION<small>ご予約</small></span></a>
+    </div>
+    <div class="footer-sns"><a href="https://www.facebook.com/renri.yokohama/" aria-label="Facebook">f</a><a href="https://www.instagram.com/renri_yokohama/" aria-label="Instagram">◎</a></div>
+    <nav class="footer-navigation" aria-label="フッターメニュー"><div class="footer-links"><a href="about_wireframe_v1.html">renriとは</a><a href="collection_wireframe_v1.html">コレクション</a><a href="handmade_wireframe_v4.html">手作りコース</a><a href="ordermade_wireframe_v4.html">オーダーメイドコース</a><a href="https://renri.jp/uchi-de-no-ring/">Uchi de no RING</a><a href="price_wireframe_v1.html">価格について</a><a href="top_wireframe_v4.html#gallery">制作事例</a><a href="top_wireframe_v4.html#voice">お客様の声</a><a href="top_wireframe_v4.html#access">店舗情報</a><a href="https://renri.jp/blog/%E3%82%A2%E3%83%95%E3%82%BF%E3%83%BC%E3%83%95%E3%82%A9%E3%83%AD%E3%83%BC/">アフターケア</a><a href="https://renri.jp/faq/">よくあるご質問</a><a href="https://renri.jp/blog/">スタッフブログ</a><a href="https://renri.jp/keyword/">用語集</a><a href="https://renri.jp/privacy/">プライバシーポリシー</a><a href="https://renri.jp/inquiry/">お問い合わせ</a><a href="https://renri.jp/blog/company/">会社概要</a></div></nav>
+    <div class="footer-brand">renri</div>
+    <div class="copyright">© 2026 renri.</div>
+  </footer>
+
+  <nav class="sp-bottom-nav" aria-label="スマートフォン固定メニュー"><a href="collection_wireframe_v1.html">コレクション</a><a href="handmade_wireframe_v4.html">手作り</a><a href="ordermade_wireframe_v4.html">オーダー</a><a href="https://renri.jp/contact/">来店予約</a></nav>
+
+  <script>
+    const menuButton = document.querySelector('.sp-menu-btn');
+    const drawer = document.querySelector('.sp-drawer');
+    const closeButton = document.querySelector('.sp-drawer-close');
+    const setDrawer = (open) => {
+      drawer.classList.toggle('is-open', open);
+      drawer.setAttribute('aria-hidden', String(!open));
+      menuButton.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+    menuButton.addEventListener('click', () => setDrawer(true));
+    closeButton.addEventListener('click', () => setDrawer(false));
+    drawer.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setDrawer(false)));
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setDrawer(false); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>renri コレクション | ワイヤーフレーム v1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600&amp;family=Cormorant+Garamond:wght@300;400;500&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text-primary: #222;
+      --text-secondary: #555;
+      --text-light: #888;
+      --bg-white: #fff;
+      --bg-soft: #f5f5f5;
+      --bg-mid: #e7e7e7;
+      --border: #ccc;
+      --dark: #222;
+      --serif-jp: 'Noto Serif JP', 'Yu Mincho', '游明朝', serif;
+      --serif-en: 'Cormorant Garamond', serif;
+      --shadow: 0 8px 30px rgba(0,0,0,.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      padding-top: 36px;
+      color: var(--text-primary); background: var(--bg-white);
+      font-family: var(--serif-jp); font-size: 15px; line-height: 1.9;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+
+    .wireframe-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+      display: flex; align-items: center; gap: 16px; height: 36px; padding: 0 20px;
+      background: #1a1a2e; color: #fff; font-family: sans-serif; font-size: 12px;
+    }
+    .wireframe-bar .badge { padding: 2px 10px; background: #e94560; border-radius: 3px; font-size: 11px; font-weight: 700; }
+    .wireframe-bar .path { color: #a2d2ff; }
+    .feedback-btn {
+      position: absolute; top: 12px; right: 12px; z-index: 50;
+      padding: 6px 14px; border-radius: 20px; background: rgba(0,0,0,.55); color: #fff;
+      font-family: sans-serif; font-size: 12px; line-height: 1.4; text-decoration: none;
+    }
+    .feedback-btn::before { content: '✎'; margin-right: 6px; }
+
+    .header {
+      position: sticky; top: 36px; z-index: 200;
+      background: rgba(255,255,255,.97); border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+    .header-inner {
+      max-width: 1200px; margin: 0 auto; padding: 14px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-family: var(--serif-en); font-size: 26px; font-weight: 300; letter-spacing: 4px; text-decoration: none; }
+    .nav { display: flex; align-items: center; gap: 16px; }
+    .nav a { color: var(--text-secondary); font-size: 13px; letter-spacing: .5px; text-decoration: none; white-space: nowrap; }
+    .nav-choice { position: relative; }
+    .nav-choice-trigger {
+      display: inline-flex; align-items: center; gap: 6px; padding: 8px 0;
+      border: 0; background: transparent; color: var(--text-secondary); cursor: pointer;
+      font-size: 13px; letter-spacing: .5px;
+    }
+    .nav-choice-trigger::after { content: '⌄'; font-family: sans-serif; font-size: 12px; }
+    .mega-menu {
+      position: fixed; top: 112px; left: 50%;
+      width: min(920px, calc(100vw - 48px)); padding: 28px;
+      background: rgba(255,255,255,.99); border: 1px solid var(--border); box-shadow: var(--shadow);
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transform: translateX(-50%) translateY(-8px); transition: opacity .2s, transform .2s;
+    }
+    .nav-choice:hover .mega-menu,
+    .nav-choice:focus-within .mega-menu,
+    .nav-choice.is-open .mega-menu { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    .mega-menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .mega-menu-card {
+      min-height: 160px; padding: 20px; border: 1px solid var(--border); background: #fff;
+      color: var(--text-primary) !important; text-decoration: none;
+    }
+    .mega-menu-card.is-current { border: 2px solid var(--dark); }
+    .mega-menu-card .en { display: block; margin-bottom: 6px; color: var(--text-light); font-family: var(--serif-en); font-size: 11px; letter-spacing: 3px; }
+    .mega-menu-card strong { display: block; margin-bottom: 8px; font-size: 15px; font-weight: 400; letter-spacing: 1.5px; }
+    .mega-menu-card small { display: block; min-height: 44px; color: var(--text-secondary); font-size: 11px; line-height: 1.8; }
+    .mega-menu-card .types { display: block; margin-top: 12px; color: var(--text-secondary); font-size: 10.5px; }
+    .mega-menu-support { display: flex; justify-content: center; gap: 30px; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border); }
+    .header-actions { display: flex; align-items: center; gap: 10px; }
+    .header-reserve { padding: 9px 18px; background: var(--dark); color: #fff; font-size: 12px; letter-spacing: 1.5px; text-decoration: none; }
+    .sp-menu-btn, .sp-drawer { display: none; }
+
+    .hero {
+      position: relative; min-height: 620px;
+      display: grid; grid-template-columns: minmax(320px, 42%) 1fr;
+      background: var(--bg-soft);
+    }
+    .hero-copy { display: flex; flex-direction: column; justify-content: center; padding: 80px clamp(40px, 6vw, 100px); }
+    .hero-copy .eyebrow { margin-bottom: 18px; color: var(--text-light); font-size: 12px; letter-spacing: 3px; }
+    .hero-copy h1 { font-size: clamp(27px, 3vw, 42px); font-weight: 300; line-height: 1.7; letter-spacing: .14em; }
+    .hero-copy p { max-width: 450px; margin-top: 24px; color: var(--text-secondary); font-size: 14px; line-height: 2.1; }
+    .hero-image { min-height: 620px; display: grid; place-items: center; background: #c9c9c9; color: #666; font-family: sans-serif; font-size: 13px; }
+
+    .section { position: relative; padding: 94px 40px; }
+    .section:nth-of-type(even) { background: var(--bg-soft); }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-head { max-width: 760px; margin: 0 auto 48px; text-align: center; }
+    .section-head .en { margin-bottom: 10px; color: var(--text-light); font-family: var(--serif-en); font-size: 12px; letter-spacing: 5px; }
+    .section-head h2 { font-size: 25px; font-weight: 300; letter-spacing: 5px; }
+    .section-head p { margin-top: 20px; color: var(--text-secondary); font-size: 14px; line-height: 2; }
+
+    .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
+    .intro-image { aspect-ratio: 4 / 3; display: grid; place-items: center; background: #d1d1d1; color: #666; font-family: sans-serif; font-size: 13px; }
+    .intro-copy h2 { margin-bottom: 22px; font-size: 27px; font-weight: 300; line-height: 1.8; letter-spacing: 3px; }
+    .intro-copy p { color: var(--text-secondary); line-height: 2.2; }
+    .reason-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .reason-card { overflow: hidden; border-top: 1px solid #999; background: #fff; }
+    .reason-image {
+      display: grid; place-items: center; aspect-ratio: 4 / 3;
+      background: linear-gradient(135deg, #d5d5d5, #bcbcbc);
+      color: #666; font-family: sans-serif; font-size: 11px;
+      text-align: center;
+    }
+    .reason-body { padding: 28px 28px 32px; }
+    .reason-card .num { display: block; margin-bottom: 18px; color: var(--text-light); font-family: var(--serif-en); font-size: 13px; letter-spacing: 3px; }
+    .reason-card h3 { margin-bottom: 14px; font-size: 18px; font-weight: 400; letter-spacing: 2px; }
+    .reason-card p { color: var(--text-secondary); font-size: 13px; line-height: 2; }
+
+    .lineup-nav { display: flex; justify-content: center; gap: 10px; margin: -10px 0 48px; }
+    .lineup-nav a { min-width: 220px; padding: 13px 18px; border: 1px solid #777; text-align: center; font-size: 13px; letter-spacing: 1.5px; text-decoration: none; }
+    .lineup-group + .lineup-group { margin-top: 72px; padding-top: 72px; border-top: 1px solid var(--border); }
+    .lineup-title { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 26px; }
+    .lineup-title h3 { font-size: 21px; font-weight: 300; letter-spacing: 3px; }
+    .lineup-title p { color: var(--text-secondary); font-size: 12px; }
+    .model-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px 18px; }
+    .model-card { display: block; color: inherit; text-decoration: none; }
+    .model-image { aspect-ratio: 4 / 3; display: grid; place-items: center; background: #d2d2d2; color: #666; font-family: sans-serif; font-size: 12px; }
+    .model-body { padding: 14px 2px; }
+    .model-body .model-no { color: var(--text-light); font-family: var(--serif-en); font-size: 10px; letter-spacing: 2px; }
+    .model-body h4 { margin: 5px 0 6px; font-size: 15px; font-weight: 400; letter-spacing: 1px; }
+    .model-body p { color: var(--text-secondary); font-size: 11px; line-height: 1.7; }
+    .model-price { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
+    .model-price span { color: var(--text-light); font-size: 9px; letter-spacing: 1px; }
+    .model-price strong { font-family: var(--serif-en); font-size: 15px; font-weight: 400; letter-spacing: 1px; }
+    .model-body .detail { display: inline-block; margin-top: 10px; border-bottom: 1px solid #777; font-size: 11px; }
+    .engagement-grid { grid-template-columns: repeat(5, 1fr); }
+
+    .choice-table { width: 100%; margin-top: 30px; border-collapse: collapse; background: #fff; font-size: 13px; }
+    .choice-table th, .choice-table td { padding: 15px 18px; border-bottom: 1px solid #ddd; text-align: left; vertical-align: top; }
+    .choice-table th { width: 24%; font-weight: 400; color: var(--text-secondary); }
+    .choice-table .pending { color: #777; font-family: sans-serif; font-size: 11px; }
+
+    .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .step { position: relative; border-top: 1px solid #888; background: #fff; }
+    .step:not(:last-child)::after { content: '›'; position: absolute; top: 50%; right: -11px; z-index: 2; font-family: sans-serif; font-size: 24px; color: #999; transform: translateY(-50%); }
+    .step-image { display: grid; place-items: center; aspect-ratio: 4 / 3; background: linear-gradient(135deg, #d5d5d5, #bcbcbc); color: #666; font-family: sans-serif; font-size: 10px; text-align: center; }
+    .step-body { padding: 22px 18px 26px; }
+    .step .num { color: var(--text-light); font-family: var(--serif-en); font-size: 11px; letter-spacing: 2px; }
+    .step h3 { margin: 9px 0; font-size: 15px; font-weight: 400; letter-spacing: 1px; }
+    .step p { color: var(--text-secondary); font-size: 11px; line-height: 1.8; }
+
+    .series-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .series-card { display: grid; grid-template-columns: 42% 1fr; border: 1px solid var(--border); background: #fff; text-decoration: none; }
+    .series-image { min-height: 210px; display: grid; place-items: center; background: #d0d0d0; color: #666; font-family: sans-serif; font-size: 12px; text-align: center; }
+    .series-body { padding: 26px; }
+    .series-body h3 { margin-bottom: 10px; font-size: 18px; font-weight: 400; letter-spacing: 2px; }
+    .series-body p { color: var(--text-secondary); font-size: 12px; line-height: 1.8; }
+
+    .comparison-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .way-card { position: relative; padding: 32px 26px; border: 1px solid var(--border); background: #fff; text-decoration: none; }
+    .way-card.is-current { border: 2px solid var(--dark); }
+    .way-card .current { position: absolute; top: 0; right: 0; padding: 5px 10px; background: var(--dark); color: #fff; font-family: sans-serif; font-size: 9px; letter-spacing: 1px; }
+    .way-card .en { color: var(--text-light); font-family: var(--serif-en); font-size: 10px; letter-spacing: 3px; }
+    .way-card h3 { margin: 7px 0 13px; font-size: 18px; font-weight: 400; letter-spacing: 2px; }
+    .way-card p { min-height: 72px; color: var(--text-secondary); font-size: 12px; line-height: 1.9; }
+    .way-card .link { display: inline-block; margin-top: 16px; border-bottom: 1px solid #777; font-size: 11px; }
+    .comparison-table-wrap { margin-top: 28px; overflow-x: auto; }
+    .comparison-table { width: 100%; min-width: 700px; border-collapse: collapse; background: #fff; font-size: 12px; }
+    .comparison-table th, .comparison-table td { padding: 14px 16px; border-bottom: 1px solid #ddd; text-align: center; }
+    .comparison-table th:first-child, .comparison-table td:first-child { text-align: left; color: var(--text-light); }
+    .comparison-table .current { background: #f0f0f0; }
+    .consult-box { margin-top: 34px; padding: 34px; background: #e9e9e9; text-align: center; }
+    .consult-box h3 { margin-bottom: 9px; font-size: 19px; font-weight: 400; letter-spacing: 2px; }
+    .consult-box p { color: var(--text-secondary); font-size: 13px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-width: 250px; min-height: 52px; margin-top: 22px; padding: 12px 28px; border: 1px solid var(--dark); background: var(--dark); color: #fff; font-size: 13px; letter-spacing: 2px; text-decoration: none; }
+
+    .faq-list { max-width: 850px; margin: 0 auto; border-top: 1px solid var(--border); }
+    .faq-item { padding: 24px 10px; border-bottom: 1px solid var(--border); }
+    .faq-item dt { margin-bottom: 10px; font-size: 15px; font-weight: 400; letter-spacing: 1px; }
+    .faq-item dt::before { content: 'Q.'; margin-right: 12px; color: var(--text-light); font-family: var(--serif-en); }
+    .faq-item dd { padding-left: 31px; color: var(--text-secondary); font-size: 13px; line-height: 2; }
+
+    .final-cta { position: relative; padding: 84px 40px; background: #ddd; text-align: center; }
+    .final-cta h2 { font-size: 25px; font-weight: 300; letter-spacing: 4px; }
+    .final-cta p { margin-top: 18px; color: var(--text-secondary); font-size: 14px; }
+    .final-actions { display: flex; justify-content: center; gap: 14px; }
+    .final-actions .btn.secondary { background: transparent; color: var(--dark); }
+
+    .footer { padding: 54px 32px; border-top: 1px solid var(--border); background: #f5f5f5; color: #666; text-align: center; }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 11px 25px; margin-bottom: 18px; font-size: 12px; }
+    .footer-links a { text-decoration: none; }
+    .footer-logo { margin: 30px 0 8px; font-family: var(--serif-en); font-size: 25px; letter-spacing: 6px; }
+    .footer-copy { color: #999; font-size: 11px; }
+    .sp-floating { display: none; }
+
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity .7s, transform .7s; }
+    .fade-in.is-visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .fade-in { opacity: 1; transform: none; transition: none; } }
+
+    @media (max-width: 960px) {
+      .nav { gap: 9px; }
+      .nav a, .nav-choice-trigger { font-size: 10.5px; }
+      .model-grid { grid-template-columns: repeat(3, 1fr); }
+      .engagement-grid { grid-template-columns: repeat(3, 1fr); }
+      .steps { grid-template-columns: repeat(3, 1fr); }
+      .step::after { display: none; }
+      .series-card { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      body { padding-bottom: 60px; }
+      .header-inner { padding: 10px 16px; }
+      .logo { font-size: 22px; letter-spacing: 3px; }
+      .nav { display: none; }
+      .header-reserve { padding: 8px 12px; font-size: 11px; letter-spacing: 1px; }
+      .sp-menu-btn { display: flex; width: 44px; height: 44px; align-items: center; justify-content: center; border: 0; background: transparent; font-size: 20px; cursor: pointer; }
+      body.sp-menu-open { overflow: hidden; }
+      .sp-drawer {
+        position: fixed; top: 36px; left: 0; right: 0; bottom: 0; z-index: 500;
+        display: flex; flex-direction: column; overflow-y: auto; padding: 20px 18px 92px;
+        background: rgba(255,255,255,.99); opacity: 0; visibility: hidden; pointer-events: none;
+        transform: translateY(-8px); transition: opacity .2s, transform .2s, visibility .2s;
+      }
+      .sp-drawer.is-open { opacity: 1; visibility: visible; pointer-events: auto; transform: none; }
+      .sp-drawer-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+      .sp-drawer-logo { font-family: var(--serif-en); font-size: 24px; letter-spacing: 4px; }
+      .sp-drawer-close { width: 44px; height: 44px; border: 0; background: transparent; font-size: 25px; cursor: pointer; }
+      .sp-drawer-title { margin: 24px 0 12px; color: var(--text-light); font-family: sans-serif; font-size: 10px; letter-spacing: 2px; }
+      .sp-choice-list { display: grid; gap: 8px; }
+      .sp-choice-card {
+        display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center;
+        min-height: 88px; padding: 14px 16px; border: 1px solid var(--border); text-decoration: none;
+      }
+      .sp-choice-card.is-current { border: 2px solid var(--dark); }
+      .sp-choice-card .en { display: block; color: var(--text-light); font-family: var(--serif-en); font-size: 10px; letter-spacing: 2.5px; }
+      .sp-choice-card strong { display: block; margin: 2px 0 3px; font-size: 14px; font-weight: 400; letter-spacing: 1px; }
+      .sp-choice-card small { display: block; color: var(--text-secondary); font-size: 10px; }
+      .sp-choice-card:not(.is-current)::after { content: '›'; font-family: sans-serif; font-size: 24px; color: var(--text-light); }
+      .sp-choice-card.is-current::after { content: '表示中'; color: var(--text-light); font-family: sans-serif; font-size: 9px; }
+      .sp-drawer-support, .sp-drawer-links { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-top: 12px; }
+      .sp-drawer-support a, .sp-drawer-links a { min-height: 44px; display: flex; align-items: center; justify-content: center; padding: 10px; border: 1px solid var(--border); font-size: 11px; text-align: center; text-decoration: none; }
+      .sp-drawer-reserve { display: flex; align-items: center; justify-content: center; min-height: 48px; margin-top: 18px; background: var(--dark); color: #fff; font-size: 12px; letter-spacing: 1.5px; text-decoration: none; }
+
+      .hero { min-height: 0; display: flex; flex-direction: column-reverse; }
+      .hero-image { min-height: 0; aspect-ratio: 16 / 10; }
+      .hero-copy { padding: 42px 22px 48px; }
+      .hero-copy .eyebrow { margin-bottom: 10px; font-size: 10px; }
+      .hero-copy h1 { font-size: 23px; line-height: 1.7; letter-spacing: 3px; }
+      .hero-copy p { margin-top: 16px; font-size: 12px; line-height: 2; }
+      .section { padding: 54px 16px; }
+      .section-head { margin-bottom: 32px; }
+      .section-head .en { font-size: 10px; letter-spacing: 4px; }
+      .section-head h2 { font-size: 20px; letter-spacing: 3px; }
+      .section-head p { margin-top: 14px; font-size: 12px; }
+      .intro-grid { grid-template-columns: 1fr; gap: 28px; }
+      .intro-image { aspect-ratio: 16 / 10; }
+      .intro-copy h2 { font-size: 20px; letter-spacing: 2px; }
+      .intro-copy p { font-size: 12px; }
+      .reason-grid { grid-template-columns: 1fr; gap: 18px; }
+      .reason-image { aspect-ratio: 16 / 10; }
+      .reason-body { padding: 22px 20px 26px; }
+      .lineup-nav { gap: 8px; margin-bottom: 36px; }
+      .lineup-nav a { min-width: 0; width: 50%; padding: 11px 8px; font-size: 11px; }
+      .lineup-title { align-items: start; flex-direction: column; gap: 4px; }
+      .model-grid, .engagement-grid { grid-template-columns: repeat(2, 1fr); gap: 18px 10px; }
+      .model-body h4 { font-size: 13px; }
+      .model-body p { font-size: 10px; }
+      .series-grid, .comparison-cards { grid-template-columns: 1fr; gap: 12px; }
+      .model-price { display: block; }
+      .model-price strong { display: block; margin-top: 3px; font-size: 13px; }
+      .choice-table { font-size: 11px; }
+      .choice-table th, .choice-table td { padding: 12px 8px; }
+      .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .step:not(:last-child)::after { display: none; }
+      .step-image { aspect-ratio: 16 / 10; padding: 8px; font-size: 9px; }
+      .step-body { padding: 16px 12px 18px; }
+      .step h3 { font-size: 13px; }
+      .step p { font-size: 10px; }
+      .step:last-child { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; }
+      .step:last-child .step-image { height: 100%; min-height: 128px; aspect-ratio: auto; }
+      .series-card { display: grid; grid-template-columns: 38% 1fr; }
+      .series-image { min-height: 170px; }
+      .series-body { padding: 18px 14px; }
+      .way-card p { min-height: 0; }
+      .consult-box { padding: 28px 18px; }
+      .final-cta { padding: 60px 18px; }
+      .final-cta h2 { font-size: 20px; letter-spacing: 3px; }
+      .final-actions { flex-direction: column; align-items: center; gap: 0; }
+      .btn { width: min(100%, 320px); }
+      .feedback-btn { top: 8px; right: 8px; padding: 5px 10px; font-size: 10px; }
+      .sp-floating {
+        position: fixed; left: 0; right: 0; bottom: 0; z-index: 400;
+        display: grid; grid-template-columns: repeat(4,1fr); height: 60px;
+        border-top: 1px solid var(--border); background: #fff;
+      }
+      .sp-floating a { display: flex; align-items: center; justify-content: center; border-right: 1px solid #ddd; font-size: 10px; text-decoration: none; }
+      .sp-floating a:last-child { background: var(--dark); color: #fff; }
+    }
+
+    /* SP GLOBAL MENU: 公開サイトの全項目を目的別に再編 */
+    @media (max-width: 768px) {
+      .sp-drawer-head {
+        position: sticky; top: -20px; z-index: 2;
+        margin: -20px -18px 14px; padding: 14px 18px 10px;
+        border-bottom: 1px solid var(--border); background: rgba(255,255,255,.98);
+      }
+      .sp-drawer-logo { color: var(--text-primary); text-decoration: none; }
+      .sp-nav-section + .sp-nav-section { margin-top: 22px; }
+      .sp-drawer-head { order: 0; }
+      .sp-drawer .sp-nav-section { order: 3; }
+      .sp-drawer .sp-nav-section:nth-of-type(2) { order: 1; }
+      .sp-drawer .sp-nav-section:nth-of-type(1) { order: 2; }
+      .sp-nav-title { margin: 0 -18px 10px; padding: 7px 18px; background: var(--bg-mid); font-family: sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 1.6px; }
+      .sp-nav-primary { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; min-height: 58px; padding: 12px 16px; background: var(--dark); color: #fff; font-size: 16px; letter-spacing: 2px; text-decoration: none; }
+      .sp-nav-primary small { display: block; margin-top: 2px; font-family: sans-serif; font-size: 9px; letter-spacing: 1px; opacity: .85; }
+      .sp-nav-primary::after { content: '›'; font-family: sans-serif; font-size: 25px; }
+      .sp-nav-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
+      .sp-nav-link { position: relative; display: flex; min-height: 48px; align-items: center; padding: 9px 28px 9px 11px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); color: var(--text-primary); font-size: 11px; line-height: 1.5; text-decoration: none; }
+      .sp-nav-link::after { content: '›'; position: absolute; right: 10px; color: var(--text-light); font-family: sans-serif; font-size: 20px; }
+      .sp-nav-link small { display: block; margin-top: 2px; color: var(--text-light); font-family: sans-serif; font-size: 8.5px; }
+      .sp-ring-list { border-top: 1px solid var(--border); }
+      .sp-ring-group { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); border-left: 1px solid var(--border); }
+      .sp-ring-group.is-current { box-shadow: inset 3px 0 0 var(--dark); }
+      .sp-ring-heading { position: relative; display: flex; min-height: 54px; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 36px 10px 13px; color: var(--text-primary); text-decoration: none; }
+      .sp-ring-heading::after { content: '›'; position: absolute; right: 13px; color: var(--text-light); font-family: sans-serif; font-size: 23px; }
+      .sp-ring-heading strong { display: block; font-size: 14px; font-weight: 400; letter-spacing: 1px; }
+      .sp-ring-heading small { display: block; margin-top: 2px; color: var(--text-light); font-family: sans-serif; font-size: 9px; }
+      .sp-ring-current { flex: 0 0 auto; color: var(--text-light); font-family: sans-serif; font-size: 9px; }
+      .sp-ring-sublinks { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); border-top: 1px solid var(--border); }
+      .sp-ring-sublinks a { display: flex; min-height: 42px; align-items: center; justify-content: center; padding: 8px 6px; background: var(--bg-soft); color: var(--text-secondary); font-size: 10px; line-height: 1.45; text-align: center; text-decoration: none; }
+      .sp-ring-sublinks a + a { border-left: 1px solid var(--border); }
+      .sp-ring-guide { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; margin-top: 10px; }
+      .sp-ring-guide a { display: flex; min-height: 44px; align-items: center; justify-content: center; padding: 9px; border: 1px solid var(--border); color: var(--text-primary); font-size: 10px; line-height: 1.45; text-align: center; text-decoration: none; }
+      .sp-ring-guide a:only-child { grid-column: 1 / -1; }
+      body.sp-menu-open .sp-floating { display: none; }
+    }
+    /* SP HEADER: 本番サイトと同じ、左メニュー・中央ブランド・右余白 */
+    @media (max-width: 768px) {
+      .header-inner {
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr) 44px;
+        align-items: center;
+        padding: 10px 16px;
+      }
+      .header-inner > .logo {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: center;
+        margin: 0;
+      }
+      .header-actions { display: contents; }
+      .header-reserve { display: none; }
+      .sp-menu-btn {
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: start;
+        padding: 0;
+      }
+      .sp-menu-icon,
+      .sp-menu-icon::before,
+      .sp-menu-icon::after {
+        display: block;
+        width: 26px;
+        height: 2px;
+        background: currentColor;
+      }
+      .sp-menu-icon { position: relative; }
+      .sp-menu-icon::before,
+      .sp-menu-icon::after {
+        position: absolute;
+        left: 0;
+        content: '';
+      }
+      .sp-menu-icon::before { top: -8px; }
+      .sp-menu-icon::after { top: 8px; }
+    }
+  </style>
+  <link rel="stylesheet" href="wireframe_header.css">
+</head>
+<body>
+  <div class="wireframe-bar">
+    <span class="badge">WIREFRAME</span>
+    <span>renri — コレクションページ v1</span>
+    <span class="path">/collection/</span>
+  </div>
+
+  <header class="header">
+    <div class="header-showcase">
+      <span aria-hidden="true"></span>
+      <a class="header-logo-image" href="top_wireframe_v4.html" aria-label="renri TOP">
+        <img src="https://renri.jp/admin/wp-content/themes/renri/img/common/header_logo.png" alt="renri">
+      </a>
+      <div class="header-contact">
+        <div class="header-contact-actions">
+          <a href="https://renri.jp/estimate/">WEB見積もり</a>
+          <a href="https://renri.jp/contact/">来店予約</a>
+        </div>
+        <a class="header-phone" href="tel:0452648310"><small>TEL.</small>045-264-8310</a>
+      </div>
+    </div>
+    <div class="header-inner">
+      <a href="top_wireframe_v4.html" class="logo">renri</a>
+      <nav class="nav">
+        <a href="about_wireframe_v1.html">renriとは</a><a href="collection_wireframe_v1.html">コレクション</a><a href="handmade_wireframe_v4.html">手作り</a><a href="ordermade_wireframe_v4.html">オーダーメイド</a><a href="top_wireframe_v4.html#gallery">制作事例</a><a href="price_wireframe_v1.html">価格</a><a href="top_wireframe_v4.html#voice">お客様の声</a><a href="top_wireframe_v4.html#access">店舗情報</a>
+      </nav>
+      <div class="header-actions">
+        <a href="https://renri.jp/contact/" class="header-reserve">来店予約</a>
+        <button class="sp-menu-btn" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="sp-drawer"><span class="sp-menu-icon" aria-hidden="true"></span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="sp-drawer" id="sp-drawer" aria-hidden="true">
+    <div class="sp-drawer-head"><a href="top_wireframe_v4.html" class="sp-drawer-logo">renri</a><button class="sp-drawer-close" type="button" aria-label="メニューを閉じる">×</button></div>
+
+    <section class="sp-nav-section" aria-labelledby="sp-reservation-title">
+      <h2 class="sp-nav-title" id="sp-reservation-title">ご相談・お見積もり</h2>
+      <div class="sp-nav-grid">
+        <a href="https://renri.jp/estimate/" class="sp-nav-link">WEB見積もり</a>
+        <a href="https://renri.jp/blog/%E3%83%AC%E3%83%B3%E3%83%AA%E3%81%AE%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E7%9B%B8%E8%AB%87%E3%80%90%E3%81%8A%E3%81%86%E3%81%A1%E3%81%A7%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E7%9B%B8%E8%AB%87/" class="sp-nav-link">オンライン相談</a>
+        <a href="https://renri.jp/contact/?id=inquiry" class="sp-nav-link">相談・打ち合わせ</a>
+        <a href="tel:0452648310" class="sp-nav-link"><span>電話で相談<small>045-264-8310</small></span></a>
+      </div>
+    </section>
+
+    <section class="sp-nav-section" aria-labelledby="sp-ring-title">
+      <h2 class="sp-nav-title" id="sp-ring-title">メインメニュー</h2>
+      <div class="sp-ring-list">
+        <div class="sp-ring-group">
+          <a href="about_wireframe_v1.html" class="sp-ring-heading"><span><strong>renriとは</strong><small>ブランドの考え方を知る</small></span></a>
+        </div>
+        <div class="sp-ring-group is-current">
+          <a href="collection_wireframe_v1.html" class="sp-ring-heading"><span><strong>コレクション</strong><small>renriの定番デザインから選ぶ</small></span><span class="sp-ring-current">表示中</span></a>
+          <div class="sp-ring-sublinks"><a href="#marriage-models">コレクション結婚指輪</a><a href="#engagement-models">コレクション婚約指輪</a></div>
+        </div>
+        <div class="sp-ring-group">
+          <a href="handmade_wireframe_v4.html" class="sp-ring-heading"><span><strong>手作りコース</strong><small>ふたりで手を動かして作る</small></span></a>
+          <div class="sp-ring-sublinks"><a href="https://renri.jp/marriage/">手作り結婚指輪</a><a href="https://renri.jp/engagement/">手作り婚約指輪</a></div>
+        </div>
+        <div class="sp-ring-group">
+          <a href="ordermade_wireframe_v4.html" class="sp-ring-heading"><span><strong>オーダーメイドコース</strong><small>デザイナーとゼロから仕立てる</small></span></a>
+          <div class="sp-ring-sublinks"><a href="https://renri.jp/order_marriage/">オーダーメイド結婚指輪</a><a href="https://renri.jp/order_engagement/">オーダーメイド婚約指輪</a></div>
+        </div>
+      </div>
+      <div class="sp-nav-grid">
+        <a href="top_wireframe_v4.html#gallery" class="sp-nav-link">制作事例</a>
+        <a href="price_wireframe_v1.html" class="sp-nav-link">価格</a>
+        <a href="top_wireframe_v4.html#voice" class="sp-nav-link">お客様の声</a>
+        <a href="top_wireframe_v4.html#access" class="sp-nav-link">店舗情報</a>
+      </div>
+      <a href="https://renri.jp/contact/" class="sp-nav-primary"><span>来店予約<small>空席確認・ご予約はこちら</small></span></a>
+      <div class="sp-ring-guide"><a href="top_wireframe_v4.html#ways">3つの選び方を比較</a><a href="top_wireframe_v4.html#consultation">まだ決めていない方へ</a></div>
+    </section>
+
+    <section class="sp-nav-section" aria-labelledby="sp-online-title">
+      <h2 class="sp-nav-title" id="sp-online-title">自宅・オンライン</h2>
+      <div class="sp-nav-grid"><a href="https://renri.jp/uchi-de-no-ring/" class="sp-nav-link">Uchi de no RING</a><a href="https://renri.jp/blog/%E3%83%AC%E3%83%B3%E3%83%AA%E3%81%AE%E3%82%AA%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E7%9B%B8%E8%AB%87%E3%80%90%E3%81%8A%E3%81%86%E3%81%A1%E3%81%A7%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E7%9B%B8%E8%AB%87/" class="sp-nav-link">オンライン相談</a></div>
+    </section>
+
+    <section class="sp-nav-section" aria-labelledby="sp-visit-title">
+      <h2 class="sp-nav-title" id="sp-visit-title">来店・サポート</h2>
+      <div class="sp-nav-grid"><a href="https://renri.jp/shop/" class="sp-nav-link">アクセス</a><a href="https://renri.jp/blog/%E6%96%B0%E3%81%9F%E3%81%AA%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%92%E9%96%8B%E5%A7%8B%EF%BC%81%EF%BC%81%E3%81%94%E4%BA%88%E7%B4%84%E3%81%AA%E3%81%97%E3%81%A7%E3%82%82%E6%8C%87%E8%BC%AA%E3%81%AE/" class="sp-nav-link">見学会</a><a href="https://renri.jp/inquiry/" class="sp-nav-link">お問い合わせ</a></div>
+    </section>
+
+    <section class="sp-nav-section" aria-labelledby="sp-content-title">
+      <h2 class="sp-nav-title" id="sp-content-title">コンテンツ</h2>
+      <div class="sp-nav-grid"><a href="https://renri.jp/blog/%E3%82%A2%E3%83%95%E3%82%BF%E3%83%BC%E3%83%95%E3%82%A9%E3%83%AD%E3%83%BC/" class="sp-nav-link">アフターケア</a><a href="https://renri.jp/faq/" class="sp-nav-link">よくあるご質問</a><a href="https://renri.jp/blog/" class="sp-nav-link">スタッフブログ</a><a href="https://renri.jp/keyword/" class="sp-nav-link">用語集</a><a href="https://renri.jp/privacy/" class="sp-nav-link">プライバシーポリシー</a></div>
+    </section>
+  </div>
+
+  <main>
+    <section class="hero">
+      <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=コレクションページv1&amp;entry.1525828345=メインビジュアル" target="_blank" rel="noopener">修正コメント</a>
+      <div class="hero-copy">
+        <div class="eyebrow">renri COLLECTION</div>
+        <h1>暮らしに寄り添う、<br>renriの定番。</h1>
+        <p>10年にわたり指輪を作り続けてきたrenriが、永く愛せるかたちを選び抜きました。完成形を確かめながら、おふたりらしい素材や仕上げを選べるコレクションです。</p>
+      </div>
+      <div class="hero-image">📷 コレクション メイン画像</div>
+    </section>
+
+    <section class="section">
+      <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=コレクションページv1&amp;entry.1525828345=導入" target="_blank" rel="noopener">修正コメント</a>
+      <div class="section-inner intro-grid">
+        <div class="intro-image fade-in">📷 コレクションを象徴する指輪の集合写真</div>
+        <div class="intro-copy fade-in">
+          <h2>迷いすぎず、妥協もしない。<br>ちょうどいい選び方。</h2>
+          <p>renriの制作実績から生まれた定番デザインをベースに、素材・幅・表面仕上げなどをお好みに合わせて選択。デザインの完成形と価格の目安が見える安心感に、renriらしい職人品質を組み合わせます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=コレクションページv1&amp;entry.1525828345=3つの特徴" target="_blank" rel="noopener">修正コメント</a>
+      <div class="section-inner">
+        <div class="section-head fade-in"><div class="en">FEATURES</div><h2>コレクションの特徴</h2></div>
+        <div class="reason-grid">
+          <article class="reason-card fade-in"><div class="reason-image">📷 コレクションのラインナップ</div><div class="reason-body"><span class="num">01</span><h3>選び抜かれた定番</h3><p>10年の制作実績と、お客様から支持された意匠をもとに、永く身につけやすいデザインを揃えます。</p></div></article>
+          <article class="reason-card fade-in"><div class="reason-image">📷 モデルと価格表示</div><div class="reason-body"><span class="num">02</span><h3>価格がわかりやすい</h3><p>モデルごとに基本価格を設定。商品と価格を見比べながら、ご予算に合うデザインを選べます。</p></div></article>
+          <article class="reason-card fade-in"><div class="reason-image">📷 職人の制作風景</div><div class="reason-body"><span class="num">03</span><h3>職人が一つずつ制作</h3><p>ご注文後、renriの職人が一つずつ制作。デザインの特性に合わせて、鍛造・鋳造から適切な製法を選び、永く使える指輪に仕立てます。</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="lineup">
+      <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=コレクションページv1&amp;entry.1525828345=ラインナップ" target="_blank" rel="noopener">修正コメント</a>
+      <div class="section-inner">
+        <div class="section-head fade-in"><div class="en">LINEUP</div><h2>デザインを選ぶ</h2><p>各モデルは、素材・幅・表面仕上げ・石留め・刻印などを、お好みに合わせてカスタマイズできます。</p></div>
+        <div class="lineup-nav"><a href="#marriage-models">結婚指輪を見る</a><a href="#engagement-models">婚約指輪を見る</a></div>
+
+        <div class="lineup-group" id="marriage-models">
+          <div class="lineup-title"><h3>結婚指輪｜全8型（予定）</h3></div>
+          <div class="model-grid">
+            <a href="collection_product_wireframe_v1.html" class="model-card fade-in"><div class="model-image">📷 半面デザイン</div><div class="model-body"><span class="model-no">MODEL 01</span><h4>半面デザイン</h4><p>異なる表情を一本で楽しめるデザイン。</p><div class="model-price"><span>基本価格（税込）</span><strong>¥---,---</strong></div><span class="detail">詳細を見る →</span></div></a>
+            <a href="#" class="model-card fade-in"><div class="model-image">📷 ミルグレイン</div><div class="model-body"><span class="model-no">MODEL 02</span><h4>ミルグレイン</h4><p>縁に繊細な粒を連ねたクラシカルな意匠。</p><div class="model-price"><span>基本価格（税込）</span><strong>¥---,---</strong></div><span class="detail">詳細を見る →</span></div></a>
+            <a href="#" class="model-card fade-in"><div class="model-image">📷 メビウス</div><div class="model-body"><span class="model-no">MODEL 03</span><h4>メビウス</h4><p>ひねりの陰影が手元を美しく見せるかたち。</p><div class="model-price"><span>基本価格（税込）</span><strong>¥---,---</strong></div><span class="detail">詳細を見る →</span></div></a>
+            <a href="#" class="model-card fade-in"><div class="model-image">📷 カーブ／ポイント切替</div><div class="model-body"><span class="model-no">MODEL 04</span><h4>カーブ・ポイント切替</h4><p>動きのあるラインと仕上げの切替。</p><div class="model-price"><span>基本価格（税込）</span><strong>¥---,---</strong></div><span class="detail">詳細を見る →</span></div></a>
+            <a href="#" class="model-card fade-in"><div class="model-image">📷 彫り半面</div><div class="model-body"><span class="model-no">MODEL 05</span><h4>彫り半面</h4><p>手仕事の彫りを部分的に効かせた意匠。</p><div class="model-price"><span>基本価格（税込）</span><strong>¥---,---</strong></div><span class="detail">詳細を見る →</span></div></a>
+            <a href="#" class="model-card fade-in"><div class="model-image">📷 コンビネーション</div><div class="model-body"><span class="model-no">MODEL 06</span><h4>コンビネーション</h4><p>異なる素材の色味を組み合わせるデザイン。</p><div class="model-price"><span>基本価格（税込）</span><strong>¥---,---</strong></div><span class="detail">詳細を見る →</span></div></a>
+            <a href="#" class="model-card fade-in"><div class="model-image">📷 エッジ／ライン</div><div class="model-body"><span class="model-no">MODEL 07</span><h4>エッジ・ライン</h4><p>輪郭や一本の線を印象的に見せる意匠。</p><div class="model-price"><span>基本価格（税込）</span><strong>¥---,---</strong></div><span class="detail">詳細を見る →</span></div></a>
+            <a href="#" class="model-card fade-in"><div class="model-image">📷 テクスチャー</div><div class="model-body"><span class="model-no">MODEL 08</span><h4>テクスチャー</h4><p>表面の質感で個性を添えるデザイン。</p><div class="model-price"><span>基本価格（税込）</span><strong>¥---,---</strong></div><span class="detail">詳細を見る →</span></div></a>
+          </div>
+        </div>
+
+        <div class="lineup-group" id="engagement-models">
+          <div class="lineup-title"><h3>婚約指輪｜全5型（予定）</h3></div>
+          <div class="model-grid engagement-grid">
+            <a href="#" class="model-card fade-in"><div class="model-image">📷 ソリテール爪留め</div><div class="model-body"><span class="model-no">MODEL 01</span><h4>ソリテール｜爪留め</h4><p>ダイヤモンドを端正に見せる王道のかたち。</p><div class="model-price"><span>基本価格（税込）</span><strong>¥---,---</strong></div><span class="detail">詳細を見る →</span></div></a>
+            <a href="#" class="model-card fade-in"><div class="model-image">📷 ソリテール覆輪</div><div class="model-body"><span class="model-no">MODEL 02</span><h4>ソリテール｜覆輪</h4><p>石を包み込み、日常に馴染みやすい意匠。</p><div class="model-price"><span>基本価格（税込）</span><strong>¥---,---</strong></div><span class="detail">詳細を見る →</span></div></a>
+            <a href="#" class="model-card fade-in"><div class="model-image">📷 エタニティ</div><div class="model-body"><span class="model-no">MODEL 03</span><h4>エタニティ</h4><p>連なる輝きを楽しめる華やかなデザイン。</p><div class="model-price"><span>基本価格（税込）</span><strong>¥---,---</strong></div><span class="detail">詳細を見る →</span></div></a>
+            <a href="#" class="model-card fade-in"><div class="model-image">📷 サイドストーン</div><div class="model-body"><span class="model-no">MODEL 04</span><h4>サイドストーン</h4><p>中央石の両側に繊細な輝きを添える意匠。</p><div class="model-price"><span>基本価格（税込）</span><strong>¥---,---</strong></div><span class="detail">詳細を見る →</span></div></a>
+            <a href="#" class="model-card fade-in"><div class="model-image">📷 カーブ</div><div class="model-body"><span class="model-no">MODEL 05</span><h4>カーブ</h4><p>指のラインに沿うやわらかな曲線。</p><div class="model-price"><span>基本価格（税込）</span><strong>¥---,---</strong></div><span class="detail">詳細を見る →</span></div></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="flow">
+      <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=コレクションページv1&amp;entry.1525828345=注文の流れ" target="_blank" rel="noopener">修正コメント</a>
+      <div class="section-inner">
+        <div class="section-head fade-in"><div class="en">ORDER FLOW</div><h2>ご注文から完成まで</h2></div>
+        <div class="steps">
+          <article class="step fade-in"><div class="step-image">📷 店頭で相談する様子</div><div class="step-body"><span class="num">STEP 01</span><h3>来店・ご相談</h3><p>3つの選び方の違いも含めてご案内。</p></div></article>
+          <article class="step fade-in"><div class="step-image">📷 コレクションの試着</div><div class="step-body"><span class="num">STEP 02</span><h3>モデルを試着</h3><p>デザインと着け心地を比較。</p></div></article>
+          <article class="step fade-in"><div class="step-image">📷 素材・仕上げサンプル</div><div class="step-body"><span class="num">STEP 03</span><h3>仕様を選ぶ</h3><p>素材・幅・仕上げ・石などを決定。</p></div></article>
+          <article class="step fade-in"><div class="step-image">📷 職人の制作風景</div><div class="step-body"><span class="num">STEP 04</span><h3>職人が制作</h3><p>決定した仕様で一つずつ制作。</p></div></article>
+          <article class="step fade-in"><div class="step-image">📷 完成した指輪・お渡し</div><div class="step-body"><span class="num">STEP 05</span><h3>完成・お渡し</h3><p>仕上がりを確認してお渡し。</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="related-series">
+      <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=コレクションページv1&amp;entry.1525828345=関連シリーズ" target="_blank" rel="noopener">修正コメント</a>
+      <div class="section-inner">
+        <div class="section-head fade-in"><div class="en">RELATED SERIES</div><h2>renriの関連シリーズ</h2><p>renriから生まれた、花をモチーフにした婚約指輪シリーズもご覧いただけます。</p></div>
+        <div class="series-grid">
+          <a href="https://renri.jp/blog/%E4%BA%8C%E4%BA%BA%E3%81%AE%E6%83%B3%E3%81%84%E5%87%BA%E3%82%92%E4%B8%80%E8%BC%AA%E3%81%AE%E8%8A%B1%E3%81%AB%E3%81%9F%E3%81%A8%E3%81%88%E3%81%A6%E3%80%82%E6%96%B0%E4%BD%9C%E3%81%AE%E3%82%A8%E3%83%B3/" target="_blank" rel="noopener" class="series-card fade-in"><div class="series-image">📷 花こよみ</div><div class="series-body"><h3>花こよみ</h3><p>季節の花をモチーフにした婚約指輪シリーズ。想い出の季節を、一輪の花にたとえて。</p></div></a>
+          <a href="https://renri.jp/blog/%E3%82%B5%E3%83%97%E3%83%A9%E3%82%A4%E3%82%BA%E3%83%97%E3%83%AD%E3%83%9D%E3%83%BC%E3%82%BA%E3%82%92%E5%BF%9C%E6%8F%B4%E3%81%97%E3%81%BE%E3%81%99%EF%BC%81%EF%BC%81%E6%96%B0%E3%81%9F%E3%81%AA%E5%A9%9A/" target="_blank" rel="noopener" class="series-card fade-in"><div class="series-image">📷 リトルブーケ</div><div class="series-body"><h3>リトルブーケ</h3><p>小さな花束を贈るように、日常に寄り添う婚約指輪シリーズ。</p></div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="compare">
+      <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=コレクションページv1&amp;entry.1525828345=3つの選び方比較" target="_blank" rel="noopener">修正コメント</a>
+      <div class="section-inner">
+        <div class="section-head fade-in"><div class="en">THREE WAYS</div><h2>3つの選び方</h2><p>どれかを先に決める必要はありません。店頭で見比べながら選べます。</p></div>
+        <div class="comparison-cards">
+          <div class="way-card is-current fade-in"><span class="current">表示中</span><span class="en">COLLECTION</span><h3>コレクション</h3><p>完成形を見比べ、renriの定番を自分たちらしく整えたい方へ。</p></div>
+          <a href="handmade_wireframe_v4.html" class="way-card fade-in"><span class="en">HANDMADE</span><h3>手作り</h3><p>ふたりで手を動かし、作る時間そのものも思い出にしたい方へ。</p><span class="link">手作りを見る →</span></a>
+          <a href="ordermade_wireframe_v4.html" class="way-card fade-in"><span class="en">ORDER MADE</span><h3>オーダーメイド</h3><p>デザイナーと相談しながら、ゼロから理想を形にしたい方へ。</p><span class="link">オーダーメイドを見る →</span></a>
+        </div>
+        <div class="comparison-table-wrap">
+          <table class="comparison-table">
+            <thead><tr><th></th><th class="current">コレクション</th><th>手作り</th><th>オーダーメイド</th></tr></thead>
+            <tbody>
+              <tr><td>選び方</td><td class="current">定番モデルから</td><td>自分たちで制作</td><td>ゼロから相談</td></tr>
+              <tr><td>制作</td><td class="current">職人</td><td>おふたり＋職人</td><td>職人</td></tr>
+              <tr><td>アレンジ</td><td class="current">好みに合わせて調整</td><td>制作可能な範囲</td><td>自由度が高い</td></tr>
+              <tr><td>価格</td><td class="current">モデル別に明示</td><td>仕様から算出</td><td>デザインから見積り</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="consult-box"><h3>まだ決めていない方へ</h3><p>3つの選び方を一度にご案内します。ご希望やご予算を伺いながら、合う方法を一緒に探します。</p><a href="https://renri.jp/contact/" class="btn">来店予約・相談</a></div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=コレクションページv1&amp;entry.1525828345=よくある質問" target="_blank" rel="noopener">修正コメント</a>
+      <div class="section-inner">
+        <div class="section-head fade-in"><div class="en">FAQ</div><h2>よくあるご質問</h2></div>
+        <dl class="faq-list fade-in">
+          <div class="faq-item"><dt>一般的な既製品とは何が違いますか？</dt><dd>renriが培ってきた意匠を定番モデルとして整理し、素材や仕上げなどを選んで、職人が一つずつ制作します。</dd></div>
+          <div class="faq-item"><dt>デザインを変更できますか？</dt><dd>素材・幅・表面仕上げ・石留め・刻印などを、ご希望に合わせて変更できます。モデルの形を大きく変えたい場合も店頭でご相談ください。</dd></div>
+          <div class="faq-item"><dt>すべて鍛造製法ですか？</dt><dd>鍛造を基本としつつ、デザインの特性に応じて鋳造を用いるモデルもあります。製法は商品ごとにご案内します。</dd></div>
+          <div class="faq-item"><dt>自分たちで手作りできますか？</dt><dd>モデルによって対応が異なります。詳しくは店頭でご相談ください。</dd></div>
+          <div class="faq-item"><dt>納期はどのくらいですか？</dt><dd>モデルや仕様によって異なります。詳しくは店頭でご案内します。</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <a class="feedback-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdng4duvxeCLjISMwoLjmrbeZHqcrqMwZlL4x6c9Ne3mf_7eg/viewform?entry.376704624=コレクションページv1&amp;entry.1525828345=最終CTA" target="_blank" rel="noopener">修正コメント</a>
+      <h2>まずは、店頭で着け比べてください。</h2>
+      <p>コレクションだけでなく、手作り・オーダーメイドも同じ場所でご相談いただけます。</p>
+      <div class="final-actions"><a href="https://renri.jp/contact/" class="btn">来店予約・相談</a><a href="top_wireframe_v4.html#access" class="btn secondary">店舗・アクセス</a></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-links"><a href="collection_wireframe_v1.html">コレクション</a><a href="handmade_wireframe_v4.html">手作り</a><a href="ordermade_wireframe_v4.html">オーダーメイド</a><a href="top_wireframe_v4.html#ways">3つの選び方</a><a href="#lineup">デザイン</a></div>
+    <div class="footer-links"><a href="#features">特徴</a><a href="#flow">ご注文の流れ</a><a href="#faq">よくあるご質問</a><a href="https://renri.jp/contact/">お問い合わせ</a></div>
+    <div class="footer-logo">renri</div><p class="footer-copy">&copy; 2026 renri.</p>
+  </footer>
+
+  <div class="sp-floating"><a href="#lineup">デザイン</a><a href="#features">特徴</a><a href="#flow">注文の流れ</a><a href="https://renri.jp/contact/">来店予約</a></div>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
+    const navChoice = document.querySelector('.nav-choice');
+    const navChoiceTrigger = document.querySelector('.nav-choice-trigger');
+    navChoiceTrigger?.addEventListener('click', () => {
+      const isOpen = navChoice.classList.toggle('is-open');
+      navChoiceTrigger.setAttribute('aria-expanded', String(isOpen));
+    });
+    document.addEventListener('click', (event) => {
+      if (navChoice && !navChoice.contains(event.target)) {
+        navChoice.classList.remove('is-open');
+        navChoiceTrigger?.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    const menuButton = document.querySelector('.sp-menu-btn');
+    const menuClose = document.querySelector('.sp-drawer-close');
+    const drawer = document.querySelector('.sp-drawer');
+    const setMenu = (open) => {
+      if (!menuButton || !drawer) return;
+      drawer.classList.toggle('is-open', open);
+      drawer.setAttribute('aria-hidden', String(!open));
+      menuButton.setAttribute('aria-expanded', String(open));
+      document.body.classList.toggle('sp-menu-open', open);
+    };
+    menuButton?.addEventListener('click', () => setMenu(!drawer.classList.contains('is-open')));
+    menuClose?.addEventListener('click', () => setMenu(false));
+    drawer?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
+  </script>
+</body>
+</html>

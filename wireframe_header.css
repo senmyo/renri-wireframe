@@ -1,0 +1,108 @@
+.header-showcase {
+  width: min(1200px, calc(100% - 48px));
+  min-height: 190px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 180px minmax(300px, 1fr);
+  align-items: center;
+  gap: 24px;
+  background: #fff;
+}
+
+.header-logo-image {
+  grid-column: 2;
+  justify-self: center;
+  width: 111px;
+  text-decoration: none;
+}
+
+.header-logo-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.header-contact {
+  grid-column: 3;
+  justify-self: end;
+  min-width: 350px;
+  text-align: center;
+}
+
+.header-contact-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.header-contact-actions a {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;
+  border: 1px solid #b89248;
+  background: #cda85c;
+  color: #fff !important;
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+}
+
+.header-phone {
+  display: block;
+  margin-top: 12px;
+  color: #2e2b2a !important;
+  font-family: Georgia, "Times New Roman", "Yu Mincho", serif;
+  font-size: 25px;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.header-phone small {
+  margin-right: 5px;
+  font-size: 15px;
+}
+
+@media (min-width: 769px) {
+  .header,
+  .site-header {
+    position: relative !important;
+    top: auto !important;
+  }
+
+  .header > .header-inner,
+  .site-header > .header-inner {
+    width: min(1200px, calc(100% - 48px));
+    max-width: 1200px;
+    min-height: 64px;
+    margin: 0 auto;
+    padding: 0 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    align-items: center;
+  }
+
+  .header > .header-inner > .logo,
+  .site-header > .header-inner > .brand,
+  .header > .header-inner > .header-actions,
+  .header > .header-inner > .reserve,
+  .site-header > .header-inner > .header-reserve,
+  .site-header > .header-inner > .sp-menu-btn {
+    display: none !important;
+  }
+
+  .header > .header-inner > .nav,
+  .site-header > .header-inner > .nav {
+    display: flex !important;
+    justify-self: center;
+    justify-content: center;
+    gap: clamp(14px, 2vw, 32px) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-showcase { display: none !important; }
+}
