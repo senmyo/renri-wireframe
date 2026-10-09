@@ -106,3 +106,26 @@
 @media (max-width: 768px) {
   .header-showcase { display: none !important; }
 }
+
+/* Current revision markers: newly changed copy is red with a red underline. */
+.revision-changed {
+  color: #c62828 !important;
+  text-decoration-line: underline;
+  text-decoration-color: #c62828;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+.revision-changed * {
+  color: #c62828 !important;
+}
+
+.revision-note {
+  margin: 18px 0;
+  padding: 10px 14px;
+  border: 1px solid #c62828;
+  color: #c62828 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  font-size: 12px;
+  line-height: 1.7;
+}
